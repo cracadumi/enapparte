@@ -3,6 +3,14 @@ ActiveAdmin.register Show do
     :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at,
     :ends_at, :booking_ids => [], :pictures => []
 
+  member_action :set_cover, method: :post do
+    resource.cover_picture_id = params[:picture_id]
+    resource.save!
+    respond_to do |format|
+      format.js
+    end
+  end
+
   form do |f|
     f.inputs "Show" do
       f.input :title
