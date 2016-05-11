@@ -8,6 +8,5 @@ angular
             dateFormat: 'yy-mm-dd'
             minDate: 1
             firstDay: 1
-            altField: listDays
     }
   ]
