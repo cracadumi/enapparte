@@ -1,22 +1,19 @@
 .container.calendar-bookings[ng-controller="DashboardCalendarController"]
   h5 Select the days you're genarally free to host during the weeks:
-  .row
-    .col-sm-4
-      table.explication-table
-        tr
-          td.bg-green Mon
-          td.bg-green Tue
-          td.bg-green Web
-          td.bg-green Thu
-          td Fri
-          td Sat
-          td.bg-green Sun
-    .col-sm-3
-      .legend-group.legend-available
-        .bg-green
-        .legend-note available
-      .legend-group.legend-not-available
-        .bg-white
-        .legend-note not available
+  #bloc_btn_choice_day
+    .btn_choice_day data-day="1" Mon
+    .btn_choice_day data-day="2" Tue
+    .btn_choice_day data-day="3" Web
+    .btn_choice_day data-day="4" Thu
+    .btn_choice_day data-day="5" Fri
+    .btn_choice_day data-day="6" Sat
+    .btn_choice_day.active data-day="0" Sun
+    .legend
+      span.legend-1
+      | availble
+      br
+      span.legend-2
+      | not available
+  .clear
   h5 Select specific dates you are avalable to host:
-  #calendar-dashboard[append-calendar data="{{shows}}" showid="{{showId}}"]
+  #calendar-dashboard[append-calendar]

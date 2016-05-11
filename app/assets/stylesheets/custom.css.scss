@@ -17914,100 +17914,104 @@ a.btn-xl.btn.btn-performer.main-section {
 }
 .calendar-bookings {
   h5 {color: #555;}
-  .explication-table {
-    td {
-      border: 1px solid #555;
-      color: #555;
+  #bloc_btn_choice_day {
+    .btn_choice_day {
+      border: 1px solid #8C8C8C;
+      border-right: none;
+      float: left;
+      padding: 8px;
       width: 50px;
-      height: 32px;
       text-align: center;
+      background-color: #F9F9F9;
+      color: #979797;
+      font-size: 11px;
+      &.active {
+        background-color: #27C47B;
+        color: #FBFEFD;
+      }
+    }
+    .legend {
+      float: left;
+      border-left: 1px solid #8C8C8C;
+      font-size: 12px;
+      padding-left: 20px;
+      span {
+        background-color: #27C47B;
+        display: inline-block;
+        width: 10px;
+        height: 11px;
+        margin-top: 0px;
+        margin-right: 3px;
+        &.legend-2 {
+          background-color: #F9F9F9;
+          border: 1px solid #8c8c8c;
+          height: 10px;
+        }
+      }
     }
   }
-  .legend-group {
-    margin-top: 5px;
-    .bg-green, .bg-white {
-      width: 10px;
-      height: 10px;
-      border: 1px solid #555;
-      float: left;
-    }
-    .bg-green {
-      border: none;
-    }
-    .legend-note {
-      line-height: 10px;
-      margin-left: 15px;
-    }
-
+  .clear {
+    clear: both;
   }
 }
 #calendar-dashboard {
-  .fc-toolbar {
-    .fc-left {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-      -moz-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-    }
-    .fc-right {
-      width: 100%;
-      .fc-today-button {
-        display: none;
+  .ui-datepicker {
+    background: white;
+    border: 1px solid #B6B6B6!important;
+    width: 100% !important;
+    overflow: auto;
+    box-sizing: border-box;
+    .ui-datepicker-header {
+      background: white !important;
+      position: relative;
+      padding: .7em;
+      border: none;
+      .ui-datepicker-prev, .ui-datepicker-next {
+        position: absolute;
+        top: 8px;
+        width: 1.8em;
+        height: 1.8em;
+        .ui-icon {
+          background-image: url("images/ui-icons_222222_256x240.png") !important;
+        }
       }
-      .fc-button-group {
-        width: 100%;
-        margin-left: 0;
-        .fc-button {
-          background: transparent;
-          border: none;
-          &:focus {
-            outline: none;
+      .ui-datepicker-title {
+        font-family: "brandon-grotesque",sans-serif;
+        color: #393939;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+    .ui-datepicker-calendar {
+      td {
+        border: 0 solid transparent;
+        .ui-state-default {
+          background-image: none;
+          font-weight: 700;
+          color: black;
+          display: block;
+          padding: 16px 10px;
+          text-align: center;
+          text-decoration: none;
+          &.ui-state-hover {
+            border: 1px solid #dadada;
+            background: #dadada;
           }
-          &.fc-pre-button {
-            float: left;
+          &.ui-state-active {
+            border: 1px solid #d3d3d3!important;
           }
-          &.fc-next-button {
-            float: right;
+        }
+        &.ui-state-highlight {
+          background: white;
+          a {
+            border-color: inherit!important;
+            box-shadow: none!important;
+            background: #2BCB86 url(checkmark.png) no-repeat bottom right!important;
+            color: white;
           }
         }
       }
     }
   }
 
-  .fc-widget-content {
-    height: 75px !important;
-    .fc-bg {
-      z-index: 4;
-      .fc-today {
-        background-color: transparent;
-      }
-      td:hover {
-        cursor: pointer;
-      }
-    }
-    .fc-content-skeleton {
-      height: 100%;
-      z-index: 1;
-      table {
-        td:hover {
-          cursor: pointer;
-        }
-        height: 100%;
-        .fc-day-number {
-          text-align: center;
-        }
-        .fc-event-container {
-          .fc-start {
-            background-color: #2bcb86;
-            border: none;
-            border-radius: 0;
-            height: 100%;
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
 }
