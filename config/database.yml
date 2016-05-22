@@ -2,7 +2,7 @@ common: &common
   adapter: postgresql
   encoding: utf8
   pool: 25
-  host: localhost
+  #host: localhost
 development:
   database: enapparte_development
   min_messages: warning
