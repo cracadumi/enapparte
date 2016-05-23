@@ -32,9 +32,6 @@ angular
               i++
           scope.$on 'insert_success', ()->
             event_param = scope.event_param
-            console.log("---------------event_param_id:" + event_param[0]['id'])
-            console.log("---------------event_param_available_at:" + event_param[0]['available_at'])
-            console.log("---------------event_param_start:" + event_param[0]['start'])
             $elm.fullCalendar 'addEventSource',
               event_param
             $elm.fullCalendar 'refetchEvents' 
