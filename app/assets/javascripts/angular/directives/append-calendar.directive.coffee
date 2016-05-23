@@ -9,7 +9,6 @@ angular
             date = new Date($elm.fullCalendar('getDate'))
             year = date.getFullYear()
             month = date.getMonth()
-            console.log("weekday_click:" + month)
             src = []
             i = 0  
             existing_days = []
@@ -61,7 +60,6 @@ angular
                   isExist = true
                   return
               if isExist == false
-                console.log("add")
                 scope.available_at = date
                 scope.insert_available_date()
         , 1000
