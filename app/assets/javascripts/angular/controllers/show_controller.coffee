@@ -19,12 +19,12 @@ class ShowController extends @NGController
     @scope.step = 1
 
     @scope.show = {}
-    @scope.cover_selected = true
+
     @scope.shows = []
     @scope.arts = []
 
     @scope.tabsClickable = false
-    @scope.img_selected = true
+
     @scope.filter = {}
 
     @scope.search = ""
@@ -67,7 +67,6 @@ class ShowController extends @NGController
         @scope.shows = shows
 
   nextStep: (form)->
-
     if @validate(form)
       @scope.step += 1
 
@@ -78,18 +77,13 @@ class ShowController extends @NGController
   validate: (form)->
     # FIXME: change to switch
     return form.$valid  if @scope.step == 1
-    if @scope.step == 2
-      if @scope.show.pictures.length == 0
-        @scope.img_selected = false
-      else @scope.img_selected = true
-      return @scope.show.pictures.length > 0 
+    return @scope.show.pictures.length > 0  if @scope.step == 2
     return true  if @scope.step == 3 && @scope.show.pictures.filter((picture)->
       picture.selected
     ).length > 0
 
   removePicture: (index)->
     @scope.show.pictures[index]._destroy = 1
-    @scope.show.pictures.length -= 1
   addShow: (show, index)->
     if angular.isDefined(index)
       @scope.shows[index] = show
@@ -131,26 +125,18 @@ class ShowController extends @NGController
     for picture in @scope.show.pictures
       picture.selected = false
     pic.selected = true
-    @scope.cover_selected = true
-    console.log @scope
 
   # finish
   finish: ()=>
-    @scope.cover_selected = false
-    if @scope.show.pictures.filter((picture)->
-      picture.selected
-    ).length > 0
-      @scope.show.hidden = 'ok'
-      @scope.show.pending = true
-      @scope.cover_selected = true
-      @scope.show
-        .save()
-        .then ()=>
-          @scope.show.pending = false
-          # redirect to
-          @state.go 'dashboard.calendar',
-            id: @scope.show.id
-          @Flash.showSuccess @scope, 'Created new show successfully.'
+    @scope.show.pending = true
+    @scope.show
+      .save()
+      .then ()=>
+        @scope.show.pending = false
+        # redirect to
+        @state.go 'dashboard.calendar',
+          id: @scope.show.id
+        @Flash.showSuccess @scope, 'Created new show successfully.'
 
   tabClick: (step)->
     if @scope.tabsClickable
