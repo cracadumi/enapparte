@@ -65,7 +65,6 @@ body {
 
 #the_logo {
   height: 100px;
-  outline: none;
 
   img {
     margin-top: -5px;
@@ -277,7 +276,7 @@ body {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
 
-.search-bar-home,
+#search-bar-home,
 #header,
 .filters {
   input, span {
@@ -291,9 +290,8 @@ body {
   }
 }
 
-.search-bar-home {
+#search-bar-home {
   padding: 0 16.875%;
-  margin-top: 3em;
 
   @media (max-width: 768px) {
     padding: 0 30px;
@@ -378,7 +376,7 @@ body {
   }
 
   .home-carousel .item {
-    height: 700px !important;
+    height: 400px !important;
   }
 
   #htw-home-link {
@@ -4549,7 +4547,7 @@ select[multiple].input-lg {
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
-  color: #737373;
+  color: #a94442 !important;
 }
 
 @media (min-width: 768px) {
@@ -9143,7 +9141,7 @@ button.close {
 }
 
 .pre-footer {
-  margin-top: 90px;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -9341,9 +9339,8 @@ body {
       margin-left: 15px;
 
       &:hover {
-        background-color: #002b3f !important;
-        color: #fff481 !important;
-        border-color: #002b3f;
+        border-color: #fff;
+        color: #fff;
       }
     }
   }
@@ -9507,7 +9504,6 @@ body {
 
   &.home-carousel {
     text-align: center;
-    height:600px;
 
     .carousel-inner .discovery-card {
       background: transparent;
@@ -10003,7 +9999,7 @@ aside h2.title.white {
   }
 
   .home-carousel .item {
-    height: 400px !important;
+    height: 700px !important;
     overflow: hidden;
   }
 
@@ -18273,17 +18269,17 @@ button.close {
   }
 }
 
+.pre-footer {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 div#header {
   width: 100%;
 }
 
 #header.not-fixed a {
   color: white;
-}
-
-#header .user-logged-dropdown:hover {
-  background: none;
-  text-decoration: underline;
 }
 
 a.btn.btn-performer {
@@ -18299,7 +18295,7 @@ a.btn.btn-performer {
     color: #fffca6;
   }
 
-  .user-logged-dropdown {
+  #dropdownMenu1 {
     color: #fff;
   }
 }
@@ -18311,7 +18307,7 @@ a.btn.btn-performer {
 }
 
 .relative .button-performer {
-  padding: 28px 0 58px;
+  padding: 58px 0;
 
   a.btn.btn-performer.main-section {
     border-style: solid;
@@ -18483,7 +18479,7 @@ button.btn.dropdown-toggle.talent {
 
 p.va-middle.text-center.text-contrast {
   font-family: FuturaLT !important;
-  font-size: 50px !important;
+  font-size: 70px !important;
 }
 
 .row.main-description {
@@ -18507,12 +18503,6 @@ a.btn-xl.btn.btn-performer.main-section {
   font-size: 15px;
   border-radius: 0;
   font-family: FuturaLT !important;
-
-  &:hover {
-    background-color: #002b3f !important;
-    color: #fff481 !important;
-    border-color: #002b3f;
-  }
 }
 
 @media (max-width: 768px) {

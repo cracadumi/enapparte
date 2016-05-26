@@ -1,12 +1,6 @@
 li[ng-if="isAuthenticated()"]
   .dropdown[uib-dropdown]
-    a#dropdownMenu1.dropdown-toggle.user-logged-dropdown [
-      type="button"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="true"
-      uib-dropdown-toggle
-    ]
+    a#dropdownMenu1.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" uib-dropdown-toggle]
       | {{ currentUser.firstname }}
       '
       | {{ currentUser.surname }}
@@ -31,15 +25,15 @@ li[ng-if="!isAuthenticated()"]
   a.nav_links.collapse-header.text-center[ui-sref="home.signup"]
     | Inscription
 li.collapse-hide[ng-if="!isAuthenticated()"]
-  = link_to Constants::Socials::FACEBOOK, class: 'nav_links', target: :blank
+  a.nav_links[ui-sref="home.signup"]
     img.facebook-icon src=image_url('i-facebook.png')
     img.facebook-icon.hover src=image_url('i-facebook-hover.png')
 li.collapse-hide[ng-if="!isAuthenticated()"]
-  = link_to Constants::Socials::TWITTER, class: 'nav_links', target: :blank
+  a.nav_links[ui-sref="home.signup"]
     img.twitter-icon src=image_url('i-twitter.png') /
     img.twitter-icon.hover src=image_url('i-twitter-hover.png') /
 li.collapse-hide[ng-if="!isAuthenticated()"]
-  = link_to Constants::Socials::INSTAGRAM, class: 'nav_links', target: :blank
+  a.nav_links[ui-sref="home.signup"]
     img.instagram-icon src=image_url('i-instagram.png') /
     img.instagram-icon.hover src=image_url('i-instagram-hover.png') /
 /li.collapse-hide[ng-if="!isAuthenticated()"]

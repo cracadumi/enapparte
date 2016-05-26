@@ -41,6 +41,7 @@ gem 'js-routes'
 gem 'fullcalendar-rails'
 gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'maruku'
+gem 'growl' if /darwin/ =~ RUBY_PLATFORM
 
 group :production do
   gem 'pg'
@@ -79,6 +80,9 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
   gem 'slim_lint'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
 end
 
 group :test do

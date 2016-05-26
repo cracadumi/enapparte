@@ -15,8 +15,6 @@ class DashboardCalendarController extends @NGController
   shows = []
   showId = ""
   events = []
-  index = 1
-  first_available_month = 0
   init: ->
     @User_availabilities
       .query()
@@ -46,9 +44,6 @@ class DashboardCalendarController extends @NGController
           console.log "insert success controller"
           return
       ), (response) ->
-          event = [{'id':index++, 'available_at':availability.available_at, 'start':availability.available_at}]
-          scope.event_param = event
-          scope.$broadcast 'insert_success', event
           console.log 'insert error:'+response['status']
           return
 
@@ -64,19 +59,15 @@ class DashboardCalendarController extends @NGController
           console.log "delete success controller"
           return
       ), (response) ->
-          scope.id = id
-          scope.$broadcast 'delete_success'
           console.log 'delete error controller'+response['statusCode']
         return
 
   weekday_Click : (weekday)->
-    @scope.first_available_month = first_available_month++
     switch weekday
       when 'MON' then  @scope.weekday = 1
       when 'TUE' then  @scope.weekday = 2
       when 'WED' then  @scope.weekday = 3
       when 'THU' then  @scope.weekday = 4
     @scope.$broadcast 'weekday_click' 
-
 
 
