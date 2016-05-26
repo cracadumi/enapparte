@@ -18284,6 +18284,11 @@ div#header {
   color: white;
 }
 
+#header .user-logged-dropdown:hover {
+  background: none;
+  text-decoration: underline;
+}
+
 a.btn.btn-performer {
   border-style: solid;
   border-color: #fffca6;
@@ -18297,7 +18302,7 @@ a.btn.btn-performer {
     color: #fffca6;
   }
 
-  #dropdownMenu1 {
+  .user-logged-dropdown {
     color: #fff;
   }
 }

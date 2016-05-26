@@ -1,6 +1,12 @@
 li[ng-if="isAuthenticated()"]
   .dropdown[uib-dropdown]
-    a#dropdownMenu1.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" uib-dropdown-toggle]
+    a#dropdownMenu1.dropdown-toggle.user-logged-dropdown [
+      type="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="true"
+      uib-dropdown-toggle
+    ]
       | {{ currentUser.firstname }}
       '
       | {{ currentUser.surname }}
