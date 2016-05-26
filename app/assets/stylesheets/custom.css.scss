@@ -65,6 +65,7 @@ body {
 
 #the_logo {
   height: 100px;
+  outline: none;
 
   img {
     margin-top: -5px;
@@ -276,7 +277,7 @@ body {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
 
-#search-bar-home,
+.search-bar-home,
 #header,
 .filters {
   input, span {
@@ -290,8 +291,9 @@ body {
   }
 }
 
-#search-bar-home {
+.search-bar-home {
   padding: 0 16.875%;
+  margin-top: 3em;
 
   @media (max-width: 768px) {
     padding: 0 30px;
@@ -376,7 +378,7 @@ body {
   }
 
   .home-carousel .item {
-    height: 400px !important;
+    height: 700px !important;
   }
 
   #htw-home-link {
@@ -9141,7 +9143,7 @@ button.close {
 }
 
 .pre-footer {
-  margin-top: 30px;
+  margin-top: 90px;
   margin-bottom: 30px;
 }
 
@@ -10001,7 +10003,7 @@ aside h2.title.white {
   }
 
   .home-carousel .item {
-    height: 700px !important;
+    height: 400px !important;
     overflow: hidden;
   }
 
@@ -18271,17 +18273,17 @@ button.close {
   }
 }
 
-.pre-footer {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
 div#header {
   width: 100%;
 }
 
 #header.not-fixed a {
   color: white;
+}
+
+#header .user-logged-dropdown:hover {
+  background: none;
+  text-decoration: underline;
 }
 
 a.btn.btn-performer {
@@ -18297,7 +18299,7 @@ a.btn.btn-performer {
     color: #fffca6;
   }
 
-  #dropdownMenu1 {
+  .user-logged-dropdown {
     color: #fff;
   }
 }
@@ -18309,7 +18311,7 @@ a.btn.btn-performer {
 }
 
 .relative .button-performer {
-  padding: 58px 0;
+  padding: 28px 0 58px;
 
   a.btn.btn-performer.main-section {
     border-style: solid;
@@ -18481,7 +18483,7 @@ button.btn.dropdown-toggle.talent {
 
 p.va-middle.text-center.text-contrast {
   font-family: FuturaLT !important;
-  font-size: 63px !important;
+  font-size: 50px !important;
 }
 
 .row.main-description {
