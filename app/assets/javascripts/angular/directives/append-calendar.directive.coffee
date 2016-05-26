@@ -12,7 +12,7 @@ angular
             i = 0  
             $elm.fullCalendar 'clientEvents', (event)->  
               dateE = new Date(event.start)
-              dateE.setDate(dateE.getDate() + 1)
+              dateE.setDate(dateE.getDate())
               if dateE.getDay() == scope.weekday
                 src[i++] = event
                 scope.id = event.id
@@ -39,13 +39,12 @@ angular
             id = scope.id
             $elm.fullCalendar 'removeEvents',id
 
-          data =  $.parseJSON attrs.data
 
           $elm.fullCalendar
-            events: data
+            events: '/api/v1/availabilities.json'
             dayClick: (date, jsEvent, allDay) ->
               date = new Date(date)
-              date.setDate(date.getDate() + 1)
+              date.setDate(date.getDate())
               date = date.toDateString()
               isExist = false
               remove_event = []
@@ -54,7 +53,7 @@ angular
                 dateE = dateE.toDateString()
                 if date == dateE
                   scope.id = event.id
-                  scope.delete_available_date()     
+                  scope.delete_available_date()
                   $elm.fullCalendar 'removeEvents',
                     event._id
                   isExist = true

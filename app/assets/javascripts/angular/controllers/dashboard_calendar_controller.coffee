@@ -15,30 +15,15 @@ class DashboardCalendarController extends @NGController
   shows = []
   showId = ""
   events = []
-  init: ->
-    @User_availabilities
-      .query()
-      .then (user_availabilities)=>
-        i = 0
-        while i < user_availabilities.length
-          event ={'id':"", 'available_at':"", 'start':""}
-          event['id'] = user_availabilities[i].id
-          event['available_at'] = user_availabilities[i].available_at
-          event['start'] = user_availabilities[i].available_at
-          events.push event
-          i++
-        @scope.shows = events
-        if @stateParams.id
-          @scope.showId = @stateParams.id
 
   insert_available_date: ()=>
     availability = {available_at:@scope.available_at}
     scope = @scope
     @http(
         method: 'POST'
-        url: '/api/v1/availabilities'
+        url: '/api/v1/availabilities.json'
         data: {availability:availability}).then ((response) ->
-          event = [{'id':response.id, 'available_at':response.available_at, 'start':response.available_at}]
+          event = response
           scope.event_param = event
           scope.$broadcast 'insert_success', event
           console.log "insert success controller"
@@ -52,7 +37,7 @@ class DashboardCalendarController extends @NGController
     scope = @scope
     @http(
         method: 'DELETE'
-        url: '/api/v1/availabilities/' + @scope.id
+        url: '/api/v1/availabilities/' + @scope.id + '.json'
         ).then ((response) ->
           scope.id = id
           scope.$broadcast 'delete_success'
