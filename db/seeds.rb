@@ -43,7 +43,7 @@ main_user = User.create(
   # uid: 123,
   dob:Time.now,
   activity:"asdsad",
-  #language: Language.all.sample,
+  language: Language.all.sample,
   bio: Faker::Lorem.paragraph(5)
 )
 
@@ -61,7 +61,7 @@ puts 'creating users...'
     phone_number: Faker::Number.number(10).gsub(/(\d{3})(\d{3})(\d{4})/, '\1-\2-\3'),
     dob: Faker::Time.backward(14000, :evening).to_date,
     activity: Faker::Lorem.sentence,
-    #language: Language.all.sample,
+    language: Language.all.sample,
     bio: Faker::Lorem.paragraph(5)
   )
 end
@@ -95,7 +95,7 @@ User.all.each do |user|
       starts_at: (1..12).to_a.sample.to_s + ':00',
       ends_at: (13..23).to_a.sample.to_s + ':00',
       active: true,
-      #art: Art.all.sample,
+      art: Art.all.sample,
     )
 
     pictures = 7.times.map do

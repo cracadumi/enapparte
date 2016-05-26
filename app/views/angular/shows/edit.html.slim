@@ -17,13 +17,10 @@
             legend= "My Show Details"
             p= "Your show will be visible on the site once you have downloaded your photos and complete details of your profile"
             br
-            input-select[label="Art" model="show.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
-            / input-integer[label="Max Spectators" model="show.maxSpectators" required]
-            input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
+            input-select[label="Max Spectators" model="show.maxSpectators"  data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name:   'Indifférent', value: 1000 }]).to_json) required]
             input-integer[label="Duration in minutes" model="show.length" required]
             input-string[label="Title" model="show.title" required]
             input-text[label="Description" model="show.description" required]
-            / input-select[label="Language" model="show.languageId" data-collection=(Language.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json) required]
           fieldset
             legend= "Price"
             input-integer[label="Price" model="show.price" required]
@@ -43,6 +40,9 @@
                       button.btn-remove-picture[type='button' ng-click="removePicture($index)"]
                         i.glyphicon.glyphicon-trash
                   .clearfix
+            .error-messages[ng-show="true"]
+              span.help-block[ng-show="!img_selected" color="#a94442"]
+                | Please, upload a photo
             br
             input-images-button[label="Upload photos" model="show.pictures" required]
         .form-inputs[ng-if="step == 3"]
@@ -58,8 +58,11 @@
                     i.glyphicon.glyphicon-ok[ng-show="picture.selected"]
                     '
                     = "Cover Photo"
-
-        hr
+              input-hidden[ model="show.hidden" required]
+            .error-messages[ng-show="true"]
+              span.help-block[ng-show="!cover_selected" color="#a94442"]
+                | Please, select a cover photo
+        href
         .form-actions
           .form-group
             .row
