@@ -276,7 +276,7 @@ body {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
 
-#search-bar-home,
+.search-bar-home,
 #header,
 .filters {
   input, span {
@@ -290,8 +290,9 @@ body {
   }
 }
 
-#search-bar-home {
+.search-bar-home {
   padding: 0 16.875%;
+  margin-top: 3em;
 
   @media (max-width: 768px) {
     padding: 0 30px;
@@ -18486,7 +18487,7 @@ button.btn.dropdown-toggle.talent {
 
 p.va-middle.text-center.text-contrast {
   font-family: FuturaLT !important;
-  font-size: 63px !important;
+  font-size: 50px !important;
 }
 
 .row.main-description {
