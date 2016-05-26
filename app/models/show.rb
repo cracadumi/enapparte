@@ -13,7 +13,7 @@ class Show < ActiveRecord::Base
   has_many :ratings, through: :reviews
 
   just_define_datetime_picker :published_at
-  validates :max_spectators, :length, :title, :description, :price, :hidden, presence: true
+  validates :max_spectators, :length, :title, :description, :price, presence: true
 
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
