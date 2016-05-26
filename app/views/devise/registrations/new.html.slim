@@ -7,7 +7,7 @@
       = f.label :firstname, "Prénom"
       = f.text_field :firstname, :autofocus => true, class: 'form-control'
     .form-group
-      = f.label :surname, "Nom"
+      = f.label :surname
       = f.text_field :surname, :autofocus => true, class: 'form-control'
     .form-group
       = f.label :gender
@@ -21,12 +21,12 @@
       = f.radio_button :gender, 'other'
       = f.label :gender, "Other", :value => "2"
     .form-group
-      = f.label :email, 
+      = f.label :email
       = f.email_field :email, class: 'form-control'
     .form-group
-      = f.label :password, "Mot de passe"
+      = f.label :password
       = f.password_field :password, class: 'form-control'
     .form-group
-      = f.label :password_confirmation, "Confirmation du mot de passe"
+      = f.label :password_confirmation
       = f.password_field :password_confirmation, class: 'form-control'
-    = f.submit 'S'inscrire', :class => 'button right'
+    = f.submit 'Sign up', :class => 'button right'
