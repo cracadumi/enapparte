@@ -41,7 +41,6 @@ gem 'js-routes'
 gem 'fullcalendar-rails'
 gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'maruku'
-gem 'growl' if /darwin/ =~ RUBY_PLATFORM
 
 group :production do
   gem 'pg'
@@ -61,7 +60,8 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-jasmine'
   gem 'rack-livereload'
-  gem 'libnotify'
+  gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
+  gem 'growl' if /darwin/ =~ RUBY_PLATFORM
   gem 'awesome_print'
   gem 'dotenv-rails'
 end
