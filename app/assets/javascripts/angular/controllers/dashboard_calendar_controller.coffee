@@ -59,23 +59,16 @@ class DashboardCalendarController extends @NGController
     while i < @scope.user_availabilities.length
       dateE = new Date(@scope.user_availabilities[i].start)
       console.log "user_availabilitie #{@scope.user_availabilities[i].start}"
-      if dateE.getDay() == 0
-        @scope.dayCount.sun++
-      if dateE.getDay() == 1
-        @scope.dayCount.mon++
-      if dateE.getDay() == 2
-        @scope.dayCount.tue++
-      if dateE.getDay() == 3
-        @scope.dayCount.wed++
-      if dateE.getDay() == 4
-        @scope.dayCount.thu++
-      if dateE.getDay() == 5
-        @scope.dayCount.fri++
-      if dateE.getDay() == 6
-        @scope.dayCount.sat++
+      switch dateE.getDay()
+        when 0 then  @scope.dayCount.sun++
+        when 1 then  @scope.dayCount.mon++
+        when 2 then  @scope.dayCount.tue++
+        when 3 then  @scope.dayCount.wed++
+        when 4 then  @scope.dayCount.thu++
+        when 5 then  @scope.dayCount.fri++
+        when 6 then  @scope.dayCount.sat++
       i++
 
-    @scope.totalMondayCount = countDayInMonth(1)
     @scope.allDaySelected = {}
     @scope.allDaySelected.sun = @checkAllDaySet('sun')
     @scope.allDaySelected.mon = @checkAllDaySet('mon')
@@ -84,6 +77,15 @@ class DashboardCalendarController extends @NGController
     @scope.allDaySelected.thu = @checkAllDaySet('thu')
     @scope.allDaySelected.fri = @checkAllDaySet('fri')
     @scope.allDaySelected.sat = @checkAllDaySet('sat')
+
+
+  checkForMatch = (array, propertyToMatch, valueToMatch) ->
+    i = 0
+    while i < array.length
+      if array[i][propertyToMatch] == valueToMatch
+        return true
+      i++
+    false
 
 
   insert_available_date: ()=>
@@ -95,7 +97,8 @@ class DashboardCalendarController extends @NGController
         data: {availability:availability}).then ((response) ->
           event = response
           scope.event_param = event
-          scope.user_availabilities.push(response.data)
+          if !checkForMatch(scope.user_availabilities, 'id', response.data.id)
+            scope.user_availabilities.push response.data
           scope.setWeekdayValue()
           scope.$broadcast 'insert_success', event
           console.log "insert success controller"

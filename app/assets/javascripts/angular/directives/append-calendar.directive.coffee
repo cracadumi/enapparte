@@ -8,13 +8,11 @@ angular
           scope.$on 'weekday_unset' , ()->
             date = new Date($elm.fullCalendar('getDate'))
             month = date.getMonth()
-            src = []
             i = 0  
             $elm.fullCalendar 'clientEvents', (event)->  
               dateE = new Date(event.start)
               dateE.setDate(dateE.getDate())
               if dateE.getDay() == scope.weekday
-                src[i++] = event
                 scope.id = event.id
                 scope.delete_available_date()
 
