@@ -5,7 +5,7 @@ angular
       strict: "A"
       link: (scope, $elm, attrs) ->
         $timeout ()->
-          scope.$on 'weekday_click' , ()->
+          scope.$on 'weekday_unset' , ()->
             date = new Date($elm.fullCalendar('getDate'))
             month = date.getMonth()
             src = []
@@ -16,8 +16,9 @@ angular
               if dateE.getDay() == scope.weekday
                 src[i++] = event
                 scope.id = event.id
-                scope.delete_available_date()      
-            
+                scope.delete_available_date()
+
+          scope.$on 'weekday_set' , ()->
             i = 1
             while i < 32
               date = new Date($elm.fullCalendar('getDate'))
@@ -27,8 +28,9 @@ angular
                 date = push_date
                 date = date.toDateString()
                 scope.available_at = date
-                scope.insert_available_date()  
+                scope.insert_available_date()
               i++
+
           scope.$on 'insert_success', ()->
             event_param = scope.event_param
             $elm.fullCalendar 'addEventSource',

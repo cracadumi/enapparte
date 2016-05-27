@@ -16,6 +16,76 @@ class DashboardCalendarController extends @NGController
   showId = ""
   events = []
 
+  init: ->
+    @User_availabilities
+      .query()
+      .then (user_availabilities)=>
+        @scope.user_availabilities = user_availabilities
+        @daysCountInMonth()
+        @setWeekdayValue()
+
+  countDayInMonth = (weekday) ->
+    d = new Date
+    month = d.getMonth()
+    d.setDate 1
+    weekdays = []
+    while d.getDay() != weekday
+      d.setDate d.getDate() + 1
+    while d.getMonth() == month
+      weekdays.push new Date(d.getTime())
+      d.setDate d.getDate() + 7
+    weekdays.length
+
+  daysCountInMonth: ()=>
+    @scope.daysInMonth = {}
+    @scope.daysInMonth.sun = countDayInMonth(0)
+    @scope.daysInMonth.mon = countDayInMonth(1)
+    @scope.daysInMonth.tue = countDayInMonth(2)
+    @scope.daysInMonth.wed = countDayInMonth(3)
+    @scope.daysInMonth.thu = countDayInMonth(4)
+    @scope.daysInMonth.fri = countDayInMonth(5)
+    @scope.daysInMonth.sat = countDayInMonth(6)
+    console.log @scope.daysInMonth
+
+  checkAllDaySet: (dayName)=>
+    if @scope.daysInMonth[dayName] == @scope.dayCount[dayName]
+      true
+    else
+      false
+
+  setWeekdayValue: ()=>
+    i = 0
+    @scope.dayCount = {sun: 0, mon: 0, tue: 0, wed: 0, thu: 0, fri: 0, sat: 0}
+    while i < @scope.user_availabilities.length
+      dateE = new Date(@scope.user_availabilities[i].start)
+      console.log "user_availabilitie #{@scope.user_availabilities[i].start}"
+      if dateE.getDay() == 0
+        @scope.dayCount.sun++
+      if dateE.getDay() == 1
+        @scope.dayCount.mon++
+      if dateE.getDay() == 2
+        @scope.dayCount.tue++
+      if dateE.getDay() == 3
+        @scope.dayCount.wed++
+      if dateE.getDay() == 4
+        @scope.dayCount.thu++
+      if dateE.getDay() == 5
+        @scope.dayCount.fri++
+      if dateE.getDay() == 6
+        @scope.dayCount.sat++
+      i++
+
+    @scope.totalMondayCount = countDayInMonth(1)
+    @scope.allDaySelected = {}
+    @scope.allDaySelected.sun = @checkAllDaySet('sun')
+    @scope.allDaySelected.mon = @checkAllDaySet('mon')
+    @scope.allDaySelected.tue = @checkAllDaySet('tue')
+    @scope.allDaySelected.wed = @checkAllDaySet('wed')
+    @scope.allDaySelected.thu = @checkAllDaySet('thu')
+    @scope.allDaySelected.fri = @checkAllDaySet('fri')
+    @scope.allDaySelected.sat = @checkAllDaySet('sat')
+
+
   insert_available_date: ()=>
     availability = {available_at:@scope.available_at}
     scope = @scope
@@ -25,6 +95,8 @@ class DashboardCalendarController extends @NGController
         data: {availability:availability}).then ((response) ->
           event = response
           scope.event_param = event
+          scope.user_availabilities.push(response.data)
+          scope.setWeekdayValue()
           scope.$broadcast 'insert_success', event
           console.log "insert success controller"
           return
@@ -40,6 +112,10 @@ class DashboardCalendarController extends @NGController
         url: '/api/v1/availabilities/' + @scope.id + '.json'
         ).then ((response) ->
           scope.id = id
+          scope.user_availabilities = $.grep(scope.user_availabilities, (user_availability) ->
+            user_availability.id != id
+          )
+          scope.setWeekdayValue()
           scope.$broadcast 'delete_success'
           console.log "delete success controller"
           return
@@ -47,12 +123,19 @@ class DashboardCalendarController extends @NGController
           console.log 'delete error controller'+response['statusCode']
         return
 
-  weekday_Click : (weekday)->
-    switch weekday
-      when 'MON' then  @scope.weekday = 1
-      when 'TUE' then  @scope.weekday = 2
-      when 'WED' then  @scope.weekday = 3
-      when 'THU' then  @scope.weekday = 4
-    @scope.$broadcast 'weekday_click' 
+  weekday_Click : (dayName) =>
+    switch dayName
+      when 'sun' then  @scope.weekday = 0
+      when 'mon' then  @scope.weekday = 1
+      when 'tue' then  @scope.weekday = 2
+      when 'wed' then  @scope.weekday = 3
+      when 'thu' then  @scope.weekday = 4
+      when 'fri' then  @scope.weekday = 5
+      when 'sat' then  @scope.weekday = 6
+
+    if @scope.allDaySelected[dayName]
+      @scope.$broadcast 'weekday_unset'
+    else
+      @scope.$broadcast 'weekday_set'
 
 
