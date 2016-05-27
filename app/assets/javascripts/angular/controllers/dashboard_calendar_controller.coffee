@@ -62,7 +62,6 @@ class DashboardCalendarController extends @NGController
     while i < @scope.user_availabilities.length
       eventDate = new Date(@scope.user_availabilities[i].start)
       currentDate = new Date
-      console.log "user_availabilities : #{@scope.user_availabilities[i].start}"
       if @scope.calendarMonth == eventDate.getMonth()
         switch eventDate.getDay()
           when 0 then  @scope.dayCount.sun++
