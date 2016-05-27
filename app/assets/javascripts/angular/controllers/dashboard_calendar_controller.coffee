@@ -21,11 +21,14 @@ class DashboardCalendarController extends @NGController
       .query()
       .then (user_availabilities)=>
         @scope.user_availabilities = user_availabilities
+        currentDate = new Date
+        @scope.calendarDate = currentDate
+        @scope.calendarMonth = currentDate.getMonth()
         @daysCountInMonth()
         @setWeekdayValue()
 
-  countDayInMonth = (weekday) ->
-    d = new Date
+  countDayInMonth = (weekday, calendarDate) ->
+    d = new Date(calendarDate)
     month = d.getMonth()
     d.setDate 1
     weekdays = []
@@ -38,13 +41,13 @@ class DashboardCalendarController extends @NGController
 
   daysCountInMonth: ()=>
     @scope.daysInMonth = {}
-    @scope.daysInMonth.sun = countDayInMonth(0)
-    @scope.daysInMonth.mon = countDayInMonth(1)
-    @scope.daysInMonth.tue = countDayInMonth(2)
-    @scope.daysInMonth.wed = countDayInMonth(3)
-    @scope.daysInMonth.thu = countDayInMonth(4)
-    @scope.daysInMonth.fri = countDayInMonth(5)
-    @scope.daysInMonth.sat = countDayInMonth(6)
+    @scope.daysInMonth.sun = countDayInMonth(0, @scope.calendarDate)
+    @scope.daysInMonth.mon = countDayInMonth(1, @scope.calendarDate)
+    @scope.daysInMonth.tue = countDayInMonth(2, @scope.calendarDate)
+    @scope.daysInMonth.wed = countDayInMonth(3, @scope.calendarDate)
+    @scope.daysInMonth.thu = countDayInMonth(4, @scope.calendarDate)
+    @scope.daysInMonth.fri = countDayInMonth(5, @scope.calendarDate)
+    @scope.daysInMonth.sat = countDayInMonth(6, @scope.calendarDate)
     console.log @scope.daysInMonth
 
   checkAllDaySet: (dayName)=>
@@ -57,16 +60,18 @@ class DashboardCalendarController extends @NGController
     i = 0
     @scope.dayCount = {sun: 0, mon: 0, tue: 0, wed: 0, thu: 0, fri: 0, sat: 0}
     while i < @scope.user_availabilities.length
-      dateE = new Date(@scope.user_availabilities[i].start)
-      console.log "user_availabilitie #{@scope.user_availabilities[i].start}"
-      switch dateE.getDay()
-        when 0 then  @scope.dayCount.sun++
-        when 1 then  @scope.dayCount.mon++
-        when 2 then  @scope.dayCount.tue++
-        when 3 then  @scope.dayCount.wed++
-        when 4 then  @scope.dayCount.thu++
-        when 5 then  @scope.dayCount.fri++
-        when 6 then  @scope.dayCount.sat++
+      eventDate = new Date(@scope.user_availabilities[i].start)
+      currentDate = new Date
+      console.log "user_availabilities : #{@scope.user_availabilities[i].start}"
+      if @scope.calendarMonth == eventDate.getMonth()
+        switch eventDate.getDay()
+          when 0 then  @scope.dayCount.sun++
+          when 1 then  @scope.dayCount.mon++
+          when 2 then  @scope.dayCount.tue++
+          when 3 then  @scope.dayCount.wed++
+          when 4 then  @scope.dayCount.thu++
+          when 5 then  @scope.dayCount.fri++
+          when 6 then  @scope.dayCount.sat++
       i++
 
     @scope.allDaySelected = {}
@@ -77,7 +82,6 @@ class DashboardCalendarController extends @NGController
     @scope.allDaySelected.thu = @checkAllDaySet('thu')
     @scope.allDaySelected.fri = @checkAllDaySet('fri')
     @scope.allDaySelected.sat = @checkAllDaySet('sat')
-
 
   checkForMatch = (array, propertyToMatch, valueToMatch) ->
     i = 0
@@ -140,5 +144,4 @@ class DashboardCalendarController extends @NGController
       @scope.$broadcast 'weekday_unset'
     else
       @scope.$broadcast 'weekday_set'
-
 

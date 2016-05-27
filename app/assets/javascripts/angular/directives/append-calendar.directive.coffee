@@ -5,9 +5,16 @@ angular
       strict: "A"
       link: (scope, $elm, attrs) ->
         $timeout ()->
+
+          scope.$on 'set_calendar_month' , ()->
+            date = new Date($elm.fullCalendar('getDate'))
+            scope.calendarDate = date
+            scope.calendarMonth = date.getMonth()
+
+
           scope.$on 'weekday_unset' , ()->
             date = new Date($elm.fullCalendar('getDate'))
-            month = date.getMonth()
+            scope.calendarMonth = date.getMonth()
             i = 0  
             $elm.fullCalendar 'clientEvents', (event)->  
               dateE = new Date(event.start)
@@ -20,6 +27,7 @@ angular
             i = 1
             while i < 32
               date = new Date($elm.fullCalendar('getDate'))
+              scope.calendarMonth = date.getMonth()
               push_date = new Date(2016, date.getMonth(), i)
               if push_date.getDay() == scope.weekday
                 push_date.setDate(push_date.getDate())
