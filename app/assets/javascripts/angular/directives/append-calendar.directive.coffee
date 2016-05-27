@@ -47,6 +47,24 @@ angular
             id = scope.id
             $elm.fullCalendar 'removeEvents',id
 
+          scope.doPrevView = ->
+            $elm.fullCalendar 'prev'
+            date = new Date($elm.fullCalendar('getDate'))
+            scope.calendarDate = date
+            scope.calendarMonth = date.getMonth()
+            scope.daysCountInMonth()
+            scope.setWeekdayValue()
+            return
+
+          scope.doNextView = ->
+            $elm.fullCalendar 'next'
+            date = new Date($elm.fullCalendar('getDate'))
+            scope.calendarDate = date
+            scope.calendarMonth = date.getMonth()
+            scope.daysCountInMonth()
+            scope.setWeekdayValue()
+            return
+
 
           $elm.fullCalendar
             events: '/api/v1/availabilities.json'
