@@ -18614,6 +18614,24 @@ a.btn-xl.btn.btn-performer.main-section {
   color: white;
 }
 
+.cal-btn-cont {
+  position: relative;
+  top: 12px;
+  .nxt {
+    border:1px solid #ddd;
+    float:right;
+    padding: 0px 7px 0px 7px;
+    cursor: pointer;
+  }
+  .prev {
+    border:1px solid #ddd;
+    float:left;
+    padding: 0px 7px 0px 7px;
+    cursor: pointer;
+  }
+}
+
+
 .calendar-bookings {
   h5 {
     color: #555;
@@ -18665,6 +18683,10 @@ a.btn-xl.btn.btn-performer.main-section {
       width: 100%;
 
       .fc-today-button {
+        display: none;
+      }
+
+      .fc-button-group{
         display: none;
       }
 
