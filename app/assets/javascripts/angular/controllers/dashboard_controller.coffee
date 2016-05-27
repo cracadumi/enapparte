@@ -12,11 +12,11 @@ class DashboardController extends @NGController
 
   tabs: [
     { heading: 'Dashboard', route: 'dashboard.index' }
-    { heading: 'Profile', route: 'dashboard.profile.personal', routeActive: 'dashboard.profile' }
+    { heading: 'Profil', route: 'dashboard.profile.personal', routeActive: 'dashboard.profile' }
     { heading: 'Messages', route: 'dashboard.messages' }
-    { heading: 'My Performances', route: 'dashboard.performances.current', routeActive: 'dashboard.performances' }
-    { heading: 'My Reservations', route: 'dashboard.reservations.current', routeActive: 'dashboard.reservations' }
-    { heading: 'Account', route: 'dashboard.account.payment', routeActive: 'dashboard.account' }
+    { heading: 'Mes performances', route: 'dashboard.performances.current', routeActive: 'dashboard.performances' }
+    { heading: 'Mes réservations', route: 'dashboard.reservations.current', routeActive: 'dashboard.reservations' }
+    { heading: 'Compte', route: 'dashboard.account.payment', routeActive: 'dashboard.account' }
   ]
 
   init: ->
@@ -24,8 +24,8 @@ class DashboardController extends @NGController
       .query()
       .then (shows)=>
 
-    tabShow = { heading: 'My Shows', route: 'dashboard.shows' }
-    tabPerformer = {heading: 'Calendar', route: "dashboard.calendar", routeActive: 'dashboard.calendar'}
+    tabShow = { heading: 'Mes performances', route: 'dashboard.shows' }
+    tabPerformer = {heading: 'Calendrier', route: "dashboard.calendar", routeActive: 'dashboard.calendar'}
 
     if @rootScope.currentUser.role == "performer"
       @scope.tabs.push tabShow
