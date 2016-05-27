@@ -4,12 +4,12 @@ form.form-horizontal[name="authForm" novalidate]
       | S'inscrire
   .modal-body
     input-string[label="Prénom" model="user.firstname" required focus]
-    input-string[label="Surname" model="user.surname" required]
+    input-string[label="Nom" model="user.surname" required]
     / input-radio[label="Gender" model="user.gender" required collection='[{"name": "Male", "value": 0}, {"name": "Female", "value": 1}, {"name": "Other", "value": 2}]']
     input-email[label="Email" model="user.email" required]
-    input-password[label="Password" model="user.password" required confirmation="1"]
+    input-password[label="Mot de passe" model="user.password" required confirmation="1"]
   .modal-footer
     button.btn.btn-primary[ng-click="authForm.$valid && ok()"]
-      | Sign Up
+      | S'enregistrer
     button.btn.btn-default[ng-click="cancel()"]
-      | Cancel
+      | Annuler
