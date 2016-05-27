@@ -33,7 +33,7 @@ class ProfileController extends @NGController
       @scope.user.save()
         .then (user)=>
           @scope.user = user
-          @Flash.showNotice @scope, 'L'utilisateur a été enregistré avec succès.'
+          @Flash.showNotice @scope, "L'utilisateur a été enregistré avec succès."
         , (error)->
-          # @Flash.showError @scope, 'L'utilisateur a été enregistré avec succès.'
+          # @Flash.showError @scope, "L'utilisateur a été enregistré avec succès."
 
