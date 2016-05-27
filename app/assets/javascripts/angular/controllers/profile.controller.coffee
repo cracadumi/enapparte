@@ -10,13 +10,13 @@ class ProfileController extends @NGController
   ]
 
   tabs2: [
-    { heading: 'Personal', route: 'dashboard.profile.personal' }
-    { heading: 'Reviews', route: 'dashboard.profile.reviews.received', routeActive: 'dashboard.profile.reviews' }
+    { heading: 'Profil', route: 'dashboard.profile.personal' }
+    { heading: 'Commentaires', route: 'dashboard.profile.reviews.received', routeActive: 'dashboard.profile.reviews' }
   ]
 
   tabsReviews: [
-    { heading: 'Received', route: 'dashboard.profile.reviews.received' }
-    { heading: 'Sent', route: 'dashboard.profile.reviews.sent' }
+    { heading: 'Reçus', route: 'dashboard.profile.reviews.received' }
+    { heading: 'Envoyés', route: 'dashboard.profile.reviews.sent' }
   ]
 
   user: {}
@@ -33,7 +33,7 @@ class ProfileController extends @NGController
       @scope.user.save()
         .then (user)=>
           @scope.user = user
-          @Flash.showNotice @scope, 'User was saved successfully.'
+          @Flash.showNotice @scope, 'L'utilisateur a été enregistré avec succès.'
         , (error)->
-          # @Flash.showError @scope, 'User was saved successfully.'
+          # @Flash.showError @scope, 'L'utilisateur a été enregistré avec succès.'
 
