@@ -12,12 +12,11 @@
 
     .col-md-9
       form.show.form-horizontal[novalidate name="showForm"]
-        .form-inputs[ng-if="step == 1"]
+        .form-inputs[ng-show="step == 1"]
           fieldset
             legend= "My Show Details"
             p= "Your show will be visible on the site once you have downloaded your photos and complete details of your profile"
             br
-            input-select[label="Art" model="show.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
             / input-integer[label="Max Spectators" model="show.maxSpectators" required]
             input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
             input-integer[label="Duration in minutes" model="show.length" required]
@@ -29,7 +28,7 @@
             input-integer[label="Price" model="show.price" required]
             .price-person-checkbox.col-sm-offset-3
               input-checkbox[label="Il s’agit du prix par personne" model="show.pricePerson"]
-        .form-inputs[ng-if="step == 2"]
+        .form-inputs[ng-show="step == 2"]
           fieldset
             legend= "Add Photos"
             p= "Add photos from your Show"
@@ -45,7 +44,7 @@
                   .clearfix
             br
             input-images-button[label="Upload photos" model="show.pictures" required]
-        .form-inputs[ng-if="step == 3"]
+        .form-inputs[ng-show="step == 3"]
           fieldset
             legend= "Cover Photo"
             p= "Choose a cover photo for your show"
