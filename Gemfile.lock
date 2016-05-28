@@ -264,6 +264,8 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libnotify (0.9.1)
       ffi (>= 1.0.11)
     listen (3.0.6)
@@ -529,6 +531,7 @@ DEPENDENCIES
   js-routes
   just-datetime-picker
   launchy
+  letter_opener
   libnotify
   maruku
   momentjs-rails (>= 2.9.0)
@@ -563,4 +566,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.12.1
+   1.12.5

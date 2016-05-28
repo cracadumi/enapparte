@@ -79,6 +79,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
   gem 'slim_lint'
+  gem 'letter_opener'
 end
 
 group :test do

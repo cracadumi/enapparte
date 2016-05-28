@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
 
   before_save :deactivate_shows
   before_save :check_picture_exists
+  after_create :send_welcome_email
 
   scope :performers, -> { where role: roles[:performer] }
 
@@ -98,6 +99,10 @@ class User < ActiveRecord::Base
 
   def user_is_performer
     errors.add(:art, 'A user should be performer') unless performer?
+  end
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
   end
 end
 
