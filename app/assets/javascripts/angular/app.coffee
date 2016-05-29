@@ -103,6 +103,8 @@
       .state 'dashboard.account.information', { url: '/information', templateUrl: 'dashboard/account/information.html' }
       .state 'dashboard.account.security', { url: '/security', templateUrl: 'dashboard/account/security.html' }
       .state 'dashboard.calendar', {url: '/:id/calendar', templateUrl: 'dashboard/calendar/index.html'}
+
+      .state 'dashboard.gallery', {url: '/gallery', templateUrl: 'dashboard/showcases/index.html'}
     .state 'home.signin', {
       url: 'signin',
       onEnter: ['$uibModal', '$state', ($uibModal, $state)->

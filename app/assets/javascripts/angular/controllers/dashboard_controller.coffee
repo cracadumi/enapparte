@@ -23,10 +23,12 @@ class DashboardController extends @NGController
 
     tabShow = { heading: 'Mes performances', route: 'dashboard.shows' }
     tabPerformer = {heading: 'Calendrier', route: "dashboard.calendar", routeActive: 'dashboard.calendar'}
+    tabGallery = {heading: 'Gallery', route: "dashboard.gallery", routeActive: 'dashboard.gallery'}
 
     if @isPerformer()
       @scope.tabs.push tabShow
       @scope.tabs.push tabPerformer
+      @scope.tabs.push tabGallery
 
 
     @Show
