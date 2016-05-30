@@ -1,0 +1,96 @@
+.container[ng-controller="ShowcasesController"]
+  .row
+    .col-md-12
+      legend= "Showcases"
+      table.table
+        thead
+          tr
+            th url
+            th kind
+            th actions
+        tbody
+          tr[ng-repeat="showcase in showcases"]
+            td.col-md-5[ng-hide="showcase.editMode"]
+              | {{ showcase.url }}
+            td.col-md-2[ng-hide="showcase.editMode"]
+              | {{ showcase.kind }}
+            td.col-md-2[ng-hide="showcase.editMode"]
+              button.btn.btn-default[ng-click="toggleEditMode(showcase)"] Edit
+              '
+              |
+              button.btn.btn-danger[delete-confirm="Are you sure?" ng-click="removeShowcase(showcase, $index)"] Delete
+
+            td.col-md-5[ng-show="showcase.editMode"]
+              input.form-control[ng-model="showcase.url" placeholder="Enter url" type="text" required]
+            td.col-md-2[ng-show="showcase.editMode"]
+              select.form-control[ng-model="showcase.kind"]
+                option ng-repeat=("kind_value in kind_values") ng-selected=("showcase.kind == kind_value.value") value="{{kind_value.value}}" 
+                  | {{kind_value.name}}
+            td.col-md-2[ng-show="showcase.editMode"]
+              button.btn.btn-success[ng-click="showcaseUpdate(showcase, $index)"] Update
+              '
+              |
+              button.btn.btn-default[ng-click="toggleEditMode(showcase, $index)"] Cancel
+
+
+      br
+      div[ng-hide="addMode"]
+        button.btn.btn-success[ng-click="toggleAddMode()"] Add new showcase
+        br
+        br
+      form.form-horizontal[name="showcaseForm" ng-show="addMode"]
+        table.table
+          tbody
+            tr
+              td.col-md-5
+                input.form-control[ng-model="showcase.url" placeholder="Enter url" type="text" required]
+              td.col-md-2
+                input-select-general[model="showcase.kind" data-collection=(([{ name: 'Dailymotion', value: 'Dailymotion'}, { name: 'Youtube', value: 'Youtube'}, { name: 'Soundcloud', value: 'Soundcloud'}]).to_json) required]
+              td.col-md-2
+                button.btn.btn-success[ng-click="showcaseForm.$valid && showcaseSave()"] Save
+                '
+                |
+                button.btn.btn-default[ng-click="toggleAddMode()"] Cancel
+
+
+
+      br
+      br
+      .form-inputs
+        fieldset
+          legend= "Pictures"
+          br
+          .row
+            .col-xs-6.col-md-3[ng-repeat="picture in pictures"]
+              .thumbnail
+                img[ng-src="{{picture.src}}" width="300" height="300"]
+                .caption
+                  .actions.pull-right
+                    a[href="javascript: void(0);" ng-click="removePicture(picture, $index)"]
+                      i.glyphicon.glyphicon-trash
+                .clearfix
+          br
+          br
+
+      form.show.form-horizontal[novalidate name="pictureForm"]
+        .form-inputs[ng-show="newPicture.src"]
+          fieldset
+            legend= "New Picture"
+            br
+            .row
+              .col-xs-6.col-md-3
+                .thumbnail
+                  img[ng-src="{{newPicture.src}}" width="300" height="300"]
+                  .caption
+                    .actions.pull-right
+                      a[href="javascript: void(0);" ng-click="newPicture = {}"]
+                        i.glyphicon.glyphicon-trash
+                  .clearfix
+            br
+        input-image-button[ng-hide="newPicture.src" label="Add new picture" model="newPicture" required]
+        div[ng-show="newPicture.src"]
+          button.btn.btn-success[ng-click="savePicture()"] Save Picture
+          '
+          span[ng-show="loading"] Uploading...
+          br
+          br

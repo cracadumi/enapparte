@@ -120,6 +120,32 @@ angular
         if scope.selectedOption
           scope.model = scope.selectedOption.value
 
+  .directive 'inputSelectGeneral', ()->
+    require: '^form'
+    strict: 'E'
+    templateUrl: 'directives/input_select_general.html'
+    scope: {
+      model: '='
+    }
+    replace: true
+    link: (scope, element, attrs, form)->
+      scope.form = form
+      scope.label = attrs.label
+      scope.elementId = 'input_' + scope.$id
+      scope.options = element.data('collection')
+      scope.required = attrs.required != undefined
+
+      scope.$watch 'model', (newValue, oldValue)->
+        if newValue && !scope.selectedOption
+          for option in scope.options
+            if option.value == newValue
+              scope.selectedOption = option
+
+      scope.$watch 'selectedOption', (newValue)->
+        if scope.selectedOption
+          scope.model = scope.selectedOption.value
+
+
   .directive 'inputImage', ()->
     require: '^form'
     strict: 'E'

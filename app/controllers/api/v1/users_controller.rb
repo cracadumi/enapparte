@@ -167,6 +167,23 @@ module Api
         respond_with :api, :v1, @user
       end
 
+      def pictures
+        @picture = current_user.pictures.create(picture_params)
+        respond_with :api, :v1, @picture
+      end
+
+      def list_pictures
+        @pictures = current_user.pictures
+        respond_with :api, :v1, @pictures
+      end
+
+      def destroy_pictures
+        @picture = current_user.pictures.find_by!(id: params[:id])
+        @picture.destroy
+        respond_with :api, :v1, @picture
+      end
+
+
       private
 
       def user_params
@@ -181,6 +198,10 @@ module Api
                                                    :last4],
                       language_ids: [], showcases_attributes: [:id, :kind, :url]
                      )
+      end
+
+      def picture_params
+        params.require(:user).permit(:src)
       end
     end
   end

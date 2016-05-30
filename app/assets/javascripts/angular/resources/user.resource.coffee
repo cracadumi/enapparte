@@ -18,5 +18,18 @@ angular
         this.nestedAttribute('paymentMethods')
         this.resource('paymentMethods', 'PaymentMethod')
 
+    resource.prototype.pictures = (src)->
+      resource
+        .$post '/api/v1/users/pictures', {src: src}
+
+    resource.prototype.listPictures = ()->
+      resource
+        .$get '/api/v1/users/list/pictures'
+
+    resource.prototype.destroyPicture = (id)->
+      resource
+        .$delete '/api/v1/users/picture', {id: id}
+
+
     resource
   ]
