@@ -37,3 +37,10 @@ class ProfileController extends @NGController
         , (error)->
           # @Flash.showError @scope, "L'utilisateur a été enregistré avec succès."
 
+  saveProfilePicture: =>
+    @scope.loading = true
+    user = new @User
+    user.profilePicture(@scope.user.profilePicture.src)
+      .then (profilePicture)=>
+        @scope.user.profilePicture = profilePicture
+        @scope.loading = false

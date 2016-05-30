@@ -1,5 +1,5 @@
 json.merge! @show.attributes
-json.user_picture_url @show.try(:user).try(:picture).try(:image).try(:url, :thumb)
+json.user_picture_url @show.try(:user).try(:profile_picture).try(:image).try(:url, :thumb)
 json.commission Show::COMMISSION
 
 json.pictures @show.pictures do |picture|

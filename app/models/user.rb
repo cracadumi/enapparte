@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   enum gender: { male: 0, female: 1, other: 2 }
   enum role: { admin: 0, user: 1, performer: 2 }
 
-  has_one :picture, as: :imageable
+  belongs_to :profile_picture, class_name: 'Picture'
   has_many :pictures, as: :imageable
   has_many :addresses
   has_many :bookings, dependent: :destroy
@@ -20,9 +20,6 @@ class User < ActiveRecord::Base
   has_many :languages, through: :languages_user
   has_many :availabilities, class_name: 'UserAvailability', dependent: :destroy
 
-  accepts_nested_attributes_for :picture, reject_if: proc { |attrs|
-    attrs['src'].blank? || attrs['src'].match(/^http:/)
-  }
   accepts_nested_attributes_for :addresses, reject_if: :reject_addresses
   accepts_nested_attributes_for :payment_methods,
                                 reject_if: :reject_payment_methods
@@ -36,7 +33,7 @@ class User < ActiveRecord::Base
   validate :user_is_performer, if: 'art.present?'
 
   before_save :deactivate_shows
-  before_save :check_picture_exists
+  before_save :check_profile_picture_exists
   after_create :send_welcome_email
 
   scope :performers, -> { where role: roles[:performer] }
@@ -81,8 +78,8 @@ class User < ActiveRecord::Base
 
   private
 
-  def check_picture_exists
-    build_picture if picture.nil?
+  def check_profile_picture_exists
+    self.profile_picture = build_profile_picture if self.profile_picture.nil?
   end
 
   def reject_addresses(attrs)

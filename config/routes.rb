@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         post 'pictures', on: :collection
         get 'list/pictures', to: 'users#list_pictures', on: :collection
         delete 'picture', to: 'users#destroy_pictures', on: :collection
+        post 'profile_picture', to: 'users#profile_picture', on: :collection
       end
       resources :shows, :defaults => { :format => 'json' } do
         post 'toggle_active', on: :member

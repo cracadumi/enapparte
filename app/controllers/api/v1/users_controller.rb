@@ -183,6 +183,14 @@ module Api
         respond_with :api, :v1, @picture
       end
 
+      def profile_picture
+        @user = current_user
+        @user.profile_picture.destroy
+        @user.profile_picture = Picture.create(picture_params)
+        @user.save
+        respond_with :api, :v1, @user
+      end
+
 
       private
 
