@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   enum role: { admin: 0, user: 1, performer: 2 }
 
   has_one :picture, as: :imageable
+  has_many :pictures, as: :imageable
   has_many :addresses
   has_many :bookings, dependent: :destroy
   has_many :shows, dependent: :destroy

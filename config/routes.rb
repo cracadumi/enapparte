@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, :defaults => { :format => 'json' } do
         get 'search', on: :collection
+        post 'pictures', on: :collection
+        get 'list/pictures', to: 'users#list_pictures', on: :collection
+        delete 'picture', to: 'users#destroy_pictures', on: :collection
       end
       resources :shows, :defaults => { :format => 'json' } do
         post 'toggle_active', on: :member

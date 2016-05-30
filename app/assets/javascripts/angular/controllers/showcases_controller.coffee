@@ -5,6 +5,7 @@ class ShowcasesController extends @NGController
     '$scope'
     '$rootScope'
     'Flash'
+    'User'
     'Showcase'
     '$state'
   ]
@@ -20,6 +21,13 @@ class ShowcasesController extends @NGController
       .query()
       .then (showcases)=>
         @scope.showcases = showcases
+
+    @scope.newPicture = {}
+    user = new @User
+    user
+      .listPictures()
+      .then (pictures)=>
+        @scope.pictures = pictures
 
   showcaseSave: =>
     kind = @scope.showcase.kind
@@ -42,8 +50,6 @@ class ShowcasesController extends @NGController
     @scope.addMode = !@scope.addMode
 
   removeShowcase: (showcase, index)=>
-    console.log index
-    console.log showcase
     scope = @scope
     showcase
       .delete()
@@ -53,3 +59,23 @@ class ShowcasesController extends @NGController
 
   toggleEditMode: (showcase)=>
     showcase.editMode = !showcase.editMode
+
+  savePicture: ()=>
+    scope = @scope
+    scope.loading = true
+    user = new @User
+    user
+      .pictures(scope.newPicture.src)
+      .then (result) ->
+        scope.pictures.push result
+        scope.loading = false
+        scope.newPicture = {}
+
+  removePicture: (picture, index)=>
+    scope = @scope
+    user = new @User
+    user
+      .destroyPicture(picture.id)
+      .then( (response) ->
+        scope.pictures.splice(index, 1)
+      )
