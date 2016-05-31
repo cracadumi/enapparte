@@ -68,6 +68,7 @@
       controller: 'RootController'
 
     .state 'about', { url: '/about', templateUrl: 'pages/about.html', controller: 'RootController' }
+    .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html', controller: 'RootController' }
     .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
     .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
