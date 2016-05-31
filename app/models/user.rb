@@ -38,10 +38,6 @@ class User < ActiveRecord::Base
 
   scope :performers, -> { where role: roles[:performer] }
 
-  def picture=(file)
-    build_picture(image: file)
-  end
-
   def sent_reviews
     bookings.includes(:review).inject([]) do |reviews, b|
       reviews << b.review if b.review

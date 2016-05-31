@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   permit_params :email, :password, :firstname, :surname, :gender, :bio,
-                :phone_number, :moving, :dob, :activity, :picture, :role, :art_id,
+                :phone_number, :moving, :dob, :activity, :role, :art_id, :profile_picture_id,
                 address_ids: [], booking_ids: [], show_ids: [], rating_ids: [],
                 language_ids: [], showcases_attributes: [:id, :kind, :url],
                 availabilities_attributes: [:available_at]
@@ -35,10 +35,10 @@ ActiveAdmin.register User do
       f.input :addresses
       f.input :bookings
       f.input :shows
-      f.input :picture, as: :file,
-                        hint: (image_tag(f.object.picture.image
-                                             .url(:thumb)) if f.object.picture)
+      f.input :profile_picture, collection: (Picture.all.last(20).reverse).map { |i| [ "#{i.id} : #{i.title}", i.id] }
       f.input :role, as: :select, collection: User.roles.keys
+
+
       f.has_many :showcases, heading: false, allow_destroy: true do |s|
         s.input :kind
         s.input :url
@@ -82,8 +82,8 @@ ActiveAdmin.register User do
         end.join(', ').html_safe
       end
       row :role
-      row :picture do
-        image_tag user.picture.image.url(:thumb) if user.picture
+      row :profile_picture do
+        image_tag user.profile_picture.image.url(:thumb) if user.profile_picture
       end
       table_for user.showcases do
         column :showcases do |showcase|
