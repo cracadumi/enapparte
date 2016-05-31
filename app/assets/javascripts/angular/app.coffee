@@ -68,7 +68,8 @@
       controller: 'RootController'
 
     .state 'about', { url: '/about', templateUrl: 'pages/about.html', controller: 'RootController' }
-    .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html', controller: 'RootController' }
+    .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html'}
+    .state 'faq', { url: '/faq', templateUrl: 'pages/faq.html'}
     .state 'concept', { url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController' }
     .state 'concept.works', {
       url: 'howItWorks',

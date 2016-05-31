@@ -18503,7 +18503,7 @@ p.main-description-header {
 }
 
 .page-description {
-  p {
+  p, .desc-text {
     padding-top: 15px;
     text-align: justify;
     margin-bottom: 10px;
@@ -18532,6 +18532,15 @@ p.main-description-header {
 
   .popup-text {
     margin-left: 20px;
+  }
+
+  .question {
+    text-decoration:underline;
+  }
+
+  hr {
+    border-width: 2px 0 0;
+    border-color: #333;
   }
 }
 
