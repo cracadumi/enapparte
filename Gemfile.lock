@@ -498,7 +498,7 @@ DEPENDENCIES
   aws-sdk (< 2.0)
   better_errors
   bonsai-elasticsearch-rails
-  bootstrap-sass
+  bootstrap-sass (~> 3.3.6)
   bootstrap3-datetimepicker-rails (~> 4.14.30)
   bower-rails
   byebug

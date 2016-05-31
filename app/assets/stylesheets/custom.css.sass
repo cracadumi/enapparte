@@ -1,0 +1,1190 @@
+$main_color: #002b3f
+$navigation_color: $main_color
+$light_color: #fff481
+$slight_light_color: #fffca6
+
+// $button_hover_background_color: #fffca6;
+$button_hover_color: $main_color
+$white: #ffffff
+$link_color: $light_color
+$features_header: #444
+$aside_background: #F2F2F2
+$classy_btn_color: rgba(249, 246, 125, 0.6)
+
+//Has to be in RGB format for opacity
+
+//FONT NAME AND SOURCE
+$font_name: Futura
+$font_src: font-url("Futura.ttf")
+$font_src1: font-url("Futura-SC-T-OT-Book_19037.ttf")
+$font_src2: font-url("Futura-T-OT-Book_19064.ttf")
+$font_src3: font-url("Futura_ICG_Book_Oblique.ttf")
+
+=links
+  color: $link_color
+  text-decoration: none
+
+@font-face
+  font-family: $font_name
+
+  /*a name to be used later
+  src: $font_src
+
+  /*URL to font
+  src: $font_src1
+
+  /*URL to font
+  src: $font_src2
+
+  /*URL to font
+  src: $font_src3
+
+  /*URL to font
+
+html
+  //font-family: Futura, "Segoe UI";
+  font-family: 'Open Sans', sans-serif
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+
+body
+  margin: 0
+  font-family: "Open Sans", sans-serif
+  color: $main_color
+
+.btn-classic
+  background-color: $classy_btn_color
+  color: $main_color
+
+.btn-performer
+  border-style: solid
+  border-color: #fffca6
+  color: #fffca6
+  border-radius: 0
+  border-width: 2px
+
+#the_logo
+  height: 100px
+  outline: none
+
+  img
+    margin-top: -5px
+    height: 100px
+    width: 100px
+    -moz-border-radius: 100px
+    -webkit-border-radius: 100px
+    border-radius: 100px
+
+    @media (max-width: 767px)
+      height: 62px
+      width: 62px
+      margin-left: 0
+
+  margin-top: 1px
+  padding-top: 1px
+  margin-bottom: -40px
+  min-width: 115px
+
+  @media (min-width: 768px) and (max-width: 991px)
+    float: left
+
+#header
+  background-color: $white
+  z-index: 1000
+  border: none
+  -webkit-border-radius: 0
+  -moz-border-radius: 0
+  border-radius: 0
+  min-height: 68px
+  margin-bottom: 0
+
+  .list-menu-nav
+    li a
+      margin-left: 15px
+
+      @media (max-width: 767px)
+        &:hover
+          background-color: #fffca6
+
+  .navbar
+    margin-bottom: 0 !important
+
+  .navbar-header
+    width: 100%
+
+  .navbar-brand
+    padding-top: 15px
+    padding-bottom: 15px
+    height: auto
+
+  .navbar-brand span
+    display: none
+    font-weight: 400
+    font-size: 18px
+    color: #A8A8A8
+    vertical-align: -4px
+    margin-left: 10px
+
+  .affix .navbar-brand span
+    display: inline-block
+    padding-left: 110px
+
+  .navbar-toggle .icon-bar
+    border-bottom: 1px solid $main_color
+
+  .navbar-nav > li > a
+    padding-top: 12px
+    padding-bottom: 12px
+
+    &.btn-leconcept
+      font-family: FuturaLT !important
+      font-size: 18px
+      margin-left: 15px
+
+      &:hover
+        background-color: #002b3f !important
+        color: #fff481 !important
+        border-color: #002b3f
+
+  .nav_links
+    background: transparent none
+    color: $white
+    font-size: 18px
+    font-family: FuturaLT !important
+
+    img.hover
+      display: none
+
+    &:hover
+      img
+        display: none
+
+        &.hover
+          display: block
+          opacity: 1
+
+    &:focus
+      outline: none
+
+  .nav_links:hover
+    text-decoration: underline
+
+  .navbar-toggle
+    border: 1px solid $main_color
+    margin-top: 17px
+    -webkit-border-radius: 0
+    -moz-border-radius: 0
+    border-radius: 0
+
+  .affix a, .affix, .not-fixed a, .not-fixed
+    color: $navigation_color !important
+
+  #the_logo
+    //background: url('../img/logo.png') no-repeat center left;
+    margin-top: 1px
+    padding-top: 1px
+    margin-bottom: -40px
+    min-width: 115px
+
+    @media (max-width: 767px)
+      margin-top: 10px
+
+  .affix #the_logo img
+    -webkit-filter: none !important
+
+  .affix #the_logo
+    background: url("../img/logo.png") no-repeat center left
+
+  @media (min-width: 768px)
+    .select-search-home,
+    .ui-select-search,
+    .ui-select-match .ui-select-toggle
+      max-width: 300px
+
+  .select-search-home
+    float: left
+    width: 100%
+    margin-top: 30px
+
+    @media (min-width: 992px)
+      width: calc(100% - 140px)
+
+    @media (max-width: 991px)
+      margin: 10px 0 15px
+
+    .ui-select-search
+      color: #6c6c6c
+
+    .ui-select-match
+      .ui-select-toggle
+        .text-muted
+          color: #6c6c6c
+
+  .custom-search
+    float: left
+    width: calc(100% - 200px)
+    max-width: 300px
+
+.navbar-nav > li > a,
+.navbar-nav > li > .dropdown
+  font-weight: 600
+  letter-spacing: 0.34px
+  padding: 14px 13px
+
+#header.affix
+  position: fixed !important
+  top: 0 !important
+  left: 0
+  right: 0
+  background: $white !important
+
+  a
+    color: $navigation_color !important
+    text-decoration: none
+
+    &.nav_links:hover
+      img
+        display: block
+
+        &.hover
+          display: none
+
+#header.not-fixed
+  // -moz-box-shadow: 0 1px 0 0 #E4E4E4;
+  // box-shadow: 0 1px 0 0 #E4E4E4;
+
+  a
+    color: $navigation_color
+    text-decoration: none
+
+.aside_bg
+  background-color: $aside_background
+
+#slider .item
+  margin-bottom: 0 !important
+
+#slider .item div p
+  font-family: Gemeli-regular, sans-serif
+  font-weight: 400
+  -webkit-font-smoothing: antialiased
+  font-style: normal
+  padding-left: 15px
+  padding-right: 15px
+  font-variant: normal
+  font-size: 44px
+  color: $white
+  line-height: 60px
+  letter-spacing: 1px
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4)
+
+  &.text-reinvent-desc
+    line-height: 75px
+    font-size: 70px
+    font-family: "Futura LT"
+    color: rgb(255, 255, 255)
+    text-align: center
+
+.search-bar-home,
+#header,
+.filters
+  input, span
+    border-radius: 0 !important
+
+  a
+    border-radius: 0 !important
+    font-size: 14px
+    padding-top: 11px
+
+.search-bar-home
+  padding: 0 16.875%
+  margin-top: 3em
+
+  @media (max-width: 768px)
+    padding: 0 30px
+
+    .input-search
+      margin-bottom: 15px
+
+  .dt-calendar
+    border-right: none
+    box-shadow: none
+
+  .btn-search-time
+    background-color: #fff
+    border-left: 0
+
+    .glyphicon-calendar
+      font-size: 15px
+
+.select-search-home
+  font-family: FuturaLT !important
+  font-size: 16px
+  height: 40px
+
+  .ui-select-search
+    height: 40px
+
+  .ui-select-match
+    .ui-select-toggle
+      height: 40px
+      padding: 10px 12px
+      color: #6c6c6c
+
+  .ui-select-choices
+    border-radius: 0
+    margin: 10px 0
+    padding: 0
+
+    .ui-select-choices-row
+      .ui-select-choices-row-inner
+        padding: 12px
+        color: #6c6c6c
+
+        &:hover
+          background-color: #fff481
+          color: #002b3f
+
+      &.active
+        .ui-select-choices-row-inner
+          background-color: #fff481
+          color: #002b3f
+
+  option
+    font-family: FuturaLT !important
+    font-size: 16px
+
+#htw-home-link
+  margin-bottom: 80px
+
+@media (max-width: 620px)
+  #slider .item div p
+    font-size: 32px
+    line-height: 40px
+    padding-bottom: 70px
+
+  .home-carousel .item
+    height: 400px !important
+
+  #htw-home-link
+    margin-bottom: 60px
+
+@media (max-width: 461px)
+  #slider .item div p
+    font-size: 24px
+
+#slider
+  z-index: 500
+  margin: auto
+
+  &.home-carousel
+    text-align: center
+    height: 600px
+
+    .carousel-inner .discovery-card
+      background: transparent
+
+  .anchor-arrow
+    cursor: pointer
+    padding: 35px 0
+
+@media (max-width: 1200px)
+  #guestPage .carousel-inner > .item > img, .carousel-inner > .item > a > img, #culinaryPics #slider
+    height: 341px
+
+@media (max-width: 1025px)
+  #guestPage .carousel-inner > .item > img, .carousel-inner > .item > a > img, #culinaryPics #slider
+    height: auto
+
+#SignUpModal .modal-dialog, #SignInModal .modal-dialog
+  width: 320px
+
+.carousel .item
+  left: 0 !important
+  -webkit-transition: opacity .8s
+
+  /*adjust timing here
+  -moz-transition: opacity .8s
+  -o-transition: opacity .8s
+  transition: opacity .8s
+
+.home-carousel .item
+  height: 570px !important
+  overflow: hidden
+
+.carousel-control
+  background-image: none !important
+
+  /* remove background gradients on controls
+
+.relative
+  position: relative
+
+/* Fade controls with items
+.next.left, .prev.right
+  opacity: 1
+  z-index: 1
+
+.active.left, .active.right
+  opacity: 0
+  z-index: 2
+
+.discovery-card
+  background-size: cover
+  background: $aside_background center
+  position: relative
+  margin-bottom: 30px
+
+  .h2
+    color: $white
+    margin: 0
+    padding: 0
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+.va-container
+  display: table
+  position: relative
+
+.va-container-h
+  width: 100%
+
+.va-container-v
+  height: 100%
+
+.va-middle
+  vertical-align: middle
+
+.va-top, .va-middle, .va-bottom
+  display: table-cell
+
+aside h2.title
+  text-transform: uppercase
+  font-weight: 700
+  padding-top: 60px
+  padding-bottom: 60px !important
+  font-size: 26px
+  color: $main_color
+  line-height: 37px
+  margin: 0
+
+aside h2.title.white
+  color: $white
+
+.site-how-it-works
+  // padding-bottom: 50px;
+
+  p
+    font-size: 16px
+    color: rgba(0, 0, 0, 0.5)
+    line-height: 24px
+
+.features_content
+  font-size: 15px
+  max-width: 288px
+  margin: auto
+  padding: 0 20px
+
+.feature_header
+  color: $features_header
+  font-weight: 600
+  font-size: 25px
+  padding-top: 10px
+  padding-bottom: 10px
+
+#headerSmall span
+  font-weight: normal
+  font-size: 18px
+  color: #a8a8a8
+  vertical-align: -6px
+  margin-left: 10px
+
+#headerSmall .navbar-brand
+  float: none
+  display: inline-block
+
+#headerSmallNav
+  box-shadow: 0 3px 3px #dfdfdf
+
+#headerSmallNav .nav > li
+  float: left
+
+#navbarNavSmall
+  float: none
+  display: inline-block !important
+
+.flash-messages
+  margin-top: 50px
+
+.flash-messages.floating
+  position: absolute
+  width: 100%
+  margin: auto
+  top: 150px
+  z-index: 5000
+
+.xs-nav
+  margin: auto
+  padding: 5px 0
+  box-shadow: 0 3px 3px #dfdfdf
+  text-align: center
+
+#pagination
+  margin-left: -5px
+  margin-right: -5px
+  padding: 0
+
+#pagination p
+  padding-top: 10px
+  text-align: center
+
+#pagination p img
+  margin: 0 5px
+
+.footer
+  text-align: center
+  background-color: #22222a
+  font-family: 'Open Sans', sans-serif
+
+  *::selection
+    background: transparent
+
+  .pt60
+    padding-top: 60px
+
+  .pt100
+    padding-top: 50px
+
+  h4.title
+    font-size: 25px
+    color: $white
+    opacity: 0.8
+    margin-bottom: 38px
+    font-weight: 300
+
+  li
+    list-style-type: none
+
+  a
+    text-decoration: none
+    font-size: 12px
+    color: $white
+    opacity: 0.7
+    display: block
+    line-height: 30px
+    font-weight: 300
+    list-style: none
+
+  li > a
+    text-decoration: none
+
+  p.title
+    font-size: 13px
+    color: $white
+    font-weight: 300
+    letter-spacing: 0.4px
+    opacity: 0.7
+
+#copyright img,
+#copyright p
+  display: inline-block
+
+@media (max-width: 1025px)
+  #headerSmallNav .visible-xs
+    display: none !important
+
+  #productsListing .item .itemInside h2
+    font-size: 14px
+
+  #guestPage .carousel-inner > .item > img
+    height: 255px
+
+  .carousel-inner > .item > a > img
+    height: 255px
+
+  #homeContent.floatable, #content.floatable
+    position: relative
+    top: 215px
+    padding-bottom: 130px
+
+@media (max-width: 992px)
+  .col-md-13
+    padding-left: 0
+    padding-top: 15px
+
+  .navbar-brand
+    padding: 15px
+
+  .homeContentFooterItem p
+    padding: 0
+
+  #headerSmallNav .visible-xs
+    display: none !important
+
+  #homePageRight .hostTeasing
+    font-size: 18px
+
+@media (max-width: 800px)
+  #leftContact
+    display: none !important
+
+  .col-md-13
+    padding-left: 0
+
+@media (max-width: 767px)
+  #navbarNav
+    width: 100%
+
+  #navbarNav li
+    float: left
+
+  .home #header #the_logo
+    background: url("../img/logo.png") no-repeat center left
+    margin-left: 15px
+
+  .home .navbar-nav > li > a
+    color: $main_color
+
+  .item .itemInside img
+    max-height: auto
+
+  .page-template-template-landingpage #header #the_logo
+    background: url("../img/logo.png") no-repeat center left
+    margin-left: 15px
+
+  #header #the_logo
+    background: url("../img/logo.png") no-repeat center left
+    margin-left: 15px
+
+  .page-template-template-landingpage-php .navbar-nav > li > a
+    color: $main_color
+
+.darken-on-hover
+  transition: opacity ease-in-out 200ms
+
+.darken-on-hover:hover
+  opacity: 0.8
+
+@media (min-width: 768px)
+  .home #header.affix-top
+    background: transparent
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+
+  .page-template-template-landingpage-php #header
+    background: transparent
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+
+  body.home
+    padding-top: 0
+
+  body.home #header
+    background: none
+
+  body.home #header.affix .navbar-nav a
+    text-shadow: none !important
+
+  body.home #header .navbar-nav .dropdown-menu a
+    color: $main_color !important
+    text-shadow: none !important
+
+  body.page-template-template-landingpage-php
+    padding-top: 0
+
+  body.page-template-template-landingpage-php #header
+    background: none
+
+  body.page-template- body.home #header .navbar-nav a
+    color: #fff
+
+  #footerLinksContent
+    display: block
+
+  #wrapper-searchbar.affix
+    left: 0
+    right: 0
+    top: 68px
+    z-index: 1000
+    position: inherit !important
+
+  #slider.affix
+    position: inherit
+    margin-bottom: 54px
+
+  #productsListing.br1
+    border-right: 1px solid #d2d2d2
+
+@media (max-width: 480px)
+  body
+    overflow-x: hidden
+
+  #the_logo
+    text-align: center
+    display: block
+
+  #the_logo span
+    display: none
+
+  #homeContentFooter
+    padding-top: 0
+
+  #homeContentFooter .homeContentFooterItem
+    border-bottom: 2px solid #dfdfdf
+
+  #homeContentFooter .homeContentFooterItem.lastFooterItem
+    border-bottom: 0
+
+  #headerSmallNav
+    text-align: center
+    box-shadow: 0
+
+  #headerSmallNav .visible-xs
+    display: block !important
+
+  #headerSmallNav a:hover
+    font-weight: 600
+
+  #headerSmallNav .nav > li
+    float: none
+    display: inline-block
+
+  #navbarNavSmall
+    display: none !important
+
+  .xsHidden
+    display: none
+
+  #rightHead640
+    overflow: hidden
+    margin-bottom: 20px
+
+  .contentBlock
+    margin-bottom: 10px
+
+  .col-md-13
+    padding-left: 0
+    padding-top: 15px
+
+  .home-carousel .item
+    height: 400px !important
+    overflow: hidden
+
+  #header.affix
+    position: static !important
+
+  #footerRow .nav
+    margin-right: 0
+    width: 50% !important
+
+  #footerRow .nav li
+    text-align: center
+
+  .homeContentFooterItem img
+    display: none !important
+
+  .tabLinks .btn-default
+    margin-bottom: 3px
+
+  #homeContent.floatable, #content.floatable
+    position: relative
+    top: 100px
+    padding-bottom: 130px
+
+#headerSmall
+  background: $white url("../img/dot.png") repeat-x center bottom
+  padding-bottom: 5px
+  padding-top: 10px
+  text-align: center
+  z-index: 600
+
+.pre-footer
+  margin-top: 90px
+  margin-bottom: 30px
+
+//1st--------------------------------------------
+div#header
+  width: 100%
+
+#header.not-fixed a
+  color: white
+
+#header .user-logged-dropdown:hover
+  background: none
+  text-decoration: underline
+
+a.btn.btn-performer
+  border-style: solid
+  border-color: #fffca6
+  border-width: 2px
+  border-radius: 0
+  color: #fffca6
+
+.affix-top
+  a.btn.btn-performer
+    color: #fffca6
+
+  .user-logged-dropdown
+    color: #fff
+
+.affix
+  a.btn.btn-performer
+    color: #002b3f
+
+.relative .button-performer
+  padding: 28px 0 58px
+
+  a.btn.btn-performer.main-section
+    border-style: solid
+    border-color: #fffca6
+    border-width: 2px
+    border-radius: 0
+    background-color: #fffca6 !important
+    color: #002b3f
+    font-weight: 600
+    padding: 10px
+
+.facebook-icon
+  padding-top: 5px
+  width: 10px
+
+.twitter-icon
+  width: 25px
+  padding-top: 5px
+
+.instagram-icon
+  width: 22px
+  padding-top: 5px
+
+.google-icon
+  width: 20px
+  padding-top: 5px
+
+.pinterest-icon
+  width: 25px
+  padding-top: 3px
+
+nav.collapse.navbar-collapse.bs-navbar-collapse
+  padding-top: 30px
+
+button.btn.dropdown-toggle.talent:hover
+  background-color: rgb(255, 244, 129)
+  color: white !important
+
+a.btn.btn-performer:hover
+  color: blue !important
+// end 1st ---------------------------------
+
+@font-face
+  font-family: 'FuturaLT'
+  src: font-url("FuturaLT.ttf") format("truetype")
+
+// 2dn ----------------------------------------
+button.btn.dropdown-toggle.talent
+  width: 30%
+  border-radius: inherit
+  background-color: white
+  color: black
+
+a.btn.btn-lg.btn-classic.chercher
+  width: 100%
+  height: 40px
+  padding: 8px 5px
+  background-color: #fff481
+  color: #002b3f
+  font-family: FuturaLT !important
+
+  &:hover
+    background-color: #002b3f
+    color: #fff481
+
+input.form-control.dt-calendar
+  width: 100%
+  height: 40px
+
+button.btn.dropdown-toggle.talent
+  width: 100%
+  height: 40px
+  border-radius: 6px
+  float: right
+
+ul.dropdown-menu
+  margin: 40px 10px
+
+  &.dropdown-list-menu-account
+    margin: 10px
+
+a.btn.btn-performer
+  border-width: 2px
+  border-style: solid
+  position: relative
+  z-index: 196
+
+ul.dropdown-menu.category
+  margin-left: 0px
+  margin-top: 45px
+
+.dropdown-menu > li > a
+  width: 217px !important
+
+#datetimepickersearchhome
+  .dropdown-menu
+    border-radius: 0
+    bottom: auto !important
+    top: 45px !important
+    min-width: 100%
+
+    .datepicker .datepicker-days .table-condensed
+      width: 100%
+
+      thead, tbody
+        tr
+          th, td
+            color: #6c6c6c
+            text-align: center
+            font-size: 16px
+            font-family: FuturaLT
+            font-weight: 100
+
+          td
+            border: 1px solid rgba(221, 221, 221, 0.13)
+
+            &.day.active
+              background-color: #fffc6a
+
+  .btn-search-time
+    cursor: pointer
+
+  .day:hover
+    cursor: pointer
+    background-color: #fffca6
+
+.dropdown-menu > li > a:hover
+  background-color: rgba(249, 246, 125, 0.6) !important
+  background-image: none
+
+p.va-middle.text-center.text-contrast
+  font-family: "FuturaLT"
+  font-size: 70px
+
+button.btn.dropdown-toggle.talent
+  background-color: white
+  font-size: 18px
+  color: rgba(0, 0, 0, 0.7)
+
+p.va-middle.text-center.text-contrast
+  font-family: FuturaLT !important
+  font-size: 50px !important
+
+.row.main-description
+  font-family: FuturaLT !important
+
+  img
+    width: 50%
+
+p.main-description-header
+  padding-top: 15px
+  text-align: center
+  margin-bottom: 60px
+  font-size: 18px
+  font-family: FuturaLT !important
+
+a.btn-xl.btn.btn-performer.main-section
+  padding: 9px 20px 10px 20px
+  font-size: 15px
+  border-radius: 0
+  font-family: FuturaLT !important
+
+  &:hover
+    background-color: #002b3f !important
+    color: #fff481 !important
+    border-color: #002b3f
+
+@media (max-width: 768px)
+  a.nav_links.collapse-header
+    color: #002b40 !important
+
+  .collapse-hide
+    display: none !important
+
+#content-main-page
+  padding-top: 100px
+
+  &.full-main-content
+    padding-top: 0
+
+#how-it-works
+  .pre-footer
+    @media (max-width: 768px)
+      margin-bottom: 0
+
+    .image-left
+      padding-left: 0
+
+      @media (max-width: 768px)
+        padding-right: 0
+
+    .image-right
+      padding-right: 0
+
+      @media (max-width: 768px)
+        padding-left: 0
+
+.footer
+  position: relative
+  font-family: FuturaLT
+  z-index: 100
+
+  @media (max-width: 768px)
+    padding-top: 20px
+
+  .info-left, .info-right
+    h4.title
+      font-size: 26px
+
+    .menu
+      a
+        font-size: 18px
+
+  hr
+    border: 1px solid #2c2c34
+
+  #copyright
+    p
+      color: #f6f6f6
+
+.btn-remove-picture
+  background: transparent
+  border: none
+  color: #337ab7
+
+.msg-validate-photo
+  display: none
+  color: red
+  padding-left: 5px
+
+.price-person-checkbox
+  padding-left: 25px
+
+  input[type='checkbox']
+    margin-left: 0 !important
+
+.bg-green
+  background-color: #2bcb86
+  color: white
+
+.cal-btn-cont
+  position: relative
+  top: 12px
+
+  .nxt
+    border: 1px solid #ddd
+    float: right
+    padding: 0px 7px 0px 7px
+    cursor: pointer
+
+  .prev
+    border: 1px solid #ddd
+    float: left
+    padding: 0px 7px 0px 7px
+    cursor: pointer
+
+.calendar-bookings
+  h5
+    color: #555
+
+  .explication-table
+    td
+      border: 1px solid #555
+      color: #555
+      width: 50px
+      height: 32px
+      text-align: center
+
+  .legend-group
+    margin-top: 5px
+
+    .bg-green, .bg-white
+      width: 10px
+      height: 10px
+      border: 1px solid #555
+      float: left
+
+    .bg-green
+      border: none
+
+    .legend-note
+      line-height: 10px
+      margin-left: 15px
+
+#calendar-dashboard
+  .fc-toolbar
+    .fc-left
+      position: absolute
+      left: 50%
+      transform: translateX(-50%)
+      -webkit-transform: translateX(-50%)
+      -moz-transform: translateX(-50%)
+      -ms-transform: translateX(-50%)
+
+    .fc-right
+      width: 100%
+
+      .fc-today-button
+        display: none
+
+      .fc-button-group
+        display: none
+
+      .fc-button-group
+        width: 100%
+        margin-left: 0
+
+        .fc-button
+          background: transparent
+          border: none
+
+          &:focus
+            outline: none
+
+          &.fc-pre-button
+            float: left
+
+          &.fc-next-button
+            float: right
+
+  .fc-widget-content
+    height: 75px !important
+
+    .fc-bg
+      z-index: 4
+
+      .fc-today
+        background-color: transparent
+
+      td:hover
+        cursor: pointer
+
+    .fc-content-skeleton
+      height: 100%
+      z-index: 1
+
+      table
+        td:hover
+          cursor: pointer
+
+        height: 100%
+
+        .fc-day-number
+          text-align: center
+
+        .fc-event-container
+          .fc-start
+            background-color: #2bcb86
+            border: none
+            border-radius: 0
+            height: 100%
+            margin: 0
