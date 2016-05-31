@@ -2,9 +2,9 @@
   .page-header
     h2= "Profil"
   / = simple_form_for @user, html: { class: 'form-horizontal' }, url: update_dashboard_path do |f|
-  form.form-horizontal[name="profileForm"]
-    .row
-      .col-md-4
+  .row
+    .col-md-4
+      form.form-horizontal[name="profilePicForm"]
         h4= "Photo de profil"
         .photo
           img[ng-src="{{ user.profilePicture.src }}"]
@@ -18,7 +18,8 @@
           br
           br
 
-      .col-md-8
+    .col-md-8
+      form.form-horizontal[name="profileForm"]
         fieldset
           legend= "Informations personnelles"
           / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
