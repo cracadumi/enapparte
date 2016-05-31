@@ -7,9 +7,16 @@
       .col-md-4
         h4= "Photo de profil"
         .photo
-          img[ng-src="{{ user.picture.src }}"]
+          img[ng-src="{{ user.profilePicture.src }}"]
 
-        input-image-button[label="Changer" model="user.picture" required]
+        input-profile-image-button[label="Changer" model="user.profilePicture" ng-hide="user.profilePicture.changed" required]
+        div[ng-show="user.profilePicture.changed"]
+          br
+          button.btn.btn-success[ng-click="saveProfilePicture()"] Save Picture
+          '
+          span[ng-show="loading"] Uploading...
+          br
+          br
 
       .col-md-8
         fieldset

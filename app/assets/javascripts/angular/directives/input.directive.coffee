@@ -170,6 +170,30 @@ angular
 
           reader.readAsDataURL file
 
+  .directive 'inputProfileImageButton', ()->
+    require: '^form'
+    strict: 'E'
+    templateUrl: 'directives/input_image_button.html'
+    scope:
+      model: '='
+    replace: true
+    link: (scope, element, attrs, form)->
+      scope.form = form
+      scope.label = attrs.label
+      scope.elementId = 'input_' + scope.$id
+      scope.required = attrs.required != undefined
+      element.bind 'change', (changeEvent) ->
+        for file in changeEvent.target.files
+          reader = new FileReader()
+
+          reader.onload = (loadEvent) ->
+            scope.$apply ->
+              scope.model = { src: loadEvent.target.result, changed: true }
+
+          reader.readAsDataURL file
+
+
+
   .directive 'inputImageButton', ()->
     require: '^form'
     strict: 'E'

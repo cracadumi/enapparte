@@ -30,6 +30,10 @@ angular
       resource
         .$delete '/api/v1/users/picture', {id: id}
 
+    resource.prototype.profilePicture = (src)->
+      resource
+        .$post '/api/v1/users/profile_picture', {src: src}
+
 
     resource
   ]
