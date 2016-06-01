@@ -1,0 +1,264 @@
+@import partials/variables
+@import partials/fonts
+
+body
+  font-family: "Open Sans", sans-serif
+  color: $main_color
+
+.btn-classic
+  background-color: $classy_btn_color
+  color: $main_color
+
+.btn-performer
+  border: 2px solid #fffca6
+  border-radius: 0
+  position: relative
+  z-index: 196
+  color: #fffca6
+
+// Header section
+.main-logo
+  background: url('../img/logo.png') no-repeat center left
+  height: 100px
+  float: left
+  margin-top: 1px
+  padding-top: 1px
+  margin-bottom: -40px
+  min-width: 115px
+  &:focus
+    outline: none
+
+  @media (max-width: 767px)
+    margin-top: 10px
+
+  @media (min-width: 768px) and (max-width: 991px)
+    float: left
+
+  img
+    margin-top: -5px
+    height: 100px
+    width: 100px
+    -moz-border-radius: 100px
+    -webkit-border-radius: 100px
+    border-radius: 100px
+
+    @media (max-width: 767px)
+      height: 62px
+      width: 62px
+      margin-left: 0
+
+.main-header
+  background: transparent
+  z-index: 1000
+  border: none
+  -webkit-border-radius: 0
+  -moz-border-radius: 0
+  border-radius: 0
+  min-height: 68px
+  margin-bottom: 0
+  &.affix-top
+    .user-logged-dropdown
+      color: #fff
+  &.not-fixed a
+    color: white
+  &.affix.affix-top a
+    color: $navigation_color
+  &.affix
+    top: 0
+    left: 0
+    right: 0
+    background: $white
+    a
+      color: $navigation_color
+      &.btn-performer
+        color: #002b3f
+      &.nav_links:hover
+        img
+          display: block
+
+          &.hover
+            display: none
+
+  .list-menu-nav .dropdown
+    &.open .user-logged-dropdown
+      background: none
+      text-decoration: underline
+    ul a
+      color: $main_color
+      padding-top: 11px
+      margin-left: 15px
+      @media (max-width: 767px)
+        &:hover
+          background-color: #fffca6
+
+  .navbar
+    margin-bottom: 0 !important
+
+  .navbar-header
+    width: 100%
+
+  .navbar-toggle .icon-bar
+    border-bottom: 1px solid $main_color
+
+  .navbar-nav > li > a
+    padding-top: 12px
+    padding-bottom: 12px
+    &:hover,
+    &:focus
+      background: inherit
+
+    &.btn-leconcept
+      font-family: FuturaLT
+      font-size: 18px
+      margin-left: 15px
+      &:hover
+        background-color: #002b3f
+        color: #fff481
+        border-color: #002b3f
+
+  .nav_links
+    background: transparent none
+    color: $white
+    font-size: 18px
+    font-family: FuturaLT
+    margin-left: 15px
+    &:hover
+      text-decoration: underline
+
+    img.hover
+      display: none
+
+    &:hover
+      img
+        display: none
+
+        &.hover
+          display: block
+          opacity: 1
+
+    &:focus
+      outline: none
+
+  .navbar-toggle
+    border: 1px solid $main_color
+    margin-top: 17px
+    -webkit-border-radius: 0
+    -moz-border-radius: 0
+    border-radius: 0
+
+  @media (min-width: 768px)
+    .select-search-home,
+    .ui-select-search,
+    .ui-select-match .ui-select-toggle
+      max-width: 300px
+
+  .select-search-home
+    float: left
+    width: 100%
+    margin-top: 30px
+
+    @media (min-width: 992px)
+      width: calc(100% - 140px)
+
+    @media (max-width: 991px)
+      margin: 10px 0 15px
+
+    .ui-select-search
+      color: #6c6c6c
+
+    .ui-select-match
+      .ui-select-toggle
+        .text-muted
+          color: #6c6c6c
+
+  .bs-navbar-collapse
+    padding-top: 30px
+
+@media (min-width: 768px)
+  .home .main-header.affix-top
+    background: transparent
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+
+@media (max-width: 767px)
+  .collapse-hide
+    display: none !important
+
+  .home .navbar-nav > li > a
+    color: $main_color
+
+@media (max-width: 480px)
+  body
+    overflow-x: hidden
+  .main-header.affix
+    position: static
+
+// Main section
+.aside_bg
+  background-color: $aside_background
+
+[id=SignUpModal] .modal-dialog,
+[id=SignInModal] .modal-dialog
+  width: 320px
+
+// Footer section
+.pre-footer
+  margin-top: 90px
+  margin-bottom: 30px
+
+.footer
+  background-color: #22222a
+  font-family: FuturaLT
+  position: relative
+  text-align: center
+  z-index: 100
+
+  @media (max-width: 768px)
+    padding-top: 20px
+
+  *::selection
+    background: transparent
+
+  .pt100
+    padding-top: 50px
+
+  h4.title
+    font-size: 25px
+    color: $white
+    opacity: 0.8
+    margin-bottom: 38px
+    font-weight: 300
+
+  li
+    list-style-type: none
+
+  a
+    text-decoration: none
+    font-size: 12px
+    color: $white
+    opacity: 0.7
+    display: block
+    line-height: 30px
+    font-weight: 300
+    list-style: none
+
+  p.title
+    font-size: 13px
+    color: $white
+    font-weight: 300
+    letter-spacing: 0.4px
+    opacity: 0.7
+
+  .info-left, .info-right
+    h4.title
+      font-size: 26px
+    .menu a
+      font-size: 18px
+
+  hr
+    border: 1px solid #2c2c34
+
+[id=copyright] p
+  color: #f6f6f6
