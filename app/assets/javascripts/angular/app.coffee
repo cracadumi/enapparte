@@ -52,7 +52,7 @@
         .addClass("affix")
         .removeData("bs.affix")
     $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'home.contact']) && !Auth.isAuthenticated()
+      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'home.contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works']) && !Auth.isAuthenticated()
         $state.go 'home'
         Flash.showError $rootScope, "You need to sign in or sign up before continuing."
     ), 500
@@ -70,6 +70,7 @@
     .state 'about', { url: '/about', templateUrl: 'pages/about.html', controller: 'RootController' }
     .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html'}
     .state 'faq', { url: '/faq', templateUrl: 'pages/faq.html'}
+    .state 'terms', { url: '/terms', templateUrl: 'pages/terms.html'}
     .state 'concept', { url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController' }
     .state 'concept.works', {
       url: 'howItWorks',
