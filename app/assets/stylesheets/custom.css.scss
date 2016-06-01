@@ -18503,6 +18503,16 @@ p.main-description-header {
 }
 
 .page-description {
+  .heading-text {
+    padding-bottom: 5px !important;
+    text-decoration:underline;
+  }
+
+  .sub-heading-text {
+    padding-top: 1px;
+    text-align: center;
+  }
+
   p, .desc-text {
     padding-top: 15px;
     text-align: justify;
