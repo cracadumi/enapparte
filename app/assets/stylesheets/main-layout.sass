@@ -72,12 +72,8 @@ body
       color: $navigation_color
       &.btn-performer
         color: #002b3f
-      &.nav_links:hover
-        img
-          display: block
-
-          &.hover
-            display: none
+      &.nav_links i:hover
+        color: #fffc76
 
   .list-menu-nav .dropdown
     &.open .user-logged-dropdown
@@ -103,6 +99,7 @@ body
   .navbar-nav > li > a
     padding-top: 12px
     padding-bottom: 12px
+    margin-bottom: 14px
     &:hover,
     &:focus
       background: inherit
@@ -124,20 +121,13 @@ body
     margin-left: 15px
     &:hover
       text-decoration: underline
-
-    img.hover
-      display: none
-
-    &:hover
-      img
-        display: none
-
-        &.hover
-          display: block
-          opacity: 1
-
     &:focus
       outline: none
+    i
+      color: #fffc76
+      font-size: 1.4em
+      &:hover
+        color: #fff
 
   .navbar-toggle
     border: 1px solid $main_color
