@@ -8,7 +8,6 @@ html[ng-app="enapparte"]
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
     script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-    link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"
     script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"
   body class="#{controller_name} #{action_name}" ng-controller="MainController"
     = render 'layouts/header'

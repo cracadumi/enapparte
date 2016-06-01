@@ -14,7 +14,8 @@
 *= require seiyria-bootstrap-slider/dist/css/bootstrap-slider.min
 *= require angular-notify/dist/angular-notify.min
 *= require 1st_load_framework
-*= require custom
+*= require main-layout
+*= require_tree ./modules
 *= require dashboard
 *= require home
 *= require show
@@ -24,7 +25,6 @@
 *= require angular-ui-router-anim-in-out/css/anim-in-out
 *= require angular-ui-select/dist/select.min
 *= require fullcalendar
-*= require style
 *= require search
 *= require_self
  */
