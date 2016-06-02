@@ -36,6 +36,10 @@ class UserSearchController extends @NGController
     @scope.artId = @stateParams.id || null
     @scope.artSelect = @ArtSelect
 
+    @scope.priceRadius = 
+      selected: null
+
+
     @scope.$watch 'artSelect.items', =>
       if @scope.artId
         @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
@@ -43,12 +47,6 @@ class UserSearchController extends @NGController
         )[0]
     
     @scope.style = ''
-    @UserSearch
-      .query
-        art_id: @scope.artId
-        end_date: @stateParams.endDate
-      .then (users) =>
-        @scope.users = users
 
     @scope.$watch 'filter.price', (newValue, oldValue) =>
       @search()
@@ -61,6 +59,17 @@ class UserSearchController extends @NGController
           'background-position': 'center top' 
         else
           ''
+      @search()
+
+    @scope.$watch 'endDate', =>
+      @search()
+
+    @scope.$watch 'startDate', =>
+      @search()
+
+    @scope.$watch 'priceRadius.selected', =>
+      @search()
+
   artIsChosen: ->
     @scope.artSelect.selected != null            
 
@@ -77,7 +86,7 @@ class UserSearchController extends @NGController
         q: q
         price0: @scope.filter.price.split(',')[0]
         price1: @scope.filter.price.split(',')[1]
-        art_id: @scope.artId
+        art_id: @scope.artSelect.selected.id if @scope.artSelect.selected
         start_date: @scope.startDate
         end_date: @scope.endDate
       .then (users)=>
