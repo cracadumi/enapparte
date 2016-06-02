@@ -33,7 +33,9 @@ module Api
 
       def search
         @users = UserSearchService.new(role: :performer,
-                                       art_id: params[:art_id])
+                                       art_id: params[:art_id],
+                                       end_date: params[:end_date],
+                                       start_date: params[:start_date])
                                   .results
         respond_with :api, :v1, @users
       end

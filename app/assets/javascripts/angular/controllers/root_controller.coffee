@@ -5,26 +5,26 @@ class RootController extends @NGController
     '$scope',
     '$rootScope',
     '$state',
-    'Art'
+    'ArtSelect',
+    '$timeout'
   ]
 
   init: ->
     @scope.art = {}
     @rootScope.rootPath = true
-    @scope.arts = []
-    @Art
-      .query()
-      .then (art)=>
-        @scope.arts = art
-    @scope.art.selected = @scope.arts[0]
+    @scope.artSelect = @ArtSelect
+    @scope.endDate = null
+   
     $('#header')
       .removeClass('not-fixed')
       .addClass('affix-top')
       .affix
         offset:
           top: 490
-    $("#content-main-page").addClass("full-main-content")
+    $("#content-main-page").addClass("full-main-content")       
+
   beginSearch: =>
-    idArt = @scope.art.selected.id if @scope.art.selected
+    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else null
     @state.go 'shows.search',
-      id: idArt || null
+      id: artId
+      endDate: @scope.endDate || null
