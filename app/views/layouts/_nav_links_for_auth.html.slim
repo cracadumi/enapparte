@@ -15,7 +15,7 @@ li[ng-if="isAuthenticated()"]
       li
         a[ui-sref="dashboard.index"]
           | Dashboard
-      li
+      li[ng-if="isPerformer()"]
         a[ui-sref="dashboard.performances.current"]
           | My Performances
       li
