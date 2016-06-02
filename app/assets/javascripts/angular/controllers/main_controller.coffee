@@ -29,4 +29,9 @@ angular
         animation: true
         templateUrl: 'devise/sign_up.html'
         controller: 'SignUpController'
+
+    $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+      $state.current = toState;
+
+)    
   ]

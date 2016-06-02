@@ -7,10 +7,7 @@ $(document).ready( function(){
   $('.modal').on('show.bs.modal', function() {
     $('.flash-messages .alert').alert('close');
   });
-  $('#datetimepickersearchhome').datetimepicker({
-    format: "DD/MM/YYYY",
-    defaultDate: new Date()
-  });
+
 });
 
 

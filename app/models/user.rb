@@ -130,9 +130,12 @@ end
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  art_id                 :integer
+#  profile_picture_id     :integer
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_profile_picture_id    (profile_picture_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #

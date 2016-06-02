@@ -1,18 +1,25 @@
-.container.va-container-h[ng-controller="ShowSearchController"]
-  .filters
+.container.va-container-h[ng-controller="UserSearchController"]
+  .filters[ng-style="style"]
     .row
+      .row
+        .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
+          p.main-description-header[style="text-align:justify;" ng-show='artIsChosen()']
+            | {{artSelect.selected.mainDescription}}
+          p.main-description-header[style="text-align:justify; font-style: italic" ng-show='artIsChosen()']  
+            | {{artSelect.selected.italicDescription}}
+          p.main-description-header[style="text-align:justify;" ng-hide='artIsChosen()']
+            | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
+
       .col-sm-4.col-xs-12
-        .form-group.clearfix
-          .input-group.input-group--filters.pull-right
-            input.form-control.dt-calendar type="text" placeholder="Start date" /
-            span.input-group-addon.btn-search-time
-              span.glyphicon.glyphicon-calendar
+        .search-datetimepicker.input-group.date[input-select-date]
+          input.form-control.dt-calendar type="text" placeholder="Start date" ng-model="startDate"
+          span.input-group-addon.btn-search-time
+            span.glyphicon.glyphicon-calendar
       .col-sm-4.col-xs-12
-        .form-group
-          .input-group.input-group--filters
-            input.form-control.dt-calendar type="text" placeholder="End date" /
-            span.input-group-addon.btn-search-time
-              span.glyphicon.glyphicon-calendar
+        .search-datetimepicker.input-group.date[input-select-date]
+          input.form-control.dt-calendar type="text" placeholder="End date" ng-model="endDate"
+          span.input-group-addon.btn-search-time
+            span.glyphicon.glyphicon-calendar                  
       .col-sm-4.col-xs-12
         .form-group
           ui-select.select-search-home[ng-model="priceRadius.selected", theme='bootstrap']
@@ -37,17 +44,16 @@
           .col-md-12
             dir-pagination-controls.pull-right
         .row
-          .col-md-4.col-sm-6.col-xs-12[dir-paginate="show in shows | itemsPerPage:21"]
-            a.show-search.thumbnail[href="" ng-click="modeDetails(show)"]
-              img[ng-src="{{ show.coverPicture.src }}" width="300" height="300"]
+          .col-md-4.col-sm-6.col-xs-12[dir-paginate="user in users | itemsPerPage:21"]
+            a.show-search.thumbnail[href=""]
+              img[ng-src="{{ user.pictureUrl }}" width="300" height="300"]
               .caption.text-center
                 p.placeholder= "Non disponible pour les dates demandées"
-                /! img.user[ng-src="{{ show.userPictureUrl }}"]
-                h4= "{{ ::show.user.fullName }}"
-                p.description= "{{ show.title }}"
-                .rating[ng-if="show.rating"]
-                  i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(show.rating)) track by $index"]
-                  i.glyphicon.glyphicon-star-empty[ng-repeat="k in range(5 - Math.round(show.rating)) track by $index"]
+                h4= "{{ user.fullName }}"
+                p.description= "{{ user.artTitle }}"
+                .rating[ng-show="user.rating"]
+                  i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(user.rating)) track by $index"]
+                  i.glyphicon.glyphicon-star-empty[ng-repeat="k in range(5 - Math.round(user.rating)) track by $index"]
                 /! .length
                   | {{ show.length }} minutes
                 /! .price

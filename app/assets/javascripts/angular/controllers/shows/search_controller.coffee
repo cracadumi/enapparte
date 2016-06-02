@@ -1,5 +1,5 @@
-class ShowSearchController extends @NGController
-  @register window.App, 'ShowSearchController'
+class UserSearchController extends @NGController
+  @register window.App, 'UserSearchController'
 
   @$inject: [
     '$scope',
@@ -9,15 +9,16 @@ class ShowSearchController extends @NGController
     'Flash',
     '$filter',
     'ShowArt',
-    'ShowSearch',
+    'UserSearch',
     '_'
     'moment'
     'Auth'
     '$state'
     '$stateParams'
+    'ArtSelect'
   ]
 
-  shows: []
+  users: []
   arts: []
   filter:
     text: ""
@@ -30,22 +31,38 @@ class ShowSearchController extends @NGController
   ]
 
   init: ->
+    @scope.startDate = @stateParams.startDate || null
+    @scope.endDate = @stateParams.endDate || null
+    @scope.artId = @stateParams.id || null
+    @scope.artSelect = @ArtSelect
 
-    if @stateParams.id
-      art_id  = @stateParams.id
-      @ShowSearch
-        .query
-          arts: JSON.stringify([art_id])
-        .then (shows)=>
-          @scope.shows = shows
-    else
-      @ShowArt
-        .query()
-        .then (arts)=>
-          @scope.arts = arts
+    @scope.$watch 'artSelect.items', =>
+      if @scope.artId
+        @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
+          i.id is + @scope.artId
+        )[0]
+    
+    @scope.style = ''
+    @UserSearch
+      .query
+        art_id: @scope.artId
+        end_date: @stateParams.endDate
+      .then (users) =>
+        @scope.users = users
 
-      @scope.$watch 'filter.price', (newValue, oldValue)=>
-        @search()
+    @scope.$watch 'filter.price', (newValue, oldValue) =>
+      @search()
+
+    @scope.$watch 'artSelect.selected', =>
+      @scope.style = 
+        if @scope.artSelect.selected && @scope.artSelect.selected.bannerUrl
+          'background': "#f2f2f2 url(\"" + @scope.artSelect.selected.bannerUrl + "\") no-repeat"
+          'background-size': 'auto 200px'
+          'background-position': 'center top' 
+        else
+          ''
+  artIsChosen: ->
+    @scope.artSelect.selected != null            
 
   search: =>
     q = if  @scope.filter.text then '*' + @scope.filter.text + '*' else ''
@@ -55,14 +72,16 @@ class ShowSearchController extends @NGController
       .map (art)->
         art.id
 
-    @ShowSearch
+    @UserSearch
       .query
         q: q
         price0: @scope.filter.price.split(',')[0]
         price1: @scope.filter.price.split(',')[1]
-        arts: JSON.stringify(art_ids)
-      .then (shows)=>
-        @scope.shows = shows
+        art_id: @scope.artId
+        start_date: @scope.startDate
+        end_date: @scope.endDate
+      .then (users)=>
+        @scope.users = users
 
   modeDetails: (show)=>
     @state.go 'shows.detail',
