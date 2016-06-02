@@ -48,7 +48,6 @@ class DashboardCalendarController extends @NGController
     @scope.daysInMonth.thu = countDayInMonth(4, @scope.calendarDate)
     @scope.daysInMonth.fri = countDayInMonth(5, @scope.calendarDate)
     @scope.daysInMonth.sat = countDayInMonth(6, @scope.calendarDate)
-    console.log @scope.daysInMonth
 
   checkAllDaySet: (dayName)=>
     if @scope.daysInMonth[dayName] == @scope.dayCount[dayName]

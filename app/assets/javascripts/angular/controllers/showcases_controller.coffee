@@ -3,11 +3,8 @@ class ShowcasesController extends @NGController
 
   @$inject: [
     '$scope'
-    '$rootScope'
-    'Flash'
     'User'
     'Showcase'
-    '$state'
   ]
 
   init: ->
