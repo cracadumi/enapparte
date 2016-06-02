@@ -1,4 +1,13 @@
-.container[ng-controller="DashboardController"]
-  tabs[data="tabs" type="tabs" template-url="ui-router-tabs-custom-ui-view-template.html"]
+div[ng-controller="DashboardController"]
+  .tab-banner.container
+    img ng-src='{{activeTab.banner}}'
+
+  tabs [
+    data="tabs"
+    type="tabs"
+    select="setActiveTab"
+    class="dashboard-header-tabs"
+    template-url="ui-router-tabs-custom-ui-view-template.html"
+  ]
   br
-  ui-view
+  .container ui-view=''
