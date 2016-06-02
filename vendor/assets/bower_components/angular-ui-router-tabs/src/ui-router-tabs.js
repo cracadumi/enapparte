@@ -34,7 +34,8 @@ angular.module('ui.router.tabs').directive(
         type: '@',
         justified: '@',
         vertical: '@',
-        class: '@'
+        class: '@',
+        select: '&'
       },
       link: function(scope) {
 
@@ -104,7 +105,7 @@ angular.module('ui.router.tabs').directive(
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+      'active="tab.active" disable="tab.disable" ng-click="go(tab)" select="select()(tab)">' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '</div>';
