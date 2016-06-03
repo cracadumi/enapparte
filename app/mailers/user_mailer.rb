@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
 
   def contact_mail contact
     @contact = contact
-    mail to: "jft@enapparteparis.com", subject: default_i18n_subject
+    mail to: "enapparte@angeltech.io", subject: default_i18n_subject
   end
 
   def welcome_email user
