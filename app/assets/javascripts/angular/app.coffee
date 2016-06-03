@@ -52,7 +52,7 @@
         .addClass("affix")
         .removeData("bs.affix")
     $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'home.contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works']) && !Auth.isAuthenticated()
+      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works']) && !Auth.isAuthenticated()
         $state.go 'home'
         Flash.showError $rootScope, "You need to sign in or sign up before continuing."
     ), 500
@@ -84,8 +84,9 @@
           $state.go '^'
       ]
     }
-    .state 'shows', { abstract: true, url: '/users', templateUrl: 'shows/index.html' }
-    .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html', params: { endDate: null } }
+    .state 'contact', { url: '/contact', templateUrl: 'pages/contact.html', controller: 'ContactController' }
+    .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
+    .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
     .state 'shows.payment', { url: '/:id/payment?date&spectators', templateUrl: 'shows/payment.html', params: { show: null } }
       .state 'shows.payment_finish', { url: '/payment_finish', templateUrl: 'shows/payment_finish.html' }
@@ -141,18 +142,6 @@
           animation: true
           templateUrl: 'devise/sign_up.html'
           controller: 'SignUpController'
-        .result
-        .finally ()->
-          $state.go '^'
-      ]
-    }
-    .state 'home.contact', {
-      url: 'contact',
-      onEnter: ['$uibModal', '$state', ($uibModal, $state)->
-        $uibModal.open
-          animation: true
-          templateUrl: 'home/contact.html'
-          controller: 'ContactController'
         .result
         .finally ()->
           $state.go '^'
