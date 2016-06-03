@@ -64,6 +64,9 @@ puts 'creating users...'
     #language: Language.all.sample,
     bio: Faker::Lorem.paragraph(5)
   )
+
+  user.profile_picture = Picture.create(image: File.open(Dir[Rails.root.join('spec/fixtures/photos/*')].sample))
+  user.save
 end
 
 # Shows
@@ -81,8 +84,6 @@ User.all.each do |user|
                   )
   end
 
-  user.picture.image = File.open(Dir[Rails.root.join('spec/fixtures/photos/*')].sample)
-  user.picture.save
 
   10.times.each do |i|
     show = Show.create(
