@@ -1,13 +1,13 @@
 .container.va-container-h[ng-controller="UserSearchController"]
-  .filters[style="padding: 260px 30px 60px; background:url(#{image_url("search-banner.jpg")}) no-repeat center top;" ng-style="style"]
+  .filters[style="padding: 210px 30px 30px; background:url(#{image_url("search-banner.jpg")}) no-repeat center top;" ng-style="style"]
     .row
       .row
         .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-          p.main-description-header[style="text-align:justify;" ng-show='artIsChosen()']
+          p.main-description-header.art-description-header[style="text-align:justify;" ng-show='artIsChosen()']
             | {{artSelect.selected.mainDescription}}
-          p.main-description-header[style="text-align:justify; font-style: italic" ng-show='artIsChosen()']  
+          p.main-description-header.art-description-header[style="text-align:justify; font-style: italic" ng-show='artIsChosen()']  
             | {{artSelect.selected.italicDescription}}
-          p.main-description-header[style="text-align:justify;" ng-hide='artIsChosen()']
+          p.main-description-header.art-description-header[style="text-align:justify;" ng-hide='artIsChosen()']
             | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
 
       .col-sm-4.col-xs-12
