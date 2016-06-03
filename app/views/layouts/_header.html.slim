@@ -1,6 +1,6 @@
 #header.main-header.navbar.navbar-static-top[role="banner"]
-  div[style="padding:0 30px"]
-    .col-md-4.col-sm-3.col-xs-12
+  .main-header-inner
+    .col-md-3.col-sm-2.col-xs-12
       .navbar-header
         button.navbar-toggle[type="button" data-toggle="collapse" data-target=".bs-navbar-collapse"]
           span.sr-only
@@ -11,7 +11,7 @@
         a#the_logo.main-logo[ui-sref="home"]
           = image_tag( 'logo.png', class: 'logo' )
 
-        .container[ng-controller="ArtSearchController"]  
+        .container[ng-controller="ArtSearchController"]
           .col-sm-6.input-search[ng-show="isSearchPage()"]
             ui-select.select-search-home[ng-model="artSelect.selected", theme='bootstrap']
               ui-select-match[placeholder='Talent recherché'] {{$select.selected.title}}
@@ -25,7 +25,7 @@
         /   ui-select-choices[repeat="art as art in arts"]
         /     div[ng-bind-html="art.title"]
 
-    .col-md-8.col-sm-9
+    .col-md-9.col-sm-10.col-xs-12
       nav.collapse.navbar-collapse.bs-navbar-collapse[role="navigation"]
         ul.nav.navbar-nav.navbar-right.list-menu-nav
           li[ng-if="isAuthenticated() && isPerformer()"]
