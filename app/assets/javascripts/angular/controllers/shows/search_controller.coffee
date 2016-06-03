@@ -24,10 +24,10 @@ class UserSearchController extends @NGController
     text: ""
     price: "0,100000"
   priceRadii: [
-    '< 50 €',
-    '50 € - 100 €',
-    '100 € - 200 €',
-    '200+ €'
+    {price0: 0, price1: 50, title: '< 50 €'}
+    {price0: 50, price1: 100, title: '50 € - 100 €'}
+    {price0: 100, price1: 200, title: '100 € - 200 €'}
+    {price0: 200, price1: 999999999999, title: '200+ €'}
   ]
 
   init: ->
@@ -81,11 +81,17 @@ class UserSearchController extends @NGController
       .map (art)->
         art.id
 
+    if @scope.priceRadius.selected
+      price0 = @scope.priceRadius.selected.price0
+      price1 = @scope.priceRadius.selected.price1 
+
     @UserSearch
       .query
         q: q
-        price0: @scope.filter.price.split(',')[0]
-        price1: @scope.filter.price.split(',')[1]
+        # price0: @scope.filter.price.split(',')[0]
+        # price1: @scope.filter.price.split(',')[1]
+        price0: price0 || null
+        price1: price1 || null
         art_id: @scope.artSelect.selected.id if @scope.artSelect.selected
         start_date: @scope.startDate
         end_date: @scope.endDate

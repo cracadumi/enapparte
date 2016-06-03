@@ -26,6 +26,10 @@ class Picture < ActiveRecord::Base
       self.image = data
     end
   end
+
+  def self.default_url(style)
+    "/images/picture/#{style}/missing.png"
+  end
 end
 
 # == Schema Information

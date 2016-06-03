@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     Language.select(:title, :id)
   end
 
+  def image
+    pictures.first.try(:image).try(:url, :thumb) || Picture.default_url(:thumb)
+  end
+
   private
 
   def check_profile_picture_exists
