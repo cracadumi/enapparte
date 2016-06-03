@@ -22,7 +22,7 @@ class DashboardController extends @NGController
       {
         heading: 'Profil'
         route: 'dashboard.profile.personal'
-        routeActive: 'dashboard.profile'
+        isActive: @state.includes.bind(@state, 'dashboard.profile')
         banner: '/assets/dashboard-banners/profil.jpg'
       }
       {
@@ -33,13 +33,13 @@ class DashboardController extends @NGController
       {
         heading: 'Mes réservations'
         route: 'dashboard.reservations.current'
-        routeActive: 'dashboard.reservations'
+        isActive: @state.includes.bind(@state, 'dashboard.reservations')
         banner: '/assets/dashboard-banners/mes-reservations.jpg'
       }
       {
         heading: 'Compte'
         route: 'dashboard.account.payment'
-        routeActive: 'dashboard.account'
+        isActive: @state.includes.bind(@state, 'dashboard.account')
         banner: '/assets/dashboard-banners/compte.jpg'
       }
     ]
@@ -52,13 +52,11 @@ class DashboardController extends @NGController
     tabPerformer =
       heading: 'Calendrier'
       route: "dashboard.calendar"
-      routeActive: 'dashboard.calendar'
       banner: '/assets/dashboard-banners/calendrier.jpg'
 
     tabGallery =
       heading: 'Gallery'
       route: "dashboard.gallery"
-      routeActive: 'dashboard.gallery'
       banner: '/assets/dashboard-banners/galerie.jpg'
 
     if @isPerformer()
