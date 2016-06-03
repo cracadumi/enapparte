@@ -23,9 +23,9 @@
       .col-sm-4.col-xs-12
         .form-group
           ui-select.select-search-home[ng-model="priceRadius.selected", theme='bootstrap']
-            ui-select-match[placeholder='Price radius'] {{$select.selected}}
+            ui-select-match[placeholder='Price radius'] {{$select.selected.title}}
             ui-select-choices[repeat="price in priceRadii"]
-              div[ng-bind-html="price"]
+              div[ng-bind-html="price.title"]
 
   .results
     .row
@@ -51,9 +51,8 @@
                 p.placeholder= "Non disponible pour les dates demandées"
                 h4= "{{ user.fullName }}"
                 p.description= "{{ user.artTitle }}"
-                .rating[ng-show="user.rating"]
-                  i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(user.rating)) track by $index"]
-                  i.glyphicon.glyphicon-star-empty[ng-repeat="k in range(5 - Math.round(user.rating)) track by $index"]
+                i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(user.rating)) track by $index"]
+                i.glyphicon.glyphicon-star-empty[ng-repeat="k in range(5 - Math.round(user.rating)) track by $index"]
                 /! .length
                   | {{ show.length }} minutes
                 /! .price
