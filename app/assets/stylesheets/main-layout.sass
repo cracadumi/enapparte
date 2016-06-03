@@ -16,7 +16,7 @@ body
   z-index: 196
   color: #fffca6
 
-// Header section
+// Main logo
 .main-logo
   height: 100px
   float: left
@@ -46,6 +46,7 @@ body
       width: 62px
       margin-left: 0
 
+// Header section
 .main-header
   background: transparent
   z-index: 1000
@@ -103,14 +104,14 @@ body
     &:focus
       background: inherit
 
-    &.btn-leconcept
-      font-family: FuturaLT
-      font-size: 18px
-      margin-left: 15px
-      &:hover
-        background-color: #002b3f
-        color: #fff481
-        border-color: #002b3f
+  .btn-leconcept
+    font-family: FuturaLT
+    font-size: 18px
+    margin-left: 15px
+    &:hover
+      background-color: #002b3f
+      color: #fff481
+      border-color: #002b3f
 
   .nav_links
     background: transparent none
@@ -160,10 +161,13 @@ body
         .text-muted
           color: #6c6c6c
 
+@media (min-width: 768px)
   .bs-navbar-collapse
     padding-top: 30px
 
-@media (min-width: 768px)
+  .main-header-inner
+    padding: 0 30px
+
   .home .main-header.affix-top
     background: transparent
     position: absolute
@@ -178,11 +182,31 @@ body
   .home .navbar-nav > li > a
     color: $main_color
 
-@media (max-width: 480px)
-  body
-    overflow-x: hidden
   .main-header.affix
     position: static
+
+  .main-content.main-content
+    padding-top: 0
+
+  .main-header .btn-leconcept
+    margin-left: 0
+
+  .list-menu-nav .dropdown.dropdown
+    border: 2px solid #fffca6
+    padding: 0
+
+    .dropdown-toggle
+      color: $main_color
+      display: block
+      padding: 14px 13px
+      text-align: center
+
+    .dropdown-menu
+      margin: 0
+
+    a
+      width: 100%
+      margin: 0 !important
 
 // Main section
 .aside_bg
