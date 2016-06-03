@@ -22,7 +22,7 @@ class DashboardController extends @NGController
       {
         heading: 'Profil'
         route: 'dashboard.profile.personal'
-        routeActive: 'dashboard.profile'
+        isActive: @state.includes.bind(@state, 'dashboard.profile')
         banner: "<%= asset_path('dashboard-banners/profil.jpg') %>"
       }
       {
@@ -33,13 +33,13 @@ class DashboardController extends @NGController
       {
         heading: 'Mes réservations'
         route: 'dashboard.reservations.current'
-        routeActive: 'dashboard.reservations'
+        isActive: @state.includes.bind(@state, 'dashboard.reservations')
         banner: "<%= asset_path('dashboard-banners/mes-reservations.jpg') %>"
       }
       {
         heading: 'Compte'
         route: 'dashboard.account.payment'
-        routeActive: 'dashboard.account'
+        isActive: @state.includes.bind(@state, 'dashboard.account')
         banner: "<%= asset_path('dashboard-banners/compte.jpg') %>"
       }
     ]

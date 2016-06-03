@@ -78,6 +78,9 @@ angular.module('ui.router.tabs').directive(
 
         /* whether to highlight given route as part of the current state */
         $scope.active = function(tab) {
+          if (typeof tab.isActive === 'function') {
+            return tab.isActive();
+          }
 
           var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
           return isAncestorOfCurrentRoute;
@@ -94,14 +97,14 @@ angular.module('ui.router.tabs').directive(
         };
 
         $scope.update_tabs();
-    }],
+      }],
       templateUrl: function(element, attributes) {
         return attributes.templateUrl || 'ui-router-tabs-default-template.html';
       }
     };
-}]
+  }]
 ).run(
-['$templateCache', function($templateCache) {
+  ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
@@ -122,5 +125,5 @@ angular.module('ui.router.tabs').directive(
 
     $templateCache.put('ui-router-tabs-custom-ui-view-template.html', CUSTOM_UI_VIEW_TEMPLATE);
     $templateCache.put('ui-router-tabs-default-template.html', INLINE_TEMPLATE);
-}]
+  }]
 );

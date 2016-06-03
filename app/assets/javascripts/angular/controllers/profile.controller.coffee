@@ -9,11 +9,6 @@ class ProfileController extends @NGController
     '$state'
   ]
 
-  tabs2: [
-    { heading: 'Profil', route: 'dashboard.profile.personal' }
-    { heading: 'Commentaires', route: 'dashboard.profile.reviews.received', routeActive: 'dashboard.profile.reviews' }
-  ]
-
   tabsReviews: [
     { heading: 'Reçus', route: 'dashboard.profile.reviews.received' }
     { heading: 'Envoyés', route: 'dashboard.profile.reviews.sent' }
@@ -23,6 +18,17 @@ class ProfileController extends @NGController
   map: null
 
   init: =>
+    @scope.tabs2 = [
+      {
+        heading: 'Profil'
+        route: 'dashboard.profile.personal'
+      }
+      {
+        heading: 'Commentaires'
+        route: 'dashboard.profile.reviews.received'
+        isActive: @state.includes.bind(@state, 'dashboard.profile.reviews')
+      }
+    ]
     @User
       .get(1)
       .then (user)=>
