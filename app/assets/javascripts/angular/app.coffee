@@ -85,6 +85,7 @@
       ]
     }
     .state 'contact', { url: '/contact', templateUrl: 'pages/contact.html', controller: 'ContactController' }
+    .state 'society', { url: '/society', templateUrl: 'pages/society.html', controller: 'SocietyController' }
     .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
     .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
