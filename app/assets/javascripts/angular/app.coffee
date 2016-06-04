@@ -77,10 +77,35 @@
       templateUrl: 'artists/show.html'
       controller: 'ArtistsController'
 
-    .state 'about', { url: '/about', templateUrl: 'pages/about.html', controller: 'RootController' }
-    .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html'}
-    .state 'faq', { url: '/faq', templateUrl: 'pages/faq.html'}
-    .state 'terms', { url: '/terms', templateUrl: 'pages/terms.html'}
+    .state 'about', {
+      url: '/about',
+      templateUrl: 'pages/about.html',
+      controller: 'RootController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'performer', {
+      url: '/performer',
+      templateUrl: 'pages/become_performer.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'faq', {
+      url: '/faq',
+      templateUrl: 'pages/faq.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'terms', {
+      url: '/terms',
+      templateUrl: 'pages/terms.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
     .state 'concept', { url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController' }
     .state 'concept.works', {
       url: 'howItWorks',
@@ -94,8 +119,22 @@
           $state.go '^'
       ]
     }
-    .state 'contact', { url: '/contact', templateUrl: 'pages/contact.html', controller: 'ContactController' }
-    .state 'society', { url: '/society', templateUrl: 'pages/society.html', controller: 'SocietyController' }
+    .state 'contact', {
+      url: '/contact',
+      templateUrl: 'pages/contact.html',
+      controller: 'ContactController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'society', {
+      url: '/society',
+      templateUrl: 'pages/society.html',
+      controller: 'SocietyController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
     .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
     .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
