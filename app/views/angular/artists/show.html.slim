@@ -34,8 +34,8 @@
       uib-tabset justified="true" class="artist-tabs"
         uib-tab heading="GALLERY"
           .artist-gallery.four-in-row
-            - 10.times do
-              .artist-gallery-item= image_tag 'img-3.jpg'
+            .artist-gallery-item ng-repeat='slide in slides track by $index' ng-click='openGallery($index)'
+              img ng-src='{{slide.image}}'
         uib-tab heading="MUSIC"
           iframe [
             width="100%"
