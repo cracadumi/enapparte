@@ -25,7 +25,7 @@
           / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
           input-string[label="Prénom" model="user.firstname" required]
           input-string[label="Nom" model="user.surname" required hint="Cette information ne sera partagée uniquement avec les utilisateur faisant partie d’une réservation confirmée"]
-          div[ng-if="user.role== 2 "]
+          div[ng-if="user.role== 'performer' "]
             input-string[label="Nom de scène" model="user.nickname"]
             .user-moving-checkbox.col-sm-offset-3
               .form-group.checkbox
