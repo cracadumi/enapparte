@@ -90,6 +90,7 @@ end
 #  rating           :float
 #  price_person     :boolean
 #  date_at          :datetime
+#  min_attendees    :integer
 #
 # Indexes
 #

@@ -1,6 +1,18 @@
-json.merge! @user.attributes
-json.language_ids @user.language_ids
+json.id @user.id
+json.email @user.email
+json.role @user.role
+json.firstname @user.firstname
+json.surname @user.surname
 json.gender @user.gender
+json.bio @user.bio
+json.phone_number @user.phone_number
+json.dob @user.dob
+json.activity @user.activity
+json.moving @user.moving
+json.art_id @user.art_id
+json.profile_picture_id @user.profile_picture_id
+json.nickname @user.nickname
+json.language_ids @user.language_ids
 
 json.profile_picture do
   json.id @user.profile_picture.try(:id)
