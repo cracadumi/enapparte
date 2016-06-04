@@ -136,6 +136,7 @@ end
 #  unconfirmed_email      :string
 #  art_id                 :integer
 #  profile_picture_id     :integer
+#  nickname               :string
 #
 # Indexes
 #

@@ -201,7 +201,7 @@ module Api
 
       def user_params
         params.require(:user)
-              .permit(:gender, :firstname, :surname, :dob, :phone_number, :bio,
+              .permit(:gender, :firstname, :surname, :nickname, :moving, :dob, :phone_number, :bio,
                       :activity, :email, :password, :password_confirmation,
                       addresses_attributes: [:id, :country, :latitude, :street,
                                              :city, :longitude, :is_primary,
