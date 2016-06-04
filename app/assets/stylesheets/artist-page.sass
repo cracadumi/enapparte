@@ -1,0 +1,202 @@
+@import partials/variables
+
+.artist-page-cover
+  background-image: asset-url('search-banner.jpg')
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+  height: 200px
+  margin-bottom: 60px
+
+.artist-page
+  font-family: FuturaLT
+  font-size: 18px
+  margin-bottom: 120px
+  h1
+    font-size: 26px
+    margin-bottom: 30px
+    text-transform: uppercase
+  h4
+    font-size: 18px
+    font-weight: bold
+    margin: 0 0 35px
+    text-transform: uppercase
+
+.my-show-heading
+  margin-top: 75px
+  text-align: center
+
+.artist-name
+  font-weight: bold
+  margin-top: 0
+  margin-left: 265px
+
+.artist-dl
+  overflow: hidden
+  margin-bottom: 10px
+  dt, dd
+    float: left
+    margin-bottom: 5px
+    width: 50%
+  dt
+    font-size: 12px
+    padding-top: 5px
+    text-transform: uppercase
+
+// Artist tabs
+.artist-tabs
+  .tab-content
+    margin-top: 30px
+  .nav-tabs
+    border-bottom: 1px solid #b1b1b1
+    li
+      &.active > a
+        background: transparent
+      + li > a
+        margin-left: 10px
+      > a
+        background: #f2f2f2
+        border: 1px solid #b1b1b1
+        border-radius: 0
+        color: $main_color
+        font-size: 16px
+        font-weight: bold
+        position: relative
+        top: 1px
+        outline: none
+        text-transform: uppercase
+
+// Artist info
+.artist-info
+  position: relative
+
+.artist-avatar
+  float: left
+  height: 220px
+  position: absolute
+  left: 0
+  top: -59px
+  width: 220px
+
+.artist-metadata
+  margin-left: 250px
+
+.artist-idf
+  background: $light_color
+  font-size: 16px
+  font-weight: bold
+  padding: 5px 10px
+
+.artist-bio
+  color: #333
+  margin-top: 35px
+  &::before
+    content: 'BIO:'
+    color: $main_color
+    display: inline
+    font-size: 16px
+    font-weight: bold
+
+// Artist Gallery
+.artist-gallery
+  overflow: hidden
+  &.three-in-row
+    .artist-gallery-item + .artist-gallery-item:not(:nth-child(3n+1))
+      margin-left: 10px
+  &.four-in-row
+    .artist-gallery-item
+      width: 131px
+      height: 131px
+      + .artist-gallery-item:not(:nth-child(4n+1))
+        margin-left: 10px
+
+.artist-gallery-item
+  float: left
+  height: 144px
+  margin-bottom: 10px
+  width: 144px
+
+// Artist show card
+.artist-show-card
+  background: asset-url('musique.png') no-repeat center center / cover
+  color: #fff
+  margin-bottom: 40px
+  min-height: 400px
+  padding: 25px 30px 30px
+  position: relative
+
+.artist-show-card-title span
+  border-bottom: 5px solid #fff
+  display: inline-block
+  font-family: 'FuturaLT Condensed'
+  font-size: 45px
+  letter-spacing: 5px
+  text-transform: uppercase
+  margin-bottom: 15px
+
+.artist-show-card-metadata
+  width: 320px
+  dd:last-child
+    font-size: 36px
+    width: 100%
+
+.artist-show-card-price
+  font-size: 12px
+  font-weight: bold
+  position: absolute
+  bottom: 30px
+  left: 30px
+  .price
+    background: $light_color
+    color: $main_color
+    display: inline-block
+    font-size: 45px
+    margin-top: 5px
+    padding: 0 15px
+
+// Artist show description
+.artist-show-description
+  line-height: 1.8
+
+// Artist comments
+.comments-title
+  background: $light_color
+  color: $main_color
+  font-weight: bold
+  margin-top: 50px
+  margin-bottom: 35px
+  padding: 10px 15px
+  text-transform: uppercase
+
+.comments-form
+  .form-control
+    border: 2px solid #e6e6e6
+    border-radius: 0
+    font-size: 18px
+    height: auto
+
+.btn-comment
+  background: $light_color
+  font-weight: bold
+  min-width: 205px
+  text-transform: uppercase
+
+// Single comment entry
+.comment-entry
+  border-top: 2px solid #e6e6e6
+  margin-top: 20px
+  padding-top: 30px
+
+.comment-sender
+  font-weight: bold
+  margin-bottom: 10px
+  .time-ago
+    font-size: 14px
+
+.comment-rating
+  font-size: 15px
+  margin-bottom: 15px
+
+.comment-text
+  margin-bottom: 30px
+  line-height: 1.8
