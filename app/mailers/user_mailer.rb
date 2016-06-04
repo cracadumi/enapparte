@@ -26,4 +26,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: 'Welcome to enapparte!'
   end
+
+  def society_mail society
+    @society = society
+    mail to: "enapparte@angeltech.io", subject: default_i18n_subject
+  end
+
 end
