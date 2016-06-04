@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root to: 'home#index'
-  devise_for :users, controllers: { confirmations: "confirmations" }
+  devise_for :users, controllers: { confirmations: "confirmations", omniauth_callbacks: 'omniauth_callbacks' }
 
   resources :users do
     post 'upload_photo', on: :collection
