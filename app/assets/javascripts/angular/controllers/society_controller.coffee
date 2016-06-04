@@ -3,13 +3,21 @@ class SocietyController extends @NGController
 
   @$inject: [
     '$scope'
-    'Flash'
-    '$rootScope'
     '$http'
   ]
 
   init: ->
     @scope.society = {}
-    
-  save: () ->
-    console.log "save"
+
+  submit: ()=>
+    scope = @scope
+
+    @http(
+      method: 'POST'
+      url: '/society'
+      data: {society:scope.society}).then ((response) ->
+      scope.society = {}
+      return
+    ), (response) ->
+      return
+

@@ -96,7 +96,7 @@ angular
             place.address_components[1] and place.address_components[1].short_name or ''
             place.address_components[2] and place.address_components[2].short_name or ''
           ].join(' ')
-        scope.infowindow.setContent '<div><strong>' + place.name + '</strong><br>' + address + '</div>'
+        scope.infowindow.setContent '<div><strong>Votre adresse</strong><br>' + address + '</div>'
         scope.infowindow.open scope.map, scope.marker
         # Get each component of the address from the place details
         # and fill the corresponding field on the form.

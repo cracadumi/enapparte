@@ -75,4 +75,5 @@ class DashboardController extends @NGController
       @scope.activeTab = tab
 
   isPerformer: ->
-    @Auth._currentUser.role in ["performer"]
+    if @Auth._currentUser
+      @Auth._currentUser.role in ["performer"]

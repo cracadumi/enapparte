@@ -13,6 +13,7 @@ class ContactController extends @NGController
     @rootScope.rootPath = true
     @scope.artSelect = @ArtSelect
     @scope.endDate = null
+    @scope.contact = {}
 
     $('#header')
       .removeClass('not-fixed')
@@ -22,11 +23,9 @@ class ContactController extends @NGController
           top: 490
     $("#content-main-page").addClass("full-main-content")
 
-  ok: ()=>
+  submitContact: ()=>
     flash = @Flash
     scope = @scope
-    if @rootScope.currentUser
-      @scope.contact.email = @rootScope.currentUser.email
 
     @http(
       method: 'POST'
