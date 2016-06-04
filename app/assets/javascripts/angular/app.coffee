@@ -52,7 +52,7 @@
         .addClass("affix")
         .removeData("bs.affix")
     $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works']) && !Auth.isAuthenticated()
+      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show']) && !Auth.isAuthenticated()
         $state.go 'home'
         Flash.showError $rootScope, "You need to sign in or sign up before continuing."
     ), 500
@@ -66,6 +66,16 @@
       url: '/'
       templateUrl: 'root.html'
       controller: 'RootController'
+
+    .state 'artists',
+      url: '/artists'
+      abstract: true
+      template: '<ui-view />'
+
+    .state 'artists.show',
+      url: '/:id'
+      templateUrl: 'artists/show.html'
+      controller: 'ArtistsController'
 
     .state 'about', { url: '/about', templateUrl: 'pages/about.html', controller: 'RootController' }
     .state 'performer', { url: '/performer', templateUrl: 'pages/become_performer.html'}
