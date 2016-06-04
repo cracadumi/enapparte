@@ -1,6 +1,7 @@
 json.merge! @user.attributes
 json.language_ids @user.language_ids
 json.gender @user.gender
+json.role @user.role
 
 json.profile_picture do
   json.id @user.profile_picture.try(:id)
