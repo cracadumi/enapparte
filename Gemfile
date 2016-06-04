@@ -60,7 +60,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-jasmine'
   gem 'rack-livereload'
-  gem 'libnotify'
+  gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
   gem 'awesome_print'
   gem 'dotenv-rails'
 end

@@ -1,76 +1,48 @@
-.container[ng-controller="ShowcasesController"]
+.container.showcase[ng-controller="ShowcasesController"]
   .row
     .col-md-12
-      legend= "Showcases"
-      table.table
-        thead
-          tr
-            th url
-            th kind
-            th actions
-        tbody
-          tr[ng-repeat="showcase in showcases"]
-            td.col-md-5[ng-hide="showcase.editMode"]
-              | {{ showcase.url }}
-            td.col-md-2[ng-hide="showcase.editMode"]
-              | {{ showcase.kind }}
-            td.col-md-2[ng-hide="showcase.editMode"]
-              button.btn.btn-default[ng-click="toggleEditMode(showcase)"] Edit
-              '
-              |
-              button.btn.btn-danger[delete-confirm="Are you sure?" ng-click="removeShowcase(showcase, $index)"] Delete
+      legend= "Music"
+      div.col-md-offset-3.col-md-6
+        div.text-center
+          a[href="http://shareandembed.help.soundcloud.com/customer/portal/articles/2167172-embedding-a-track-or-playlist-" target="blank"]
+            | Instructions to upload your soundcloud playlist 
+        input.music-url.form-control[ng-model="current_music.url" placeholder="Enter url" type="text" required ng-keypress="$event.keyCode == 13 && onEditMusicUrl()"]
+      div.col-md-offset-3.col-md-6.thumbnail-section[ng-if="music"]
+        .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
+        button.btn.btn-danger.delete[delete-confirm="Are you sure?" ng-click="removeMusic()"] Delete
 
-            td.col-md-5[ng-show="showcase.editMode"]
-              input.form-control[ng-model="showcase.url" placeholder="Enter url" type="text" required]
-            td.col-md-2[ng-show="showcase.editMode"]
-              select.form-control[ng-model="showcase.kind"]
-                option ng-repeat=("kind_value in kind_values") ng-selected=("showcase.kind == kind_value.value") value="{{kind_value.value}}" 
-                  | {{kind_value.name}}
-            td.col-md-2[ng-show="showcase.editMode"]
-              button.btn.btn-success[ng-click="showcaseUpdate(showcase, $index)"] Update
-              '
-              |
-              button.btn.btn-default[ng-click="toggleEditMode(showcase, $index)"] Cancel
-
-
-      br
-      div[ng-hide="addMode"]
-        button.btn.btn-success[ng-click="toggleAddMode()"] Add new showcase
+      legend= "Video"
+      div.col-md-6.thumbnail-section[ng-repeat="video in videos"]
+        .thumbnail[ng-bind-html="trustAsHtml(video.url)"]
+        button.btn.btn-danger.delete[delete-confirm="Are you sure?" ng-click="removeVideo($index)"] Delete
+      div.col-md-6.new-video-section.thumbnail-section
+        input.video-url.form-control[ng-model="current_video.url" placeholder="Enter url" type="text" required]
         br
         br
-      form.form-horizontal[name="showcaseForm" ng-show="addMode"]
-        table.table
-          tbody
-            tr
-              td.col-md-5
-                input.form-control[ng-model="showcase.url" placeholder="Enter url" type="text" required]
-              td.col-md-2
-                input-select-general[model="showcase.kind" data-collection=(([{ name: 'Dailymotion', value: 'Dailymotion'}, { name: 'Youtube', value: 'Youtube'}, { name: 'Soundcloud', value: 'Soundcloud'}]).to_json) required]
-              td.col-md-2
-                button.btn.btn-success[ng-click="showcaseForm.$valid && showcaseSave()"] Save
-                '
-                |
-                button.btn.btn-default[ng-click="toggleAddMode()"] Cancel
-
-
+        span Platform : 
+        '
+        |
+        select.video-kind.form-control[ng-model="current_video.kind"]
+          option ng-repeat=("kind_value in kind_values") ng-selected=("current_video.kind == kind_value.value") value="{{kind_value.value}}" 
+            | {{kind_value.name}}
+        button.add-video.btn.btn-success[ng-click="onAddVideoUrl()"] Add Video
 
       br
       br
-      .form-inputs
-        fieldset
-          legend= "Pictures"
-          br
-          .row
-            .col-xs-6.col-md-3[ng-repeat="picture in pictures"]
-              .thumbnail
-                img[ng-src="{{picture.src}}" width="300" height="300"]
-                .caption
-                  .actions.pull-right
-                    a[href="javascript: void(0);" ng-click="removePicture(picture, $index)"]
-                      i.glyphicon.glyphicon-trash
-                .clearfix
-          br
-          br
+
+      legend= "Pictures"
+      br
+      .row
+        .col-xs-6.col-md-3[ng-repeat="picture in pictures"]
+          .thumbnail
+            img[ng-src="{{picture.src}}" width="300" height="300"]
+            .caption
+              .actions.pull-right
+                a[href="javascript: void(0);" ng-click="removePicture(picture, $index)"]
+                  i.glyphicon.glyphicon-trash
+            .clearfix
+      br
+      br
 
       form.show.form-horizontal[novalidate name="pictureForm"]
         .form-inputs[ng-show="newPicture.src"]

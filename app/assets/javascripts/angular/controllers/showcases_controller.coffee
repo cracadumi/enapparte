@@ -3,6 +3,7 @@ class ShowcasesController extends @NGController
 
   @$inject: [
     '$scope'
+    '$sce'
     'User'
     'Showcase'
   ]
@@ -10,15 +11,21 @@ class ShowcasesController extends @NGController
   init: ->
     @scope.kind_values = [
       {'name':'Dailymotion', 'value':'Dailymotion'},
-      {'name':'Youtube', 'value':'Youtube'},
-      {'name':'Soundcloud', 'value':'Soundcloud'}
+      {'name':'Youtube', 'value':'Youtube'}
     ]
     @scope.showcase = new @Showcase
+    @scope.current_music = new @Showcase
+    @scope.current_music.kind = "Soundcloud"
+    @scope.current_video = new @Showcase
+    @scope.current_video.kind = "Dailymotion"
     @Showcase
       .query()
       .then (showcases)=>
         @scope.showcases = showcases
-
+        @scope.musics = showcases.filter (showcase) -> showcase.kind == 'Soundcloud'
+        @scope.music = @scope.musics[0]
+        @scope.current_music.url = @scope.music && @scope.music['url']
+        @scope.videos = showcases.filter (showcase) -> showcase.kind != 'Soundcloud'
     @scope.newPicture = {}
     user = new @User
     user
@@ -26,37 +33,53 @@ class ShowcasesController extends @NGController
       .then (pictures)=>
         @scope.pictures = pictures
 
-  showcaseSave: =>
-    kind = @scope.showcase.kind
-    @scope.showcase
-      .save()
-      .then (showcase)=>
-        @scope.showcases.push showcase
-        @scope.showcase = {}
-        @scope.showcase = new @Showcase
-        @scope.showcase.kind = kind
-        @toggleAddMode()
+  trustAsHtml: (htmlCode) =>
+    @sce.trustAsHtml htmlCode
 
-  showcaseUpdate: (showcase)=>
-    showcase
-      .save()
-      .then (showcase)=>
-        @toggleEditMode(showcase)
+  onEditMusicUrl: (event) =>
+    if @scope.music && !@scope.current_music.url
+      return @scope.removeMusic()
 
-  toggleAddMode: =>
-    @scope.addMode = !@scope.addMode
-
-  removeShowcase: (showcase, index)=>
     scope = @scope
-    showcase
+    if scope.music
+      scope.music.url = scope.current_music.url
+    else
+      scope.music = scope.current_music
+      scope.current_music = new @Showcase
+      scope.current_music.url = scope.music.url
+      scope.current_music.kind = scope.music.kind
+    scope.music
+      .save()
+      .then (music)=>
+
+  onAddVideoUrl: () =>
+    scope = @scope
+    if !scope.current_video.url
+      return
+    kind = scope.current_video.kind
+    scope.current_video
+      .save()
+      .then (video) =>
+        scope.videos.push video
+        scope.current_video = {}
+        scope.current_video = new @Showcase
+        scope.current_video.kind = kind
+
+  removeMusic: ()=>
+    scope = @scope
+    scope.music
       .delete()
-      .then( (response) ->
-        scope.showcases.splice(index, 1)
-      )
+      .then (response) ->
+        scope.music = null
+        scope.current_music.url = ""
 
-  toggleEditMode: (showcase)=>
-    showcase.editMode = !showcase.editMode
-
+  removeVideo: (index)=>
+    scope = @scope
+    scope.videos[index]
+      .delete()
+      .then (response) ->
+        scope.videos.splice(index, 1)
+        
   savePicture: ()=>
     scope = @scope
     scope.loading = true
