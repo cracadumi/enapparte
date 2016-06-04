@@ -10,7 +10,6 @@ class ShowController extends @NGController
     '$sce',
     '$filter',
     'ShowArt',
-    'ShowSearch'
     '$stateParams'
     '$state'
   ]
