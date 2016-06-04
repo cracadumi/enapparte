@@ -19,6 +19,7 @@
             br
             input-select[label="Art" model="show.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
             input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
+            input-select[label="Min Spectators" model="show.minAttendees" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
             input-integer[label="Duration in minutes" model="show.length" required]
             input-string[label="Title" model="show.title" required]
             input-text[label="Description" model="show.description" required]
