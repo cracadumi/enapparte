@@ -24,6 +24,14 @@ json.addresses @user.addresses do |address|
   json.full_address address.full_address
 end
 
+if @user.performer?
+  json.stripe_connected @user.stripe_user_id.present?
+elsif @user.user?
+  json.credit_cards @user.credit_cards do |card|
+    json.merge! card.attributes
+  end
+end
+
 json.reviews @user.reviews.includes(booking: [user: [:profile_picture, :ratings]]) do |review|
   json.merge! review.attributes
   json.userImageUrl review.try(:booking).try(:user).try(:profile_picture).try(:image).try(:url, :thumb)

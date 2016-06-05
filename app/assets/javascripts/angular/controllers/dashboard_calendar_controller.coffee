@@ -94,43 +94,43 @@ class DashboardCalendarController extends @NGController
     availability = {available_at:@scope.available_at}
     scope = @scope
     @http(
-        method: 'POST'
-        url: '/api/v1/availabilities.json'
-        data: {availability:availability}).then ((response) ->
-          event = response
-          scope.event_param = event
-          if !checkForMatch(scope.user_availabilities, 'id', response.data.id)
-            scope.user_availabilities.push response.data
-          scope.setWeekdayValue()
-          scope.$broadcast 'insert_success', event
-          console.log "insert success controller"
-          return
+      method: 'POST'
+      url: '/api/v1/availabilities.json'
+      data: {availability:availability}).then ((response) ->
+        event = response
+        scope.event_param = event
+        if !checkForMatch(scope.user_availabilities, 'id', response.data.id)
+          scope.user_availabilities.push response.data
+        scope.setWeekdayValue()
+        scope.$broadcast 'insert_success', event
+        console.log "insert success controller"
+        return
       ), (response) ->
-          event = [{'id':index++, 'available_at':availability.available_at, 'start':availability.available_at}]
-          scope.event_param = event
-          scope.$broadcast 'insert_success', event
-          console.log 'insert error:'+response['status']
-          return
+        event = [{'id':index++, 'available_at':availability.available_at, 'start':availability.available_at}]
+        scope.event_param = event
+        scope.$broadcast 'insert_success', event
+        console.log 'insert error:'+response['status']
+        return
 
   delete_available_date: ()=>
     id = @scope.id
     scope = @scope
     @http(
-        method: 'DELETE'
-        url: '/api/v1/availabilities/' + @scope.id + '.json'
-        ).then ((response) ->
-          scope.id = id
-          scope.user_availabilities = $.grep(scope.user_availabilities, (user_availability) ->
-            user_availability.id != id
-          )
-          scope.setWeekdayValue()
-          scope.$broadcast 'delete_success'
-          console.log "delete success controller"
-          return
+      method: 'DELETE'
+      url: '/api/v1/availabilities/' + @scope.id + '.json'
+      ).then ((response) ->
+        scope.id = id
+        scope.user_availabilities = $.grep(scope.user_availabilities, (user_availability) ->
+          user_availability.id != id
+        )
+        scope.setWeekdayValue()
+        scope.$broadcast 'delete_success'
+        console.log "delete success controller"
+        return
       ), (response) ->
-          scope.id = id
-          scope.$broadcast 'delete_success'
-          console.log 'delete error controller'+response['statusCode']
+        scope.id = id
+        scope.$broadcast 'delete_success'
+        console.log 'delete error controller'+response['statusCode']
         return
 
   weekday_Click : (dayName) =>

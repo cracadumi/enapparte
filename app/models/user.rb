@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:stripe_connect]
 
   enum gender: { male: 0, female: 1, other: 2 }
   enum role: { admin: 0, user: 1, performer: 2 }
@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :languages_user
   has_many :languages, through: :languages_user
   has_many :availabilities, class_name: 'UserAvailability', dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
 
   accepts_nested_attributes_for :addresses, reject_if: :reject_addresses
   accepts_nested_attributes_for :payment_methods,

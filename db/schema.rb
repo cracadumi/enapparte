@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160604173302) do
+ActiveRecord::Schema.define(version: 20160604190609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(version: 20160604173302) do
   add_index "bookings", ["payment_method_id"], name: "index_bookings_on_payment_method_id", using: :btree
   add_index "bookings", ["show_id"], name: "index_bookings_on_show_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "brand"
+    t.string   "country"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.string   "funding"
+    t.string   "last4"
+    t.string   "stripe_id"
+    t.boolean  "default",    default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string   "title"
@@ -209,6 +223,10 @@ ActiveRecord::Schema.define(version: 20160604173302) do
     t.integer  "art_id"
     t.integer  "profile_picture_id"
     t.string   "nickname"
+    t.string   "customer_id"
+    t.string   "stripe_pub_key"
+    t.string   "stripe_user_id"
+    t.string   "stripe_access_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
