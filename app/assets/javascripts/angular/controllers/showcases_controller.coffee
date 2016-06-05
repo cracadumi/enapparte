@@ -41,7 +41,6 @@ class ShowcasesController extends @NGController
 
   getDailyEmbedUrl: (url) =>
     m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
-    console.log m
     if m != null
       if m[3] != undefined
         return "https://www.dailymotion.com/embed/video/"+m[3]
