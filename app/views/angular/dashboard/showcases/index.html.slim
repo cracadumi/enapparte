@@ -11,9 +11,9 @@
         .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
         button.btn.btn-danger.delete[delete-confirm="Are you sure?" ng-click="removeMusic()"] Delete
 
-      legend= "Video"
+      legend.col-md-12= "Video"
       div.col-md-6.thumbnail-section[ng-repeat="video in videos"]
-        .thumbnail[ng-bind-html="trustAsHtml(video.url)"]
+        .thumbnail[ng-bind-html="getEmbedUrl(video.url)"]
         button.btn.btn-danger.delete[delete-confirm="Are you sure?" ng-click="removeVideo($index)"] Delete
       div.col-md-6.new-video-section.thumbnail-section
         input.video-url.form-control[ng-model="current_video.url" placeholder="Enter url" type="text" required]
@@ -30,7 +30,7 @@
       br
       br
 
-      legend= "Pictures"
+      legend.col-md-12= "Pictures"
       br
       .row
         .col-xs-6.col-md-3[ng-repeat="picture in pictures"]
@@ -42,12 +42,11 @@
                   i.glyphicon.glyphicon-trash
             .clearfix
       br
-      br
 
       form.show.form-horizontal[novalidate name="pictureForm"]
         .form-inputs[ng-show="newPicture.src"]
           fieldset
-            legend= "New Picture"
+            legend.col-md-12= "New Picture"
             br
             .row
               .col-xs-6.col-md-3

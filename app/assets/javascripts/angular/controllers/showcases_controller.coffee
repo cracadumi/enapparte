@@ -33,8 +33,26 @@ class ShowcasesController extends @NGController
       .then (pictures)=>
         @scope.pictures = pictures
 
-  trustAsHtml: (htmlCode) =>
-    @sce.trustAsHtml htmlCode
+  getEmbedUrl: (video_url) =>
+    embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)
+    if embed_url
+      return @sce.trustAsHtml '<iframe frameborder="0" height="270" width="480" src="'+embed_url+'"></iframe>'
+    ''
+
+  getDailyEmbedUrl: (url) =>
+    m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
+    console.log m
+    if m != null
+      if m[3] != undefined
+        return "https://www.dailymotion.com/embed/video/"+m[3]
+      return "https://www.dailymotion.com/embed/video/"+m[2]
+    null
+
+  getYoutubeEmbedUrl: (url) =>
+    match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
+    if match && match[7].length == 11
+        return "https://www.youtube.com/embed/"+match[7];
+    null
 
   onEditMusicUrl: (event) =>
     if @scope.music && !@scope.current_music.url
