@@ -36,7 +36,7 @@ class UserSearchController extends @NGController
     @scope.artId = @stateParams.id || null
     @scope.artSelect = @ArtSelect
 
-    @scope.priceRadius = 
+    @scope.priceRadius =
       selected: null
 
 
@@ -45,18 +45,16 @@ class UserSearchController extends @NGController
         @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
           i.id is + @scope.artId
         )[0]
-    
+
     @scope.style = ''
 
     @scope.$watch 'filter.price', (newValue, oldValue) =>
       @search()
 
     @scope.$watch 'artSelect.selected', =>
-      @scope.style = 
+      @scope.style =
         if @scope.artSelect.selected && @scope.artSelect.selected.bannerUrl
-          'background': "#f2f2f2 url(\"" + @scope.artSelect.selected.bannerUrl + "\") no-repeat"
-          'background-size': 'auto 200px'
-          'background-position': 'center top' 
+          'background-image': "url(\"" + @scope.artSelect.selected.bannerUrl + "\")"
         else
           ''
       @search()
@@ -71,7 +69,7 @@ class UserSearchController extends @NGController
       @search()
 
   artIsChosen: ->
-    @scope.artSelect.selected != null            
+    @scope.artSelect.selected != null
 
   search: =>
     q = if  @scope.filter.text then '*' + @scope.filter.text + '*' else ''
@@ -83,7 +81,7 @@ class UserSearchController extends @NGController
 
     if @scope.priceRadius.selected
       price0 = @scope.priceRadius.selected.price0
-      price1 = @scope.priceRadius.selected.price1 
+      price1 = @scope.priceRadius.selected.price1
 
     @UserSearch
       .query

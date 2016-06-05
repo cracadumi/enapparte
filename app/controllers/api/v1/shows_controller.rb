@@ -45,6 +45,6 @@ class Api::V1::ShowsController < Api::BaseController
   private
 
   def show_params
-    params.require(:show).permit(:max_spectators, :length, :title, :description, :price, :price_person, :cover_picture_id, :starts_at, :ends_at, :date_at, pictures_attributes: [ :src, :_destroy, :id, :selected ])
+    params.require(:show).permit(:art_id, :min_attendees, :max_spectators, :length, :title, :description, :price, :price_person, :cover_picture_id, :starts_at, :ends_at, :date_at, pictures_attributes: [ :src, :_destroy, :id, :selected ])
   end
 end

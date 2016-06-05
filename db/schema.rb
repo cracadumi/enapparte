@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20160604190609) do
     t.float    "rating"
     t.boolean  "price_person"
     t.datetime "date_at"
+    t.integer  "min_attendees"
   end
 
   add_index "shows", ["art_id"], name: "index_shows_on_art_id", using: :btree

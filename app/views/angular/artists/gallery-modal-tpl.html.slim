@@ -1,0 +1,6 @@
+uib-carousel active='activeSlideIdx' no-transition='true'
+  uib-slide [
+    ng-repeat="slide in slides track by $index"
+    index="$index"
+  ]
+    img ng-src="{{slide.image}}" alt="{{slide.title}}"

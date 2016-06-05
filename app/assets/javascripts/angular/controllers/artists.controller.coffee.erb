@@ -1,0 +1,38 @@
+class ArtistsController extends @NGController
+  @register window.App, 'ArtistsController'
+
+  @$inject: [
+    '$scope'
+    '$uibModal'
+  ]
+
+  init: ->
+    @scope.user =
+      full_name: 'Test User'
+
+    @scope.slides = []
+    @scope.activeSlideIdx = 0
+
+    i = 12
+    slide =
+      title: 'Test title'
+      image: "<%= asset_path('img-3.jpg') %>"
+    slide2 =
+      title: 'Test title'
+      image: "<%= asset_path('main_bg.jpg') %>"
+
+    while i isnt 0
+      if i % 2 is 0
+        @scope.slides.push slide
+      else
+        @scope.slides.push slide2
+      i--
+
+    @scope.openGallery = (idx) =>
+      @scope.activeSlideIdx = idx
+
+      modal = @uibModal.open
+        templateUrl: 'artists/gallery-modal-tpl.html'
+        scope: @scope
+        size: 'lg'
+        windowTopClass: 'artist-gallery-modal'
