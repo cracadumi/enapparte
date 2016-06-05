@@ -196,6 +196,18 @@ module Api
         respond_with :api, :v1, @user
       end
 
+      api! 'Disconnect stripe for performers'
+      description <<-EOS
+        ## Description
+        Disconnect connected stripe account from performer.
+        Returns user object.
+      EOS
+
+      def disconnect_stripe
+        @user = current_user
+        ManageUserStripe.new(@user).disconnect_stripe
+        respond_with :api, :v1, @user
+      end
 
       private
 

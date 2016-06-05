@@ -34,6 +34,8 @@ angular
       resource
         .$post '/api/v1/users/profile_picture', {src: src}
 
+    resource.prototype.disconnectStripe = ->
+      resource.$delete '/api/v1/users/disconnect-stripe'
 
     resource
   ]
