@@ -1,3 +1,1 @@
-json.array!(@cards) do |card|
-  json.merge! card.attributes
-end
+json.merge! @card.attributes

@@ -29,10 +29,14 @@
                   .row
                     .col-xs-6
                       label EXP MONTH
-                      input.form-control[type="tel" ng-model="card.exp_month" cc-exp-month ng-required="true"]
+                      select.form-control[ng-model="card.exp_month" cc-exp-month ng-required="true"]
+                        option[disabled selected value=""] Month
+                        option[ng-repeat="month in months" value="{{$index + 1}}"] {{$index + 1}} - {{month}}
                     .col-xs-6
                       label EXP YEAR
-                      input.form-control[type="tel" ng-model="card.exp_year" cc-exp-year ng-required="true"]
+                      select.form-control[ng-model="card.exp_year" cc-exp-year ng-required="true"]
+                        option[disabled selected value=""] Year
+                        option[ng-repeat="year in years" value="{{year}}"] {{year}}
               .col-xs-5.col-md-5
                 .form-group
                   label CV CODE
