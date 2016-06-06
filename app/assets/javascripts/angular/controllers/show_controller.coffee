@@ -12,6 +12,7 @@ class ShowController extends @NGController
     'ShowArt',
     '$stateParams'
     '$state'
+    'ngProgressFactory'
   ]
 
   init: ->
@@ -43,6 +44,8 @@ class ShowController extends @NGController
 
     @scope.$watch 'show.endsAt', (newValue, oldValue)=>
       @scope.show.startsAt = newValue  if @scope.show.startsAt > newValue
+
+    @scope.progressbar = @ngProgressFactory.createInstance()
 
   load: ()=>
     @scope.tabsClickable = true
@@ -148,6 +151,7 @@ class ShowController extends @NGController
 
   # finish
   finish: ()=>
+    @scope.progressbar.start()
     if @finishValidate()
       @scope.show.pending = true
       @scope.show
@@ -158,6 +162,7 @@ class ShowController extends @NGController
           @state.go 'dashboard.calendar',
             id: @scope.show.id
           @Flash.showSuccess @scope, 'Created new show successfully.'
+          @scope.progressbar.complete()
 
   tabClick: (step)->
     if @scope.tabsClickable

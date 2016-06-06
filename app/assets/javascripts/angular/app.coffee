@@ -17,6 +17,7 @@
     'stripe'
     'credit-cards'
     'ui.select'
+    'ngProgress'
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->

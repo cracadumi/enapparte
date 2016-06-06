@@ -6,3 +6,21 @@ class CreditCard < ActiveRecord::Base
     self.update(default: true)
   end
 end
+
+# == Schema Information
+#
+# Table name: credit_cards
+#
+#  id         :integer          not null, primary key
+#  brand      :string
+#  country    :string
+#  exp_month  :integer
+#  exp_year   :integer
+#  funding    :string
+#  last4      :string
+#  stripe_id  :string
+#  default    :boolean          default(FALSE)
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

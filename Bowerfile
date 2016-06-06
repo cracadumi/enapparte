@@ -28,4 +28,5 @@ asset 'angular-mocks'
 asset 'bootstrap-fileinput'
 asset 'angular-ui-select'
 asset 'angular-bootstrap-select', github: 'joaoneto/angular-bootstrap-select'
+asset 'ngprogress'
 

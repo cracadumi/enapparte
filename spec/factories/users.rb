@@ -57,6 +57,10 @@ end
 #  art_id                 :integer
 #  profile_picture_id     :integer
 #  nickname               :string
+#  customer_id            :string
+#  stripe_pub_key         :string
+#  stripe_user_id         :string
+#  stripe_access_code     :string
 #
 # Indexes
 #
