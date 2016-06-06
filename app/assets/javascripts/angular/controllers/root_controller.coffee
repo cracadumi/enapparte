@@ -14,14 +14,14 @@ class RootController extends @NGController
     @rootScope.rootPath = true
     @scope.artSelect = @ArtSelect
     @scope.endDate = null
-   
+
     $('#header')
       .removeClass('not-fixed')
       .addClass('affix-top')
       .affix
         offset:
           top: 490
-    $("#content-main-page").addClass("full-main-content")       
+    $("#content-main-page").addClass("full-main-content")
 
   beginSearch: =>
     artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else null

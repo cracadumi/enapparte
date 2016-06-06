@@ -33,5 +33,7 @@ angular
     $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
       $state.current = toState;
 
-)    
+    $scope.isSearchPage = () ->
+      $state.current.name == "shows.search"
+)
   ]

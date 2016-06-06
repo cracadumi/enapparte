@@ -87,9 +87,6 @@ body
   .navbar
     margin-bottom: 0 !important
 
-  .navbar-header
-    width: 100%
-
   .navbar-toggle .icon-bar
     border-bottom: 1px solid $main_color
 
@@ -145,10 +142,14 @@ body
     margin-top: 30px
 
     @media (min-width: 992px)
-      width: calc(100% - 140px)
+      width: calc(100% - 100px)
 
-    @media (max-width: 874px)
-      margin: 10px 0 15px
+    @media (max-width: 767px)
+      margin: 15px 0
+      .ui-select-match
+        .ui-select-toggle
+          height: 37px
+          padding: 6px 25px 6px 14px
 
     .ui-select-search
       color: #6c6c6c
@@ -174,26 +175,34 @@ body
   .main-header .btn-leconcept
     margin-left: 0
 
-  .list-menu-nav .dropdown.dropdown
-    border: 2px solid #fffca6
-    padding: 0
+  .art-select-sidebar
+    position: absolute
+    left: 80px
+    right: 80px
 
-    .dropdown-toggle
-      color: $main_color
-      display: block
-      padding: 14px 13px
-      text-align: center
+  .list-menu-nav
+    padding: 0 30px
+    .dropdown.dropdown
+      border: 2px solid #fffca6
+      padding: 0
 
-    .dropdown-menu
-      margin: 0
+      .dropdown-toggle
+        color: $main_color
+        display: block
+        padding: 14px 13px
+        text-align: center
 
-    a
-      width: 100%
-      margin: 0 !important
+      .dropdown-menu
+        margin: 0
+
+      a
+        width: 100%
+        margin: 0 !important
 
 @media (min-width: 768px)
   .bs-navbar-collapse
     padding-top: 30px
+    float: right
 
   .home .main-header.affix-top
     background: transparent
@@ -203,6 +212,30 @@ body
     right: 0
 
 @media (min-width: 768px) and (max-width: 991px)
+  .main-header:not(.has-search)
+    .bs-navbar-collapse
+      padding-right: 30px
+
+  .has-search
+    .navbar-header
+      width: 100%
+
+    .bs-navbar-collapse
+      background: #fff
+      padding-top: 0
+      float: none
+      text-align: center
+      &.collapse:not(.in)
+        display: none !important
+
+    .navbar-toggle
+      display: block
+      margin-top: 30px
+
+    .list-menu-nav
+      display: inline-block
+      float: none
+
   .main-header .nav_links
     margin-left: 9px
 
