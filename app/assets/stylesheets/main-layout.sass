@@ -141,8 +141,11 @@ body
     width: 100%
     margin-top: 30px
 
+    @media (min-width: 768px)
+      margin-left: 20px
+
     @media (min-width: 992px)
-      width: calc(100% - 100px)
+      width: calc(100% - 120px)
 
     @media (max-width: 767px)
       margin: 15px 0
@@ -177,8 +180,8 @@ body
 
   .art-select-sidebar
     position: absolute
-    left: 80px
-    right: 80px
+    left: 100px
+    right: 100px
 
   .list-menu-nav
     padding: 0 30px
@@ -200,6 +203,11 @@ body
         margin: 0 !important
 
 @media (min-width: 768px)
+  .main-header.has-search
+    .ui-select-match .ui-select-toggle
+      height: 48px
+      padding-top: 15px
+
   .bs-navbar-collapse
     padding-top: 30px
     float: right
@@ -241,7 +249,11 @@ body
 
 @media (min-width: 992px)
   .main-header-inner
-    padding: 0 30px
+    padding-right: 30px
+
+  .collapse-hide a.nav_links
+    padding-left: 3px
+    padding-right: 3px
 
 // Main section
 .aside_bg
