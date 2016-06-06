@@ -7,6 +7,7 @@ class ProfileController extends @NGController
     'Flash'
     'User'
     '$state'
+    'ngProgressFactory'
   ]
 
   tabsReviews: [
@@ -34,6 +35,8 @@ class ProfileController extends @NGController
       .then (user)=>
         @scope.user = user
 
+    @scope.progressbar = @ngProgressFactory.createInstance()
+
   userSave: =>
     if @scope.user
       @scope.user.save()
@@ -44,9 +47,11 @@ class ProfileController extends @NGController
           # @Flash.showError @scope, "L'utilisateur a été enregistré avec succès."
 
   saveProfilePicture: =>
+    @scope.progressbar.start()
     @scope.loading = true
     user = new @User
     user.profilePicture(@scope.user.profilePicture.src)
       .then (profilePicture)=>
         @scope.user.profilePicture = profilePicture
         @scope.loading = false
+        @scope.progressbar.complete()
