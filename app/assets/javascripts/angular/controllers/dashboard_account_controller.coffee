@@ -8,6 +8,7 @@ class DashboardAccountController extends @NGController
     'User'
     '$state',
     'CreditCard',
+    '$locale',
     '_'
   ]
 
@@ -16,6 +17,8 @@ class DashboardAccountController extends @NGController
   creditCards: []
   card:
     pending: false
+  months: []
+  years: []
 
   init: ->
     tabsAccount = [
@@ -23,10 +26,13 @@ class DashboardAccountController extends @NGController
       { heading: 'Information', route: 'dashboard.account.information' }
       { heading: 'Security', route: 'dashboard.account.security' }
     ]
+    @scope.months = @locale.DATETIME_FORMATS.SHORTMONTH
+    currentYear = new Date().getFullYear()
+    @scope.years = _.range(currentYear, currentYear + 10)
 
     @User
       .get(1)
-      .then (user)=>
+      .then (user) =>
         @scope.user = user
         @scope.creditCards = user.creditCards
         if @scope.user.role in ['performer']
@@ -47,7 +53,7 @@ class DashboardAccountController extends @NGController
       number: @scope.card.number
       cvc: @scope.card.cvc
       exp_month: @scope.card.exp_month
-      exp_year: @scope.card.exp_year
+      exp_year: @scope.card.exp_year.toString().substr(2, 2)
     , (status, response) =>
       if response.error
         @Flash.showError @scope, response.error.message
