@@ -57,12 +57,14 @@ class DashboardAccountController extends @NGController
     , (status, response) =>
       if response.error
         @Flash.showError @scope, response.error.message
+        @scope.card.pending = false
       else
         cardToken = response.id
         new @CreditCard(card_token: cardToken).create()
-          .then (cards) =>
+          .then (card) =>
             @scope.card = {}
-            @scope.creditCards = cards
+            _.each(@scope.creditCards, (card) -> card.default = false)
+            @scope.creditCards.push card
             @scope.card.pending = false
             @Flash.showNotice @scope, 'Card is successfully saved!'
           , (error) =>
