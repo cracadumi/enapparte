@@ -84,6 +84,9 @@ body
         &:hover
           background-color: #fffca6
 
+  .main-header-inner
+    width: 100%
+
   .navbar
     margin-bottom: 0 !important
 
@@ -178,10 +181,14 @@ body
   .main-header .btn-leconcept
     margin-left: 0
 
+  .navbar-header
+    padding-right: 0
+    margin-right: -15px
+
   .art-select-sidebar
     position: absolute
     left: 100px
-    right: 100px
+    right: 75px
 
   .list-menu-nav
     padding: 0 30px
@@ -203,11 +210,6 @@ body
         margin: 0 !important
 
 @media (min-width: 768px)
-  .main-header.has-search
-    .ui-select-match .ui-select-toggle
-      height: 48px
-      padding-top: 15px
-
   .bs-navbar-collapse
     padding-top: 30px
     float: right
@@ -226,6 +228,7 @@ body
 
   .has-search
     .navbar-header
+      padding-right: 0
       width: 100%
 
     .bs-navbar-collapse
@@ -248,8 +251,10 @@ body
     margin-left: 9px
 
 @media (min-width: 992px)
-  .main-header-inner
-    padding-right: 30px
+  .main-header.has-search
+    .ui-select-match .ui-select-toggle
+      height: 48px
+      padding-top: 15px
 
   .collapse-hide a.nav_links
     padding-left: 3px
