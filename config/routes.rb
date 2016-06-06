@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         post 'pictures', on: :collection
         get 'list/pictures', to: 'users#list_pictures', on: :collection
         delete 'picture', to: 'users#destroy_pictures', on: :collection
+        get 'artist', on: :collection
         post 'profile_picture', to: 'users#profile_picture', on: :collection
         delete 'disconnect-stripe', to: 'users#disconnect_stripe', on: :collection
       end
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
       resources :bookings, :defaults => { :format => 'json' } do
         post 'change_status', on: :member
       end
-      resources :arts
+      resources :arts, :defaults => { :format => 'json' }
       resources :showcases
       resources :user_availabilities, path: :availabilities, only: [:index, :show, :create, :destroy]
       resources :credit_cards, only: [:create] do

@@ -3,13 +3,21 @@ class ArtistsController extends @NGController
 
   @$inject: [
     '$scope'
-    '$uibModal'
+    '$uibModal',
+    '$stateParams',
+    'User',
+    'Art'
   ]
 
   init: ->
-    @scope.user =
-      full_name: 'Test User'
 
+    user_id = @stateParams.id
+    user = new @User
+    user
+      .artist(user_id)
+      .then (artist)=>
+        @scope.user = artist
+        console.log @scope.user
     @scope.slides = []
     @scope.activeSlideIdx = 0
 

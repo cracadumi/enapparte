@@ -1,28 +1,27 @@
-.artist-page-cover
+.artist-page-cover[style="background-image:url({{user.art.bannerUrl}})"]
 
 .artist-page.container
   .row
     h1.artist-name
-      | {{user.full_name}}
+      | {{user.fullName}}
     .col-md-6
       .artist-info.clearfix
         figure.artist-avatar
-          = image_tag 'img-3.jpg'
+          img[src="{{user.profile_picture}}" alt="Profile Avatar"]
         .artist-metadata
           dl.artist-dl
             dt Average rating:
             dd
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
+              .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<user.rating, 'glyphicon-star-empty': $index+1>user.rating}"]
             dt ART:
-            dd Music
+            dd 
+              | {{user.art.title}}
             dt Speciality:
-            dd Folk singer
+            dd 
+              | {{user.activity}}
             dt Languages:
-            dd François, English
+            dd 
+              | {{user.availableLanguages}}
           .artist-idf Je me deplace IDF
       .artist-bio
         | Lorem ipsum dolor sit amet, consectetur adipiscing elit.

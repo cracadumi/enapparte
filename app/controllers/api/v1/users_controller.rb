@@ -122,6 +122,11 @@ module Api
         respond_with :api, :v1, @user
       end
 
+      def artist
+        @user = User.find(params[:id])
+        respond_with :api, :v1, @user
+      end
+
       api! 'Update user'
       description <<-EOS
         ## Description

@@ -47,7 +47,7 @@ div[ng-controller="UserSearchController"]
             dir-pagination-controls.pull-right
         .row
           .col-md-4.col-sm-6.col-xs-12[dir-paginate="user in users | itemsPerPage:21"]
-            a.show-search.thumbnail[href=""]
+            a.show-search.thumbnail[href="#/artists/{{user.id}}"]
               img[ng-src="{{ user.pictureUrl }}" width="300" height="300"]
               .caption.text-center
                 p.placeholder= "Non disponible pour les dates demandées"

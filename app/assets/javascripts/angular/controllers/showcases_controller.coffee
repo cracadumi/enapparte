@@ -90,14 +90,14 @@ class ShowcasesController extends @NGController
         scope.music = null
         scope.current_music.url = ""
 
-  removeVideo: (index)=>
+  removeVideo: (index) =>
     scope = @scope
     scope.videos[index]
       .delete()
       .then (response) ->
         scope.videos.splice(index, 1)
         
-  savePicture: ()=>
+  savePicture: () =>
     scope = @scope
     scope.loading = true
     user = new @User
