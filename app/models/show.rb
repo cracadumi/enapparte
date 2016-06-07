@@ -5,6 +5,7 @@ class Show < ActiveRecord::Base
   belongs_to :cover_picture, class_name: 'Picture'
 
   belongs_to :user
+  has_one :art, through: :user
   has_many :languages, through: :user
 
   has_many   :bookings
@@ -88,6 +89,7 @@ end
 #  updated_at       :datetime         not null
 #  rating           :float
 #  price_person     :boolean
+#  date_at          :datetime
 #  min_attendees    :integer
 #
 # Indexes

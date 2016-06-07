@@ -47,6 +47,8 @@
 
         fieldset
           legend= "A propos"
+          div[ng-if="user.role== 'performer' "]
+            input-select[label="Art" model="user.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
           input-string[label="Activité" model="user.activity"]
           input-text[label="Bio" model="user.bio"]
           .form-group.languages-select
