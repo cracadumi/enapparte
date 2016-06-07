@@ -92,6 +92,12 @@ class User < ActiveRecord::Base
     shows.where(active: true)
   end
 
+  def pictures=(array)
+    array.each do |file|
+      pictures.build(image: file)
+    end
+  end
+
   private
 
   def check_profile_picture_exists
