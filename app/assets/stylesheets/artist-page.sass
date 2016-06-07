@@ -32,18 +32,6 @@
   margin-top: 0
   margin-left: 265px
 
-.artist-dl
-  overflow: hidden
-  margin-bottom: 10px
-  dt, dd
-    float: left
-    margin-bottom: 5px
-    width: 50%
-  dt
-    font-size: 12px
-    padding-top: 5px
-    text-transform: uppercase
-
 // Artist tabs
 .artist-tabs
   .tab-content
@@ -76,7 +64,7 @@
 
 .artist-avatar
   float: left
-  height: 220px
+  max-height: 220px
   position: absolute
   left: 0
   top: -59px
@@ -97,7 +85,7 @@
   color: #333
   margin-top: 35px
   &::before
-    content: 'BIO:'
+    content: 'BIO: '
     color: $main_color
     display: inline
     font-size: 16px
