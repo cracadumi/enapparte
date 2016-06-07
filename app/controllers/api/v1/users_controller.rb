@@ -219,7 +219,7 @@ module Api
       def user_params
         params.require(:user)
               .permit(:gender, :firstname, :surname, :nickname, :moving, :dob, :phone_number, :bio,
-                      :activity, :email, :password, :password_confirmation,
+                      :activity, :email, :password, :password_confirmation, :art_id,
                       addresses_attributes: [:id, :country, :latitude, :street,
                                              :city, :longitude, :is_primary,
                                              :state, :postcode],
