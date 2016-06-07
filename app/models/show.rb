@@ -29,9 +29,9 @@ class Show < ActiveRecord::Base
     })
   end
 
-  # def rating
-  #   [ratings.average(:value).to_i, 5].min
-  # end
+  def rating
+    [ratings.average(:value).to_i, 5].min
+  end
 
   def toggle_active
     if user && user.addresses.any? && user.phone_number.present?

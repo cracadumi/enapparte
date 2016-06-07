@@ -7,7 +7,7 @@
     .col-md-6
       .artist-info.clearfix
         figure.artist-avatar
-          img[src="{{user.profile_picture}}" alt="Profile Avatar"]
+          img[src="{{user.pictureUrl}}" alt="Profile Avatar"]
         .artist-metadata
           dl.artist-dl
             dt Average rating:
@@ -23,166 +23,93 @@
             dd
               | {{user.availableLanguages}}
           .artist-idf Je me deplace IDF
-      .artist-bio
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        | Morbi non pretium massa, ac condimentum quam. Quisque
-        | quam nulla, pellentesque ac mauris in, fringilla tincidunt
-        | elit. Vivamus vel lectus congue, accumsan mauris ac,
-        | pulvinar magna.
+      .artist-bio[ng-if="user.moving"]
+        | {{user.bio}}
     .col-md-6
       uib-tabset justified="true" class="artist-tabs"
         uib-tab heading="GALLERY"
           .artist-gallery.four-in-row
-            .artist-gallery-item ng-repeat='slide in slides track by $index' ng-click='openGallery($index)'
-              img ng-src='{{slide.image}}'
+            .artist-gallery-item ng-repeat='slide in user.pictures track by $index' ng-click='openGallery($index)'
+              img ng-src='{{slide.src}}'
         uib-tab heading="MUSIC"
-          iframe [
-            width="100%"
-            height="450"
-            scrolling="no"
-            frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/1615033&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"
-          ]
+          .thumbnail[ng-bind-html="trustAsHtml(music.url)"] 
         uib-tab heading="VIDEO"
-          iframe [
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/QLN-a2w568M"
-            frameborder="0"
-            allowfullscreen
-          ]
+          .thumbnail[ng-bind-html="getEmbedUrl(videos[0].url)"]
 
   .row
     h1.my-show-heading
       b MY SHOW
+    div[ng-repeat="show in user.shows"]
+      .artist-show-card.col-xs-12.col-md-12[style="background-image : url({{show.coverPicture}})"]
+        .artist-show-card-title
+          span 
+            | {{show.title}}
+        .artist-show-card-metadata
+          dl.artist-dl
+            dt average rating:
+            dd
+              .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<show.rating, 'glyphicon-star-empty': $index+1>show.rating}"]
+            dt duration of show:
+            dd 1h 40min
+            dt number of spectators:
+            dd From 50 to 1000
+        .artist-show-card-price
+          .text-uppercase total price
+          .price $534
+        .artist-show-card-actions
+          .transparent-control
+            .input-group
+              input.form-control type='text' placeholder='Select date'
+              .input-group-addon
+                .glyphicon.glyphicon-calendar
+          .transparent-control
+            .input-group
+              input.form-control type='text' placeholder='Select time'
+              .input-group-addon
+                .glyphicon.glyphicon-dashboard
+          .transparent-control
+            .input-group
+              input.form-control type='text' placeholder='Number of guests'
+              .input-group-addon
+                .glyphicon.glyphicon-user
+          .transparent-control
+            .btn.btn-enapparte-primary Book now
 
-    .artist-show-card
-      .artist-show-card-title
-        span Mauris Hendrerit ante at purus
-      .artist-show-card-metadata
-        dl.artist-dl
-          dt average rating:
-          dd
-            .glyphicon.glyphicon-star
-            .glyphicon.glyphicon-star
-            .glyphicon.glyphicon-star
-            .glyphicon.glyphicon-star
-            .glyphicon.glyphicon-star-empty
-          dt duration of show:
-          dd 1h 40min
-          dt number of spectators:
-          dd From 50 to 1000
-      .artist-show-card-price
-        .text-uppercase total price
-        .price $534
-      .artist-show-card-actions
-        .transparent-control
-          .input-group
-            input.form-control type='text' placeholder='Select date'
-            .input-group-addon
-              .glyphicon.glyphicon-calendar
-        .transparent-control
-          .input-group
-            input.form-control type='text' placeholder='Select time'
-            .input-group-addon
-              .glyphicon.glyphicon-dashboard
-        .transparent-control
-          .input-group
-            input.form-control type='text' placeholder='Number of guests'
-            .input-group-addon
-              .glyphicon.glyphicon-user
-        .transparent-control
-          .btn.btn-enapparte-primary Book now
+      .col-xs-12.col-md-5
+        h4 Gallery
+        .artist-gallery.three-in-row
+          .artist-gallery-item[ng-repeat="picture in show.pictures"]
+            img ng-src='{{picture.src}}'
+      .col-xs-12.col-md-7
+        h4 Description:
+        .artist-show-description
+          | Cras egestas vitae lectus nec dapibus. Pellentesque blandit
+          | est ut massa malesuada, sed pulvinar dui ultricies.
+          | Maecenas arcu ipsum, tincidunt quis ipsum at, pulvinar
+          | consectetur sapien. Praesent laoreet, nibh porttitor
+          | tincidunt tempor, metus purus accumsan tellus, vel varius
+          | sem orci eget ante. Donec sed accumsan urna. Proin euismod
+          | ultricies mattis. Pellentesque suscipit non ante id semper.
+          | Cras porta accumsan nulla et efficitur. Sed pharetra eros
+          | purus, ut convallis diam porta eget. Etiam at feugiat nibh,
+          | et semper dolor. Curabitur at rhoncus lectus, vel pretium metus.
 
-    .col-xs-12.col-md-5
-      h4 Gallery
-      .artist-gallery.three-in-row
-        - 10.times do
-          .artist-gallery-item= image_tag 'img-3.jpg'
-    .col-xs-12.col-md-7
-      h4 Description:
-      .artist-show-description
-        | Cras egestas vitae lectus nec dapibus. Pellentesque blandit
-        | est ut massa malesuada, sed pulvinar dui ultricies.
-        | Maecenas arcu ipsum, tincidunt quis ipsum at, pulvinar
-        | consectetur sapien. Praesent laoreet, nibh porttitor
-        | tincidunt tempor, metus purus accumsan tellus, vel varius
-        | sem orci eget ante. Donec sed accumsan urna. Proin euismod
-        | ultricies mattis. Pellentesque suscipit non ante id semper.
-        | Cras porta accumsan nulla et efficitur. Sed pharetra eros
-        | purus, ut convallis diam porta eget. Etiam at feugiat nibh,
-        | et semper dolor. Curabitur at rhoncus lectus, vel pretium metus.
-
-      .comments-section
-        - 3.times do
-          .comment-entry
-            .comment-sender
-              | Derek Ross
-              span.time-ago &nbsp; - 5 hours ago
-            .comment-rating
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-              .glyphicon.glyphicon-star
-            .comment-text
-              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              | Pellentesque eget eleifend libero. Integer vestibulum
-              | ipsum sed lorem sollicitudin, at suscipit magna dapibus.
-              | Phasellus tristique quam at elit iaculis, ut sollicitudin
-              | leo fermentum. Interdum et malesuada fames ac ante ipsum
-              | primis in faucibus.
-
-  .artist-show-card
-    .artist-show-card-title
-      span Pellentesque eget eleifend libero
-    .artist-show-card-metadata
-      dl.artist-dl
-        dt average rating:
-        dd
-          .glyphicon.glyphicon-star-empty
-          .glyphicon.glyphicon-star-empty
-          .glyphicon.glyphicon-star-empty
-          .glyphicon.glyphicon-star-empty
-          .glyphicon.glyphicon-star-empty
-        dt duration of show:
-        dd 0h 40min
-        dt floor surface needed:
-        dd 100 m3
-        dt number of spectators:
-        dd Max 1000
-    .artist-show-card-price
-      .text-uppercase price per person
-      .price $20
-    .artist-show-card-actions
-      .transparent-control
-        .input-group
-          input.form-control type='text' placeholder='Select date'
-          .input-group-addon
-            .glyphicon.glyphicon-calendar
-      .transparent-control
-        .input-group
-          input.form-control type='text' placeholder='Select time'
-          .input-group-addon
-            .glyphicon.glyphicon-dashboard
-      .transparent-control
-        .input-group
-          input.form-control type='text' placeholder='Number of guests'
-          .input-group-addon
-            .glyphicon.glyphicon-user
-      .transparent-control
-        .btn.btn-enapparte-primary Book now
-
-  .col-md-offset-4
-    h4 Description:
-    .artist-show-description
-      | Cras egestas vitae lectus nec dapibus. Pellentesque blandit
-      | est ut massa malesuada, sed pulvinar dui ultricies.
-      | Maecenas arcu ipsum, tincidunt quis ipsum at, pulvinar
-      | consectetur sapien. Praesent laoreet, nibh porttitor tincidunt
-      | tempor, metus purus accumsan tellus, vel varius sem orci eget
-      | ante. Donec sed accumsan urna. Proin euismod ultricies mattis.
-      | Pellentesque suscipit non ante id semper. Cras porta accumsan
-      | nulla et efficitur. Sed pharetra eros purus, ut convallis diam
-      | porta eget. Etiam at feugiat nibh, et semper dolor. Curabitur
-      | at rhoncus lectus, vel pretium metus.
+        .comments-section
+          - 3.times do
+            .comment-entry
+              .comment-sender
+                | Derek Ross
+                span.time-ago &nbsp; - 5 hours ago
+              .comment-rating
+                .glyphicon.glyphicon-star
+                .glyphicon.glyphicon-star
+                .glyphicon.glyphicon-star
+                .glyphicon.glyphicon-star
+                .glyphicon.glyphicon-star
+              .comment-text
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                | Pellentesque eget eleifend libero. Integer vestibulum
+                | ipsum sed lorem sollicitudin, at suscipit magna dapibus.
+                | Phasellus tristique quam at elit iaculis, ut sollicitudin
+                | leo fermentum. Interdum et malesuada fames ac ante ipsum
+                | primis in faucibus.

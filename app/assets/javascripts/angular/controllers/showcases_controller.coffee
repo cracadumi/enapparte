@@ -32,6 +32,7 @@ class ShowcasesController extends @NGController
       .listPictures()
       .then (pictures)=>
         @scope.pictures = pictures
+    @scope.trustAsHtml = @sce.trustAsHtml
 
   getEmbedUrl: (video_url) =>
     embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)
