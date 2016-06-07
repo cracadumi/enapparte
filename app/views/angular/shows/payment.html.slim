@@ -49,33 +49,33 @@
               |  confirms your booking.
 
       .col-md-8
-          .row
-            .col-md-6
-              label.select-label A quelle adresse souhaitez-vous commander la performance?
-              ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
-                ui-select-match [] {{user.address.fullAddress}}
-                ui-select-choices repeat='address in user.addresses track by $index'
-                  div [] {{address.fullAddress}}
-            .col-md-6
-              label.select-label Choisissez votre moyen de paiement
-              ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
-                ui-select-match [] {{$select.payment}}
-                ui-select-choices repeat='payment in user.paymentMethods track by $index'
-                  div [] {{payment}}
+        .row
+          .col-md-6
+            label.select-label A quelle adresse souhaitez-vous commander la performance?
+            ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
+              ui-select-match [] {{user.address.fullAddress}}
+              ui-select-choices repeat='address in user.addresses track by $index'
+                div [] {{address.fullAddress}}
+          .col-md-6
+            label.select-label Choisissez votre moyen de paiement
+            ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
+              ui-select-match [] {{$select.payment}}
+              ui-select-choices repeat='payment in user.paymentMethods track by $index'
+                div [] {{payment}}
 
-          .show-payment-message.col-xs-12
-            .form-group
-              label.text-uppercase Message
-              input.form-control.enapparte-input [
-                type='text'
-                placeholder='Enter name'
-                ng-model='booking.username'
-              ]
-            .form-group
-              textarea.form-control.enapparte-input [
-                placeholder='Enter your message'
-                ng-model='booking.message'
-              ]
+        .show-payment-message.col-xs-12
+          .form-group
+            label.text-uppercase Message
+            input.form-control.enapparte-input [
+              type='text'
+              placeholder='Enter name'
+              ng-model='booking.username'
+            ]
+          .form-group
+            textarea.form-control.enapparte-input [
+              placeholder='Enter your message'
+              ng-model='booking.message'
+            ]
 
       .col-xs-12
         .terms-checkbox.checkbox
