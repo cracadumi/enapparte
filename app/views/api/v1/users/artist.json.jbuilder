@@ -1,6 +1,6 @@
 json.id @user.id
 json.art do
-  json.banner_url @user.art.banner_url
+  json.banner_url image_url(@user.art.banner_url)
   json.title @user.art.title
 end
 json.full_name @user.full_name

@@ -54,7 +54,6 @@ class UserSearchController extends @NGController
     @scope.$watch 'artSelect.selected', =>
       @scope.style =
         if @scope.artSelect.selected && @scope.artSelect.selected.bannerUrl
-          console.log @scope.artSelect.selected.bannerUrl 
           'background-image': "url(\"" + @scope.artSelect.selected.bannerUrl + "\")"
         else
           ''
