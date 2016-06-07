@@ -87,6 +87,12 @@ class User < ActiveRecord::Base
     pictures.first.try(:image).try(:url, :thumb) || Picture.default_url(:thumb)
   end
 
+  def pictures=(array)
+    array.each do |file|
+      pictures.build(image: file)
+    end
+  end
+
   private
 
   def check_profile_picture_exists

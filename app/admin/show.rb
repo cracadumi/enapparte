@@ -1,6 +1,6 @@
 ActiveAdmin.register Show do
   permit_params :title, :length, :surface, :description, :price, :max_spectators, :active, :user_id,
-    :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at,
+    :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at, :cover_picture_id,
     :ends_at, :booking_ids => [], :pictures => []
 
   form do |f|
@@ -17,6 +17,7 @@ ActiveAdmin.register Show do
       f.input :published_at, as: :just_datetime_picker
       f.input :user
       f.input :bookings
+      f.input :cover_picture, collection: (Picture.all.last(20).reverse).map { |i| [ "#{i.id} : #{i.title}", i.id] }
       f.input :pictures, as: :file, input_html: { multiple: true }
       li id: 'pictures' do
         div class: 'inline-hints' do
