@@ -30,6 +30,17 @@ json.shows do
   	json.title show.title
   	json.rating show.rating
   	json.cover_picture show.cover_picture.src
+  	json.duration show.duration
+  	json.description show.description
+  	json.price show.price.to_i
+  	json.spectators show.spectators
+  	json.reviews do
+  	  json.array! show.reviews_max_3 do |review|
+  	  	json.review review.review
+  	  	json.rating review.rating.value
+  	  	json.username review.booking.user.full_name
+  	  end
+  	end
   	json.pictures do
   	  json.array! show.pictures do |picture|
   	  	json.id picture.id
@@ -38,3 +49,4 @@ json.shows do
   	end
   end
 end
+

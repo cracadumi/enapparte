@@ -14,8 +14,7 @@ class Show < ActiveRecord::Base
   has_many :ratings, through: :reviews
 
   just_define_datetime_picker :published_at
-  validates :max_spectators, :length, :title, :description, :price, presence: true
-
+  validates :max_spectators, :min_attendees, :length, :title, :description, :price, presence: true
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   after_save :set_cover_picture
@@ -30,8 +29,28 @@ class Show < ActiveRecord::Base
     })
   end
 
-  def rating
-    [ratings.average(:value).to_i, 5].min
+  def reviews_max_3
+    reviews.first(3)
+  end
+
+  def spectators
+    spect = ""
+    if min_attendees
+      spect += "from " + min_attendees.to_s + " "
+    end
+    if max_spectators
+      spect += "to " + max_spectators.to_s
+    end
+    spect.slice(0,1).capitalize + spect.slice(1..-1)
+  end
+
+  def duration
+    if length > 59
+      return (length / 60).to_s + "h " + (length % 60).to_s.to_s + "min"
+    else
+      return length.to_s + "min"
+    end
+    ''
   end
 
   def toggle_active
@@ -66,6 +85,7 @@ class Show < ActiveRecord::Base
   def update_rating
     self.rating = [ratings.average(:value).to_f, 5].min
   end
+
 end
 
 # == Schema Information
@@ -89,7 +109,6 @@ end
 #  updated_at       :datetime         not null
 #  rating           :float
 #  price_person     :boolean
-#  date_at          :datetime
 #  min_attendees    :integer
 #
 # Indexes

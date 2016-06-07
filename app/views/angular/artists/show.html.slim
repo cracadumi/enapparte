@@ -50,12 +50,14 @@
             dd
               .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<show.rating, 'glyphicon-star-empty': $index+1>show.rating}"]
             dt duration of show:
-            dd 1h 40min
-            dt number of spectators:
-            dd From 50 to 1000
+            dd 
+              | {{show.duration}}
+            dt[ng-if="show.spectators"] number of spectators:
+            dd
+              | {{show.spectators}}
         .artist-show-card-price
           .text-uppercase total price
-          .price $534
+          .price ${{show.price}}
         .artist-show-card-actions
           .transparent-control
             .input-group
@@ -83,33 +85,14 @@
       .col-xs-12.col-md-7
         h4 Description:
         .artist-show-description
-          | Cras egestas vitae lectus nec dapibus. Pellentesque blandit
-          | est ut massa malesuada, sed pulvinar dui ultricies.
-          | Maecenas arcu ipsum, tincidunt quis ipsum at, pulvinar
-          | consectetur sapien. Praesent laoreet, nibh porttitor
-          | tincidunt tempor, metus purus accumsan tellus, vel varius
-          | sem orci eget ante. Donec sed accumsan urna. Proin euismod
-          | ultricies mattis. Pellentesque suscipit non ante id semper.
-          | Cras porta accumsan nulla et efficitur. Sed pharetra eros
-          | purus, ut convallis diam porta eget. Etiam at feugiat nibh,
-          | et semper dolor. Curabitur at rhoncus lectus, vel pretium metus.
+          | {{show.description}}
 
         .comments-section
-          - 3.times do
-            .comment-entry
-              .comment-sender
-                | Derek Ross
-                span.time-ago &nbsp; - 5 hours ago
-              .comment-rating
-                .glyphicon.glyphicon-star
-                .glyphicon.glyphicon-star
-                .glyphicon.glyphicon-star
-                .glyphicon.glyphicon-star
-                .glyphicon.glyphicon-star
-              .comment-text
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                | Pellentesque eget eleifend libero. Integer vestibulum
-                | ipsum sed lorem sollicitudin, at suscipit magna dapibus.
-                | Phasellus tristique quam at elit iaculis, ut sollicitudin
-                | leo fermentum. Interdum et malesuada fames ac ante ipsum
-                | primis in faucibus.
+          .comment-entry[ng-repeat="review in show.reviews"]
+            .comment-sender
+              | {{review.username}}
+              span.time-ago &nbsp; - 5 hours ago
+            .comment-rating
+              .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<review.rating, 'glyphicon-star-empty': $index+1>review.rating}"]
+            .comment-text
+              | {{review.review}}
