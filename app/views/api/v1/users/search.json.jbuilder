@@ -7,5 +7,6 @@ json.array! @users do |user|
   json.art_title user.art.try(:title) || '-'
   json.rating user.rating
   json.unavailable user.unavailable
+  json.activity user.activity
   json.picture_url user.profile_picture.try(:image).try(:url, :thumb)
 end
