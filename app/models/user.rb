@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
 
   scope :performers, -> { where role: roles[:performer] }
 
+  attr_accessor :unavailable
+
   def sent_reviews
     bookings.includes(:review).inject([]) do |reviews, b|
       reviews << b.review if b.review

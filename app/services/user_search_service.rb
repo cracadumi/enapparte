@@ -19,7 +19,11 @@ class UserSearchService
     if end_date
       right_border = DateTime.strptime(end_date, '%d/%m/%Y')
       left_border = start_date ?  DateTime.strptime(start_date, '%d/%m/%Y') : DateTime.now
-      @users = @users.joins(:availabilities).where(user_availabilities: { available_at: left_border..right_border })
+      all_users = @users
+      available_users = @users.joins(:availabilities).where(user_availabilities: { available_at: left_border..right_border })
+      non_available_users = (all_users - available_users).uniq
+      non_available_users.each {|u| u.unavailable = true}
+      @users = (available_users + non_available_users).uniq
     end  
   end
 

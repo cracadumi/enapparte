@@ -24,10 +24,10 @@ class UserSearchController extends @NGController
     text: ""
     price: "0,100000"
   priceRadii: [
-    {price0: 0, price1: 50, title: '< 50 €'}
-    {price0: 50, price1: 100, title: '50 € - 100 €'}
-    {price0: 100, price1: 200, title: '100 € - 200 €'}
-    {price0: 200, price1: 999999999999, title: '200+ €'}
+    {price0: 0, price1: 200, title: '< 200 €'}
+    {price0: 200, price1: 400, title: '200 € - 400 €'}
+    {price0: 400, price1: 600, title: '400 € - 600 €'}
+    {price0: 600, price1: 999999999999, title: '600+ €'}
   ]
 
   init: ->
