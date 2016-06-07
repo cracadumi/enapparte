@@ -1,4 +1,5 @@
 @import partials/variables
+@import partials/mixins
 
 .artist-page-cover
   background-image: asset-url('search-banner.jpg')
@@ -196,32 +197,40 @@
     margin-top: 5px
     padding: 0 15px
 
+.artist-show-card-actions
+  bottom: 20px
+  +display-flex
+  +flex-wrap(wrap)
+  +justify-content(space-between)
+  left: 250px
+  position: absolute
+  right: 30px
+  .transparent-control
+    +flex(0 0 24%)
+    margin-bottom: 10px
+    @media (max-width: 991px)
+      +flex(0 0 48%)
+    .form-control
+      background: transparent
+      border-radius: 0
+      border-width: 2px 0 2px 2px
+      color: #fff
+      font-size: 18px
+      height: auto
+      padding-right: 0
+    .input-group-addon
+      background: transparent
+      border-radius: 0
+      border-width: 2px 2px 2px 0
+      color: #fff
+    .btn-enapparte-primary
+      font-size: 18px
+      height: 100%
+      width: 100%
+
 // Artist show description
 .artist-show-description
   line-height: 1.8
-
-// Artist comments
-.comments-title
-  background: $light_color
-  color: $main_color
-  font-weight: bold
-  margin-top: 50px
-  margin-bottom: 35px
-  padding: 10px 15px
-  text-transform: uppercase
-
-.comments-form
-  .form-control
-    border: 2px solid #e6e6e6
-    border-radius: 0
-    font-size: 18px
-    height: auto
-
-.btn-comment
-  background: $light_color
-  font-weight: bold
-  min-width: 205px
-  text-transform: uppercase
 
 // Single comment entry
 .comment-entry
