@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606180230) do
+ActiveRecord::Schema.define(version: 20160607123034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,7 +174,6 @@ ActiveRecord::Schema.define(version: 20160606180230) do
     t.datetime "published_at"
     t.integer  "cover_picture_id"
     t.integer  "user_id"
-    t.integer  "art_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.float    "rating"
@@ -183,7 +182,6 @@ ActiveRecord::Schema.define(version: 20160606180230) do
     t.integer  "min_attendees"
   end
 
-  add_index "shows", ["art_id"], name: "index_shows_on_art_id", using: :btree
   add_index "shows", ["cover_picture_id"], name: "index_shows_on_cover_picture_id", using: :btree
   add_index "shows", ["user_id"], name: "index_shows_on_user_id", using: :btree
 
