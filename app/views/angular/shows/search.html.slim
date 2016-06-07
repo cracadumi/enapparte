@@ -49,7 +49,8 @@ div[ng-controller="UserSearchController"]
             a.show-search.thumbnail[href=""]
               img[ng-src="{{ user.pictureUrl }}" width="300" height="300"]
               .caption.text-center
-                p.placeholder= "Non disponible pour les dates demandées"
+                p.placeholder[ng-show="user.unavailable"]
+                  | Non disponible pour les dates demandées
                 h4= "{{ user.fullName }}"
                 p.description= "{{ user.artTitle }}"
                 i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(user.rating)) track by $index"]
