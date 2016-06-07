@@ -23,6 +23,8 @@ class ArtistsController extends @NGController
         musics = @scope.user.showcases.filter (showcase) -> showcase.kind == 'Soundcloud'
         @scope.music = musics[0]
         @scope.videos = @scope.user.showcases.filter (showcase) -> showcase.kind != 'Soundcloud'
+        @scope.bannerStyle = 
+          'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
 
         console.log @scope.user
     @scope.trustAsHtml = @sce.trustAsHtml

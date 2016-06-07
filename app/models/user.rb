@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
     pictures.first.try(:image).try(:url, :thumb) || Picture.default_url(:thumb)
   end
 
+  def active_shows
+    shows.where(active: true)
+  end
+
   private
 
   def check_profile_picture_exists
@@ -106,6 +110,7 @@ class User < ActiveRecord::Base
   def deactivate_shows
     shows.update_all(active: false) unless phone_number.present?
   end
+
 
   def user_is_performer
     errors.add(:art, 'A user should be performer') unless performer?

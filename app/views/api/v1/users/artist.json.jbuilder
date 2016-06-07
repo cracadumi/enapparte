@@ -25,7 +25,7 @@ end
 
 json.showcases @user.showcases
 json.shows do
-  json.array! @user.shows do |show|
+  json.array! @user.active_shows do |show|
   	json.id show.id
   	json.title show.title
   	json.rating show.rating
