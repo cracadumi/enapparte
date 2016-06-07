@@ -9,5 +9,5 @@ json.array! @users do |user|
   json.availabilities user.availabilities do |availability|
     json.available_at availability.available_at
   end
-  json.picture_url user.image
+  json.picture_url user.profile_picture.image
 end
