@@ -154,7 +154,9 @@
 
 // Artist show card
 .artist-show-card
-  background: asset-url('musique.png') no-repeat center center / cover
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: cover
   color: #fff
   margin-bottom: 40px
   min-height: 400px
@@ -201,25 +203,44 @@
   .transparent-control
     +flex(0 0 24%)
     margin-bottom: 10px
+    position: relative
     @media (max-width: 991px)
       +flex(0 0 48%)
+    .input-group
+      background: rgba(0,0,0,0.5)
     .form-control
       background: transparent
       border-radius: 0
       border-width: 2px 0 2px 2px
+      border-color: #fff
       color: #fff
       font-size: 18px
       height: auto
       padding-right: 0
+    .form-control::-moz-placeholder
+      color: #fff
+    .form-control::-webkit-input-placeholder
+      color: #fff
     .input-group-addon
       background: transparent
       border-radius: 0
       border-width: 2px 2px 2px 0
+      border-color: #fff
       color: #fff
     .btn-enapparte-primary
       font-size: 18px
       height: 100%
       width: 100%
+
+.book-for-company
+  color: $light_color
+  float: left
+  font-size: 14px
+  left: 0
+  position: absolute
+  right: 0
+  text-align: center
+  top: 100%
 
 // Artist show description
 .artist-show-description
