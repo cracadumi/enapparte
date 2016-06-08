@@ -32,7 +32,7 @@
 //= require angular-bootstrap/ui-bootstrap-tpls.min
 //= require angular-devise/lib/devise-min
 //= require ng-focus-if/focusIf.min
-//= require angular-ui-router-tabs/src/ui-router-tabs
+//= require angular-ui-router-tabs
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker
 //= require angular-bootstrap-datetimepicker/src/js/datetimepicker.templates
 //= require angular-animate/angular-animate.min
@@ -46,6 +46,7 @@
 //= require fullcalendar
 //= require_tree .
 //= require intl-tel-input/build/js/intlTelInput.min
+//= require ngprogress/build/ngprogress.min
 
 
 I18n = {
@@ -54,7 +55,7 @@ I18n = {
   }
 }
 
-StripePublishableKey = 'pk_test_BZOxA28fNF4UBPQ0EMYTj5B0';
+StripePublishableKey = "<%= ENV['STRIPE_PUBLISHABLE_KEY']%>";
 
 $(function(){
   if(window.location.hash != "") {

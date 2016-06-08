@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root to: 'home#index'
-  devise_for :users, controllers: { confirmations: "confirmations" }
+  devise_for :users, controllers: { confirmations: "confirmations", omniauth_callbacks: 'omniauth_callbacks' }
 
   resources :users do
     post 'upload_photo', on: :collection
@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, :defaults => { :format => 'json' } do
         get 'search', on: :collection
+        post 'pictures', on: :collection
+        get 'list/pictures', to: 'users#list_pictures', on: :collection
+        delete 'picture', to: 'users#destroy_pictures', on: :collection
+        get 'artist', on: :collection
+        post 'profile_picture', to: 'users#profile_picture', on: :collection
+        delete 'disconnect-stripe', to: 'users#disconnect_stripe', on: :collection
       end
       resources :shows, :defaults => { :format => 'json' } do
         post 'toggle_active', on: :member
@@ -30,9 +36,12 @@ Rails.application.routes.draw do
       resources :bookings, :defaults => { :format => 'json' } do
         post 'change_status', on: :member
       end
-      resources :arts
+      resources :arts, :defaults => { :format => 'json' }
       resources :showcases
       resources :user_availabilities, path: :availabilities, only: [:index, :show, :create, :destroy]
+      resources :credit_cards, only: [:create] do
+        patch 'make_default', on: :member
+      end
     end
   end
 
@@ -45,6 +54,7 @@ Rails.application.routes.draw do
   patch '/dashboard/update', to: 'dashboard#update', as: 'update_dashboard'
   get '/dashboard/bookings', to: 'dashboard#bookings', as: 'bookings_dashboard'
   post '/contact', to: 'home#contact', as: 'home_contact'
+  post '/society', to: 'home#society', as: 'home_society'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,60 +1,108 @@
-.container[ng-controller="ShowPaymentController"]
-  .row
-    .col-md-3.col-md-offset-1
-      img[ng-src="{{ show.coverPicture.src }}"]
-      h3
-        | {{ show.title }}
-      p
-        | {{ booking.date | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}
-      table.table
-        tr
-          td.text-right
-            | Spectators
-          td.text-right
-            | {{ booking.spectators }}
-        tr
-          td.text-right
-            | Price
-          td.text-right
-            | {{ show.price | currency }}
-        tr.active
-          td.text-right : strong
-            | Total
-          td.text-right : strong
-            | {{ show.price * show.commission | currency }}
+.show-payment-page
+  .show-payment-cover
 
-      hr
-      p
-        a[href="#"]
-          | Cancellation policy
-      p
-        | N’hésitez pas à nous contacter si vous avez des questions: +334234234
+  .container[ng-controller="ShowPaymentController"]
+    .artist-show-card style="background-image: url({{::show.coverPicture.src}})"
+      .artist-show-card-title
+        span
+          | {{::show.title }}
+      .artist-info.clearfix
+        figure.artist-avatar
+          /img[src="{{user.profile_picture}}" alt="Profile Avatar"]
+          = image_tag 'img-3.jpg'
+        h1.artist-name
+          | {{user.fullName || 'Test User'}}
 
-    .col-md-7
-      form.form-horizontal[name="paymentForm" novalidate]
-        fieldset
-          legend= "A quelle adresse souhaitez-vous commander la performance?"
-          input-select-address[label="Select address" model="user.address" addresses="user.addresses" required]
-        .margin-bottom-40
-        fieldset
-          legend= "Payment"
-          input-select-payment[label="Select payment" model="user.payment" payment-methods="user.paymentMethods" card="card" required]
+    form.form-horizontal.row[name="paymentForm" novalidate]
+      aside.col-md-4
+        .show-payment-aside
+          dl.enapparte-dl
+            dt date:
+            dd
+              | {{ ::booking.date | amDateFormat:'dddd, MMMM Do YYYY' }}
+            dt time:
+            dd
+              | {{ ::booking.date | amDateFormat:'h:mm:ss a' }}
+            dt number of guests:
+            dd 30
+            dt price per guest:
+            dd $20
+            dt service fee:
+            dd $1.5
+            dt.coupon-code coupon code:
+            dd
+              .input-group
+                input.form-control.enapparte-input.has-no-border type='text' placeholder='Enter code'
+                .input-group-btn
+                  .btn.btn-enapparte-primary Ok
+          .total-price
+            | Total incluant frais de reservation
+            span
+              | {{ show.price * show.commission | currency }}
 
-        fieldset
-          legend= "Message to Performer"
-          input-text[label="Message" model="booking.message"]
+          hr
+          .cancellation
+            p Cancellation Policy
+            p.small
+              | 100% refund 2 days prior to the event. You'll get your
+              |  host's contact information immediately after the host
+              |  confirms your booking.
 
-        input-boolean[label="J’accepte les Conditions Générales d’Utilisation." model="booking.accepted" required]
-
-        hr
-
+      .col-md-8
         .row
-          .col-md-9.col-md-offset-3
-            button.btn.btn-success[type="submit" ng-click="bookingOrder(paymentForm)"]
-              i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="user.savePending || booking.savePending"]
-              '
-              | Booking
+          .col-md-6
+            label.select-label A quelle adresse souhaitez-vous commander la performance?
+            ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
+              ui-select-match [] {{user.address.fullAddress}}
+              ui-select-choices repeat='address in user.addresses track by $index'
+                div [] {{address.fullAddress}}
+          .col-md-6
+            label.select-label Choisissez votre moyen de paiement
+            ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
+              ui-select-match [] {{$select.payment}}
+              ui-select-choices repeat='payment in user.paymentMethods track by $index'
+                div [] {{payment}}
 
-  .margin-bottom-40
+        .show-payment-message.col-xs-12
+          .form-group
+            label.text-uppercase Message
+            input.form-control.enapparte-input [
+              type='text'
+              placeholder='Enter name'
+              ng-model='booking.username'
+            ]
+          .form-group
+            textarea.form-control.enapparte-input [
+              placeholder='Enter your message'
+              ng-model='booking.message'
+            ]
 
+      .col-xs-12
+        .terms-checkbox.checkbox
+          label
+            input [
+              name="terms_and_conditions"
+              ng-required="required"
+              type="checkbox"
+              ng-model="booking.accepted"
+            ]
+            | I have read and accept
+            a ui-sref='terms' : b &nbsp; Terms and Conditions.
 
+          .error-messages[ng-show="paymentForm.$submitted || paymentForm[elementId].$touched"]
+            span.help-block [
+              ng-show="paymentForm.terms_and_conditions.$error.required"
+            ]
+              | Please, check it
+      .show-payment-booknow.col-xs-12
+        button.btn.btn-enapparte-primary [
+          type="submit"
+          ng-click="bookingOrder(paymentForm)"
+        ]
+          i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="user.savePending || booking.savePending"]
+          '
+          | Book now
+        .booknow-hint
+          | You won’t be charged until performer
+          br
+          | accepts your booking request

@@ -17,6 +17,7 @@
     'stripe'
     'credit-cards'
     'ui.select'
+    'ngProgress'
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->
@@ -52,7 +53,7 @@
         .addClass("affix")
         .removeData("bs.affix")
     $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'home.contact']) && !Auth.isAuthenticated()
+      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
         $state.go 'home'
         Flash.showError $rootScope, "You need to sign in or sign up before continuing."
     ), 500
@@ -67,6 +68,74 @@
       templateUrl: 'root.html'
       controller: 'RootController'
 
+    .state 'artists',
+      url: '/artists'
+      abstract: true
+      template: '<ui-view />'
+
+    .state 'artists.show',
+      url: '/:id'
+      templateUrl: 'artists/show.html'
+      controller: 'ArtistsController'
+
+    .state 'about', {
+      url: '/about',
+      templateUrl: 'pages/about.html',
+      controller: 'RootController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'performer', {
+      url: '/performer',
+      templateUrl: 'pages/become_performer.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'faq', {
+      url: '/faq',
+      templateUrl: 'pages/faq.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'terms', {
+      url: '/terms',
+      templateUrl: 'pages/terms.html'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'concept', { url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController' }
+    .state 'concept.works', {
+      url: 'howItWorks',
+      onEnter: ['$uibModal', '$state', ($uibModal, $state)->
+        $uibModal.open
+          animation: true
+          templateUrl: 'pages/how_it_works.html'
+          controller: 'ConceptController'
+        .result
+        .finally ()->
+          $state.go '^'
+      ]
+    }
+    .state 'contact', {
+      url: '/contact',
+      templateUrl: 'pages/contact.html',
+      controller: 'ContactController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
+    .state 'society', {
+      url: '/society',
+      templateUrl: 'pages/society.html',
+      controller: 'SocietyController'
+      onEnter: ['$anchorScroll', ($anchorScroll)->
+        $anchorScroll(0)
+      ]
+    }
     .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
     .state 'shows.search', { url: '/:id/search', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
@@ -103,6 +172,8 @@
       .state 'dashboard.account.information', { url: '/information', templateUrl: 'dashboard/account/information.html' }
       .state 'dashboard.account.security', { url: '/security', templateUrl: 'dashboard/account/security.html' }
       .state 'dashboard.calendar', {url: '/:id/calendar', templateUrl: 'dashboard/calendar/index.html'}
+
+      .state 'dashboard.gallery', {url: '/gallery', templateUrl: 'dashboard/showcases/index.html'}
     .state 'home.signin', {
       url: 'signin',
       onEnter: ['$uibModal', '$state', ($uibModal, $state)->
@@ -122,18 +193,6 @@
           animation: true
           templateUrl: 'devise/sign_up.html'
           controller: 'SignUpController'
-        .result
-        .finally ()->
-          $state.go '^'
-      ]
-    }
-    .state 'home.contact', {
-      url: 'contact',
-      onEnter: ['$uibModal', '$state', ($uibModal, $state)->
-        $uibModal.open
-          animation: true
-          templateUrl: 'home/contact.html'
-          controller: 'ContactController'
         .result
         .finally ()->
           $state.go '^'

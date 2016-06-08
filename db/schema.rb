@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519064950) do
+ActiveRecord::Schema.define(version: 20160606180230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,9 +35,12 @@ ActiveRecord::Schema.define(version: 20160519064950) do
   create_table "arts", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
+    t.text     "main_description"
+    t.text     "italic_description"
+    t.text     "banner_url"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -63,6 +66,20 @@ ActiveRecord::Schema.define(version: 20160519064950) do
   add_index "bookings", ["payment_method_id"], name: "index_bookings_on_payment_method_id", using: :btree
   add_index "bookings", ["show_id"], name: "index_bookings_on_show_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "brand"
+    t.string   "country"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.string   "funding"
+    t.string   "last4"
+    t.string   "stripe_id"
+    t.boolean  "default",    default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string   "title"
@@ -157,15 +174,13 @@ ActiveRecord::Schema.define(version: 20160519064950) do
     t.datetime "published_at"
     t.integer  "cover_picture_id"
     t.integer  "user_id"
-    t.integer  "art_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.float    "rating"
     t.boolean  "price_person"
-    t.datetime "date_at"
+    t.integer  "min_attendees"
   end
 
-  add_index "shows", ["art_id"], name: "index_shows_on_art_id", using: :btree
   add_index "shows", ["cover_picture_id"], name: "index_shows_on_cover_picture_id", using: :btree
   add_index "shows", ["user_id"], name: "index_shows_on_user_id", using: :btree
 
@@ -202,13 +217,22 @@ ActiveRecord::Schema.define(version: 20160519064950) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.integer  "profile_picture_id"
+    t.string   "nickname"
+    t.string   "customer_id"
+    t.string   "stripe_pub_key"
+    t.string   "stripe_user_id"
+    t.string   "stripe_access_code"
     t.integer  "art_id"
   end
 
+  add_index "users", ["art_id"], name: "index_users_on_art_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["profile_picture_id"], name: "index_users_on_profile_picture_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "bookings", "payment_methods"
   add_foreign_key "payment_methods", "bookings"
   add_foreign_key "payment_methods", "users"
+  add_foreign_key "users", "arts"
 end

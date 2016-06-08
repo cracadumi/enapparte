@@ -1,44 +1,61 @@
 .row
   .page-header
-    h2= "Personal informations"
+    h2= "Profil"
   / = simple_form_for @user, html: { class: 'form-horizontal' }, url: update_dashboard_path do |f|
-  form.form-horizontal[name="profileForm"]
-    .row
-      .col-md-4
-        h4= "Your profile photo"
+  .row
+    .col-md-4
+      form.form-horizontal[name="profilePicForm"]
+        h4= "Photo de profil"
         .photo
-          img[ng-src="{{ user.picture.src }}"]
+          img[ng-src="{{ user.profilePicture.src }}"]
 
-        input-image-button[label="Change" model="user.picture" required]
+        input-profile-image-button[label="Changer" model="user.profilePicture" ng-hide="user.profilePicture.changed" required]
+        div[ng-show="user.profilePicture.changed"]
+          br
+          button.btn.btn-success[ng-click="saveProfilePicture()"] Save Picture
+          '
+          span[ng-show="loading"] Uploading...
+          br
+          br
 
-      .col-md-8
+    .col-md-8
+      form.form-horizontal[name="profileForm"]
         fieldset
-          legend= "Personal Info"
+          legend= "Informations personnelles"
           / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
-          input-string[label="First Name" model="user.firstname" required]
-          input-string[label="Surname" model="user.surname" required hint="Cette information ne sera partagée uniquement avec les utilisateur faisant partie d’une réservation confirmée"]
+          input-string[label="Prénom" model="user.firstname" required]
+          input-string[label="Nom" model="user.surname" required hint="Cette information ne sera partagée uniquement avec les utilisateur faisant partie d’une réservation confirmée"]
+          div[ng-if="user.role== 'performer' "]
+            input-string[label="Nom de scène" model="user.nickname"]
+            .user-moving-checkbox.col-sm-offset-3
+              .form-group.checkbox
+                input name="moving" ng-model="user.moving" type="checkbox"
+                label
+                  | Je me déplace en IDF
           input-date[label="Date of Birth" model="user.dob" required]
           .row
             .col-md-9.col-md-offset-3
               a[ui-sref="dashboard.account.security"] "Actualisez votre adresse email"
           input-email[label="Email" model="user.email" required disabled]
-          input-phone[label="Phone Number" model="user.phoneNumber" required hint="Le numéro permet aux hôtes et aux performeurs de se contacter. Rassurez-vous, cette information ne sera communiquée qu’une fois votre réservation confirmée!"]
+          input-phone[label="Téléphone" model="user.phoneNumber" required hint="Le numéro permet aux hôtes et aux performeurs de se contacter. Rassurez-vous, cette information ne sera communiquée qu’une fois votre réservation confirmée!"]
 
         fieldset.form_addresses
-          legend= "Addresses"
-          input-select-address[label="Select address" model="user.address" addresses="user.addresses" required]
+          legend= "Adresses"
+          input-select-address[label="Selectionner l'adresse" model="user.address" addresses="user.addresses" required]
 
         .margin-bottom-40
 
         fieldset
-          legend= "About You"
-          input-string[label="Activity" model="user.activity"]
+          legend= "A propos"
+          div[ng-if="user.role== 'performer' "]
+            input-select[label="Art" model="user.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
+          input-string[label="Activité" model="user.activity"]
           input-text[label="Bio" model="user.bio"]
           .form-group.languages-select
-            label.text-right.col-sm-3.control-label= "Languages"
+            label.text-right.col-sm-3.control-label= "Langages"
             .col-sm-9
-              ui-select ng-model="user.languageIds" tagging="" tagging-label="(custom 'new' label)" theme="bootstrap" title=("Choose a language") multiple=""
-                ui-select-match(placeholder="Select languages..."){{$item.title}}
+              ui-select ng-model="user.languageIds" tagging="" tagging-label="(custom 'new' label)" theme="bootstrap" title=("Choisissez un langage") multiple=""
+                ui-select-match(placeholder="Selectionner des langages..."){{$item.title}}
                 ui-select-choices repeat=("language.id as language in user.availableLanguages | filter: $select.search") 
                   div ng-bind-html=("language.title | highlight: $select.search") 
 
@@ -48,7 +65,7 @@
             button.btn.btn-success[ng-click="profileForm.$valid && userSave()"]
               i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="user.savePending"]
               '
-              | Save My Profile
+              | Enregistrer mon profil
 
   br
   br

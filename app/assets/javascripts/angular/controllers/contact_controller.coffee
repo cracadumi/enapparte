@@ -3,29 +3,36 @@ class ContactController extends @NGController
 
   @$inject: [
     '$scope'
-    '$uibModalInstance'
-    'Auth'
     'Flash'
     '$rootScope'
     '$http'
   ]
 
-  ok: ()=>
-    uibModalInstance = @uibModalInstance
+  init: ->
+    @scope.art = {}
+    @rootScope.rootPath = true
+    @scope.artSelect = @ArtSelect
+    @scope.endDate = null
+    @scope.contact = {}
+
+    $('#header')
+      .removeClass('not-fixed')
+      .addClass('affix-top')
+      .affix
+        offset:
+          top: 490
+    $("#content-main-page").addClass("full-main-content")
+
+  submitContact: ()=>
     flash = @Flash
-    user = @rootScope.currentUser
-    if user
-      data = {email: user.email, message: @scope.contact.message}
-    else
-      data = {email: @scope.contact.email, message: @scope.contact.message}
+    scope = @scope
+
     @http(
       method: 'POST'
       url: '/contact'
-      data: {contact:@scope.contact}).then ((response) ->
-      console.log response
-      uibModalInstance.close(true)
-      flash.showSuccess @scope, 'Contact mail has been sent successfully.'
+      data: {contact:scope.contact}).then ((response) ->
+      flash.showSuccess scope, 'Contact mail has been sent successfully.'
+      scope.contact = {}
       return
     ), (response) ->
-      console.log 'test'
       return

@@ -1,29 +1,4 @@
-#slider.carousel.home-carousel.slide[data-ride="carousel" style="background:url(#{image_url('main_background.jpg')}) no-repeat center center; background-size:cover;"]
-  .carousel-inner[style="text-align:center;height:400px"]
-    .item.relative.discovery-card.active
-      .va-container.va-container-v.va-container-h
-        p.va-middle.text-center.text-contrast.text-reinvent-desc
-          | Il est temps de réinventer
-          br
-          |  vos évènements
-          br
-  #search-bar-home
-    .row
-      .col-sm-4.input-search
-        ui-select.select-search-home[ng-model="art.selected", theme='bootstrap']
-          ui-select-match[placeholder='Talent recherché'] {{$select.selected.title}}
-          ui-select-choices[repeat="art as art in arts"]
-            div[ng-bind-html="art.title"]
-      .col-sm-4.input-search
-        #datetimepickersearchhome.input-group.date
-          input.form-control.dt-calendar type="text" /
-          span.input-group-addon.btn-search-time
-            span.glyphicon.glyphicon-calendar
-      .col-sm-4.input-search
-        a.btn.btn-lg.btn-classic.chercher[ng-click="beginSearch()"]
-          |  Chercher
-  span[scroll-on-click]
-    = image_tag 'arrow.png', class: "anchor-arrow"
+= render 'angular/pages/header_search'
 .relative[itemscope itemtype="//schema.org/WebPage"]
   aside.aside_bg
     .container
@@ -34,7 +9,7 @@
       .row
         .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
           p.main-description-header[style="text-align:justify;"]
-            | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités
+            | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
       .row
         .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
           .row
@@ -57,7 +32,7 @@
               | Découvrez tous nos performeurs
 aside#how-it-works.site-how-it-works.text-center
   h2.title[style="padding-bottom: 40px; font-family: FuturaLT !important;"]
-    | COMMENT CA MARCHE?
+    | COMMENT CA MARCHE ?
   .container
     .row.main-description
       .col-sm-4.text-center
@@ -78,7 +53,7 @@ aside#how-it-works.site-how-it-works.text-center
         h4.feature_header
           |  Partagez
         p.features_content
-          |  Le jour de votre événement,le performeur que vous aurez choisi apporte son matériel et s’adapte à votre chez-vous. Vous n’avez plus qu’à profiter de cette expérience unique avec vos proches !
+          |  Le jour de votre événement, le performeur que vous aurez choisi apporte son matériel et s’adapte à votre chez-vous. Vous n’avez plus qu’à profiter de cette expérience unique avec vos proches !
 
   .container.pre-footer
     .row
@@ -86,20 +61,21 @@ aside#how-it-works.site-how-it-works.text-center
         .row
           .col-xs-12.col-sm-6
             .discovery-card
-              a[ui-sref="home.contact"]
-                img src=image_url('nouscontacter.jpg') /
+              a[ui-sref="contact"]
+                img src=image_url('nouscontacter.png') /
           .col-xs-12.col-sm-6
             .discovery-card
-              img src=image_url('concept.jpg') /
+              img src=image_url('concept.png') /
     .row
       .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-        img src=image_url('society.jpg') /
+        a[ui-sref="society"]
+          img src=image_url('society.png') /
 /  .container-fluid.pre-footer
 /    .row
 /      .col-sm-6.text-center.image-left
-/        img src=image_url('nouscontacter.jpg') /
+/        img src=image_url('nouscontacter.png') /
 /      .col-sm-6.text-center.image-right
-/        img src=image_url('concept.jpg') /
+/        img src=image_url('concept.png') /
 /  .container-fluid
 /    .row
-/      img src=image_url('society.jpg') /
+/      img src=image_url('society.png') /

@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'postmark-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'high_voltage'
 gem 'slim-rails'
@@ -41,6 +41,7 @@ gem 'js-routes'
 gem 'fullcalendar-rails'
 gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'maruku'
+gem 'omniauth-stripe-connect'
 
 group :production do
   gem 'pg'
@@ -79,6 +80,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
   gem 'slim_lint'
+  gem 'letter_opener'
 end
 
 group :test do

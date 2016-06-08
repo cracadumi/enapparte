@@ -54,9 +54,22 @@ end
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  profile_picture_id     :integer
+#  nickname               :string
+#  customer_id            :string
+#  stripe_pub_key         :string
+#  stripe_user_id         :string
+#  stripe_access_code     :string
+#  art_id                 :integer
 #
 # Indexes
 #
+#  index_users_on_art_id                (art_id)
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_profile_picture_id    (profile_picture_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_f005fe78ac  (art_id => arts.id)
 #

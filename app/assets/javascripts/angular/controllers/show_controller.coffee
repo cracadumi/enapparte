@@ -10,9 +10,9 @@ class ShowController extends @NGController
     '$sce',
     '$filter',
     'ShowArt',
-    'ShowSearch'
     '$stateParams'
     '$state'
+    'ngProgressFactory'
   ]
 
   init: ->
@@ -44,6 +44,8 @@ class ShowController extends @NGController
 
     @scope.$watch 'show.endsAt', (newValue, oldValue)=>
       @scope.show.startsAt = newValue  if @scope.show.startsAt > newValue
+
+    @scope.progressbar = @ngProgressFactory.createInstance()
 
   load: ()=>
     @scope.tabsClickable = true
@@ -77,10 +79,31 @@ class ShowController extends @NGController
   validate: (form)->
     # FIXME: change to switch
     return form.$valid  if @scope.step == 1
-    return @scope.show.pictures.length > 0  if @scope.step == 2
-    return true  if @scope.step == 3 && @scope.show.pictures.filter((picture)->
+    return @hasPicture() if @scope.step == 2
+    return true  if @scope.step == 3 && @pictureIsSelected()
+
+  hasPicture: ->
+    @scope.show.pictures.length > 0
+
+  pictureIsSelected: ->
+    @scope.show.pictures.filter((picture)->
       picture.selected
-    ).length > 0
+    ).length > 0  
+
+  finishValidate: ->
+    unless @scope.showForm.$valid
+      @showError(1, 'Some fields have empty or wrong values')
+    else unless @hasPicture()
+      @showError(2, 'You need to add a picture')
+    else unless @pictureIsSelected()
+      @showError(3, 'You need to select a picture') 
+    else 
+      true
+
+  showError: (step, message)-> 
+    @scope.step = step
+    @Flash.showNotice(@scope, message)
+    false    
 
   removePicture: (index)->
     @scope.show.pictures[index]._destroy = 1
@@ -128,15 +151,18 @@ class ShowController extends @NGController
 
   # finish
   finish: ()=>
-    @scope.show.pending = true
-    @scope.show
-      .save()
-      .then ()=>
-        @scope.show.pending = false
-        # redirect to
-        @state.go 'dashboard.calendar',
-          id: @scope.show.id
-        @Flash.showSuccess @scope, 'Created new show successfully.'
+    @scope.progressbar.start()
+    if @finishValidate()
+      @scope.show.pending = true
+      @scope.show
+        .save()
+        .then ()=>
+          @scope.show.pending = false
+          # redirect to
+          @state.go 'dashboard.calendar',
+            id: @scope.show.id
+          @Flash.showSuccess @scope, 'Created new show successfully.'
+          @scope.progressbar.complete()
 
   tabClick: (step)->
     if @scope.tabsClickable

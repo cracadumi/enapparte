@@ -1,0 +1,63 @@
+class ArtistsController extends @NGController
+  @register window.App, 'ArtistsController'
+
+  @$inject: [
+    '$scope',
+    '$sce'
+    '$uibModal',
+    '$stateParams',
+    'User',
+    'Art'
+  ]
+
+  init: ->
+
+    user_id = @stateParams.id
+    user = new @User
+    user
+      .artist(user_id)
+      .then (artist)=>
+        @scope.user = artist
+        @scope.slides = @scope.user.pictures
+        @scope.activeSlideIdx = 0
+        musics = @scope.user.showcases.filter (showcase) -> showcase.kind == 'Soundcloud'
+        @scope.music = musics[0]
+        @scope.videos = @scope.user.showcases.filter (showcase) -> showcase.kind != 'Soundcloud'
+        @scope.bannerStyle = 
+          'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
+
+        console.log @scope.user
+    @scope.trustAsHtml = @sce.trustAsHtml
+
+    @scope.openGallery = (idx) =>
+      @scope.activeSlideIdx = idx
+
+      modal = @uibModal.open
+        templateUrl: 'artists/gallery-modal-tpl.html'
+        scope: @scope
+        size: 'lg'
+        windowTopClass: 'artist-gallery-modal'
+
+  getEmbedUrl: (video_url) =>
+    embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)
+    if embed_url
+      return @sce.trustAsHtml '<iframe frameborder="0" height="270" width="480" src="'+embed_url+'"></iframe>'
+    ''
+
+  getDailyEmbedUrl: (url) =>
+    if !url
+      return ''
+    m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
+    if m != null
+      if m[3] != undefined
+        return "https://www.dailymotion.com/embed/video/"+m[3]
+      return "https://www.dailymotion.com/embed/video/"+m[2]
+    null
+
+  getYoutubeEmbedUrl: (url) =>
+    if !url
+      return ''
+    match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
+    if match && match[7].length == 11
+        return "https://www.youtube.com/embed/"+match[7];
+    null

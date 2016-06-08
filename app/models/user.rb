@@ -1,16 +1,17 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:stripe_connect]
 
   enum gender: { male: 0, female: 1, other: 2 }
   enum role: { admin: 0, user: 1, performer: 2 }
 
-  has_one :picture, as: :imageable
+  belongs_to :profile_picture, class_name: 'Picture'
+  has_many :pictures, as: :imageable
   has_many :addresses
   has_many :bookings, dependent: :destroy
   has_many :shows, dependent: :destroy
   belongs_to :art
-  has_many :ratings, through: :shows, source: :ratings
+  has_many :ratings, source: :ratings
   has_many :show_bookings, through: :shows, source: :bookings
   has_many :reviews, through: :show_bookings
   has_many :payment_methods
@@ -18,10 +19,8 @@ class User < ActiveRecord::Base
   has_many :languages_user
   has_many :languages, through: :languages_user
   has_many :availabilities, class_name: 'UserAvailability', dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
 
-  accepts_nested_attributes_for :picture, reject_if: proc { |attrs|
-    attrs['src'].blank? || attrs['src'].match(/^http:/)
-  }
   accepts_nested_attributes_for :addresses, reject_if: :reject_addresses
   accepts_nested_attributes_for :payment_methods,
                                 reject_if: :reject_payment_methods
@@ -35,19 +34,19 @@ class User < ActiveRecord::Base
   validate :user_is_performer, if: 'art.present?'
 
   before_save :deactivate_shows
-  before_save :check_picture_exists
+  before_save :check_profile_picture_exists
+  after_create :send_welcome_email
 
   scope :performers, -> { where role: roles[:performer] }
 
-  def picture=(file)
-    build_picture(image: file)
-  end
+  attr_accessor :unavailable
 
   def sent_reviews
     bookings.includes(:review).inject([]) do |reviews, b|
       reviews << b.review if b.review
     end
   end
+
 
   def full_name
     "#{firstname} #{surname}"
@@ -73,14 +72,36 @@ class User < ActiveRecord::Base
     [ratings.average(:value).to_i, 5].min
   end
 
+  def available_languages
+    @available_languages = []
+    languages.each do |language|
+      @available_languages.push(language.title)
+    end
+    @available_languages.join(', ')
+  end
+
   def self.available_languages
     Language.select(:title, :id)
   end
 
+  def image
+    pictures.first.try(:image).try(:url, :thumb) || Picture.default_url(:thumb)
+  end
+
+  def active_shows
+    shows.where(active: true)
+  end
+
+  def pictures=(array)
+    array.each do |file|
+      pictures.build(image: file)
+    end
+  end
+
   private
 
-  def check_picture_exists
-    build_picture if picture.nil?
+  def check_profile_picture_exists
+    self.profile_picture = build_profile_picture if self.profile_picture.nil?
   end
 
   def reject_addresses(attrs)
@@ -96,8 +117,13 @@ class User < ActiveRecord::Base
     shows.update_all(active: false) unless phone_number.present?
   end
 
+
   def user_is_performer
     errors.add(:art, 'A user should be performer') unless performer?
+  end
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_later
   end
 end
 
@@ -131,9 +157,22 @@ end
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  profile_picture_id     :integer
+#  nickname               :string
+#  customer_id            :string
+#  stripe_pub_key         :string
+#  stripe_user_id         :string
+#  stripe_access_code     :string
+#  art_id                 :integer
 #
 # Indexes
 #
+#  index_users_on_art_id                (art_id)
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_profile_picture_id    (profile_picture_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_f005fe78ac  (art_id => arts.id)
 #

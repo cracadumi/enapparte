@@ -120,7 +120,33 @@ angular
         if scope.selectedOption
           scope.model = scope.selectedOption.value
 
-  .directive 'inputImage', ()->
+  .directive 'inputSelectGeneral', ()->
+    require: '^form'
+    strict: 'E'
+    templateUrl: 'directives/input_select_general.html'
+    scope: {
+      model: '='
+    }
+    replace: true
+    link: (scope, element, attrs, form)->
+      scope.form = form
+      scope.label = attrs.label
+      scope.elementId = 'input_' + scope.$id
+      scope.options = element.data('collection')
+      scope.required = attrs.required != undefined
+
+      scope.$watch 'model', (newValue, oldValue)->
+        if newValue && !scope.selectedOption
+          for option in scope.options
+            if option.value == newValue
+              scope.selectedOption = option
+
+      scope.$watch 'selectedOption', (newValue)->
+        if scope.selectedOption
+          scope.model = scope.selectedOption.value
+
+
+  .directive 'inputImage', ['Flash', (Flash)->
     require: '^form'
     strict: 'E'
     templateUrl: 'directives/input_image.html'
@@ -133,18 +159,30 @@ angular
       scope.elementId = 'input_' + scope.$id
       scope.required = attrs.required != undefined
       scope.model = []  unless scope.model
-
+      fileTypes = [
+        'jpg'
+        'jpeg'
+        'png'
+        'gif'
+        'bmp'
+        'tiff'
+      ]
       element.bind 'change', (changeEvent) ->
         for file in changeEvent.target.files
-          reader = new FileReader()
+          extension = file.name.split('.').pop().toLowerCase()
+          isSuccess = fileTypes.indexOf(extension) > -1
+          if isSuccess
+            reader = new FileReader()
+            reader.onload = (loadEvent) ->
+              scope.$apply ->
+                scope.model.push { src: loadEvent.target.result }
+            reader.readAsDataURL file
+          else
+            Flash.showError(scope, "Please select only image!")
+  ]
 
-          reader.onload = (loadEvent) ->
-            scope.$apply ->
-              scope.model.push { src: loadEvent.target.result }
 
-          reader.readAsDataURL file
-
-  .directive 'inputImageButton', ()->
+  .directive 'inputProfileImageButton', ['Flash', (Flash)->
     require: '^form'
     strict: 'E'
     templateUrl: 'directives/input_image_button.html'
@@ -156,17 +194,65 @@ angular
       scope.label = attrs.label
       scope.elementId = 'input_' + scope.$id
       scope.required = attrs.required != undefined
+
+      fileTypes = [
+        'jpg'
+        'jpeg'
+        'png'
+        'gif'
+        'bmp'
+        'tiff'
+      ]
       element.bind 'change', (changeEvent) ->
         for file in changeEvent.target.files
-          reader = new FileReader()
+          extension = file.name.split('.').pop().toLowerCase()
+          isSuccess = fileTypes.indexOf(extension) > -1
+          if isSuccess
+            reader = new FileReader()
+            reader.onload = (loadEvent) ->
+              scope.$apply ->
+                scope.model = { src: loadEvent.target.result, changed: true }
+            reader.readAsDataURL file
+          else
+            Flash.showError(scope, "Please select only image!")
+  ]
 
-          reader.onload = (loadEvent) ->
-            scope.$apply ->
-              scope.model = { src: loadEvent.target.result }
 
-          reader.readAsDataURL file
+  .directive 'inputImageButton', ['Flash', (Flash)->
+    require: '^form'
+    strict: 'E'
+    templateUrl: 'directives/input_image_button.html'
+    scope:
+      model: '='
+    replace: true
+    link: (scope, element, attrs, form)->
+      scope.form = form
+      scope.label = attrs.label
+      scope.elementId = 'input_' + scope.$id
+      scope.required = attrs.required != undefined
+      fileTypes = [
+        'jpg'
+        'jpeg'
+        'png'
+        'gif'
+        'bmp'
+        'tiff'
+      ]
 
-  .directive 'inputImagesButton', ()->
+      element.bind 'change', (changeEvent) ->
+        for file in changeEvent.target.files
+          extension = file.name.split('.').pop().toLowerCase()
+          isSuccess = fileTypes.indexOf(extension) > -1
+          if isSuccess
+            reader = new FileReader()
+            reader.onload = (loadEvent) ->
+              scope.$apply ->
+                scope.model = { src: loadEvent.target.result }
+            reader.readAsDataURL file
+          else
+            Flash.showError(scope, "Please select only image!")
+  ]
+  .directive 'inputImagesButton', ['Flash', (Flash)->
     require: '^form'
     strict: 'E'
     templateUrl: 'directives/input_images_button.html'
@@ -179,21 +265,30 @@ angular
       scope.elementId = 'input_' + scope.$id
       scope.required = attrs.required != undefined
       scope.model = []  unless scope.model
-      types = /(\.|\/)(jpe?g|png)$/i
       scope.msgValidate = false
+      fileTypes = [
+        'jpg'
+        'jpeg'
+        'png'
+        'gif'
+        'bmp'
+        'tiff'
+      ]
+
       element.bind 'change', (changeEvent) ->
         for file in changeEvent.target.files
-          if types.test file.type || types.test file.name
+          extension = file.name.split('.').pop().toLowerCase()
+          isSuccess = fileTypes.indexOf(extension) > -1
+          if isSuccess
             reader = new FileReader()
-
             reader.onload = (loadEvent) ->
               scope.$apply ->
                 scope.model.push { src: loadEvent.target.result }
                 $('.msg-validate-photo').hide()
             reader.readAsDataURL file
           else
-            $('.msg-validate-photo').show()
-
+            Flash.showError(scope, "Please select only image!")
+  ]
 
   .directive 'inputTime', ()->
     require: '^form'

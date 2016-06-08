@@ -32,9 +32,14 @@ module Api
       EOS
 
       def search
-        @users = UserSearchService.new(role: :performer,
-                                       art_id: params[:art_id])
-                                  .results
+        @users = UserSearchService.new(
+                                        role: :performer,
+                                        art_id: params[:art_id],
+                                        end_date: params[:end_date],
+                                        start_date: params[:start_date],
+                                        price_min: params[:price0],
+                                        price_max: params[:price1]
+                                      ).results
         respond_with :api, :v1, @users
       end
 
@@ -117,6 +122,11 @@ module Api
         respond_with :api, :v1, @user
       end
 
+      def artist
+        @user = User.find(params[:id])
+        respond_with :api, :v1, @user
+      end
+
       api! 'Update user'
       description <<-EOS
         ## Description
@@ -167,12 +177,49 @@ module Api
         respond_with :api, :v1, @user
       end
 
+      def pictures
+        @picture = current_user.pictures.create(picture_params)
+        respond_with :api, :v1, @picture
+      end
+
+      def list_pictures
+        @pictures = current_user.pictures
+        respond_with :api, :v1, @pictures
+      end
+
+      def destroy_pictures
+        @picture = current_user.pictures.find_by!(id: params[:id])
+        @picture.destroy
+        respond_with :api, :v1, @picture
+      end
+
+      def profile_picture
+        @user = current_user
+        @user.profile_picture.destroy if @user.profile_picture
+        @user.profile_picture = Picture.create(picture_params)
+        @user.save
+        respond_with :api, :v1, @user
+      end
+
+      api! 'Disconnect stripe for performers'
+      description <<-EOS
+        ## Description
+        Disconnect connected stripe account from performer.
+        Returns user object.
+      EOS
+
+      def disconnect_stripe
+        @user = current_user
+        ManageUserStripe.new(@user).disconnect_stripe
+        respond_with :api, :v1, @user
+      end
+
       private
 
       def user_params
         params.require(:user)
-              .permit(:gender, :firstname, :surname, :dob, :phone_number, :bio,
-                      :activity, :email, :password, :password_confirmation,
+              .permit(:gender, :firstname, :surname, :nickname, :moving, :dob, :phone_number, :bio,
+                      :activity, :email, :password, :password_confirmation, :art_id,
                       addresses_attributes: [:id, :country, :latitude, :street,
                                              :city, :longitude, :is_primary,
                                              :state, :postcode],
@@ -181,6 +228,10 @@ module Api
                                                    :last4],
                       language_ids: [], showcases_attributes: [:id, :kind, :url]
                      )
+      end
+
+      def picture_params
+        params.require(:user).permit(:src)
       end
     end
   end
