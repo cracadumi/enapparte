@@ -29,8 +29,11 @@
       uib-tabset justified="true" class="artist-tabs"
         uib-tab heading="GALLERY"
           .artist-gallery.four-in-row
-            .artist-gallery-item ng-repeat='slide in user.pictures track by $index' ng-click='openGallery($index)'
-              img ng-src='{{slide.src}}'
+            .artist-gallery-item [
+              ng-repeat='slide in user.pictures track by $index'
+              ng-click='openGallery(user.pictures, $index)'
+            ]
+              img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
         uib-tab heading="MUSIC"
           .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
         uib-tab heading="VIDEO"
@@ -81,8 +84,11 @@
       .col-xs-12.col-md-5
         h4 Gallery
         .artist-gallery.three-in-row
-          .artist-gallery-item[ng-repeat="picture in show.pictures"]
-            img ng-src='{{picture.src}}'
+          .artist-gallery-item [
+            ng-repeat="picture in show.pictures"
+            ng-click='openGallery(show.pictures, $index)'
+          ]
+            img ng-src='{{picture.src}}' alt='show-picture-{{$index + 1}}'
       .col-xs-12.col-md-7
         h4 Description:
         .artist-show-description

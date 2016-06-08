@@ -18,24 +18,23 @@ class ArtistsController extends @NGController
       .artist(user_id)
       .then (artist)=>
         @scope.user = artist
-        @scope.slides = @scope.user.pictures
         @scope.activeSlideIdx = 0
         musics = @scope.user.showcases.filter (showcase) -> showcase.kind == 'Soundcloud'
         @scope.music = musics[0]
         @scope.videos = @scope.user.showcases.filter (showcase) -> showcase.kind != 'Soundcloud'
-        @scope.bannerStyle = 
+        @scope.bannerStyle =
           'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
 
         console.log @scope.user
     @scope.trustAsHtml = @sce.trustAsHtml
 
-    @scope.openGallery = (idx) =>
+    @scope.openGallery = (slides, idx) =>
+      @scope.slides = slides
       @scope.activeSlideIdx = idx
 
       modal = @uibModal.open
         templateUrl: 'artists/gallery-modal-tpl.html'
         scope: @scope
-        size: 'lg'
         windowTopClass: 'artist-gallery-modal'
 
   getEmbedUrl: (video_url) =>

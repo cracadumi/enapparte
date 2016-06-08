@@ -1,6 +1,7 @@
+a.close ng-click='$close()' &times;
 uib-carousel active='activeSlideIdx' no-transition='true'
   uib-slide [
     ng-repeat="slide in slides track by $index"
     index="$index"
   ]
-    img ng-src="{{slide.image}}" alt="{{slide.title}}"
+    img ng-src="{{slide.src}}" alt="slide-{{$index + 1}}"
