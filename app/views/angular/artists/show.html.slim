@@ -63,15 +63,26 @@
           .price ${{show.price}}
         .artist-show-card-actions
           .transparent-control
-            .input-group
-              input.form-control type='text' placeholder='Select date'
+            .input-group.search-datetimepicker [input-select-date]
+              input.form-control [
+                type='text'
+                placeholder='Select date'
+                ng-model='booking.date'
+              ]
               .input-group-addon
                 .glyphicon.glyphicon-calendar
-          .transparent-control
-            .input-group
-              input.form-control type='text' placeholder='Select time'
+          .transparent-control.enapparte-timepicker
+            .input-group [uib-dropdown auto-close='outsideClick']
+              input.form-control [
+                type='text'
+                placeholder='Select time'
+                readonly='true'
+                ng-value="booking.time | date:'shortTime'"
+              ]
               .input-group-addon
-                .glyphicon.glyphicon-dashboard
+                .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
+              div [uib-dropdown-menu]
+                uib-timepicker ng-model='booking.time' hour-step="1" minute-step="15"
           .transparent-control
             .input-group
               input.form-control type='text' placeholder='Number of guests'

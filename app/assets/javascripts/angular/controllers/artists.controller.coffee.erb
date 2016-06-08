@@ -12,6 +12,8 @@ class ArtistsController extends @NGController
 
   init: ->
 
+    @scope.booking = {}
+
     user_id = @stateParams.id
     user = new @User
     user
