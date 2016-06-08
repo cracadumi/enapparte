@@ -12,7 +12,8 @@ json.cover_picture do
   json.src @show.cover_picture.try(:src)
 end
 
-json.user do
-  json.merge! @show.user.try(:attributes)
-  json.full_name @show.user.try(:full_name)
+if @show.user.present?
+  json.user do
+    json.partial! 'api/v1/users/user', user: @show.user
+  end
 end
