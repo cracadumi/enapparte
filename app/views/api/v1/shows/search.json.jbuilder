@@ -14,7 +14,6 @@ json.array!(@shows.includes(:cover_picture, :pictures, :user)) do |show|
   end
 
   json.user do |json|
-    json.merge! show.user.try(:attributes)
-    json.full_name show.user.try(:full_name)
-  end if show.cover_picture
+    json.partial! 'api/v1/users/user', user: show.user
+  end if show.user
 end

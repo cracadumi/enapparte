@@ -12,8 +12,6 @@ json.cover_picture do
   json.src @show.cover_picture.try(:src)
 end
 
-if @show.user.present?
-  json.user do
-    json.partial! 'api/v1/users/user', user: @show.user
-  end
-end
+json.user do
+  json.partial! 'api/v1/users/user', user: @show.user
+end if @show.user
