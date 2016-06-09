@@ -35,7 +35,14 @@ ActiveAdmin.register User do
       f.input :addresses
       f.input :bookings
       f.input :shows
+
       f.input :profile_picture, collection: (Picture.all.last(20).reverse).map { |i| [ "#{i.id} : #{i.title}", i.id] }
+      li id: 'profile_picture' do
+        div class: 'inline-hints' do
+          render(partial: 'active_admin/picture', locals: { object: f.object, page: 'edit' })
+        end
+      end
+
       f.input :role, as: :select, collection: User.roles.keys
 
       f.input :pictures, as: :file, input_html: { multiple: true }
