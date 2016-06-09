@@ -12,7 +12,7 @@
         input-profile-image-button[label="Changer" model="user.profilePicture" ng-hide="user.profilePicture.changed" required]
         div[ng-show="user.profilePicture.changed"]
           br
-          button.btn.btn-success[ng-click="saveProfilePicture()"] Save Picture
+          button.btn.btn-enapparte-primary[ng-click="saveProfilePicture()"] Save Picture
           '
           span[ng-show="loading"] Uploading...
           br
@@ -56,18 +56,13 @@
             .col-sm-9
               ui-select ng-model="user.languageIds" tagging="" tagging-label="(custom 'new' label)" theme="bootstrap" title=("Choisissez un langage") multiple=""
                 ui-select-match(placeholder="Selectionner des langages..."){{$item.title}}
-                ui-select-choices repeat=("language.id as language in user.availableLanguages | filter: $select.search") 
-                  div ng-bind-html=("language.title | highlight: $select.search") 
+                ui-select-choices repeat=("language.id as language in user.availableLanguages | filter: $select.search")
+                  div ng-bind-html=("language.title | highlight: $select.search")
 
 
         .form-actions
           .pull-right
-            button.btn.btn-success[ng-click="profileForm.$valid && userSave()"]
+            button.btn.btn-enapparte-primary[ng-click="profileForm.$valid && userSave()"]
               i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="user.savePending"]
               '
               | Enregistrer mon profil
-
-  br
-  br
-  br
-  br
