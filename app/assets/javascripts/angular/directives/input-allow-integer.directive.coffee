@@ -3,7 +3,7 @@
 'use strict;'
 
 angular.module 'enapparte'
-  .directive 'validateInteger', [
+  .directive 'inputAllowInteger', [
     () ->
       restrict: 'A'
       link: (scope, element) ->
