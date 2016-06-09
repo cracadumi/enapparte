@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :firstname, :surname, :gender, :bio,
+  permit_params :email, :password, :firstname, :surname, :nickname, :gender, :bio,
                 :phone_number, :moving, :dob, :activity, :role, :art_id, :profile_picture_id,
                 address_ids: [], booking_ids: [], show_ids: [], rating_ids: [], :pictures => [],
                 language_ids: [], showcases_attributes: [:id, :kind, :url],
@@ -26,6 +26,7 @@ ActiveAdmin.register User do
       f.input :password if f.object.new_record?
       f.input :firstname
       f.input :surname
+      f.input :nickname, label: 'Nom de scène (nickname)'
       f.input :gender, as: :select, collection: User.genders.keys
       f.input :bio
       f.input :phone_number
