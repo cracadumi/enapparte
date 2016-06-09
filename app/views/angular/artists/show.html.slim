@@ -51,7 +51,9 @@
           dl.enapparte-dl
             dt average rating:
             dd
-              .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<show.rating, 'glyphicon-star-empty': $index+1>show.rating}"]
+              .glyphicon [
+                ng-repeat="n in [].constructor(5) track by $index"
+                ng-class="{'glyphicon-star': $index<show.rating, 'glyphicon-star-empty': $index+1>show.rating}"]
             dt duration of show:
             dd
               | {{show.duration}}
@@ -85,7 +87,12 @@
                 uib-timepicker ng-model='booking.time' hour-step="1" minute-step="15"
           .transparent-control
             .input-group
-              input.form-control type='text' placeholder='Number of guests'
+              input.form-control [
+                type='text'
+                placeholder='Number of guests'
+                ng-model='booking.numberOfGuests'
+                validate-integer=''
+              ]
               .input-group-addon
                 .glyphicon.glyphicon-user
           .transparent-control
@@ -111,6 +118,8 @@
               | {{review.username}}
               span.time-ago &nbsp; - 5 hours ago
             .comment-rating
-              .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<review.rating, 'glyphicon-star-empty': $index+1>review.rating}"]
+              .glyphicon [
+                ng-repeat="n in [].constructor(5) track by $index"
+                ng-class="{'glyphicon-star': $index<review.rating, 'glyphicon-star-empty': $index+1>review.rating}"]
             .comment-text
               | {{review.review}}
