@@ -23,9 +23,14 @@ li div.inline-hints {
 
 div.image-view {
   display:inline-block;
+  position: relative;
 }
 
 div.image-view.preview {
   background-color: #B5BDD3;
 }
-
+div.image-view .cover_picture_checkbox {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+}

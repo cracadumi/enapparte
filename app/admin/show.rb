@@ -1,27 +1,28 @@
 ActiveAdmin.register Show do
-  permit_params :title, :length, :surface, :description, :price, :max_spectators, :active, :user_id,
+  permit_params :title, :length, :surface, :description, :price, :max_spectators, :min_attendees, :active, :user_id,
     :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at, :cover_picture_id,
     :ends_at, :booking_ids => [], :pictures => []
 
   form do |f|
     f.inputs "Show" do
+      f.semantic_errors *f.object.errors.keys
       f.input :title
       f.input :length
       f.input :surface
       f.input :description
       f.input :price
       f.input :max_spectators
+      f.input :min_attendees
       f.input :starts_at
       f.input :ends_at
       f.input :active
       f.input :published_at, as: :just_datetime_picker
       f.input :user
       f.input :bookings
-      f.input :cover_picture, collection: (Picture.all.last(20).reverse).map { |i| [ "#{i.id} : #{i.title}", i.id] }
       f.input :pictures, as: :file, input_html: { multiple: true }
       li id: 'pictures' do
         div class: 'inline-hints' do
-          render(partial: 'active_admin/pictures', locals: { object: f.object, page: 'edit' })
+          render(partial: 'active_admin/show_pictures', locals: { f: f, object: f.object, page: 'edit' })
         end
       end
     end
