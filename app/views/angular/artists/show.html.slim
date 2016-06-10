@@ -48,7 +48,7 @@
   .row
     h1.my-show-heading
       b MY SHOW
-    div[ng-repeat="show in user.shows"]
+    .artist-show-entry.clearfix[ng-repeat="show in user.shows"]
       .artist-show-card.col-xs-12.col-md-12[style="background-image : url({{show.coverPicture}})"]
         .artist-show-card-title
           span

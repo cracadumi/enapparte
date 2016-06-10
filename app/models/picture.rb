@@ -1,8 +1,8 @@
 class Picture < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
-  
+
   # PaperClip
-  has_attached_file :image, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/picture/:style/missing.png"
+  has_attached_file :image, styles: { large: "1175x400#", medium: "300x300#", thumb: "100x100#" }, default_url: "/images/picture/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   attr_accessor :src
