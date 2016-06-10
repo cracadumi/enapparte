@@ -18,6 +18,7 @@
     'credit-cards'
     'ui.select'
     'ngProgress'
+    'angular-bind-html-compile'
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->

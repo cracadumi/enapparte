@@ -24,6 +24,7 @@
     "bootstrap-fileinput": "latest",
     "angular-ui-select": "latest",
     "angular-bootstrap-select": "git://github.com/joaoneto/angular-bootstrap-select",
-    "ngprogress": "latest"
+    "ngprogress": "latest",
+    "angular-bind-html-compile": "latest"
   }
 }
