@@ -27,17 +27,23 @@
         | {{user.bio}}
     .col-md-6
       uib-tabset justified="true" class="artist-tabs"
-        uib-tab heading="GALLERY"
+        uib-tab heading="GALLERY" ng-if='user.pictures.length'
           .artist-gallery.four-in-row
             .artist-gallery-item [
               ng-repeat='slide in user.pictures track by $index'
               ng-click='openGallery(user.pictures, $index)'
             ]
               img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
-        uib-tab heading="MUSIC"
+        uib-tab heading="MUSIC" ng-if='music.url'
           .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
-        uib-tab heading="VIDEO"
-          .thumbnail[ng-bind-html="getEmbedUrl(videos[0].url)"]
+        uib-tab heading="VIDEO" ng-if='videos.length'
+          .thumbnail[bind-html-compile="previewVideo"]
+          .artist-gallery.four-in-row
+            .artist-gallery-item [
+              ng-repeat='video in videos track by $index'
+              ng-click='setPreviewVideo(video.url)'
+            ]
+              img ng-src='{{video.thumbnail}}'
 
   .row
     h1.my-show-heading
