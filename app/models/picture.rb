@@ -10,6 +10,10 @@ class Picture < ActiveRecord::Base
     self.image.url(:medium)
   end
 
+  def src_original
+    self.image.url(:original)
+  end
+
   def src= data
     if data.include? 'base64,'
       content_type, image_data = data.split('base64,')

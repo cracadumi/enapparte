@@ -45,6 +45,7 @@ json.shows do
   	  json.array! show.pictures do |picture|
   	  	json.id picture.id
   	  	json.src picture.src
+        json.src_original picture.src_original
   	  end
   	end
   end
