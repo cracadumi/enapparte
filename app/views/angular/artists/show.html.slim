@@ -26,8 +26,8 @@
       .artist-bio[ng-if="user.moving"]
         | {{user.bio}}
     .col-md-6
-      uib-tabset justified="true" class="artist-tabs"
-        uib-tab heading="GALLERY" ng-if='user.pictures.length'
+      uib-tabset justified="true" class="artist-tabs" ng-if='user.pictures.length'
+        uib-tab heading="GALLERY"
           .artist-gallery.four-in-row
             .artist-gallery-item [
               ng-repeat='slide in user.pictures track by $index'
