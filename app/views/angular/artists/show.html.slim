@@ -23,7 +23,7 @@
             dd
               | {{user.availableLanguages}}
           .artist-idf Je me deplace IDF
-      .artist-bio[ng-if="user.moving"]
+      .artist-bio[ng-if="user.bio"]
         | {{user.bio}}
     .col-md-6
       uib-tabset justified="true" class="artist-tabs" ng-if='user.pictures.length'
