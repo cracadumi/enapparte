@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < Api::BaseController
-      before_action :authenticate_user!, except: [:search, :show]
+      before_action :authenticate_user!, except: [:search, :show, :artist]
 
       resource_description do
         short 'Users'
