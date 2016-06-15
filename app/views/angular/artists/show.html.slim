@@ -4,7 +4,10 @@
 .artist-page.container
   .row
     h1.artist-name
-      | {{user.fullName}}
+      span[ng-hide="user.nickname"]
+        | {{user.fullName}}
+      span[ng-show="user.nickname"]
+        | {{user.nickname}}
     .col-md-6
       .artist-info.clearfix
         figure.artist-avatar

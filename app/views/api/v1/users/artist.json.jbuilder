@@ -6,6 +6,7 @@ end
 json.full_name @user.full_name
 json.rating @user.rating
 json.activity @user.activity
+json.nickname @user.nickname
 
 json.profile_picture do
   json.id @user.profile_picture.try(:id)
