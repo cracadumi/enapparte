@@ -24,8 +24,7 @@
             dd
               | {{user.availableLanguages}}
           .artist-idf Je me deplace IDF
-      .artist-bio[ng-if="user.bio"]
-        | {{user.bio}}
+      .artist-bio[ng-if="user.bio" ng-bind-html="user.bio"]
     .col-md-6
       uib-tabset justified="true" class="artist-tabs" ng-if='user.pictures.length'
         uib-tab heading="GALLERY"
