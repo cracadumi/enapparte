@@ -28,7 +28,7 @@ ActiveAdmin.register User do
       f.input :surname
       f.input :nickname, label: 'Nom de scène (nickname)'
       f.input :gender, as: :select, collection: User.genders.keys
-      f.input :bio
+      f.input :bio, as: :ckeditor
       f.input :phone_number
       f.input :dob, as: :datepicker
       f.input :activity
