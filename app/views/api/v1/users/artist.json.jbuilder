@@ -33,6 +33,7 @@ json.shows do
   	json.duration show.duration
   	json.description show.description
   	json.price show.price.to_i
+    json.price_person show.price_person
   	json.spectators show.spectators
   	json.reviews do
   	  json.array! show.reviews_max_3 do |review|
