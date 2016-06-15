@@ -9,6 +9,7 @@ class ArtistsController extends @NGController
     'User'
     'Art'
     'Dailymotion'
+    'orderByFilter'
   ]
 
   init: ->
@@ -26,6 +27,10 @@ class ArtistsController extends @NGController
         @scope.music = musics[0]
         @scope.videos = @scope.user.showcases
           .filter (showcase) -> showcase.kind != 'Soundcloud'
+
+        # If many shows, sort by price ascending
+        if @scope.user.shows.length > 3
+          @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', true)
 
         @generateThumbnails()
         @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
