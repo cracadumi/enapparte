@@ -11,6 +11,7 @@ ActiveAdmin.register Show do
       f.input :surface
       f.input :description
       f.input :price
+      f.input :price_person
       f.input :max_spectators
       f.input :min_attendees
       f.input :starts_at
@@ -36,6 +37,7 @@ ActiveAdmin.register Show do
       row :surface
       row :description
       row :price
+      row :price_person
       row :max_spectators
       row :active
       row :user do
