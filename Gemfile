@@ -42,6 +42,7 @@ gem 'fullcalendar-rails'
 gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'maruku'
 gem 'omniauth-stripe-connect'
+gem 'ckeditor'
 
 group :production do
   gem 'pg'
