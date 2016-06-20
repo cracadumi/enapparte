@@ -177,7 +177,8 @@
       .state 'dashboard.gallery', {url: '/gallery', templateUrl: 'dashboard/showcases/index.html'}
     .state 'home.signin', {
       url: 'signin',
-      onEnter: ['$uibModal', '$state', ($uibModal, $state)->
+      onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
+        $uibModalStack.dismissAll('closing')
         $uibModal.open
           animation: true
           templateUrl: 'devise/log_in.html'
@@ -189,7 +190,8 @@
     }
     .state 'home.signup', {
       url: 'signup',
-      onEnter: ['$uibModal', '$state', ($uibModal, $state)->
+      onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
+        $uibModalStack.dismissAll('closing')
         $uibModal.open
           animation: true
           templateUrl: 'devise/sign_up.html'

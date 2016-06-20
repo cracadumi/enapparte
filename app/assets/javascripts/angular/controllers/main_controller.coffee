@@ -12,26 +12,17 @@ angular
 
     $rootScope.isAuthenticated = ()->
       Auth.isAuthenticated()
+
     $rootScope.isPerformer = ()->
       Auth._currentUser.role in ["admin", "performer"]
+
     $rootScope.logout = ()->
       Auth.logout().then ()->
         $rootScope.currentUser = null
         $state.go 'home'
-    $rootScope.showSignIn = ()->
-      $uibModal.open
-        animation: true
-        templateUrl: 'devise/log_in.html'
-        controller: 'SignInController'
-
-    $rootScope.showSignUp = ()->
-      $uibModal.open
-        animation: true
-        templateUrl: 'devise/sign_up.html'
-        controller: 'SignUpController'
 
     $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-      $state.current = toState;
+      $state.current = toState
 
     $scope.isSearchPage = () ->
       $state.current.name == "shows.search"
