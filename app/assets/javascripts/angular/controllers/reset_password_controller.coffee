@@ -1,5 +1,5 @@
-class ForgotPasswordController extends @NGController
-  @register window.App, 'ForgotPasswordController'
+class ResetPasswordController extends @NGController
+  @register window.App, 'ResetPasswordController'
 
   @$inject: [
     '$scope'
@@ -7,6 +7,8 @@ class ForgotPasswordController extends @NGController
     'Auth'
     'Flash'
     '$rootScope'
+    '$stateParams'
+    '$state'
   ]
 
   user:
@@ -14,11 +16,12 @@ class ForgotPasswordController extends @NGController
     password: ''
 
   ok: ()=>
+    @scope.user.reset_password_token = @stateParams.reset_password_token
     @Auth
-      .sendResetPasswordInstructions @scope.user, {}
+      .resetPassword @scope.user, {}
       .then (user)=>
         @uibModalInstance.close(@scope.user)
-        @Flash.showSuccess @scope, 'Instructions was sent successfully!'
+        @Flash.showSuccess @scope, 'Password was changed successfully!'
       , (e)=>
         if e.data.error
           @Flash.showError @scope, e.data.error

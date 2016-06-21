@@ -53,8 +53,9 @@
         .removeClass("affix-top, affix-bottom, full-main-content")
         .addClass("affix")
         .removeData("bs.affix")
+
     $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
+      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'home.forgot_password', 'home.reset_password', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
         $state.go 'home'
         Flash.showError $rootScope, "You need to sign in or sign up before continuing."
     ), 500
@@ -202,7 +203,7 @@
       ]
     }
     .state 'home.forgot_password', {
-      url: 'signup',
+      url: 'forgot_password',
       onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
         $uibModalStack.dismissAll('closing')
         $uibModal.open
@@ -212,6 +213,19 @@
         .result
         .finally ()->
           $state.go '^'
+      ]
+    }
+    .state 'home.reset_password', {
+      url: 'reset_password?reset_password_token'
+      onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
+        $uibModalStack.dismissAll('closing')
+        $uibModal.open
+          animation: true
+          templateUrl: 'devise/reset_password.html'
+          controller: 'ResetPasswordController'
+        .result
+        .finally ()->
+          $state.go 'home.signin'
       ]
     }
 
