@@ -52,7 +52,8 @@ div[ng-controller="UserSearchController"]
               .caption.text-center
                 p.placeholder[ng-show="user.unavailable"]
                   | Non disponible pour les dates demandées
-                h4= "{{ user.fullName }}"
+                h4[ng-if="!user.nickname"]= "{{ user.fullName }}"
+                h4[ng-if="user.nickname"]= "{{ user.nickname }}"
                 span= "{{ user.activity }}"
                 p.description= "{{ user.artTitle }}"
                 i.glyphicon.glyphicon-star[ng-repeat="k in range(Math.round(user.rating)) track by $index"]
