@@ -17,7 +17,7 @@
             legend= "My Show Details"
             p= "Your show will be visible on the site once you have downloaded your photos and complete details of your profile"
             br
-            input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
+            input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(((1..25).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
             input-select[label="Min Spectators" model="show.minAttendees" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
             input-integer[label="Duration in minutes" model="show.length" required]
             input-string[label="Title" model="show.title" required]
