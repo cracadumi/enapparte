@@ -201,5 +201,18 @@
           $state.go '^'
       ]
     }
+    .state 'home.forgot_password', {
+      url: 'signup',
+      onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
+        $uibModalStack.dismissAll('closing')
+        $uibModal.open
+          animation: true
+          templateUrl: 'devise/forgot_password.html'
+          controller: 'ForgotPasswordController'
+        .result
+        .finally ()->
+          $state.go '^'
+      ]
+    }
 
 ]
