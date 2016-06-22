@@ -33,7 +33,17 @@
             li
               a[ui-sref="performer"]
                 | Pourquoi?
+            li
           .col-xs-2
+        .row
+          .col-xs-2
+          .col-xs-8
+            = link_to Constants::Socials::FACEBOOK, target: :blank
+              i.fa-facebook.fa-3x.fa
+            = link_to Constants::Socials::TWITTER, target: :blank
+              i.fa-twitter.fa-3x.fa
+            = link_to Constants::Socials::INSTAGRAM, target: :blank
+              i.fa-instagram.fa-3x.fa
     hr
     .row
       .col-md-12.col-sm-12
