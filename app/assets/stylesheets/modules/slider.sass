@@ -9,8 +9,10 @@
     text-align: center
     height: 600px
 
-    .carousel-inner .discovery-card
-      background: transparent
+    .carousel-inner
+      height: 400px
+      .discovery-card
+        background: transparent
 
   .anchor-arrow
     cursor: pointer
@@ -64,16 +66,25 @@
   opacity: 0
   z-index: 2
 
-@media (min-width: 768px)
+@media (max-width: 768px)
+  .home-carousel .item
+    height: 380px !important
+
   [id=slider].affix
     position: inherit
     margin-bottom: 54px
 
 @media (max-width: 620px)
   [id=slider] .item div p
-    font-size: 32px
-    line-height: 40px
+    font-size: 32px !important
+    line-height: 40px !important
     padding-bottom: 70px
 
+  #slider.home-carousel
+    height: 420px !important
+
   .home-carousel .item
-    height: 400px
+    height: 200px !important
+
+  .carousel-inner
+    height: 200px !important

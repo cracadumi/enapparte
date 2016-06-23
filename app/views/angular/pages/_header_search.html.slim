@@ -1,5 +1,5 @@
 #slider.carousel.home-carousel.slide[data-ride="carousel" style="background:url(#{image_url('main_background.jpg')}) no-repeat center center; background-size:cover;"]
-  .carousel-inner[style="text-align:center;height:400px"]
+  .carousel-inner[style="text-align:center"]
     .item.relative.discovery-card.active
       .va-container.va-container-v.va-container-h
         p.va-middle.text-center.text-contrast.text-reinvent-desc
@@ -16,7 +16,7 @@
             div[ng-bind-html="art.title"]
       .col-sm-4.input-search
         .search-datetimepicker.input-group.date[input-select-date]
-          input.form-control.dt-calendar[type="text" ng-model="endDate"] 
+          input.form-control.dt-calendar[type="text" ng-model="endDate"]
           span.input-group-addon.btn-search-time
             span.glyphicon.glyphicon-calendar
       .col-sm-4.input-search
@@ -24,4 +24,4 @@
           |  Chercher
   span[scroll-on-click]
     = image_tag 'arrow.png', class: "anchor-arrow"
-    
+
