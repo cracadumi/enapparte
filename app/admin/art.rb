@@ -1,5 +1,6 @@
 ActiveAdmin.register Art do
-  permit_params :title, :description
+  permit_params :title, :description, :main_description, :italic_description,
+                :banner_url
 
   index do
     selectable_column
@@ -18,6 +19,9 @@ ActiveAdmin.register Art do
       f.semantic_errors *f.object.errors.keys
       f.input :title
       f.input :description
+      f.input :main_description
+      f.input :italic_description
+      f.input :banner_url
     end
     f.actions
   end
@@ -31,6 +35,9 @@ ActiveAdmin.register Art do
       end
       row :title
       row :description
+      row :main_description
+      row :italic_description
+      row :banner_url
       row :created_at
       row :updated_at
     end
