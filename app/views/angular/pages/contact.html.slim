@@ -7,7 +7,7 @@
       form.form-horizontal[name="contactForm" novalidate]
         .row
           .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
-            .page-description            
+            .page-description
               p
                 | ENAPPARTÉ vous propose une sélection riche et éclectique de performeurs culturels pour votre évènement, quels que soient l'occasion, vos envies et votre budget.
               p
@@ -33,6 +33,10 @@
                   input-string[label="Téléphone (facultatif)" model="contact.phone"]
 
                 input-text[label="Message" model="contact.message" required]
+                br
+                .text-right.col-sm-5.society-btn
+                  button.btn.btn-primary[ng-click="contactForm.$valid && submitContact()"]
+                    | ENVOYER
         .row
           .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
             .page-description
@@ -43,7 +47,5 @@
               p
                 | Notre offre ne concerne pour l'instant que Paris et l’Ile-de-France.
 
-              button.btn.btn-primary[ng-click="contactForm.$valid && submitContact()"]
-                | ENVOYER
               br
               br
