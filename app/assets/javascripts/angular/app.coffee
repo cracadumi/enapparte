@@ -47,6 +47,8 @@
 
   $rootScope.$on '$stateChangeSuccess', (e)->
     $rootScope.rootPath = false
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+
     unless $state.current.name.startsWith 'home'
       $(window).off('.affix')
       $("#header")
@@ -109,7 +111,9 @@
         $anchorScroll(0)
       ]
     }
-    .state 'concept', { url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController' }
+    .state 'concept', {
+      url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController'
+    }
     .state 'concept.works', {
       url: 'howItWorks',
       onEnter: ['$uibModal', '$state', ($uibModal, $state)->
