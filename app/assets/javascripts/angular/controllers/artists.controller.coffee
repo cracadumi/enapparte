@@ -33,7 +33,8 @@ class ArtistsController extends @NGController
           @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', true)
 
         @generateThumbnails()
-        @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
+        if @scope.videos.length > 0
+          @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
         @scope.bannerStyle =
           'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
 
