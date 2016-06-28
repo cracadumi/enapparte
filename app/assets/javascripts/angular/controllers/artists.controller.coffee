@@ -30,7 +30,7 @@ class ArtistsController extends @NGController
 
         # If many shows, sort by price ascending
         if @scope.user.shows.length > 3
-          @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', true)
+          @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', false)
 
         @generateThumbnails()
         if @scope.videos.length > 0
