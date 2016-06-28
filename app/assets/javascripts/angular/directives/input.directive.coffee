@@ -239,6 +239,13 @@ angular
         'tiff'
       ]
 
+      # hover effect for button
+      element.find('input')
+        .mouseenter ()->
+          element.find('input').prev().addClass('hover')
+        .mouseleave ()->
+          element.find('input').prev().removeClass('hover')
+
       element.bind 'change', (changeEvent) ->
         for file in changeEvent.target.files
           extension = file.name.split('.').pop().toLowerCase()
