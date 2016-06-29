@@ -63,6 +63,7 @@ group :development, :test do
   gem 'guard-jasmine'
   gem 'rack-livereload'
   gem 'libnotify'
+  gem 'growl'
   gem 'awesome_print'
   gem 'dotenv-rails'
 end

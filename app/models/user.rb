@@ -158,13 +158,6 @@ end
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
-#  profile_picture_id     :integer
-#  nickname               :string
-#  customer_id            :string
-#  stripe_pub_key         :string
-#  stripe_user_id         :string
-#  stripe_access_code     :string
-#  art_id                 :integer
 #
 # Indexes
 #
