@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
                                 reject_if: :reject_payment_methods
   accepts_nested_attributes_for :showcases
   accepts_nested_attributes_for :availabilities
+  accepts_nested_attributes_for :profile_picture
 
   validates :firstname, :surname, presence: true
   validates :email, format: {

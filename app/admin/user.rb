@@ -1,9 +1,4 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :firstname, :surname, :nickname, :gender, :bio,
-                :phone_number, :moving, :dob, :activity, :role, :art_id, :profile_picture_id,
-                address_ids: [], booking_ids: [], show_ids: [], rating_ids: [], :pictures => [],
-                language_ids: [], showcases_attributes: [:id, :kind, :url],
-                availabilities_attributes: [:available_at]
   index do
     selectable_column
     id_column
@@ -37,11 +32,13 @@ ActiveAdmin.register User do
       f.input :bookings
       f.input :shows
 
-      f.input :profile_picture, collection: (Picture.all.last(20).reverse).map { |i| [ "#{i.id} : #{i.title}", i.id] }
-      li id: 'profile_picture' do
-        div class: 'inline-hints' do
-          render(partial: 'active_admin/picture', locals: { object: f.object, page: 'edit' })
-        end
+      f.inputs 'Profile picture', header: false, for: [:profile_picture, f.object.profile_picture || Picture.new] do |fc|
+        fc.input :image, as: :file
+        li id: 'profile_picture' do
+          div class: 'inline-hints' do
+            render(partial: 'active_admin/picture', locals: { object: f.object, page: 'edit' })
+          end
+      end
       end
 
       f.input :role, as: :select, collection: User.roles.keys
