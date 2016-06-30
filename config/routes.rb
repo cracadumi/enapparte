@@ -56,4 +56,5 @@ Rails.application.routes.draw do
   get '/dashboard/bookings', to: 'dashboard#bookings', as: 'bookings_dashboard'
   post '/contact', to: 'home#contact', as: 'home_contact'
   post '/society', to: 'home#society', as: 'home_society'
+
 end

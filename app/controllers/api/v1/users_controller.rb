@@ -40,6 +40,7 @@ module Api
                                         price_min: params[:price0],
                                         price_max: params[:price1]
                                       ).results
+        @users = User.all
         respond_with :api, :v1, @users
       end
 
@@ -123,7 +124,16 @@ module Api
       end
 
       def artist
-        @user = User.find(params[:id])
+        @user = User.find_by_id(params[:id])
+
+        if @user.art.nil?
+          @user.art = Art.first
+        end
+
+        if @user.art.banner_url.nil?
+          @user.art.banner_url = '/'
+        end
+        
         respond_with :api, :v1, @user
       end
 

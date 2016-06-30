@@ -30,4 +30,4 @@ angular
     $scope.goPerformer = ->
       $state.go 'performer'
 )
-  ]
+]
