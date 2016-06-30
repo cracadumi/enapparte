@@ -1,4 +1,4 @@
-#header.main-header.navbar.navbar-static-top[role="banner" ng-class="{'has-search': isSearchPage()}"]
+#header.main-header.navbar.navbar-static-top[role="banner" ng-class="{'has-search': isSearchPage(), home: $state.current.name.startsWith('home') }"]
   .main-header-inner.row
     .navbar-header.col-md-5
       button.navbar-toggle [

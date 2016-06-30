@@ -26,6 +26,10 @@ class ArtistsController extends @NGController
       .artist(user_id)
       .then (artist)=>
         @scope.user = artist
+
+        @scope.bannerStyle =
+          'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
+
         @scope.activeSlideIdx = 0
         musics = @scope.user.showcases.filter (showcase) -> showcase.kind == 'Soundcloud'
         @scope.music = musics[0]
@@ -39,8 +43,6 @@ class ArtistsController extends @NGController
         @generateThumbnails()
         if @scope.videos.length > 0
           @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
-        @scope.bannerStyle =
-          'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
 
     @scope.trustAsHtml = @sce.trustAsHtml
 

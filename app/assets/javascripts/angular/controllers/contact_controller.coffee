@@ -15,14 +15,6 @@ class ContactController extends @NGController
     @scope.endDate = null
     @scope.contact = {}
 
-    $('#header')
-      .removeClass('not-fixed')
-      .addClass('affix-top')
-      .affix
-        offset:
-          top: 490
-    $("#content-main-page").addClass("full-main-content")
-
   submitContact: ()=>
     flash = @Flash
     scope = @scope

@@ -1,71 +1,8 @@
-.container.showcase[ng-controller="ShowcasesController"]
+.container[ng-controller="DashboardGalleryController"]
   .row
-    .col-md-12
-      legend= "Music"
-      div.col-md-offset-3.col-md-6
-        div.text-center
-          a[href="http://shareandembed.help.soundcloud.com/customer/portal/articles/2167172-embedding-a-track-or-playlist-" target="blank"]
-            | Instructions to upload your soundcloud playlist
-        .row
-          .col-md-9
-            input.music-url.form-control[ng-model="current_music.url" placeholder="Enter url" type="text" required ng-keypress="$event.keyCode == 13 && onEditMusicUrl()"]
-          .col-md-3
-            .btn.btn-enapparte-primary.pull-left[ng-click="onEditMusicUrl()"]= "Valider"
-      div.col-md-offset-3.col-md-6.thumbnail-section[ng-if="music"]
-        .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
-        button.btn.btn-enapparte-primary.delete[delete-confirm="Are you sure?" ng-click="removeMusic()"] Delete
-
-      legend.col-md-12= "Video"
-      div.col-md-6.thumbnail-section[ng-repeat="video in videos"]
-        .thumbnail[ng-bind-html="getEmbedUrl(video.url)"]
-        button.btn.btn-enapparte-primary.delete[delete-confirm="Are you sure?" ng-click="removeVideo($index)"] Delete
-      div.col-md-6.new-video-section.thumbnail-section
-        input.video-url.form-control[ng-model="current_video.url" placeholder="Enter url" type="text" required]
-        br
-        br
-        span Platform :
-        '
-        |
-        select.video-kind.form-control[ng-model="current_video.kind"]
-          option ng-repeat=("kind_value in kind_values") ng-selected=("current_video.kind == kind_value.value") value="{{kind_value.value}}"
-            | {{kind_value.name}}
-        button.add-video.btn.btn-enapparte-primary[ng-click="onAddVideoUrl()"] Add Video
-
+    .col-md-3
       br
-      br
+      tabs[data="tabsGallery" type="pills" vertical="true" template-url="ui-router-tabs-custom-ui-view-template.html"]
 
-      legend.col-md-12= "Pictures"
-      br
-      .row
-        .col-xs-6.col-md-3[ng-repeat="picture in pictures"]
-          .thumbnail
-            img[ng-src="{{picture.src}}" width="300" height="300"]
-            .caption
-              .actions.pull-right
-                a[href="javascript: void(0);" ng-click="removePicture(picture, $index)"]
-                  i.glyphicon.glyphicon-trash
-            .clearfix
-      br
-
-      form.show.form-horizontal[novalidate name="pictureForm"]
-        .form-inputs[ng-show="newPicture.src"]
-          fieldset
-            legend.col-md-12= "New Picture"
-            br
-            .row
-              .col-xs-6.col-md-3
-                .thumbnail
-                  img[ng-src="{{newPicture.src}}" width="300" height="300"]
-                  .caption
-                    .actions.pull-right
-                      a[href="javascript: void(0);" ng-click="newPicture = {}"]
-                        i.glyphicon.glyphicon-trash
-                  .clearfix
-            br
-        input-image-button[ng-hide="newPicture.src" label="Add new picture" model="newPicture" required]
-        div[ng-show="newPicture.src"]
-          button.btn.btn-enapparte-primary[ng-click="savePicture()"] Save Picture
-          '
-          span[ng-show="loading"] Uploading...
-          br
-          br
+    .col-md-9
+      ui-view

@@ -45,16 +45,25 @@
   Auth.currentUser().then (user)->
       $rootScope.currentUser = user
 
+  $rootScope.$on '$viewContentLoaded', (e)->
+    $('#header').affix
+      offset:
+        top: 490
+
+    if $state.current.name.startsWith 'home'
+      $("#content-main-page").addClass("full-main-content")
+      $("#header").data('bs.affix').options.offset.top = 490
+      $("#header").affix('checkPosition')
+      $("#header").addClass("home").removeClass("not-home")
+    else
+      $("#content-main-page").removeClass("full-main-content")
+      $("#header").data('bs.affix').options.offset.top = 0
+      $("#header").affix('checkPosition')
+      $("#header").removeClass("home").addClass("not-home")
+
   $rootScope.$on '$stateChangeSuccess', (e)->
     $rootScope.rootPath = false
     document.body.scrollTop = document.documentElement.scrollTop = 0
-
-    unless $state.current.name.startsWith 'home'
-      $(window).off('.affix')
-      $("#header")
-        .removeClass("affix-top, affix-bottom, full-main-content")
-        .addClass("affix")
-        .removeData("bs.affix")
 
     $timeout (->
       if !($state.current.name in ['home', 'home.signin', 'home.signup', 'home.forgot_password', 'home.reset_password', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
@@ -155,6 +164,7 @@
 
       .state 'dashboard.profile', { abstract: true, url: '/profile', templateUrl: 'dashboard/profile/tabs.html' }
       .state 'dashboard.profile.personal', { url: '/personal', templateUrl: 'dashboard/profile/personal.html' }
+
       .state 'dashboard.profile.reviews', { abstract: true, url: '/reviews', templateUrl: 'dashboard/profile/reviews/tabs.html' }
       .state 'dashboard.profile.reviews.received', { url: '/received', templateUrl: 'dashboard/profile/reviews/received.html' }
       .state 'dashboard.profile.reviews.sent', { url: '/sent', templateUrl: 'dashboard/profile/reviews/sent.html' }
@@ -179,7 +189,10 @@
       .state 'dashboard.account.security', { url: '/security', templateUrl: 'dashboard/account/security.html' }
       .state 'dashboard.calendar', {url: '/:id/calendar', templateUrl: 'dashboard/calendar/index.html'}
 
-      .state 'dashboard.gallery', {url: '/gallery', templateUrl: 'dashboard/showcases/index.html'}
+      .state 'dashboard.gallery', { abstract: true, url: '/gallery', templateUrl: 'dashboard/showcases/index.html' }
+      .state 'dashboard.gallery.music', {url: '/music', templateUrl: 'dashboard/showcases/music.html'}
+      .state 'dashboard.gallery.video', {url: '/video', templateUrl: 'dashboard/showcases/video.html'}
+      .state 'dashboard.gallery.pictures', {url: '/pictures', templateUrl: 'dashboard/showcases/pictures.html'}
     .state 'home.signin', {
       url: 'signin',
       onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->

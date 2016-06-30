@@ -26,5 +26,8 @@ angular
 
     $scope.isSearchPage = () ->
       $state.current.name == "shows.search"
+
+    $scope.goPerformer = ->
+      $state.go 'performer'
 )
   ]

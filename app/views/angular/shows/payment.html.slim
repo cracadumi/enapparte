@@ -29,12 +29,12 @@
             dt price per guest:
             dd 
               span ng-if="show.pricePerson"
-                | {{ show.price * (1 + show.commission) | currency }}
+                | {{ show.price * (1 + show.commission) | currency:undefined:0 }}
               span ng-if="!show.pricePerson"
-                | {{ show.price * (1 + show.commission) / booking.spectators | currency }}
+                | {{ show.price * (1 + show.commission) / booking.spectators | currency:undefined:0 }}
             dt service fee:
             dd 
-              | {{ show.commission | currency }}
+              | {{ show.commission | currency:undefined:0 }}
             dt.coupon-code coupon code:
             dd
               .input-group
@@ -44,9 +44,9 @@
           .total-price
             | Total incluant frais de reservation
             span ng-if="show.pricePerson"
-              | {{ show.price * (1 + show.commission) * booking.spectators | currency }}
+              | {{ show.price * (1 + show.commission) * booking.spectators | currency:undefined:0 }}
             span ng-if="!show.pricePerson"
-              | {{ show.price * (1 + show.commission) / booking.spectators * booking.spectators | currency }}
+              | {{ show.price * (1 + show.commission) / booking.spectators * booking.spectators | currency:undefined:0 }}
 
           hr
           .cancellation
