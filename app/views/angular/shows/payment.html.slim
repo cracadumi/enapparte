@@ -38,7 +38,7 @@
           .total-price
             | Total incluant frais de reservation
             span
-              | {{ show.price * show.commission | currency }}
+              | {{ show.price * show.commission | currency:undefined:0 }}
 
           hr
           .cancellation

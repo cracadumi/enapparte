@@ -36,7 +36,7 @@
                 .length
                   | {{ show.length }} minutes
                 .price
-                  | {{ show.price | currency }}
+                  | {{ show.price | currency:undefined:0 }}
 
         .row
           .col-md-12
@@ -77,7 +77,7 @@
               i.glyphicon.glyphicon-star-empty[ng-repeat="k in range(5 - Math.round(show.rating)) track by $index"]
             h3= "{{ show.title }}"
             p.price
-              | {{ show.price | currency }}
+              | {{ show.price | currency:undefined:0 }}
             p.length
               | {{ show.length }} minutes
             p.available

@@ -72,7 +72,8 @@
         .artist-show-card-price
           .text-uppercase[ng-hide="show.pricePerson"] total price
           .text-uppercase[ng-show="show.pricePerson"] per person
-          .price ${{show.price}}
+          .price
+            | {{ show.price | currency:undefined:0 }}
         .artist-show-card-actions
           .transparent-control
             .input-group.search-datetimepicker [input-select-date]

@@ -20,7 +20,7 @@ br
             h3
               | {{ show.title }}
             .price
-              | {{ show.price | currency:$ }}
+              | {{ show.price | currency:undefined:0 }}
             .actions.pull-right
               a[ng-href="/shows/{{show.id}}/edit" title="Edit"]
                 i.glyphicon.glyphicon-pencil
