@@ -1,14 +1,23 @@
-class ShowcasesController extends @NGController
-  @register window.App, 'ShowcasesController'
+class DashboardGalleryController extends @NGController
+  @register window.App, 'DashboardGalleryController'
 
   @$inject: [
     '$scope'
     '$sce'
+    '$rootScope'
+    'Flash'
+    '$state'
     'User'
     'Showcase'
   ]
 
-  init: ->
+  tabsGallery: [
+    { heading: 'Music', route: 'dashboard.gallery.music' }
+    { heading: 'Video', route: 'dashboard.gallery.video' }
+    { heading: 'Pictures', route: 'dashboard.gallery.pictures' }
+  ]
+
+  init: =>
     @scope.kind_values = [
       {'name':'Dailymotion', 'value':'Dailymotion'},
       {'name':'Youtube', 'value':'Youtube'}
@@ -51,7 +60,7 @@ class ShowcasesController extends @NGController
   getYoutubeEmbedUrl: (url) =>
     match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
     if match && match[7].length == 11
-        return "https://www.youtube.com/embed/"+match[7];
+        return "https://www.youtube.com/embed/"+match[7]
     null
 
   onEditMusicUrl: (event) =>
@@ -97,7 +106,7 @@ class ShowcasesController extends @NGController
       .delete()
       .then (response) ->
         scope.videos.splice(index, 1)
-        
+
   savePicture: () =>
     scope = @scope
     scope.loading = true

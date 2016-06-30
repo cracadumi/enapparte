@@ -164,6 +164,7 @@
 
       .state 'dashboard.profile', { abstract: true, url: '/profile', templateUrl: 'dashboard/profile/tabs.html' }
       .state 'dashboard.profile.personal', { url: '/personal', templateUrl: 'dashboard/profile/personal.html' }
+
       .state 'dashboard.profile.reviews', { abstract: true, url: '/reviews', templateUrl: 'dashboard/profile/reviews/tabs.html' }
       .state 'dashboard.profile.reviews.received', { url: '/received', templateUrl: 'dashboard/profile/reviews/received.html' }
       .state 'dashboard.profile.reviews.sent', { url: '/sent', templateUrl: 'dashboard/profile/reviews/sent.html' }
@@ -188,7 +189,10 @@
       .state 'dashboard.account.security', { url: '/security', templateUrl: 'dashboard/account/security.html' }
       .state 'dashboard.calendar', {url: '/:id/calendar', templateUrl: 'dashboard/calendar/index.html'}
 
-      .state 'dashboard.gallery', {url: '/gallery', templateUrl: 'dashboard/showcases/index.html'}
+      .state 'dashboard.gallery', { abstract: true, url: '/gallery', templateUrl: 'dashboard/showcases/index.html' }
+      .state 'dashboard.gallery.music', {url: '/music', templateUrl: 'dashboard/showcases/music.html'}
+      .state 'dashboard.gallery.video', {url: '/video', templateUrl: 'dashboard/showcases/video.html'}
+      .state 'dashboard.gallery.pictures', {url: '/pictures', templateUrl: 'dashboard/showcases/pictures.html'}
     .state 'home.signin', {
       url: 'signin',
       onEnter: ['$uibModal', '$state', '$uibModalStack', ($uibModal, $state, $uibModalStack)->
