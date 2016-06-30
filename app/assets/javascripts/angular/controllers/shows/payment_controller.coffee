@@ -10,6 +10,7 @@ class ShowPaymentController extends @NGController
     'Flash'
     '$state'
     '$stateParams'
+    '$uibModal'
   ]
 
   show: {}
@@ -27,6 +28,8 @@ class ShowPaymentController extends @NGController
       .get(1)
       .then (user)=>
         @scope.user = user
+        @scope.user.creditCards.unshift({last4: '', brand: 'Add New Card'})
+        @scope.user.addresses.unshift({fullAddress: 'Add New Address'})
     if @stateParams.show
       @scope.show = @stateParams.show
     else
@@ -43,13 +46,52 @@ class ShowPaymentController extends @NGController
       else
         # @window.location.href = '/'
 
+  addNewCard: () =>
+    modalInstance = @uibModal.open
+      animation: true
+      templateUrl: 'shows/add_new_card.html'
+      backdrop: 'static'
+      controller: ['$scope', '$uibModalInstance', '$state', 'Flash', '$locale', 'CreditCard', ($scope, $uibModalInstance, $state, Flash, $locale, CreditCard)->
+        $scope.months = $locale.DATETIME_FORMATS.SHORTMONTH
+        currentYear = new Date().getFullYear()
+        $scope.years = _.range(currentYear, currentYear + 10)
+        $scope.addNewCard = () ->
+          $scope.card.pending = true
+          Stripe.card.createToken
+            number: $scope.card.number
+            cvc: $scope.card.cvc
+            exp_month: $scope.card.exp_month
+            exp_year: $scope.card.exp_year.toString().substr(2, 2)
+          , (status, response) =>
+            if response.error
+              Flash.showError @scope, response.error.message
+              $scope.card.pending = false
+            else
+              cardToken = response.id
+              new CreditCard(card_token: cardToken).create()
+                .then (card) =>
+                  $scope.card = {}
+                  Flash.showNotice $scope, 'Card is successfully saved!'
+                  $scope.card.pending = false
+                  $uibModalInstance.close card
+                , (error) =>
+                  Flash.showError $scope, 'Failed to create new card'
+                  $scope.card.pending = false
+                  $uibModalInstance.close false
+      ]
+    .result
+    .then (result)=>
+      if result
+        @scope.user.creditCards.push(result)
+        @scope.user.payment = result
+
   bookingCreate: ()=>
     @scope.user.save()
       .then (user)=>
         @scope.booking.status    = 2
         @scope.booking.price     = @scope.show.price * @scope.show.commission
         @scope.booking.addressId = @scope.user.address.id
-        @scope.booking.paymentId = @scope.user.payment.id
+        @scope.booking.creditCardId = @scope.user.payment.id
         @scope.booking.showId    = @scope.show.id
         @scope.booking.save()
           .then (booking)=>
@@ -60,24 +102,5 @@ class ShowPaymentController extends @NGController
 
   bookingOrder: (form)=>
     if form.$valid && @scope.user
-      if @scope.user.payment.new
-        # Stripe
-        Stripe.card.createToken {
-          number: @scope.card.number
-          cvc: @scope.card.cvc
-          exp_month: @scope.card.exp_month
-          exp_year: @scope.card.exp_year
-        }, (status, response)=>
-          if response.error
-            Flash.showError @scope, response.error.message
-          else
-            selected = {}
-            selected.stripeToken = response.id
-            selected.last4 = response.card.last4
-            selected.new = false
-            @scope.user.paymentMethods.push selected
-            @scope.user.payment = selected
-            @scope.bookingCreate()
-      else
-        @scope.bookingCreate()
+      @scope.bookingCreate()
 

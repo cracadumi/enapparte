@@ -3,7 +3,7 @@ angular
   .directive 'inputSelectDate', ->
     link: (scope, element, attr) ->
       $(element).datetimepicker
-        format: "DD/MM/YYYY"
+        format: "MM/DD/YYYY"
         defaultDate: new Date()
 
       $(element).on "dp.change", ->
@@ -12,7 +12,7 @@ angular
   .directive 'inputSelectStartDate', ->
     link: (scope, element, attr) ->
       $(element).datetimepicker
-        format: "DD/MM/YYYY"
+        format: "MM/DD/YYYY"
         defaultDate: new Date()
 
       $(element).on "dp.change", ->

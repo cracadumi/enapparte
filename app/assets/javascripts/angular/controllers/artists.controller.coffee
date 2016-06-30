@@ -5,8 +5,12 @@ class ArtistsController extends @NGController
     '$scope'
     '$sce'
     '$uibModal'
+    '$uibModalStack'
     '$stateParams'
+    '$rootScope'
+    '$state'
     'User'
+    'Auth'
     'Art'
     'Dailymotion'
     'orderByFilter'
@@ -14,7 +18,7 @@ class ArtistsController extends @NGController
 
   init: ->
 
-    @scope.booking = {}
+    @scope.bookings = []
 
     user_id = @stateParams.id
     user = new @User
@@ -31,7 +35,7 @@ class ArtistsController extends @NGController
         # If many shows, sort by price ascending
         if @scope.user.shows.length > 3
           @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', false)
-
+        @scope.bookings = new Array(@scope.user.shows.length)
         @generateThumbnails()
         if @scope.videos.length > 0
           @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
@@ -110,3 +114,39 @@ class ArtistsController extends @NGController
 
   setPreviewVideo: (url) =>
     @scope.previewVideo = @getEmbedUrl url
+
+  validateFields: (booking) =>
+    if !booking.time || !booking.date || !booking.numberOfGuests || booking.time == '' || booking.date == '' || booking.numberOfGuests == ''
+      booking.invalid = true
+      booking.valid = false
+    else
+      booking.invalid = false
+      booking.valid = true
+    booking.valid
+
+  bookNow: (index, show_id) =>
+    if (@scope.bookings[index])
+      @scope.bookings[index].submitted = true
+      if @validateFields(@scope.bookings[index])
+        unless @Auth.isAuthenticated()
+          @uibModalStack.dismissAll('closing')
+          @uibModal.open
+            animation: true
+            templateUrl: 'devise/log_in.html'
+            controller: 'SignInController'
+          .result
+          .then ()=>
+            @state.go 'shows.payment',
+              id: show_id
+              date: new Date(@scope.bookings[index].date + " " + @scope.bookings[index].time.getHours() + ':' + @scope.bookings[index].time.getMinutes()).getTime() / 1000
+              spectators: @scope.bookings[index].numberOfGuests
+        else
+          @state.go 'shows.payment',
+            id: show_id
+            date: new Date(@scope.bookings[index].date + " " + @scope.bookings[index].time.getHours() + ':' + @scope.bookings[index].time.getMinutes()).getTime() / 1000
+            spectators: @scope.bookings[index].numberOfGuests
+    else
+      @scope.bookings[index] = {}
+      @scope.bookings[index].invalid = true
+      @scope.bookings[index].valid = false
+      @scope.bookings[index].submitted = true
