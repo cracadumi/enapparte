@@ -64,6 +64,7 @@ group :development, :test do
   gem 'rack-livereload'
   gem 'libnotify'
   gem 'growl'
+  gem 'ruby_gntp'
   gem 'awesome_print'
   gem 'dotenv-rails'
 end
