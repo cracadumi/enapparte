@@ -22,6 +22,9 @@
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->
+  AuthProvider.logoutPath 'users/sign_out.json'
+  AuthProvider.logoutMethod 'GET'
+  return
 ]
 
 @App.config ["$httpProvider", ($httpProvider) ->
