@@ -1,17 +1,17 @@
-.show-payment-page
-  .show-payment-cover
-
-  .container[ng-controller="ShowPaymentController"]
-    .artist-show-card style="background-image: url({{::show.coverPicture.src}})"
+.show-payment-page[ng-controller="ShowPaymentController"]
+  .show-payment-cover[ng-style="bannerStyle"]
+    span[] {{::show.artTitle}}
+  .container
+    .artist-show-card[style="background-image : url({{::show.coverPicture}})"]
       .artist-show-card-title
         span
           | {{::show.title }}
       .artist-info.clearfix
         figure.artist-avatar
-          /img[src="{{user.profile_picture}}" alt="Profile Avatar"]
-          = image_tag 'img-3.jpg'
+          img[src="{{show.user.profilePicture.src}}" alt="Profile Avatar"]
+          / = image_tag 'img-3.jpg'
         h1.artist-name
-          | {{user.fullName || 'Test User'}}
+          | {{show.user.nickname || show.user.fullName}}
 
     form.form-horizontal.row[name="paymentForm" novalidate]
       aside.col-md-4
