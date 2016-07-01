@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615173804) do
+ActiveRecord::Schema.define(version: 20160630194548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,9 +60,11 @@ ActiveRecord::Schema.define(version: 20160615173804) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "payment_method_id"
+    t.integer  "credit_card_id"
   end
 
   add_index "bookings", ["address_id"], name: "index_bookings_on_address_id", using: :btree
+  add_index "bookings", ["credit_card_id"], name: "index_bookings_on_credit_card_id", using: :btree
   add_index "bookings", ["payment_method_id"], name: "index_bookings_on_payment_method_id", using: :btree
   add_index "bookings", ["show_id"], name: "index_bookings_on_show_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
@@ -190,13 +192,16 @@ ActiveRecord::Schema.define(version: 20160615173804) do
     t.datetime "published_at"
     t.integer  "cover_picture_id"
     t.integer  "user_id"
+    t.integer  "art_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.float    "rating"
     t.boolean  "price_person"
+    t.datetime "date_at"
     t.integer  "min_attendees"
   end
 
+  add_index "shows", ["art_id"], name: "index_shows_on_art_id", using: :btree
   add_index "shows", ["cover_picture_id"], name: "index_shows_on_cover_picture_id", using: :btree
   add_index "shows", ["user_id"], name: "index_shows_on_user_id", using: :btree
 
@@ -247,6 +252,7 @@ ActiveRecord::Schema.define(version: 20160615173804) do
   add_index "users", ["profile_picture_id"], name: "index_users_on_profile_picture_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "bookings", "credit_cards"
   add_foreign_key "bookings", "payment_methods"
   add_foreign_key "payment_methods", "bookings"
   add_foreign_key "payment_methods", "users"
