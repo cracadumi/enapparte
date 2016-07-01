@@ -20,6 +20,7 @@
     "angular-ui-router-anim-in-out": "latest",
     "angular-credit-cards": "latest",
     "stripe-angular": "latest",
+    "angular-i18n": "latest",
     "angular-mocks": "latest",
     "bootstrap-fileinput": "latest",
     "angular-ui-select": "latest",

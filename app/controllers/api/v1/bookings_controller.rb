@@ -39,7 +39,7 @@ class Api::V1::BookingsController < Api::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:date, :spectators, :price, :message, :show_id, :user_id, :address_id, :status)
+    params.require(:booking).permit(:date, :spectators, :price, :message, :show_id, :user_id, :address_id, :status, :credit_card_id)
   end
 
 end

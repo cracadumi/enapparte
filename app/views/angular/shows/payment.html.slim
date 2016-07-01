@@ -24,11 +24,17 @@
             dd
               | {{ ::booking.date | amDateFormat:'h:mm:ss a' }}
             dt number of guests:
-            dd 30
+            dd 
+              | {{ ::booking.spectators}}
             dt price per guest:
-            dd $20
+            dd 
+              span ng-if="show.pricePerson"
+                | {{ show.price * (1 + show.commission) | currency:undefined:0 }}
+              span ng-if="!show.pricePerson"
+                | {{ show.price * (1 + show.commission) / booking.spectators | currency:undefined:0 }}
             dt service fee:
-            dd $1.5
+            dd 
+              | {{ show.commission | currency:undefined:0 }}
             dt.coupon-code coupon code:
             dd
               .input-group
@@ -37,8 +43,10 @@
                   .btn.btn-enapparte-primary Ok
           .total-price
             | Total incluant frais de reservation
-            span
-              | {{ show.price * show.commission | currency }}
+            span ng-if="show.pricePerson"
+              | {{ show.price * (1 + show.commission) * booking.spectators | currency:undefined:0 }}
+            span ng-if="!show.pricePerson"
+              | {{ show.price * (1 + show.commission) / booking.spectators * booking.spectators | currency:undefined:0 }}
 
           hr
           .cancellation
@@ -49,33 +57,29 @@
               |  confirms your booking.
 
       .col-md-8
-        .row
-          .col-md-6
-            label.select-label A quelle adresse souhaitez-vous commander la performance?
-            ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
-              ui-select-match [] {{user.address.fullAddress}}
-              ui-select-choices repeat='address in user.addresses track by $index'
-                div [] {{address.fullAddress}}
-          .col-md-6
-            label.select-label Choisissez votre moyen de paiement
-            ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
-              ui-select-match [] {{$select.payment}}
-              ui-select-choices repeat='payment in user.paymentMethods track by $index'
-                div [] {{payment}}
+          .row
+            .col-md-6
+              label.select-label A quelle adresse souhaitez-vous commander la performance?
+              ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
+                ui-select-match [] {{user.address.fullAddress}}
+                ui-select-choices repeat='address in user.addresses track by $index'
+                  div ng-if="address.fullAddress != 'Add New Address'" {{address.fullAddress}}
+                  div ng-if="address.fullAddress == 'Add New Address'" ui-sref="dashboard.profile.personal" {{address.fullAddress}}
+            .col-md-6
+              label.select-label Choisissez votre moyen de paiement
+              ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
+                ui-select-match 
+                  div ng-if="user.payment.brand && user.payment.brand != 'Add New Card'" {{user.payment.brand}}, {{user.payment.last4}}
+                ui-select-choices repeat='payment in user.creditCards track by $index'
+                  div ng-click="addNewCard()" ng-if="payment.brand == 'Add New Card'" Add New Card
+                  div ng-if="payment.brand != 'Add New Card'" {{payment.brand}}, {{payment.last4}}
 
-        .show-payment-message.col-xs-12
-          .form-group
-            label.text-uppercase Message
-            input.form-control.enapparte-input [
-              type='text'
-              placeholder='Enter name'
-              ng-model='booking.username'
-            ]
-          .form-group
-            textarea.form-control.enapparte-input [
-              placeholder='Enter your message'
-              ng-model='booking.message'
-            ]
+          .show-payment-message.col-xs-12
+            .form-group
+              textarea.form-control.enapparte-input [
+                placeholder='Enter your message'
+                ng-model='booking.message'
+              ]
 
       .col-xs-12
         .terms-checkbox.checkbox
@@ -98,6 +102,7 @@
         button.btn.btn-enapparte-primary [
           type="submit"
           ng-click="bookingOrder(paymentForm)"
+          ng-disabled="!booking.accepted || !user.payment || user.payment.last4 == '' || !user.address || user.savePending || booking.savePending"
         ]
           i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="user.savePending || booking.savePending"]
           '

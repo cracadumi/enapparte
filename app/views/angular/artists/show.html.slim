@@ -72,41 +72,53 @@
         .artist-show-card-price
           .text-uppercase[ng-hide="show.pricePerson"] total price
           .text-uppercase[ng-show="show.pricePerson"] per person
-          .price ${{show.price}}
+          .price
+            | {{ show.price | currency:undefined:0 }}
         .artist-show-card-actions
-          .transparent-control
+          .transparent-control ng-class="{'input-invalid': bookings[$index].submitted && bookings[$index].invalid && (!bookings[$index].date || bookings[$index].date == '')}"
             .input-group.search-datetimepicker [input-select-date]
               input.form-control [
                 type='text'
                 placeholder='Select date'
-                ng-model='booking.date'
+                ng-model='bookings[$index].date'
+                ng-change='validateFields(bookings[$index])'
+                required
               ]
               .input-group-addon
                 .glyphicon.glyphicon-calendar
-          .transparent-control.enapparte-timepicker
+            .error
+              | Please fill this field
+          .transparent-control.enapparte-timepicker ng-class="{'input-invalid': bookings[$index].submitted && bookings[$index].invalid && (!bookings[$index].time || bookings[$index].time == '')}"
             .input-group [uib-dropdown auto-close='outsideClick']
               input.form-control [
                 type='text'
                 placeholder='Select time'
                 readonly='true'
-                ng-value="booking.time | date:'shortTime'"
+                ng-value="bookings[$index].time | date:'shortTime'"
+                required
               ]
               .input-group-addon
                 .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
               div [uib-dropdown-menu]
-                uib-timepicker ng-model='booking.time' hour-step="1" minute-step="15"
-          .transparent-control
+                uib-timepicker ng-model='bookings[$index].time' hour-step="1" minute-step="15"
+            .error
+              | Please fill this field
+          .transparent-control ng-class="{'input-invalid': bookings[$index].submitted && bookings[$index].invalid && (!bookings[$index].numberOfGuests || bookings[$index].numberOfGuests == '')}"
             .input-group
               input.form-control [
                 type='text'
                 placeholder='Number of guests'
-                ng-model='booking.numberOfGuests'
+                ng-model='bookings[$index].numberOfGuests'
+                ng-change='validateFields(bookings[$index])'
                 input-allow-integer=''
+                required
               ]
               .input-group-addon
                 .glyphicon.glyphicon-user
+            .error
+              | Please fill this field
           .transparent-control
-            .btn.btn-enapparte-primary Book now
+            button.btn.btn-enapparte-primary ng-click='bookNow($index, show.id)' Book now
 
       .col-xs-12.col-md-5
         h4 Gallery
