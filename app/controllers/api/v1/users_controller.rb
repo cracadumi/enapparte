@@ -40,7 +40,6 @@ module Api
                                         price_min: params[:price0],
                                         price_max: params[:price1]
                                       ).results
-        @users = User.all
         respond_with :api, :v1, @users
       end
 
@@ -133,7 +132,7 @@ module Api
         if @user.art.banner_url.nil?
           @user.art.banner_url = '/'
         end
-        
+
         respond_with :api, :v1, @user
       end
 
