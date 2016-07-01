@@ -38,7 +38,8 @@ class ShowPaymentController extends @NGController
           .get id
           .then (show)=>
             @scope.show = show
-
+            @scope.bannerStyle =
+              'background-image' : "url(\"" + @scope.show.bannerUrl + "\")"
             # set selected
             for picture in @scope.show.pictures
               picture.selected = true  if picture.id == @scope.show.coverPictureId
