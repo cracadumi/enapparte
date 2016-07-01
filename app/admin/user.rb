@@ -54,9 +54,9 @@ ActiveAdmin.register User do
         s.input :kind
         s.input :url
       end
-      f.has_many :availabilities, heading: false, allow_destroy: true do |s|
-        s.input :available_at
-      end
+      # f.has_many :availabilities, heading: false, allow_destroy: true do |s|
+      #   s.input :available_at
+      # end
       f.input :art
     end
     f.actions

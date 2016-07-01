@@ -31,7 +31,7 @@ json.shows do
   	json.id show.id
   	json.title show.title
   	json.rating show.rating
-  	json.cover_picture show.cover_picture.image(:large)
+    json.cover_picture show.cover_picture.image(:large)  if show.cover_picture
   	json.duration show.duration
   	json.description show.description
   	json.price show.price.to_i
