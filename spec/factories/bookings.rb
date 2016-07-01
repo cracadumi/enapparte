@@ -41,15 +41,18 @@ end
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  payment_method_id :integer
+#  credit_card_id    :integer
 #
 # Indexes
 #
 #  index_bookings_on_address_id         (address_id)
+#  index_bookings_on_credit_card_id     (credit_card_id)
 #  index_bookings_on_payment_method_id  (payment_method_id)
 #  index_bookings_on_show_id            (show_id)
 #  index_bookings_on_user_id            (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_3e4624132d  (credit_card_id => credit_cards.id)
 #  fk_rails_f65e591682  (payment_method_id => payment_methods.id)
 #
