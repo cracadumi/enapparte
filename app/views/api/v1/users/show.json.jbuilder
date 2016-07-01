@@ -25,6 +25,9 @@ json.addresses @user.addresses do |address|
 end
 
 if @user.performer?
+  json.credit_cards @user.credit_cards do |card|
+    json.merge! card.attributes
+  end
   json.stripe_connected @user.stripe_user_id.present?
 elsif @user.user?
   json.credit_cards @user.credit_cards do |card|
