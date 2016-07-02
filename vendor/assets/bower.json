@@ -21,6 +21,7 @@
     "angular-credit-cards": "latest",
     "stripe-angular": "latest",
     "angular-i18n": "latest",
+    "angular-ui-router-tabs": "latest",
     "angular-mocks": "latest",
     "bootstrap-fileinput": "latest",
     "angular-ui-select": "latest",
