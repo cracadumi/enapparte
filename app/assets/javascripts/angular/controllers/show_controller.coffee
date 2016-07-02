@@ -153,6 +153,10 @@ class ShowController extends @NGController
   finish: ()=>
     @scope.progressbar.start()
     if @finishValidate()
+      if @scope.show.maxSpectators == undefined
+        @scope.show.maxSpectators = null;
+      if @scope.show.minAttendees == undefined
+        @scope.show.minAttendees = null;
       @scope.show.pending = true
       @scope.show
         .save()

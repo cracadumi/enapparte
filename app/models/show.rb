@@ -14,7 +14,7 @@ class Show < ActiveRecord::Base
   has_many :ratings, through: :reviews
 
   just_define_datetime_picker :published_at
-  validates :max_spectators, :min_attendees, :length, :title, :description, :price, presence: true
+  validates :length, :title, :description, :price, presence: true
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   after_save :set_cover_picture
@@ -35,13 +35,17 @@ class Show < ActiveRecord::Base
 
   def spectators
     spect = ""
-    if min_attendees
+    if min_attendees && max_spectators
       spect += "from " + min_attendees.to_s + " "
-    end
-    if max_spectators
       spect += "to " + max_spectators.to_s
+      spect.slice(0,1).capitalize + spect.slice(1..-1)
+    elsif !min_attendees && !max_spectators
+      spect = "Indifférent"
+    elsif !min_attendees
+      spect = max_spectators.to_s
+    elsif !max_spectators
+      spect = min_attendees.to_s
     end
-    spect.slice(0,1).capitalize + spect.slice(1..-1)
   end
 
   def duration
@@ -105,17 +109,14 @@ end
 #  published_at     :datetime
 #  cover_picture_id :integer
 #  user_id          :integer
-#  art_id           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  rating           :float
 #  price_person     :boolean
-#  date_at          :datetime
 #  min_attendees    :integer
 #
 # Indexes
 #
-#  index_shows_on_art_id            (art_id)
 #  index_shows_on_cover_picture_id  (cover_picture_id)
 #  index_shows_on_user_id           (user_id)
 #
