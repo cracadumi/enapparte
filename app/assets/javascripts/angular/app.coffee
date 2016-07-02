@@ -43,7 +43,11 @@
 @App.run ['$rootScope', 'Auth', '$state', 'Flash', '$timeout', ($rootScope, Auth, $state, Flash, $timeout)->
 
   Auth.currentUser().then (user)->
-      $rootScope.currentUser = user
+    $rootScope.currentUser = user
+  , ()->
+    if !($state.current.name in ['home', 'home.signin', 'home.signup', 'home.forgot_password', 'home.reset_password', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
+      $state.go 'home'
+      Flash.showError $rootScope, "You need to sign in or sign up before continuing."
 
   $rootScope.$on '$viewContentLoaded', (e)->
     $('#header').affix
@@ -65,12 +69,6 @@
     $rootScope.rootPath = false
     $rootScope.previousState = from.name
     document.body.scrollTop = document.documentElement.scrollTop = 0
-
-    $timeout (->
-      if !($state.current.name in ['home', 'home.signin', 'home.signup', 'home.forgot_password', 'home.reset_password', 'shows.search', 'contact', 'about', 'performer', 'faq', 'terms', 'concept', 'concept.works', 'artists.show', 'society']) && !Auth.isAuthenticated()
-        $state.go 'home'
-        Flash.showError $rootScope, "You need to sign in or sign up before continuing."
-    ), 500
 
 ]
 @App.config ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider)->
