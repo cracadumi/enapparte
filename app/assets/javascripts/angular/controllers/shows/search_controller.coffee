@@ -41,6 +41,8 @@ class UserSearchController extends @NGController
 
 
     @scope.$watch 'artSelect.items', =>
+      if @rootScope.previousState != 'artists.show'
+        @scope.artSelect.selected = @scope.artSelect.items[0]
       if @scope.artId
         @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
           i.id is + @scope.artId

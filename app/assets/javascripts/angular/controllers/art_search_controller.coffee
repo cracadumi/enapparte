@@ -12,5 +12,5 @@ class ArtSearchController extends @NGController
     @scope.state = @state
 
   isSearchPage: ->
-    @scope.state.current.name == "shows.search"
+    @scope.state.current.name == "shows.search" || @scope.state.current.name == "shows.search"
 
