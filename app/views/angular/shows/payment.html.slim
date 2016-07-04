@@ -39,7 +39,7 @@
                 .input-group-btn
                   .btn.btn-enapparte-primary Ok
           .total-price
-            | Total incluant frais de reservation
+            | Prix total
             span ng-if="show.pricePerson"
               | {{ show.price * booking.spectators * show.commission | currency:undefined:0 }}
             span ng-if="!show.pricePerson"
@@ -56,14 +56,14 @@
       .col-md-8
           .row
             .col-md-6
-              label.select-label A quelle adresse souhaitez-vous commander la performance?
+              label.select-label A quelle adresse souhaitez-vous commander la performance ?
               ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap'
                 ui-select-match [] {{user.address.fullAddress}}
                 ui-select-choices repeat='address in user.addresses track by $index'
                   div ng-if="address.fullAddress != 'Add New Address'" {{address.fullAddress}}
                   div ng-if="address.fullAddress == 'Add New Address'" ui-sref="dashboard.profile.personal" {{address.fullAddress}}
             .col-md-6
-              label.select-label Choisissez votre moyen de paiement
+              label.select-label Choisissez votre moyen de paiement :
               ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap'
                 ui-select-match 
                   div ng-if="user.payment.brand && user.payment.brand != 'Add New Card'" {{user.payment.brand}}, {{user.payment.last4}}
@@ -87,8 +87,8 @@
               type="checkbox"
               ng-model="booking.accepted"
             ]
-            | I have read and accept
-            a ui-sref='terms' : b &nbsp; Terms and Conditions.
+            | I have read and accept 
+            a ui-sref='terms' : b &nbsp;Terms and Conditions.
 
           .error-messages[ng-show="paymentForm.$submitted || paymentForm[elementId].$touched"]
             span.help-block [
