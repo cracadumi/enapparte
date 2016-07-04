@@ -17,6 +17,9 @@ class DashboardGalleryController extends @NGController
     { heading: 'Pictures', route: 'dashboard.gallery.pictures' }
   ]
 
+  newPicture:
+    src: null
+
   init: =>
     @scope.kind_values = [
       {'name':'Dailymotion', 'value':'Dailymotion'},
@@ -35,7 +38,6 @@ class DashboardGalleryController extends @NGController
         @scope.music = @scope.musics[0]
         @scope.current_music.url = @scope.music && @scope.music['url']
         @scope.videos = showcases.filter (showcase) -> showcase.kind != 'Soundcloud'
-    @scope.newPicture = {}
     user = new @User
     user
       .listPictures()
@@ -107,22 +109,3 @@ class DashboardGalleryController extends @NGController
       .then (response) ->
         scope.videos.splice(index, 1)
 
-  savePicture: () =>
-    scope = @scope
-    scope.loading = true
-    user = new @User
-    user
-      .pictures(scope.newPicture.src)
-      .then (result) ->
-        scope.pictures.push result
-        scope.loading = false
-        scope.newPicture = {}
-
-  removePicture: (picture, index)=>
-    scope = @scope
-    user = new @User
-    user
-      .destroyPicture(picture.id)
-      .then( (response) ->
-        scope.pictures.splice(index, 1)
-      )
