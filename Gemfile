@@ -64,7 +64,9 @@ group :development, :test do
   gem 'rack-livereload'
   gem 'libnotify'
   gem 'growl'
-  gem 'ruby_gntp'
+  # Please, use condition statement for your platform
+  # It doesn't work for me, thanks.
+  # gem 'ruby_gntp'
   gem 'awesome_print'
   gem 'dotenv-rails'
 end
