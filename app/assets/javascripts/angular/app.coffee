@@ -19,6 +19,7 @@
     'ui.select'
     'ngProgress'
     'angular-bind-html-compile'
+    'ngCkeditor'
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->

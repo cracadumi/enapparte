@@ -3,7 +3,7 @@
     h2= "Profil"
   / = simple_form_for @user, html: { class: 'form-horizontal' }, url: update_dashboard_path do |f|
   .row
-    .col-md-4
+    .col-md-4.pull-left
       form.form-horizontal[name="profilePicForm"]
         h4= "Photo de profil"
         .photo
@@ -18,8 +18,8 @@
           br
           br
 
-    .col-md-8
-      form.form-horizontal[name="profileForm"]
+    form.form-horizontal[name="profileForm"]
+      .col-md-8
         fieldset
           legend= "Informations personnelles"
           / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
@@ -39,6 +39,7 @@
           input-email[label="Email" model="user.email" required disabled]
           input-phone[label="Téléphone" model="user.phoneNumber" required hint="Le numéro permet aux hôtes et aux performeurs de se contacter. Rassurez-vous, cette information ne sera communiquée qu’une fois votre réservation confirmée!"]
 
+      .col-md-12
         fieldset.form_addresses
           legend= "Adresses"
           input-select-address[label="Selectionner l'adresse" model="user.address" addresses="user.addresses" required]
@@ -50,7 +51,7 @@
           div[ng-if="user.role== 'performer' "]
             input-select[label="Art" model="user.artId" required data-collection=(Art.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json)]
           input-string[label="Activité" model="user.activity"]
-          input-text[label="Bio" model="user.bio"]
+          input-ckeditor[label="Bio" model="user.bio"]
           .form-group.languages-select
             label.text-right.col-sm-3.control-label= "Langages"
             .col-sm-9

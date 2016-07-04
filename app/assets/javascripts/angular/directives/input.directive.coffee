@@ -47,6 +47,20 @@ angular
       scope.elementId = 'input_' + scope.$id
       scope.required = attrs.required != undefined
 
+  .directive 'inputCkeditor', ()->
+    require: '^form'
+    strict: 'E'
+    templateUrl: 'directives/input_ckeditor.html'
+    scope: {
+      model: '='
+    }
+    replace: true
+    link: (scope, element, attrs, form)->
+      scope.form = form
+      scope.label = attrs.label
+      scope.elementId = 'input_' + scope.$id
+      scope.required = attrs.required != undefined
+
   .directive 'inputDate', ()->
     strict: 'E'
     templateUrl: 'directives/input_date.html'

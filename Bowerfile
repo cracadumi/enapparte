@@ -25,6 +25,7 @@ asset 'angular-credit-cards'
 asset 'stripe-angular'
 asset 'angular-i18n'
 asset 'angular-ui-router-tabs'
+asset 'ng-ckeditor'
 
 asset 'angular-mocks'
 asset 'bootstrap-fileinput'
