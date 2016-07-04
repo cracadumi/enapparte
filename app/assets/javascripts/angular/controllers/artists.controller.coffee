@@ -14,11 +14,13 @@ class ArtistsController extends @NGController
     'Art'
     'Dailymotion'
     'orderByFilter'
+    'ArtSelect'
   ]
 
   init: ->
 
     @scope.bookings = []
+    @scope.artSelect = @ArtSelect
 
     user_id = @stateParams.id
     user = new @User
@@ -44,6 +46,10 @@ class ArtistsController extends @NGController
         if @scope.videos.length > 0
           @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
 
+        @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
+          i.id is + @scope.user.art.id
+        )[0]
+
     @scope.trustAsHtml = @sce.trustAsHtml
 
     @scope.openGallery = (slides, idx) =>
@@ -54,6 +60,16 @@ class ArtistsController extends @NGController
         templateUrl: 'artists/gallery-modal-tpl.html'
         scope: @scope
         windowTopClass: 'artist-gallery-modal'
+
+    @scope.$watch 'artSelect.items', =>
+      if @scope.user
+        @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
+          i.id is + @scope.user.art.id
+        )[0]
+
+    @scope.$watch 'artSelect.selected', =>
+      if @scope.user && @scope.artSelect.selected.id != @scope.user.art.id
+        @state.go 'shows.search'
 
   getEmbedUrl: (video_url) =>
     embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)

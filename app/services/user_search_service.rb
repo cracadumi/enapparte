@@ -3,8 +3,8 @@ class UserSearchService
     @users = User.all
     filter_by_role(params[:role])
     filter_by_art(params[:art_id])
-    filter_by_available_at(params[:start_date], params[:end_date])
     filter_by_price(params[:price_min], params[:price_max])
+    filter_by_available_at(params[:start_date], params[:end_date])
   end
 
   def filter_by_role(role)
@@ -17,8 +17,8 @@ class UserSearchService
 
   def filter_by_available_at(start_date, end_date)
     if end_date
-      right_border = DateTime.strptime(end_date, '%d/%m/%Y')
-      left_border = start_date ?  DateTime.strptime(start_date, '%d/%m/%Y') : DateTime.now
+      right_border = DateTime.strptime(end_date, '%m/%d/%Y')
+      left_border = start_date ?  DateTime.strptime(start_date, '%m/%d/%Y') : DateTime.now
       all_users = @users
       available_users = @users.joins(:availabilities).where(user_availabilities: { available_at: left_border..right_border })
       non_available_users = (all_users - available_users).uniq

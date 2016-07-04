@@ -2,6 +2,7 @@ json.id @user.id
 json.art do
   json.banner_url image_url(@user.art.banner_url)
   json.title @user.art.title
+  json.id @user.art.id
 end
 json.full_name @user.full_name
 json.rating @user.rating

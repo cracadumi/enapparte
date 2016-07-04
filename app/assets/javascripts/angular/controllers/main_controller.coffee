@@ -25,7 +25,7 @@ angular
       $state.current = toState
 
     $scope.isSearchPage = () ->
-      $state.current.name == "shows.search"
+      $state.current.name == "shows.search" || $state.current.name == "artists.show"
 
     $scope.goPerformer = ->
       $state.go 'performer'

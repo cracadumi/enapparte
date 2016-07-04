@@ -66,8 +66,9 @@
       $("#header").affix('checkPosition')
       $("#header").removeClass("home").addClass("not-home")
 
-  $rootScope.$on '$stateChangeSuccess', (e)->
+  $rootScope.$on '$stateChangeSuccess', (e, to, toParams, from, fromParams)->
     $rootScope.rootPath = false
+    $rootScope.previousState = from.name
     document.body.scrollTop = document.documentElement.scrollTop = 0
 
 ]
