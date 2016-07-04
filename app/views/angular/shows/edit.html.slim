@@ -21,7 +21,7 @@
             input-select[label="Min Spectators" model="show.minAttendees" data-collection=(((1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json) required]
             input-integer[label="Duration in minutes" model="show.length" required]
             input-string[label="Title" model="show.title" required]
-            input-text[label="Description" model="show.description" required]
+            input-ckeditor[label="Description" model="show.description" required]
             / input-select[label="Language" model="show.languageId" data-collection=(Language.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json) required]
           fieldset
             legend= "Price"

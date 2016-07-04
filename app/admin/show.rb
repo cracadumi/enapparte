@@ -9,7 +9,7 @@ ActiveAdmin.register Show do
       f.input :title
       f.input :length
       f.input :surface
-      f.input :description
+      f.input :description, as: :ckeditor
       f.input :price
       f.input :price_person
       f.input :max_spectators
