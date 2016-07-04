@@ -430,7 +430,6 @@ GEM
       unicode-display_width (~> 0.3)
     rubocop-rspec (1.4.0)
     ruby-progressbar (1.7.5)
-    ruby_gntp (0.3.4)
     rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -576,7 +575,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rspec
-  ruby_gntp
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_form

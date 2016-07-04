@@ -254,7 +254,7 @@ angular
             reader = new FileReader()
             reader.onload = (loadEvent) ->
               scope.$apply ->
-                scope.model = { src: loadEvent.target.result }
+                scope.model = { src: loadEvent.target.result, changed: true }
             reader.readAsDataURL file
           else
             Flash.showError(scope, "Please select only image!")
