@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, reject_if: :reject_addresses
   accepts_nested_attributes_for :payment_methods,
                                 reject_if: :reject_payment_methods
-  accepts_nested_attributes_for :showcases
+  accepts_nested_attributes_for :showcases, allow_destroy: true
   accepts_nested_attributes_for :availabilities
   accepts_nested_attributes_for :profile_picture
 
