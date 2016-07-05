@@ -48,7 +48,8 @@
             ]
               img ng-src='{{video.thumbnail}}'
 
-  .row
+  .margin-bottom-40
+  .well
     h1.my-show-heading
       b MY SHOW
     .artist-show-entry.clearfix[ng-repeat="show in user.shows"]
@@ -130,7 +131,7 @@
             img ng-src='{{picture.src}}' alt='show-picture-{{$index + 1}}'
       .col-xs-12.col-md-7
         h4 Description:
-        .artist-show-description[ng-bind-html="show.description"]
+        .artist-show-description[ng-bind-html="show.bio"]
 
         .comments-section
           .comment-entry[ng-repeat="review in show.reviews"]
