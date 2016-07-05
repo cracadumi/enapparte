@@ -1,7 +1,7 @@
 ActiveAdmin.register Show do
   permit_params :title, :length, :surface, :description, :price, :max_spectators, :min_attendees, :active, :user_id,
     :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at, :cover_picture_id,
-    :ends_at, :booking_ids => [], :pictures => []
+    :ends_at, :price_person, :booking_ids => [], :pictures => []
 
   form do |f|
     f.inputs "Show" do
