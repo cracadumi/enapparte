@@ -36,7 +36,7 @@
               ng-repeat='slide in user.pictures track by $index'
               ng-click='openGallery(user.pictures, $index)'
             ]
-              img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
+            img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
         uib-tab heading="MUSIC" ng-if='music.url'
           .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
         uib-tab heading="VIDEO" ng-if='videos.length'
@@ -130,8 +130,7 @@
             img ng-src='{{picture.src}}' alt='show-picture-{{$index + 1}}'
       .col-xs-12.col-md-7
         h4 Description:
-        .artist-show-description
-          | {{show.description}}
+        .artist-show-description[ng-bind-html="show.description"]
 
         .comments-section
           .comment-entry[ng-repeat="review in show.reviews"]
