@@ -58,6 +58,8 @@ body
   &.affix-top.home
     .user-logged-dropdown
       color: #fff
+    a.btn-performer:hover
+      background: $navigation_color
   &.not-fixed a
     color: white
   &.affix.affix-top a
@@ -71,8 +73,11 @@ body
     a
       color: $navigation_color
       &.btn-performer
-        color: #002b3f
-        background-color: #fffca6
+        // color: #002b3f
+        // background-color: #fffca6
+        background: $light_color
+        &:hover
+          background-color: #002b3f
       &.nav_links i:hover
         color: #fffc76
 
@@ -85,8 +90,8 @@ body
       padding-top: 11px
       margin-left: 15px
       @media (max-width: 767px)
-        &:hover
-          background-color: #fffca6
+        // &:hover
+        //   background-color: #fffca6
 
   .main-header-inner
     width: 100%
@@ -101,16 +106,15 @@ body
     padding-top: 12px
     padding-bottom: 12px
     margin-bottom: 14px
-    &:hover,
-    &:focus
-      background: inherit
+    // &:hover,
+    // &:focus
+    //   background: inherit
 
   .btn-leconcept
     font-family: FuturaLT
     font-size: 18px
     margin-left: 15px
     &:hover
-      background-color: #002b3f
       color: #fff481
       border-color: #002b3f
 
