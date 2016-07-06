@@ -5,7 +5,9 @@ class ContactController extends @NGController
     '$scope'
     'Flash'
     '$rootScope'
+    'ArtSelect'
     '$http'
+    '$state'
   ]
 
   init: ->
@@ -28,3 +30,9 @@ class ContactController extends @NGController
       return
     ), (response) ->
       return
+
+  beginSearch: =>
+    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else null
+    @state.go 'shows.search',
+      id: artId
+      endDate: @scope.endDate || null
