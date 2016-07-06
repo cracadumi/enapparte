@@ -1,5 +1,6 @@
-.artist-page-cover[ng-style="bannerStyle"]
-  span[] {{user.art.title || 'Tous les performeurs'}}
+a[ui-sref="shows.search({id: user.art.id})"]
+  .artist-page-cover[ng-style="bannerStyle"]
+    span[] {{user.art.title || 'Tous les performeurs'}}
 
 .artist-page.container
   .row
