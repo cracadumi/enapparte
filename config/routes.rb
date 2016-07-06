@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resources :pictures, :defaults => { :format => 'json' }
       resources :bookings, :defaults => { :format => 'json' } do
         post 'change_status', on: :member
+        post 'apply_coupon'
       end
       resources :arts, :defaults => { :format => 'json' }
       resources :showcases

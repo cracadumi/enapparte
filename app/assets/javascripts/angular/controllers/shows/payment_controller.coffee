@@ -38,6 +38,10 @@ class ShowPaymentController extends @NGController
           .get id
           .then (show)=>
             @scope.show = show
+            if @scope.show.pricePerson
+              @scope.booking.price     = @scope.show.price * @scope.show.commission * @scope.booking.spectators
+            else
+              @scope.booking.price     = @scope.show.price * @scope.show.commission
             @scope.bannerStyle =
               'background-image' : "url(\"" + @scope.show.bannerUrl + "\")"
             # set selected
@@ -46,6 +50,15 @@ class ShowPaymentController extends @NGController
               picture._destroy = 0
       else
         # @window.location.href = '/'
+
+  applyCoupon: () =>
+    @scope.booking.applyCoupon(@scope.booking.coupon)
+    .then (result) =>
+      if result.success
+        if @scope.show.pricePerson
+          @scope.booking.price     = @scope.show.price * @scope.show.commission * @scope.booking.spectators * 0.9
+        else
+          @scope.booking.price     = @scope.show.price * @scope.show.commission * 0.9
 
   addNewCard: () =>
     modalInstance = @uibModal.open
@@ -90,7 +103,6 @@ class ShowPaymentController extends @NGController
     @scope.user.save()
       .then (user)=>
         @scope.booking.status    = 2
-        @scope.booking.price     = @scope.show.price * @scope.show.commission
         @scope.booking.addressId = @scope.user.address.id
         @scope.booking.creditCardId = @scope.user.payment.id
         @scope.booking.showId    = @scope.show.id

@@ -30,6 +30,15 @@ class Api::V1::BookingsController < Api::BaseController
     respond_with :api, :v1, @bookings
   end
 
+  def apply_coupon
+    puts params
+    if params[:booking][:coupon] && params[:booking][:coupon] == 'EARLYBIRD'
+      render :json => { success: true }
+    else
+      render :json => { success: false }
+    end
+  end
+
   # def destroy
   #   @booking = current_user.bookings.find(params[:id])
   #   @booking.destroy

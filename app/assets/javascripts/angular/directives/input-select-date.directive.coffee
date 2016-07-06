@@ -5,6 +5,7 @@ angular
       $(element).datetimepicker
         format: "MM/DD/YYYY"
         defaultDate: new Date()
+        minDate: new Date(new Date().getTime() - 23 * 60 * 60 * 1000)
 
       $(element).on "dp.change", ->
         $(element).find('input').trigger('input') 
