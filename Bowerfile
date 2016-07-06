@@ -24,7 +24,7 @@ asset 'angular-ui-router-anim-in-out'
 asset 'angular-credit-cards'
 asset 'stripe-angular'
 asset 'angular-i18n'
-asset 'angular-ui-router-tabs'
+# asset 'angular-ui-router-tabs'
 asset 'ng-ckeditor'
 
 asset 'angular-mocks'

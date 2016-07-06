@@ -9,6 +9,7 @@ class DashboardGalleryController extends @NGController
     '$state'
     'User'
     'Showcase'
+    'EmbedVideo'
   ]
 
   tabsGallery: [
@@ -22,8 +23,9 @@ class DashboardGalleryController extends @NGController
 
   init: =>
     @scope.kind_values = [
-      {'name':'Dailymotion', 'value':'Dailymotion'},
-      {'name':'Youtube', 'value':'Youtube'}
+      { name:'Dailymotion', value:'Dailymotion', }
+      { name:'Youtube', value:'Youtube', }
+      { name:'Vimeo', value:'Vimeo', }
     ]
     @scope.showcase = new @Showcase
     @scope.current_music = new @Showcase
@@ -45,25 +47,8 @@ class DashboardGalleryController extends @NGController
         @scope.pictures = pictures
     @scope.trustAsHtml = @sce.trustAsHtml
 
-  getEmbedUrl: (video_url) =>
-    embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)
-    if embed_url
-      return @sce.trustAsHtml '<iframe frameborder="0" height="270" width="480" src="'+embed_url+'"></iframe>'
-    ''
-
-  getDailyEmbedUrl: (url) =>
-    m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
-    if m != null
-      if m[3] != undefined
-        return "https://www.dailymotion.com/embed/video/"+m[3]
-      return "https://www.dailymotion.com/embed/video/"+m[2]
-    null
-
-  getYoutubeEmbedUrl: (url) =>
-    match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
-    if match && match[7].length == 11
-        return "https://www.youtube.com/embed/"+match[7]
-    null
+  getEmbedUrl: (video) =>
+    @EmbedVideo.getVideoFrame video, 480, 270
 
   onEditMusicUrl: (event) =>
     if @scope.music && !@scope.current_music.url
