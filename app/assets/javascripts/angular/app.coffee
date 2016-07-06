@@ -114,10 +114,12 @@
       ]
     }
     .state 'terms', {
-      url: '/terms',
+      url: '/terms?page',
       templateUrl: 'pages/terms.html'
-      onEnter: ['$anchorScroll', ($anchorScroll)->
-        $anchorScroll(0)
+      onEnter: ['$anchorScroll', '$stateParams', '$location', '$timeout', ($anchorScroll, $stateParams, $location, $timeout)->
+        $timeout ->
+          $anchorScroll.yOffset = 100;
+          $anchorScroll($stateParams.page)
       ]
     }
     .state 'concept', {

@@ -12,5 +12,9 @@ angular
       resource
         .$post '/api/v1/bookings/' + this.id + '/change_status', { status: status }
 
+    resource.prototype.applyCoupon = (coupon)->
+      resource
+        .$post '/api/v1/bookings/' + this.id + '/apply_coupon', { coupon: coupon }
+
     resource
   ]
