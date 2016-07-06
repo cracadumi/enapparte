@@ -12,9 +12,9 @@ class ArtistsController extends @NGController
     'User'
     'Auth'
     'Art'
-    'Dailymotion'
     'orderByFilter'
     'ArtSelect'
+    'EmbedVideo'
   ]
 
   init: ->
@@ -44,7 +44,7 @@ class ArtistsController extends @NGController
         @scope.bookings = new Array(@scope.user.shows.length)
         @generateThumbnails()
         if @scope.videos.length > 0
-          @scope.previewVideo = @getEmbedUrl @scope.videos[0].url
+          @setPreviewVideo @scope.videos[0]
 
         @scope.artSelect.selected = (@scope.artSelect.items.filter (i) =>
           i.id is + @scope.user.art.id
@@ -71,67 +71,17 @@ class ArtistsController extends @NGController
       if @scope.user && @scope.artSelect.selected.id != @scope.user.art.id
         @state.go 'shows.search'
 
-  getEmbedUrl: (video_url) =>
-    embed_url = @scope.getDailyEmbedUrl(video_url) || @scope.getYoutubeEmbedUrl(video_url)
-    if embed_url
-      return @sce.trustAsHtml '<iframe frameborder="0" height="270" width="100%" src="'+embed_url+'"></iframe>'
-    ''
-
-  getDailyEmbedUrl: (url) =>
-    if !url
-      return ''
-    m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
-    if m != null
-      if m[3] != undefined
-        return "https://www.dailymotion.com/embed/video/"+m[3]
-      return "https://www.dailymotion.com/embed/video/"+m[2]
-    null
-
-  getYoutubeEmbedUrl: (url) =>
-    if !url
-      return ''
-    match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)
-    if match && match[7].length == 11
-      return "https://www.youtube.com/embed/#{match[7]}"
-    null
-
-  getYoutubeThumb: (url) =>
-    return '' unless url
-    match = url.match /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
-    if match and match[1].length is 11
-      return "http://img.youtube.com/vi/#{match[1]}/0.jpg"
-    null
-
-  getDailyThumb: (url) =>
-    return '' unless url
-    m = url.match(/^.+(dailymotion.com|dai.ly)\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/)
-    if m isnt null
-      videoId = if m[3] isnt undefined then m[3] else m[2]
-      return @Dailymotion.getVideoThumbUrl videoId
-    null
+  getEmbedUrl: (video) =>
+    @EmbedVideo.getVideoFrame video, "100%", 270
 
   generateThumbnails: =>
     i = @scope.videos.length
     while i > 0
       i--
-      if @scope.videos[i].kind is 'Youtube'
-        @scope.videos[i].thumbnail = @getYoutubeThumb @scope.videos[i].url
-      else
-        do (i) =>
-          @getDailyThumb @scope.videos[i].url
-            .then (
-              (response) => @scope.videos[i].thumbnail = response.data.thumbnail_medium_url
-              (response) =>
-                if response.status is 200
-                  # Assign in error callback because dailymotion returns not
-                  #  valid JSON which is treated as error.
-                  @scope.videos[i].thumbnail = response.data.thumbnail_medium_url
-                else
-                  console.error response
-            )
+      @EmbedVideo.setThumbnail @scope.videos[i]
 
-  setPreviewVideo: (url) =>
-    @scope.previewVideo = @getEmbedUrl url
+  setPreviewVideo: (video) =>
+    @scope.previewVideo = @getEmbedUrl video
 
   validateFields: (booking) =>
     if !booking.time || !booking.date || !booking.numberOfGuests || booking.time == '' || booking.date == '' || booking.numberOfGuests == ''

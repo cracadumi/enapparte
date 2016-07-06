@@ -44,7 +44,7 @@
           .artist-gallery.four-in-row
             .artist-gallery-item [
               ng-repeat='video in videos track by $index'
-              ng-click='setPreviewVideo(video.url)'
+              ng-click='setPreviewVideo(video)'
             ]
               img ng-src='{{video.thumbnail}}'
 

@@ -1,7 +1,8 @@
 .showcase
   .row
     div.col-md-6.thumbnail-section[ng-repeat="video in videos"]
-      .thumbnail[ng-bind-html="getEmbedUrl(video.url)"]
+      | {{ video.kind }}
+      .thumbnail[ng-bind-html="getEmbedUrl(video)"]
       button.btn.btn-enapparte-primary.delete[delete-confirm="Are you sure?" ng-click="removeVideo($index)"] Delete
   br
   br
