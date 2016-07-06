@@ -36,7 +36,7 @@
               ng-repeat='slide in user.pictures track by $index'
               ng-click='openGallery(user.pictures, $index)'
             ]
-            img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
+              img ng-src='{{slide.src}}' alt='gallery-picture-{{$index + 1}}'
         uib-tab heading="MUSIC" ng-if='music.url'
           .thumbnail[ng-bind-html="trustAsHtml(music.url)"]
         uib-tab heading="VIDEO" ng-if='videos.length'
