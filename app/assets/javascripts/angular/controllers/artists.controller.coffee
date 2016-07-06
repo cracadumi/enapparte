@@ -37,8 +37,8 @@ class ArtistsController extends @NGController
         @scope.videos = @scope.user.showcases
           .filter (showcase) -> showcase.kind != 'Soundcloud'
 
-        # If many shows, sort by price ascending
-        if @scope.user.shows.length > 3
+        # sort by price ascending
+        if @scope.user.shows.length > 1
           @scope.user.shows = @orderByFilter(@scope.user.shows, 'price', false)
         @generateThumbnails()
         if @scope.videos.length > 0
