@@ -4,12 +4,12 @@ a[ui-sref="shows.search({id: user.art.id})"]
 
 .artist-page.container
   .row
-    h1.artist-name
-      span[ng-hide="user.nickname"]
-        | {{user.fullName}}
-      span[ng-show="user.nickname"]
-        | {{user.nickname}}
     .col-md-6
+      h1.artist-name
+        span[ng-hide="user.nickname"]
+          | {{user.fullName}}
+        span[ng-show="user.nickname"]
+          | {{user.nickname}}
       .artist-info.clearfix
         figure.artist-avatar
           img[src="{{user.profilePicture.src}}" alt="Profile Avatar"]
@@ -28,8 +28,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
             dd
               | {{user.availableLanguages}}
           .artist-idf Je me deplace en IDF
-      .artist-bio[ng-if="user.bio" ng-bind-html="user.bio"]
-    .col-md-6
+      .margin-bottom-40
       uib-tabset justified="true" class="artist-tabs"
         uib-tab heading="GALLERY" ng-if='user.pictures.length'
           .artist-gallery.four-in-row
@@ -48,6 +47,8 @@ a[ui-sref="shows.search({id: user.art.id})"]
               ng-click='setPreviewVideo(video)'
             ]
               img ng-src='{{video.thumbnail}}'
+    .col-md-6
+      .artist-bio[ng-if="user.bio" ng-bind-html="user.bio"]
 
   .margin-bottom-40
   .row.artist-shows
