@@ -126,7 +126,7 @@
       url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController'
     }
     .state 'concept.works', {
-      url: 'howItWorks',
+      url: '/howItWorks',
       onEnter: ['$uibModal', '$state', ($uibModal, $state)->
         $uibModal.open
           animation: true
