@@ -55,7 +55,7 @@
       offset:
         top: 490
 
-    if $state.current.name.startsWith 'home'
+    if $state.current.name.startsWith('home') || $state.current.name.startsWith('pages')
       $("#content-main-page").addClass("full-main-content")
       $("#header").data('bs.affix').options.offset.top = 490
       $("#header").affix('checkPosition')
@@ -91,15 +91,17 @@
       templateUrl: 'artists/show.html'
       controller: 'ArtistsController'
 
-    .state 'about', {
+    .state 'pages',
+      abstract: true
+      url: '/pages'
+      templateUrl: 'pages/index.html'
+
+    .state 'pages.about',
       url: '/about',
       templateUrl: 'pages/about.html',
       controller: 'RootController'
-      onEnter: ['$anchorScroll', ($anchorScroll)->
-        $anchorScroll(0)
-      ]
-    }
-    .state 'performer', {
+
+    .state 'pages.performer', {
       url: '/performer',
       templateUrl: 'pages/become_performer.html'
       onEnter: ['$anchorScroll', ($anchorScroll)->
@@ -122,10 +124,10 @@
           $anchorScroll($stateParams.page)
       ]
     }
-    .state 'concept', {
+    .state 'pages.concept', {
       url: '/concept', templateUrl: 'pages/concept.html', controller: 'RootController'
     }
-    .state 'concept.works', {
+    .state 'pages.concept.works', {
       url: '/howItWorks',
       onEnter: ['$uibModal', '$state', ($uibModal, $state)->
         $uibModal.open
@@ -137,7 +139,7 @@
           $state.go '^'
       ]
     }
-    .state 'contact', {
+    .state 'pages.contact', {
       url: '/contact',
       templateUrl: 'pages/contact.html',
       controller: 'ContactController'
