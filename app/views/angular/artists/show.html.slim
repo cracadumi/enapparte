@@ -131,7 +131,7 @@
             img ng-src='{{picture.src}}' alt='show-picture-{{$index + 1}}'
       .col-xs-12.col-md-7
         h4 Description:
-        .artist-show-description[ng-bind-html="show.bio"]
+        .artist-show-description[ng-bind-html="show.description" ng-if="show.description"]
 
         .comments-section
           .comment-entry[ng-repeat="review in show.reviews"]
