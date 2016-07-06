@@ -79,11 +79,11 @@ angular.module('ui.router.tabs').directive(
 
         /* whether to highlight given route as part of the current state */
         $scope.is_active = function(tab) {
-          // if (typeof tab.isActive === 'function') {
-          //   return tab.isActive();
-          // }
+          if (typeof tab.isActive === 'function') {
+            return tab.isActive();
+          }
 
-          var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
+          var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params);
           return isAncestorOfCurrentRoute;
         };
 
@@ -97,7 +97,7 @@ angular.module('ui.router.tabs').directive(
 
             tab.active = $scope.is_active(tab);
             if (tab.active) {
-              $scope.tabs.active = index;
+              $scope.active = index;
             }
           });
         };
@@ -112,7 +112,7 @@ angular.module('ui.router.tabs').directive(
 ).run(
 ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
-      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
+      '<uib-tabset active="active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
       'disable="tab.disable" ng-click="go(tab)" select="select()(tab)">' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
@@ -121,9 +121,9 @@ angular.module('ui.router.tabs').directive(
       '</div>';
 
     var INLINE_TEMPLATE = '<div>' +
-      '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
+      '<uib-tabset active="active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
-      'disable="tab.disable" ng-click="go(tab)">' +
+      'disable="tab.disable" ng-click="go(tab)" select="select()(tab)">' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +

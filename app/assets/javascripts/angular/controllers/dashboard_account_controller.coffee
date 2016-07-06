@@ -20,12 +20,13 @@ class DashboardAccountController extends @NGController
   months: []
   years: []
 
+  tabsAccount: [
+    { heading: 'Payment', route: 'dashboard.account.payment' }
+    { heading: 'Information', route: 'dashboard.account.information' }
+    { heading: 'Security', route: 'dashboard.account.security' }
+  ]
+
   init: ->
-    tabsAccount = [
-      { heading: 'Payment', route: 'dashboard.account.payment' }
-      { heading: 'Information', route: 'dashboard.account.information' }
-      { heading: 'Security', route: 'dashboard.account.security' }
-    ]
     @scope.months = @locale.DATETIME_FORMATS.SHORTMONTH
     currentYear = new Date().getFullYear()
     @scope.years = _.range(currentYear, currentYear + 10)
