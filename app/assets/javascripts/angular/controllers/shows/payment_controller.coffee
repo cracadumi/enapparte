@@ -28,6 +28,7 @@ class ShowPaymentController extends @NGController
       .get(1)
       .then (user)=>
         @scope.user = user
+        @scope.user.creditCards.unshift({last4: '', brand: 'Paypal'})
         @scope.user.creditCards.unshift({last4: '', brand: 'Add New Card'})
         @scope.user.addresses.unshift({fullAddress: 'Add New Address'})
     if @stateParams.show
@@ -64,7 +65,7 @@ class ShowPaymentController extends @NGController
     modalInstance = @uibModal.open
       animation: true
       templateUrl: 'shows/add_new_card.html'
-      backdrop: 'static'
+      backdrop  : 'static'
       controller: ['$scope', '$uibModalInstance', '$state', 'Flash', '$locale', 'CreditCard', ($scope, $uibModalInstance, $state, Flash, $locale, CreditCard)->
         $scope.months = $locale.DATETIME_FORMATS.SHORTMONTH
         currentYear = new Date().getFullYear()
