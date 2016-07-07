@@ -9,8 +9,7 @@ class ArtSearchController extends @NGController
 
   init: ->
     @scope.artSelect = @ArtSelect
-    @scope.state = @state
 
   isSearchPage: ->
-    @scope.state.current.name == "shows.search" || @scope.state.current.name == "shows.search"
+    @state.current.name == "shows.search"
 
