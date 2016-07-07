@@ -82,7 +82,7 @@ class ArtistsController extends @NGController
     @scope.previewVideo = @getEmbedUrl video
 
   validateFields: (show) =>
-    if !show.time || !show.date || show.time == '' || show.date == '' || (show.pricePerson && (show.numberOfGuests == '' || !show.numberOfGuests)) || (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)
+    if !show.time || !show.date || show.time == '' || show.date == '' || (show.pricePerson && (show.numberOfGuests == '' || !show.numberOfGuests)) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees))
       show.invalid = true
       show.valid = false
     else
