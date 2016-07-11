@@ -42,9 +42,9 @@ class Show < ActiveRecord::Base
     elsif !min_attendees && !max_spectators
       spect = "Indifférent"
     elsif !min_attendees
-      spect = max_spectators.to_s
+      spect = "Maximum " + max_spectators.to_s
     elsif !max_spectators
-      spect = min_attendees.to_s
+      spect = "Minimum " + min_attendees.to_s
     end
   end
 

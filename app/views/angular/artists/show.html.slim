@@ -106,7 +106,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 uib-timepicker ng-model='show.time' hour-step="1" minute-step="1"
             .error
               | Please fill this field
-          .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && ((show.pricePerson && (!show.numberOfGuests || show.numberOfGuests == '')) || (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators))}"
+          .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && ((show.pricePerson && (!show.numberOfGuests || show.numberOfGuests == '')) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees)) || (!show.minAttendees && !show.maxSpectators && (show.numberOfGuests < 1)))}"
             .input-group
               input.form-control [
                 type='text'
@@ -120,8 +120,15 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 .glyphicon.glyphicon-user
             .error ng-if="!show.numberOfGuests || show.numberOfGuests == ''"
               | Please fill this field
-            .error ng-if="show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators"
+            .error ng-if="show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)"
               | Please enter a value between {{show.minAttendees}} and {{show.maxSpectators}}
+            .error ng-if="!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)"
+              | Please enter a value between 1 and {{show.maxSpectators}}
+            .error ng-if="show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees)"
+              | Please enter a value greater than {{show.minAttendees}}
+            .error ng-if="!show.minAttendees && !show.maxSpectators && (show.numberOfGuests < 1)"
+              | Please enter a value greater than 0
+
           .transparent-control
             button.btn.btn-enapparte-primary ng-click='bookNow(show)' Book now
 

@@ -77,10 +77,12 @@
             label.select-label Choisissez votre moyen de paiement :
             ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap' onkeypress="return false"
               ui-select-match
-                div ng-if="user.payment.brand && user.payment.brand != 'Add New Card'" {{user.payment.brand}}, {{user.payment.last4}}
+                div ng-if="user.payment.brand && user.payment.brand != 'Add New Card' && user.payment.brand != 'Paypal' " {{user.payment.brand}}, {{user.payment.last4}}
               ui-select-choices repeat='payment in user.creditCards track by $index'
                 div ng-click="addNewCard()" ng-if="payment.brand == 'Add New Card'" Add New Card
-                div ng-if="payment.brand != 'Add New Card'" {{payment.brand}}, {{payment.last4}}
+                div ng-if="payment.brand == 'Paypal'" Paypal
+                div ng-if="payment.brand != 'Add New Card' && payment.brand != 'Paypal'" {{payment.brand}}, {{payment.last4}}
+
 
         .show-payment-message.col-xs-12
           .form-group
