@@ -51,7 +51,7 @@ div[ng-controller="UserSearchController"]
               img[ng-src="{{ user.pictureUrl }}" width="300" height="300"]
               .caption.text-center
                 p.placeholder[ng-show="user.unavailable"]
-                  | Non disponible pour les dates demandées
+                  | Non disponible à la date demandée
                 h4[ng-if="!user.nickname"]= "{{ user.fullName }}"
                 h4[ng-if="user.nickname"]= "{{ user.nickname }}"
                 span= "{{ user.activity }}"
