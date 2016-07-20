@@ -40,6 +40,8 @@ json.shows do
     json.spectators show.spectators
     json.min_attendees show.min_attendees
     json.max_spectators show.max_spectators
+    json.guso (show.guso || 0)
+    json.commission Show::COMMISSION
   	json.reviews do
   	  json.array! show.reviews_max_3 do |review|
   	  	json.review review.review
