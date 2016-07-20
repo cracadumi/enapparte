@@ -76,7 +76,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
           .text-uppercase[ng-hide="show.pricePerson"] total price
           .text-uppercase[ng-show="show.pricePerson"] per person
           .price
-            | {{ show.price | currency:undefined:0 }}
+            | {{ show.price*show.commission+show.guso | currency:undefined:0 }}
         .artist-show-card-actions
           .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && (!show.date || show.date == '')}"
             .input-group.search-datetimepicker [input-select-date]

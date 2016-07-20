@@ -114,6 +114,7 @@ end
 #  rating           :float
 #  price_person     :boolean
 #  min_attendees    :integer
+#  guso             :float            default(0.0)
 #
 # Indexes
 #
