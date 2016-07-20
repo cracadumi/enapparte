@@ -25,7 +25,6 @@ json.pictures do
     json.src_original picture.src_original
   end
 end
-
 json.showcases @user.showcases
 json.shows do
   json.array! @user.active_shows do |show|
@@ -41,7 +40,7 @@ json.shows do
     json.min_attendees show.min_attendees
     json.max_spectators show.max_spectators
     json.guso (show.guso || 0)
-    json.commission Show::COMMISSION
+    json.commission ENV['COMMISSION']
   	json.reviews do
   	  json.array! show.reviews_max_3 do |review|
   	  	json.review review.review
