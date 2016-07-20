@@ -42,7 +42,7 @@
               span ng-if="!show.pricePerson"Prix indicatif par personnee:
             dd
               span ng-if="show.pricePerson"
-                | {{ show.price * show.commission | currency:undefined:0 }}
+                | {{ show.price * show.commission * booking.spectators / booking.spectators | currency:undefined:0 }}
               span ng-if="!show.pricePerson"
                 | {{ show.price * show.commission / booking.spectators | currency:undefined:0 }}
             dt.coupon-code coupon code:
@@ -53,8 +53,10 @@
                   .btn.btn-enapparte-primary ng-click="applyCoupon()" Ok
           .total-price
             | Prix total
-            span
-              | {{ booking.price | currency:undefined:0 }}
+            span ng-if="show.pricePerson"
+              | {{ show.price * booking.spectators * show.commission | currency }}
+            span ng-if="!show.pricePerson"
+              | {{ show.price * show.commission | currency }}
 
           hr
           .cancellation
