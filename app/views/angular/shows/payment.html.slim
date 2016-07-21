@@ -12,17 +12,17 @@
           / = image_tag 'img-3.jpg'
         h1.artist-name
           | {{show.user.nickname || show.user.fullName}}
-    div
+    div.bkpage-content
       | Réserver via enapparteparis.com, c’est faire le choix de la simplicité.
       br
       br
       | Vous profiterez bientôt d’une performance unique et exclusive, et vous bénéficiez dès maintenant:
       br
       br
-      .col-md-offset-1 - &nbsp;&nbsp; d’un paiement 100% sécurisé, par CB ou Paypal.
-      .col-md-offset-1 - &nbsp;&nbsp; de garanties en cas d’annulation,
-      .col-md-offset-1 - &nbsp;&nbsp; d’un accompagnement par une équipe dédiée,
-      .col-md-offset-1 - &nbsp;&nbsp; de chouettes réductions sur votre prochaine réservation!
+      div - &nbsp;&nbsp; d’un paiement 100% sécurisé, par CB ou Paypal.
+      div - &nbsp;&nbsp; de garanties en cas d’annulation,
+      div - &nbsp;&nbsp; d’un accompagnement par une équipe dédiée,
+      div - &nbsp;&nbsp; de chouettes réductions sur votre prochaine réservation!
       br
     form.form-horizontal.row[name="paymentForm" novalidate]
       aside.col-md-4
@@ -141,6 +141,8 @@
             '
             | Book now
           .booknow-hint
-            | Le performeur que vous avez choisi a 48 heures pour accepter votre demande de réservation. En général, cela va très vite!
+            | Le performeur que vous avez choisi a 48 heures pour accepter votre demande de réservation. 
+            br
+            | En général, cela va très vite!
             br
             | Le montant est pour l’instant provisionné sur votre compte, et le paiement ne sera définitivement prélevé qu’au lendemain de votre événement
