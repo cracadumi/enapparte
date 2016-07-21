@@ -103,7 +103,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
               .input-group-addon
                 .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
               div [uib-dropdown-menu]
-                uib-timepicker ng-model='show.time' hour-step="1" minute-step="1"
+                uib-timepicker ng-model='show.time' hour-step="1" minute-step="1" show-meridian="false"
             .error
               | Please fill this field
           .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && ((show.pricePerson && (!show.numberOfGuests || show.numberOfGuests == '')) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees)) || (!show.minAttendees && !show.maxSpectators && (show.numberOfGuests < 1)))}"
