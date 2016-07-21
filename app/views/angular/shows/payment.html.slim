@@ -57,7 +57,11 @@
               | {{ show.price * booking.spectators * show.commission | currency }}
             span ng-if="!show.pricePerson"
               | {{ show.price * show.commission | currency }}
-
+            p.small
+              | Vous êtes une société ? Merci de nous contacter 
+              a[href="http://enapparte-staging.herokuapp.com/#/society"]
+                | ici
+              | !
           hr
           .cancellation
             a ui-sref="terms({page: 'article9'})" Cancellation Policy
