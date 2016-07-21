@@ -1,7 +1,7 @@
 ActiveAdmin.register Show do
   permit_params :title, :length, :surface, :description, :price, :max_spectators, :min_attendees, :active, :user_id,
     :published_at_date, :published_at_time_hour, :published_at_time_minute, :starts_at, :cover_picture_id,
-    :ends_at, :price_person, :booking_ids => [], :pictures => []
+    :ends_at, :price_person, :guso, :booking_ids => [], :pictures => []
 
   form do |f|
     f.inputs "Show" do
@@ -20,6 +20,7 @@ ActiveAdmin.register Show do
       f.input :published_at, as: :just_datetime_picker
       f.input :user
       f.input :bookings
+      f.input :guso
       f.input :pictures, as: :file, input_html: { multiple: true }
       li id: 'pictures' do
         div class: 'inline-hints' do
@@ -51,6 +52,7 @@ ActiveAdmin.register Show do
       row :published_at
       row :starts_at
       row :ends_at
+      row :guso
       row :bookings do
         show.bookings.map{ |b| link_to admin_booking_path(b) }.join(', ').html_safe
       end

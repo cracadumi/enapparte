@@ -42,7 +42,7 @@
               span ng-if="!show.pricePerson"Prix indicatif par personnee:
             dd
               span ng-if="show.pricePerson"
-                | {{ show.price * show.commission | currency:undefined:0 }}
+                | {{ show.price * show.commission * booking.spectators / booking.spectators | currency:undefined:0 }}
               span ng-if="!show.pricePerson"
                 | {{ show.price * show.commission / booking.spectators | currency:undefined:0 }}
             dt.coupon-code coupon code:
@@ -53,8 +53,10 @@
                   .btn.btn-enapparte-primary ng-click="applyCoupon()" Ok
           .total-price
             | Prix total
-            span
-              | {{ booking.price | currency:undefined:0 }}
+            span ng-if="show.pricePerson"
+              | {{ show.price * booking.spectators * show.commission | currency }}
+            span ng-if="!show.pricePerson"
+              | {{ show.price * show.commission | currency }}
 
           hr
           .cancellation
@@ -90,8 +92,28 @@
             textarea.form-control.enapparte-input [
               placeholder='Enter your message'
               ng-model='booking.message'
-              ]
-
+              ]        
+        .show-guso-content ng-if="show.guso"
+          p
+            | Pourquoi le montant affiché ici est-il inférieur au prix total que j’ai vu sur le profil du performeur ? 
+          p
+            | Tout simplement parce que l’artiste que vous avez choisi souhaite obtenir un cachet d’intermittence. Le prix total affiché se compose donc :
+          ol
+            li
+              | Du « net artiste » à régler sur enapparteparis.com lors de votre réservation, 
+            li
+              | Du cachet à régler sur 
+              a[href="https://www.guso.fr/" target="_blank"]
+                | https://www.guso.fr/
+              | . Notre équipe vous contactera afin de vous accompagner dans cette déclaration. C’est très simple et cela prend 5 minutes. 
+          p
+            | Pour toute question, n’hésitez pas à 
+            u
+              | nous contacter
+            i.blue
+              | (link to contact page : http://enapparte-staging.herokuapp.com/#/pages/contact) 
+            | ou à en parler avec votre performeur via la messagerie, une fois votre réservation effectuée! 
+                
         .col-xs-12
           .terms-checkbox.checkbox
             label
