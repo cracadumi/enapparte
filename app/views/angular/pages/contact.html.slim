@@ -18,7 +18,7 @@
               br
               div.row
                 div.col-sm-5.col-sm-offset-2
-                  a.btn.btn-primary.text-center[ui-sref="home.signin" ng-if="!isAuthenticated()"]
+                  a.btn.btn-primary.text-center[ng-click="signInPopup()" ng-if="!isAuthenticated()"]
                     | J'ai un compte : me connecter
                 div.col-sm-5
                   a.btn.btn-primary.text-center[ui-sref="home.signup" ng-if="!isAuthenticated()"]

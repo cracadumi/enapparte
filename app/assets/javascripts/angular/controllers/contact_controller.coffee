@@ -4,6 +4,8 @@ class ContactController extends @NGController
   @$inject: [
     '$scope'
     'Flash'
+    '$uibModal'
+    '$uibModalStack'
     '$rootScope'
     'ArtSelect'
     '$http'
@@ -36,3 +38,10 @@ class ContactController extends @NGController
     @state.go 'shows.search',
       id: artId
       endDate: @scope.endDate || null
+
+  signInPopup: =>
+    @uibModalStack.dismissAll('closing')
+    @uibModal.open
+      animation: true
+      templateUrl: 'devise/log_in.html'
+      controller: 'SignInController'
