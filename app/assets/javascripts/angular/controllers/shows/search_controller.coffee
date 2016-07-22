@@ -23,6 +23,7 @@ class UserSearchController extends @NGController
   filter:
     text: ""
     price: "0,100000"
+
   priceRadii: [
     {price0: 0, price1: 200, title: '< 200 €'}
     {price0: 200, price1: 400, title: '200 € - 400 €'}
@@ -102,6 +103,3 @@ class UserSearchController extends @NGController
     @state.go 'shows.detail',
       id: show.id
       show: show
-
-
-

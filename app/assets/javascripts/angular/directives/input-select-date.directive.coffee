@@ -6,10 +6,12 @@ angular
         format: "MM/DD/YYYY"
         defaultDate: new Date()
         minDate: new Date(new Date().getTime() - 23 * 60 * 60 * 1000)
+        allowInputToggle: true
 
+      ele = $(element).find('input')
       $(element).on "dp.change", ->
-        $(element).find('input').trigger('input') 
- 
+        ele.trigger('input')
+
   .directive 'inputSelectStartDate', ->
     link: (scope, element, attr) ->
       $(element).datetimepicker

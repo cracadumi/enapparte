@@ -171,6 +171,3 @@ class ShowController extends @NGController
   tabClick: (step)->
     if @scope.tabsClickable
       @scope.step = step
-
-
-
