@@ -23,11 +23,18 @@ class UserSearchController extends @NGController
   filter:
     text: ""
     price: "0,100000"
+
   priceRadii: [
     {price0: 0, price1: 200, title: '< 200 €'}
     {price0: 200, price1: 400, title: '200 € - 400 €'}
     {price0: 400, price1: 600, title: '400 € - 600 €'}
     {price0: 600, price1: 999999999999, title: '600+ €'}
+  ]
+  priceRadiiGastro: [
+    {price0: 0, price1: 200, title: '< 40 €'}
+    {price0: 200, price1: 400, title: '40 € - 60 €'}
+    {price0: 400, price1: 600, title: '60 € - 80 €'}
+    {price0: 600, price1: 999999999999, title: '80+ €'}
   ]
 
   init: ->
@@ -39,7 +46,6 @@ class UserSearchController extends @NGController
 
     @scope.priceRadius =
       selected: null
-
 
     @scope.$watch 'artSelect.items', =>
       if @rootScope.previousState != 'artists.show'
@@ -55,13 +61,19 @@ class UserSearchController extends @NGController
       @search()
 
     @scope.$watch 'artSelect.selected', =>
+      if angular.isUndefined(@scope.artSelect.selected)
+        ''
+      else
+        @rootScope.artSeleceted =  @scope.artSelect.selected.title
+
       @scope.style =
         if @scope.artSelect.selected && @scope.artSelect.selected.bannerUrl
           'background-image': "url(\"" + @scope.artSelect.selected.bannerUrl + "\")"
         else
           ''
       @search()
-
+      if @rootScope.artSeleceted == 'Gastronomie'
+        @scope.priceRadius = [{1,2,3}]
     @scope.$watch 'showDate', =>
       @search()
 

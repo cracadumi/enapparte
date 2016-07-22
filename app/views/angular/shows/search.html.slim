@@ -19,11 +19,12 @@ div[ng-controller="UserSearchController"]
           input.form-control.dt-calendar type="text" placeholder="Date de votre événement" ng-model="showDate"
           span.input-group-addon.btn-search-time
             span.glyphicon.glyphicon-calendar
+
       .col-sm-4.col-xs-12.mar-left-20
         .form-group
           ui-select.select-search-home[ng-model="priceRadius.selected", theme='bootstrap']
             ui-select-match[placeholder='Price radius'] {{$select.selected.title}}
-            ui-select-choices[repeat="price in priceRadii"]
+            ui-select-choices[repeat="price in artSelect.selected.title == 'Gastronomie' ? priceRadiiGastro : priceRadii"]
               div[ng-bind-html="price.title"]
 
   .results.container
