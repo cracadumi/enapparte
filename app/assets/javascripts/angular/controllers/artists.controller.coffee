@@ -22,6 +22,11 @@ class ArtistsController extends @NGController
     @scope.artSelect = @ArtSelect
 
     user_id = @stateParams.id
+    @scope.show = {
+      date: @stateParams.showDate
+    }
+
+
     user = new @User
     user
       .artist(user_id)

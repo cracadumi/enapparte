@@ -16,7 +16,7 @@
             div[ng-bind-html="art.title"]
       .col-sm-4.input-search
         .search-datetimepicker.input-group.date[input-select-date]
-          input.form-control.dt-calendar[type="text" ng-model="endDate"]
+          input.form-control.dt-calendar[type="text" ng-model="art.endDate" ng-value="art.endDate"]
           span.input-group-addon.btn-search-time
             span.glyphicon.glyphicon-calendar
       .col-sm-4.input-search
@@ -24,4 +24,3 @@
           |  Chercher
   span[scroll-on-click]
     = image_tag 'arrow.png', class: "anchor-arrow"
-
