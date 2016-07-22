@@ -29,7 +29,8 @@ class UserSearchService
   end
 
   def filter_by_available_at_date(show_date)
-    @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now }).uniq
+    available_users =   @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now })
+    @users = available_users.uniq
   end
 
   def filter_by_price(price_min, price_max)
