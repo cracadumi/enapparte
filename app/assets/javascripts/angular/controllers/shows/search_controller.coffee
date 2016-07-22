@@ -35,6 +35,7 @@ class UserSearchController extends @NGController
     @scope.endDate = @stateParams.endDate || null
     @scope.artId = @stateParams.id || null
     @scope.artSelect = @ArtSelect
+    @scope.showDate = @stateParams.showDate || null
 
     @scope.priceRadius =
       selected: null
@@ -59,6 +60,9 @@ class UserSearchController extends @NGController
           'background-image': "url(\"" + @scope.artSelect.selected.bannerUrl + "\")"
         else
           ''
+      @search()
+
+    @scope.$watch 'showDate', =>
       @search()
 
     @scope.$watch 'endDate', =>
@@ -93,6 +97,7 @@ class UserSearchController extends @NGController
         price0: price0 || null
         price1: price1 || null
         art_id: @scope.artSelect.selected.id if @scope.artSelect.selected
+        show_date: @scope.showDate
         start_date: @scope.startDate
         end_date: @scope.endDate
       .then (users)=>
@@ -102,6 +107,3 @@ class UserSearchController extends @NGController
     @state.go 'shows.detail',
       id: show.id
       show: show
-
-
-

@@ -12,17 +12,14 @@ div[ng-controller="UserSearchController"]
           p.main-description-header.art-description-header[style="text-align:justify;" ng-hide='artIsChosen()']
             | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
 
+      .col-sm-2
+
       .col-sm-4.col-xs-12
-        .search-datetimepicker.input-group.date[input-select-start-date]
-          input.form-control.dt-calendar type="text" placeholder="Start date" ng-model="startDate"
+        .search-datetimepicker.input-group.date[input-select-date id="showDate"]
+          input.form-control.dt-calendar type="text" placeholder="Date de votre événement" ng-model="showDate"
           span.input-group-addon.btn-search-time
             span.glyphicon.glyphicon-calendar
-      .col-sm-4.col-xs-12
-        .search-datetimepicker.input-group.date[input-select-date id="endDate"]
-          input.form-control.dt-calendar type="text" placeholder="End date" ng-model="endDate"
-          span.input-group-addon.btn-search-time
-            span.glyphicon.glyphicon-calendar
-      .col-sm-4.col-xs-12
+      .col-sm-4.col-xs-12.mar-left-20
         .form-group
           ui-select.select-search-home[ng-model="priceRadius.selected", theme='bootstrap']
             ui-select-match[placeholder='Price radius'] {{$select.selected.title}}

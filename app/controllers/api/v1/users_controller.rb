@@ -37,6 +37,7 @@ module Api
                                         art_id: params[:art_id],
                                         end_date: params[:end_date],
                                         start_date: params[:start_date],
+                                        start_date: params[:show_date],
                                         price_min: params[:price0],
                                         price_max: params[:price1]
                                       ).results
