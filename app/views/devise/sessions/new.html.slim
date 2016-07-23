@@ -10,7 +10,7 @@
       = f.email_field :email, :autofocus => true, class: 'form-control'
     .form-group
       - if devise_mapping.recoverable?
-        = link_to "Forgot password?", new_password_path(resource_name), class: 'right'
+        = link_to "Mot de passe oublié?", new_password_path(resource_name), class: 'right'
       = f.label :password
       = f.password_field :password, class: 'form-control'
     = f.submit 'Sign in', :class => 'button right'
@@ -18,4 +18,4 @@
       .checkbox[style="width:150px"]
         label
           = f.check_box :remember_me
-          |  Remember me 
+          |  Se souvenir de moi 
