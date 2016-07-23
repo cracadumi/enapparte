@@ -10,9 +10,9 @@ class DashboardReservationsController extends @NGController
   ]
 
   tabsReservations: [
-    { heading: 'Current', route: 'dashboard.reservations.current' }
-    { heading: 'History', route: 'dashboard.reservations.history' }
-    { heading: 'Cancelled', route: 'dashboard.reservations.cancelled' }
+    { heading: 'Réservations en cours', route: 'dashboard.reservations.current' }
+    { heading: 'Historique', route: 'dashboard.reservations.history' }
+    { heading: 'Réservations annulées', route: 'dashboard.reservations.cancelled' }
   ]
 
   bookings: []
