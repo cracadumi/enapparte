@@ -16,16 +16,16 @@ a[ui-sref="shows.search({id: user.art.id})"]
             img[src="{{user.profilePicture.src}}" alt="Profile Avatar"]
           .artist-metadata
             dl.enapparte-dl
-              dt Note:
+              dt Note
               dd
                 .glyphicon[ng-repeat="n in [].constructor(5) track by $index" ng-class="{'glyphicon-star': $index<user.rating, 'glyphicon-star-empty': $index+1>user.rating}"]
-              dt Secteur:
+              dt Secteur
               dd
                 | {{user.art.title}}
-              dt Spécialité:
+              dt Spécialité
               dd
                 | {{user.activity}}
-              dt Langues:
+              dt Langues
               dd
                 | {{user.availableLanguages}}
             .artist-idf Je me deplace en IDF
