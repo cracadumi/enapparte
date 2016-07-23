@@ -31,21 +31,21 @@
             dt date:
             dd
               | {{ ::booking.date | amDateFormat:'Do MMMM, YYYY' }}
-            dt time:
+            dt heure:
             dd
               | {{ ::booking.date | amDateFormat:'HH:mm' }}
-            dt number of guests:
+            dt nombre de convives:
             dd
               | {{ ::booking.spectators}}
             dt
               span ng-if="show.pricePerson"Prix par personne:
-              span ng-if="!show.pricePerson"Prix indicatif par personnee:
+              span ng-if="!show.pricePerson"Prix indicatif par personne:
             dd
               span ng-if="show.pricePerson"
                 | {{ show.price * show.commission * booking.spectators / booking.spectators | currency:undefined:0 }}
               span ng-if="!show.pricePerson"
                 | {{ show.price * show.commission / booking.spectators | currency:undefined:0 }}
-            dt.coupon-code coupon code:
+            dt.coupon-code code promo:
             dd
               .input-group
                 input.form-control.enapparte-input.has-no-border type='text' ng-model="booking.coupon" placeholder='Enter code'
@@ -59,7 +59,7 @@
               | {{ show.price * show.commission | currency }}
             p.small
               | Vous êtes une société ? Merci de nous contacter 
-              a[href="http://enapparte-staging.herokuapp.com/#/society"]
+              a[href="http://enapparte-staging.herokuapp.com/#/society" target="_blank"]
                 | ici
               | !
           hr

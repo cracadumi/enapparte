@@ -64,15 +64,15 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 | {{show.title}}
             .artist-show-card-metadata
               dl.enapparte-dl
-                dt note:
+                dt note
                 dd
                   .glyphicon [
                     ng-repeat="n in [].constructor(5) track by $index"
                     ng-class="{'glyphicon-star': $index<show.rating, 'glyphicon-star-empty': $index+1>show.rating}"]
-                dt durée:
+                dt durée
                 dd
                   | {{show.duration}}
-                dt[ng-if="show.spectators"] nombre de convives:
+                dt[ng-if="show.spectators"] nombre de convives
                 dd
                   | {{show.spectators}}
             .artist-show-card-price
@@ -108,7 +108,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                   div [uib-dropdown-menu]
                     uib-timepicker ng-model='show.time' hour-step="1" minute-step="1" show-meridian="false"
                 .error
-                  | Please fill this field
+                  | Veuillez remplir ce champ
               .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && ((show.pricePerson && (!show.numberOfGuests || show.numberOfGuests == '')) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees)) || (!show.minAttendees && !show.maxSpectators && (show.numberOfGuests < 1)))}"
                 .input-group
                   input.form-control [
