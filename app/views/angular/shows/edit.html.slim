@@ -14,24 +14,24 @@
       form.show.form-horizontal[novalidate name="showForm"]
         .form-inputs[ng-show="step == 1"]
           fieldset
-            legend= "My Show Details"
-            p= "Your show will be visible on the site once you have downloaded your photos and complete details of your profile"
+            legend= "Ajouter une nouvelle performance"
+            p= "Votre performance ne sera visible sur votre profil que lorsqu'elle sera complète"
             br
-            input-select[label="Max Spectators" model="show.maxSpectators" data-collection=(([{ name: '' }] + (1..25).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
-            input-select[label="Min Spectators" model="show.minAttendees" data-collection=(([{ name: '' }] + (1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
-            input-integer[label="Duration in minutes" model="show.length" required]
-            input-string[label="Title" model="show.title" required]
+            input-select[label="Nombre de convives maximum" model="show.maxSpectators" data-collection=(([{ name: '' }] + (1..25).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
+            input-select[label="Nombre de convives minimum" model="show.minAttendees" data-collection=(([{ name: '' }] + (1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
+            input-integer[label="Durée (en minutes)" model="show.length" required]
+            input-string[label="Nom de la performance" model="show.title" required]
             input-ckeditor[label="Description" model="show.description" required]
             / input-select[label="Language" model="show.languageId" data-collection=(Language.order(:title).all.map {|a| { name: a.title, value: a.id }}.to_json) required]
           fieldset
-            legend= "Price"
-            input-integer[label="Price" model="show.price" required]
+            legend= "Prix"
+            input-integer[label="Prix" model="show.price" required]
             .price-person-checkbox.col-sm-offset-3
               input-checkbox[label="Il s’agit du prix par personne" model="show.pricePerson"]
         .form-inputs[ng-show="step == 2"]
           fieldset
-            legend= "Add Photos"
-            p= "Add photos from your Show"
+            legend= "Ajouter des photos"
+            p= "Ajouter des photos"
             br
             .row
               .col-xs-6.col-md-3[ng-repeat="picture in show.pictures" ng-hide="picture._destroy == 1"]
@@ -43,11 +43,11 @@
                         i.glyphicon.glyphicon-trash
                   .clearfix
             br
-            input-images-button[label="Upload photos" model="show.pictures" required]
+            input-images-button[label="Ajouter" model="show.pictures" required]
         .form-inputs[ng-show="step == 3"]
           fieldset
-            legend= "Cover Photo"
-            p= "Choose a cover photo for your show"
+            legend= "Photo de couverture"
+            p= "Choisissez une photo de couverture pour votre performance"
             br
             .row
               .col-xs-6.col-md-3[ng-repeat="picture in show.pictures" ng-hide="picture._destroy == 1"]
@@ -56,7 +56,7 @@
                   .caption
                     i.glyphicon.glyphicon-ok[ng-show="picture.selected"]
                     '
-                    = "Cover Photo"
+                    = "Photo de couverture"
 
         hr
         .form-actions
@@ -64,12 +64,12 @@
             .row
               .col-md-9.col-md-offset-3
                 button#continue.btn.btn-enapparte-primary[ng-click="prevStep(showForm)" ng-show="step > 1"]
-                  = "Back"
+                  = "Précédent"
                 '
                 button#continue.btn.btn-enapparte-primary[ng-click="nextStep(showForm)" ng-show="step < 3"]
-                  = "Continue"
+                  = "Continuer"
                 button#finish.btn.btn-enapparte-primary[ng-click="finish()" ng-show="step == 3"]
                   i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="show.pending"]
                   '
-                  = "Finish"
+                  = "Valider"
 
