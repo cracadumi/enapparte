@@ -3,43 +3,43 @@
     .col-sm-5
       .panel.panel-default
         .panel-heading
-          h3.panel-title Current Credit Cards
+          h3.panel-title Carte(s) de crédit enregistrée(s)
         .panel-body
           ul
             li[ng-repeat="card in creditCards"]
               span() {{card.brand}}, {{card.last4}}
               '
-              label.label.label-success[ng-show="card.default"] Default
+              label.label.label-success[ng-show="card.default"] Carte principale
               '
-              a[href="" ng-click="makeDefaultCard(card.id)" ng-show="!card.default"] Make Default
-            li[ng-show="!creditCards.length"] No Credit Cards.
+              a[href="" ng-click="makeDefaultCard(card.id)" ng-show="!card.default"] Carte principale
+            li[ng-show="!creditCards.length"] Pas de carte de crédit.
     .col-sm-7
       .panel.panel-default
         .panel-heading
-          h3.panel-title Payment Details
+          h3.panel-title Ajouter une carte de paiement
         .panel-body
           form[novalidate="novalidate" name="cardForm"]
             .row
               .col-xs-12
                 .form-group
-                  label CARD NUMBER
-                  input.form-control[type="tel" ng-model="card.number" cc-format cc-number ng-required="true" aria-required="true" required autofocus placeholder="Credit Card Number"]
+                  label Numéro de carte
+                  input.form-control[type="tel" ng-model="card.number" cc-format cc-number ng-required="true" aria-required="true" required autofocus placeholder="Numéro de carte"]
               .col-xs-7.col-md-7
                 .form-group[cc-exp]
                   .row
                     .col-xs-6
-                      label EXP MONTH
+                      label MOIS
                       select.form-control[ng-model="card.exp_month" cc-exp-month ng-required="true"]
                         option[disabled selected value=""] Month
                         option[ng-repeat="month in months" value="{{$index + 1}}"] {{$index + 1}} - {{month}}
                     .col-xs-6
-                      label EXP YEAR
+                      label ANNÉE
                       select.form-control[ng-model="card.exp_year" cc-exp-year ng-required="true"]
                         option[disabled selected value=""] Year
                         option[ng-repeat="year in years" value="{{year}}"] {{year}}
               .col-xs-5.col-md-5
                 .form-group
-                  label CV CODE
+                  label CRYPTOGRAMME VISUEL
                   input.form-control[type="tel" ng-model="card.cvc" cc-type="cardNumber.$ccType" cc-cvc  ng-required="true"]
               .col-xs-12
-                button.btn.btn-enapparte-primary.btn-block[type="button" ng-click="addNewCard()" ng-disabled="cardForm.$invalid || card.pending"] Add New Card
+                button.btn.btn-enapparte-primary.btn-block[type="button" ng-click="addNewCard()" ng-disabled="cardForm.$invalid || card.pending"] Ajouter
