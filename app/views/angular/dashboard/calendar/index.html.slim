@@ -1,26 +1,26 @@
 .container.calendar-bookings[ng-controller="DashboardCalendarController"]
-  h5 Sélection rapide : indiquez ici les jours où vous êtes généralement disponible pour proposer vos performances (vous pouvez désélectionner des jours en cliquant dessus sur le calendrier)
+  h5 Sélection rapide : indiquez ici les jours où vous êtes généralement disponible pour proposer vos performances (vous pouvez désélectionner des jours en cliquant dessus sur le calendrier) :
   .row
     .col-sm-4
       table.explication-table
         tr
-          td#td-mon[ng-click="weekday_Click('mon')" data-ng-class="{'bg-green': allDaySelected.mon}"] Mon
-          td#td-mon[ng-click="weekday_Click('tue')" data-ng-class="{'bg-green': allDaySelected.tue}"] Tue
-          td#td-mon[ng-click="weekday_Click('wed')" data-ng-class="{'bg-green': allDaySelected.wed}"] Wed
-          td#td-mon[ng-click="weekday_Click('thu')" data-ng-class="{'bg-green': allDaySelected.thu}"] Thu
-          td#td-mon[ng-click="weekday_Click('fri')" data-ng-class="{'bg-green': allDaySelected.fri}"] Fri
-          td#td-mon[ng-click="weekday_Click('sat')" data-ng-class="{'bg-green': allDaySelected.sat}"] Sat
-          td#td-mon[ng-click="weekday_Click('sun')" data-ng-class="{'bg-green': allDaySelected.sun}"] Sun
+          td#td-mon[ng-click="weekday_Click('mon')" data-ng-class="{'bg-green': allDaySelected.mon}"] Lun
+          td#td-mon[ng-click="weekday_Click('tue')" data-ng-class="{'bg-green': allDaySelected.tue}"] Mar
+          td#td-mon[ng-click="weekday_Click('wed')" data-ng-class="{'bg-green': allDaySelected.wed}"] Mer
+          td#td-mon[ng-click="weekday_Click('thu')" data-ng-class="{'bg-green': allDaySelected.thu}"] Jeu
+          td#td-mon[ng-click="weekday_Click('fri')" data-ng-class="{'bg-green': allDaySelected.fri}"] Ven
+          td#td-mon[ng-click="weekday_Click('sat')" data-ng-class="{'bg-green': allDaySelected.sat}"] Sam
+          td#td-mon[ng-click="weekday_Click('sun')" data-ng-class="{'bg-green': allDaySelected.sun}"] Dim
     .col-sm-3
       .legend-group.legend-available
         .bg-green
-        .legend-note available
+        .legend-note Disponible
       .legend-group.legend-not-available
         .bg-white
-        .legend-note not available
-  h5 Vous pouvez aussi indiquer vos disponibilités jour par jour 
+        .legend-note Pas disponible
+  h5 Vous pouvez aussi indiquer vos disponibilités jour par jour :
   div.cal-btn-cont
-    div.nxt[ng-click="doNextView()"] Next
-    div.prev[ng-click="doPrevView()"] Prev
+    div.nxt[ng-click="doNextView()"] Suivant
+    div.prev[ng-click="doPrevView()"] Précédent
 
   #calendar-dashboard[append-calendar showid="{{showId}}"]

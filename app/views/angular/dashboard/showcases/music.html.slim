@@ -1,10 +1,10 @@
 .showcase
   div
     a[href="http://shareandembed.help.soundcloud.com/customer/portal/articles/2167172-embedding-a-track-or-playlist-" target="blank"]
-      | Instructions to upload your soundcloud playlist
+      | Si vous souhaitez lier votre compte soundcloud, cliquez ici pour voir les instructions
   .row
     .col-md-9
-      input.music-url.form-control[ng-model="current_music.url" placeholder="Enter url" type="text" required ng-keypress="$event.keyCode == 13 && onEditMusicUrl()"]
+      input.music-url.form-control[ng-model="current_music.url" placeholder="Entrer l'url" type="text" required ng-keypress="$event.keyCode == 13 && onEditMusicUrl()"]
     .col-md-3
       .btn.btn-enapparte-primary.pull-left[ng-click="onEditMusicUrl()"]= "Valider"
   br

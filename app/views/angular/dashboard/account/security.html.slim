@@ -2,12 +2,12 @@
   / = simple_form_for @user do |f|
   form.form-horizontal[name="formChangePassword"]
     fieldset
-      legend Change Password
-      input-password[label="Password" model="user.password" required confirmation="1"]
+      legend Changer le mot de passe
+      input-password[label="Nouveau mot de passe" model="user.password" required confirmation="1"]
     .row
       .col-md-9.col-md-offset-3
         button.btn.btn-enapparte-primary[ng-click="formChangePassword.$valid && changePassword()"]
-          | Change
+          | Changer
 
   br
   br
@@ -17,9 +17,9 @@
 
   form.form-horizontal[name="formChangeEmail"]
     fieldset
-      legend Change Email
+      legend Modifier l'email
       input-email[label="Email" model="user.email" required]
     .row
       .col-md-9.col-md-offset-3
         button.btn.btn-enapparte-primary[ng-click="formChangeEmail.$valid && changeEmail()"]
-          | Change
+          | Changer

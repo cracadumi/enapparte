@@ -30,12 +30,12 @@
                     .col-xs-6
                       label MOIS
                       select.form-control[ng-model="card.exp_month" cc-exp-month ng-required="true"]
-                        option[disabled selected value=""] Month
+                        option[disabled selected value=""] Mois
                         option[ng-repeat="month in months" value="{{$index + 1}}"] {{$index + 1}} - {{month}}
                     .col-xs-6
                       label ANNÉE
                       select.form-control[ng-model="card.exp_year" cc-exp-year ng-required="true"]
-                        option[disabled selected value=""] Year
+                        option[disabled selected value=""] Année
                         option[ng-repeat="year in years" value="{{year}}"] {{year}}
               .col-xs-5.col-md-5
                 .form-group
