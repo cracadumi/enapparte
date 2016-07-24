@@ -43,7 +43,7 @@ gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'maruku'
 gem 'omniauth-stripe-connect'
 gem 'ckeditor'
-gem 'devise-i18n'
+
 
 group :production do
   gem 'pg'
