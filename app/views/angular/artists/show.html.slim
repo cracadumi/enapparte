@@ -88,6 +88,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     placeholder='Date'
                     ng-model='show.date'
                     ng-change='validateFields(show)'
+                    ng-keyup="$event.keyCode == 13 && bookNow(show)"
                     required
                   ]
                   .input-group-addon
@@ -101,6 +102,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     placeholder='Heure'
                     readonly='true'
                     ng-value="show.time | date:'shortTime'"
+                    ng-keyup="$event.keyCode == 13 && bookNow(show)"
                     required                    
                   ]
                   .input-group-addon
@@ -116,6 +118,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     placeholder='Nombre de convives'
                     ng-model='show.numberOfGuests'
                     ng-change='validateFields(show)'
+                    ng-keyup="$event.keyCode == 13 && bookNow(show)"
                     input-allow-integer=''
                     required
                   ]
