@@ -44,6 +44,7 @@ end
 #  price_person     :boolean
 #  date_at          :datetime
 #  min_attendees    :integer
+#  guso             :float
 #
 # Indexes
 #

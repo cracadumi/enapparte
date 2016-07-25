@@ -19,16 +19,18 @@ class ArtistsController extends @NGController
 
 
   init: ->
-
     @scope.artSelect = @ArtSelect
-
     user_id = @stateParams.id
     user = new @User
     user
       .artist(user_id)
       .then (artist)=>
         @scope.user = artist
+        
+        for show in @scope.user.shows
+          show.date = @stateParams.showDate
 
+        @scope.user.shows
         @scope.bannerStyle =
           'background-image' : "url(\"" + @scope.user.art.bannerUrl + "\")"
 

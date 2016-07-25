@@ -10,13 +10,14 @@ class RootController extends @NGController
   ]
 
   init: ->
-    @scope.art = {}
+    @scope.art = {
+      endDate: null
+    }
     @rootScope.rootPath = true
     @scope.artSelect = @ArtSelect
-    @scope.endDate = null
 
   beginSearch: =>
-    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else null
+    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else nulls    
     @state.go 'shows.search',
       id: artId
-      endDate: @scope.endDate || null
+      showDate: @scope.endDate || null
