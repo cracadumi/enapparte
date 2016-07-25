@@ -1,4 +1,4 @@
 #history
   p[ng-if="(bookings | filter:filterOldBookings).length == 0"]
-    | You have no old bookings
+    | Vous n'avez pas d'historique
   performance[ng-repeat="booking in bookings | filter:filterOldBookings" booking="booking"]
