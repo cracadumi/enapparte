@@ -29,10 +29,10 @@ class UserSearchService
   end
 
   def filter_by_available_at_date(show_date)
-    if show_date
+    if show_date.present?
       right_border = DateTime.strptime(show_date, '%m/%d/%Y')
       left_border = show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now
-      all_users = @users      
+      all_users = @users
       available_users =   @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now })
       non_available_users = (all_users - available_users).uniq
       non_available_users.each {|u| u.unavailable = true}
@@ -43,11 +43,11 @@ class UserSearchService
   def filter_by_price(price_min, price_max)
     return @users if price_min.blank? && price_max.blank?
     if price_min.blank?
-      @users = @users.joins(:shows).where('price < ?', price_max)
+      @users = @users.joins(:shows).where('price < ?', price_max).uniq
     elsif price_max.blank?
-      @users = @users.joins(:shows).where('price > ?', price_min)
+      @users = @users.joins(:shows).where('price > ?', price_min).uniq
     else
-      @users = @users.joins(:shows).where(shows: { price: price_min..price_max })
+      @users = @users.joins(:shows).where(shows: { price: price_min..price_max }).uniq
     end
   end
 
