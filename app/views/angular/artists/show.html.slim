@@ -96,7 +96,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 .error
                   | Veuillez remplir ce champ
               .transparent-control.enapparte-timepicker ng-class="{'input-invalid': show.submitted && show.invalid && (!show.time || show.time == '')}"
-                .input-group [uib-dropdown uib-dropdown-toggle]
+                .input-group [uib-dropdown auto-close="outsideClick"]
                   input.form-control [
                     type='text'
                     placeholder='Heure'
@@ -107,7 +107,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                   ]
                   .input-group-addon
                     .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
-                  div [uib-dropdown-menu]
+                  div [uib-dropdown-menu class="dropdown-menu"]
                     uib-timepicker ng-model='show.time' hour-step="1" minute-step="1" show-meridian="false"
                 .error
                   | Veuillez remplir ce champ
