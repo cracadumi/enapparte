@@ -17,7 +17,7 @@ class RootController extends @NGController
     @scope.artSelect = @ArtSelect
 
   beginSearch: =>
-    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else null
+    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else nulls    
     @state.go 'shows.search',
       id: artId
-      endDate: @scope.art.endDate || null
+      showDate: @scope.endDate || null
