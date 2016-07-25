@@ -278,15 +278,20 @@ body
 
 // Footer section
 
-.nav li a:hover, .nav li a:focus
-  background: none !important
-
+.nav li a:focus, .nav li a:focus,
 .nav li a:hover, .nav li a:hover
-  background: #002b3f !important
-  color: #fff !important
-
+  background: none
+  
 .main-header.affix-top.home a.btn-performer:hover
-  background: #002b3f !important
+  background: #002b3f
+
+.main-header.affix-top.home .user-logged-dropdown:hover, .user-logged-dropdown:focus
+  background: none
+
+.main-header.not-home a.user-logged-dropdown:hover, .main-header.affix a.user-logged-dropdown:hover,
+.main-header.not-home a.user-logged-dropdown:focus, .main-header.affix a.user-logged-dropdown:focus
+  background: none
+  color:  #002b3f
 
 .mar-left-20
   margin-left: 20px
