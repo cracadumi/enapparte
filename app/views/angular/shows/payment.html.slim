@@ -53,10 +53,8 @@
                   .btn.btn-enapparte-primary ng-click="applyCoupon()" Ok
           .total-price
             | Prix total
-            span ng-if="show.pricePerson"
-              | {{ show.price * booking.spectators * show.commission | currency }}
-            span ng-if="!show.pricePerson"
-              | {{ show.price * show.commission | currency }}
+            span
+              | {{ booking.price | currency }}
             p.small
               | Vous êtes une société ? Merci de nous contacter 
               a[href="http://enapparte-staging.herokuapp.com/#/society" target="_blank"]
