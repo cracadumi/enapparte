@@ -95,13 +95,13 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 .error
                   | Veuillez remplir ce champ
               .transparent-control.enapparte-timepicker ng-class="{'input-invalid': show.submitted && show.invalid && (!show.time || show.time == '')}"
-                .input-group [uib-dropdown auto-close='outsideClick'  uib-dropdown-toggle]
+                .input-group [uib-dropdown uib-dropdown-toggle]
                   input.form-control [
                     type='text'
                     placeholder='Heure'
                     readonly='true'
                     ng-value="show.time | date:'shortTime'"
-                    required                    
+                    required
                   ]
                   .input-group-addon
                     .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
