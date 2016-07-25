@@ -7,8 +7,4 @@ $(document).ready( function(){
   $('.modal').on('show.bs.modal', function() {
     $('.flash-messages .alert').alert('close');
   });
-
 });
-
-
-

@@ -15,16 +15,16 @@ li[ng-if="isAuthenticated()"]
     ul.dropdown-menu.dropdown-menu-right.dropdown-list-menu-account[aria-labelledby="dropdownMenu1"]
       li
         a[ui-sref="dashboard.index"]
-          | Dashboard
+          | Espace personnel
       li[ng-if="isPerformer()"]
         a[ui-sref="dashboard.performances.current"]
-          | My Performances
+          | Mes performances
       li
         a[ui-sref="dashboard.account.payment"]
-          | Account
+          | Compte
       li
         a[href="" ng-click="logout()"]
-          | Log out
+          | Me déconnecter
 li[ng-if="!isAuthenticated()"]
   a.nav_links.collapse-header.text-center[ui-sref="home.signin"]
     | Connexion

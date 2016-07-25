@@ -12,40 +12,40 @@
           / = image_tag 'img-3.jpg'
         h1.artist-name
           | {{show.user.nickname || show.user.fullName}}
-    div
+    div.bkpage-content
       | Réserver via enapparteparis.com, c’est faire le choix de la simplicité.
       br
       br
       | Vous profiterez bientôt d’une performance unique et exclusive, et vous bénéficiez dès maintenant:
       br
       br
-      .col-md-offset-1 - &nbsp;&nbsp; d’un paiement 100% sécurisé, par CB ou Paypal.
-      .col-md-offset-1 - &nbsp;&nbsp; de garanties en cas d’annulation,
-      .col-md-offset-1 - &nbsp;&nbsp; d’un accompagnement par une équipe dédiée,
-      .col-md-offset-1 - &nbsp;&nbsp; de chouettes réductions sur votre prochaine réservation!
+      div - &nbsp;&nbsp; d’un paiement 100% sécurisé, par CB ou Paypal.
+      div - &nbsp;&nbsp; de garanties en cas d’annulation,
+      div - &nbsp;&nbsp; d’un accompagnement par une équipe dédiée,
+      div - &nbsp;&nbsp; de chouettes réductions sur votre prochaine réservation!
       br
     form.form-horizontal.row[name="paymentForm" novalidate]
       aside.col-md-4
         .show-payment-aside
           dl.enapparte-dl
-            dt date:
+            dt date
             dd
               | {{ ::booking.date | amDateFormat:'Do MMMM, YYYY' }}
-            dt time:
+            dt heure
             dd
               | {{ ::booking.date | amDateFormat:'HH:mm' }}
-            dt number of guests:
+            dt nombre de convives
             dd
               | {{ ::booking.spectators}}
             dt
-              span ng-if="show.pricePerson"Prix par personne:
-              span ng-if="!show.pricePerson"Prix indicatif par personnee:
+              span ng-if="show.pricePerson"Prix par personne
+              span ng-if="!show.pricePerson"Prix indicatif par personne
             dd
               span ng-if="show.pricePerson"
                 | {{ show.price * show.commission * booking.spectators / booking.spectators | currency:undefined:0 }}
               span ng-if="!show.pricePerson"
                 | {{ show.price * show.commission / booking.spectators | currency:undefined:0 }}
-            dt.coupon-code coupon code:
+            dt.coupon-code code promo
             dd
               .input-group
                 input.form-control.enapparte-input.has-no-border type='text' ng-model="booking.coupon" placeholder='Enter code'
@@ -57,14 +57,15 @@
               | {{ show.price * booking.spectators * show.commission | currency }}
             span ng-if="!show.pricePerson"
               | {{ show.price * show.commission | currency }}
-
+            p.small
+              | Vous êtes une société ? Merci de nous contacter 
+              a[href="http://enapparte-staging.herokuapp.com/#/society" target="_blank"]
+                | ici
+              | !
           hr
           .cancellation
-            a ui-sref="terms({page: 'article9'})" Cancellation Policy
-            p.small
-              | 100% refund 2 days prior to the event. You'll get your
-              |  host's contact information immediately after the host
-              |  confirms your booking.
+            a[ui-sref="terms({page: 'article9'})" target="_blank"] Politique d'annulation
+            
 
       .col-md-8
         .row
@@ -90,14 +91,14 @@
           .form-group
             label Laissez un message à votre performeur!
             textarea.form-control.enapparte-input [
-              placeholder='Enter your message'
+              placeholder='Laissez lui un mot'
               ng-model='booking.message'
               ]        
         .show-guso-content ng-if="show.guso"
           p
-            | Pourquoi le montant affiché ici est-il inférieur au prix total que j’ai vu sur le profil du performeur ? 
+            | Pourquoi le montant à payer sur cette page est-il inférieur au prix total que j’ai vu sur le profil du performeur ? 
           p
-            | Tout simplement parce que l’artiste que vous avez choisi souhaite obtenir un cachet d’intermittence. Le prix total affiché se compose donc :
+            | Tout simplement parce que l’artiste que vous avez choisi souhaite obtenir un cachet d’intermittence. Le prix total affiché sur le profil du performeur se compose donc :
           ol
             li
               | Du « net artiste » à régler sur enapparteparis.com lors de votre réservation, 
@@ -111,7 +112,7 @@
             u
               | nous contacter
             i.blue
-              | (link to contact page : http://enapparte-staging.herokuapp.com/#/pages/contact) 
+              a[href="http://enapparte-staging.herokuapp.com/#/pages/contact" target="_blank"] 
             | ou à en parler avec votre performeur via la messagerie, une fois votre réservation effectuée! 
                 
         .col-xs-12
@@ -123,8 +124,8 @@
                 type="checkbox"
                 ng-model="booking.accepted"
               ]
-              | I have read and accept
-              a ui-sref='terms' : b &nbsp;Terms and Conditions.
+              | J'ai lu et j'accepte les
+              a [ui-sref='terms' target='_blank'] : b &nbsp;CGU.
 
             .error-messages[ng-show="paymentForm.$submitted || paymentForm[elementId].$touched"]
               span.help-block [
@@ -141,6 +142,6 @@
             '
             | Book now
           .booknow-hint
-            | Le performeur que vous avez choisi a 48 heures pour accepter votre demande de réservation. En général, cela va très vite!
+            | Le performeur que vous avez choisi a 48 heures pour accepter votre demande de réservation. 
             br
-            | Le montant est pour l’instant provisionné sur votre compte, et le paiement ne sera définitivement prélevé qu’au lendemain de votre événement
+            | En général, cela va très vite ! Le montant est pour l’instant provisionné sur votre compte, et le paiement ne sera définitivement prélevé qu’au lendemain de votre événement

@@ -13,9 +13,9 @@ class DashboardGalleryController extends @NGController
   ]
 
   tabsGallery: [
-    { heading: 'Music', route: 'dashboard.gallery.music' }
-    { heading: 'Video', route: 'dashboard.gallery.video' }
-    { heading: 'Pictures', route: 'dashboard.gallery.pictures' }
+    { heading: 'Musique', route: 'dashboard.gallery.music' }
+    { heading: 'Vidéos', route: 'dashboard.gallery.video' }
+    { heading: 'Photos', route: 'dashboard.gallery.pictures' }
   ]
 
   newPicture:

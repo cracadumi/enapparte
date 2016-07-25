@@ -44,6 +44,7 @@ gem 'maruku'
 gem 'omniauth-stripe-connect'
 gem 'ckeditor'
 
+
 group :production do
   gem 'pg'
   gem 'puma'

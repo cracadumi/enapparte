@@ -17,6 +17,7 @@ class ArtistsController extends @NGController
     'EmbedVideo'
   ]
 
+
   init: ->
 
     @scope.artSelect = @ArtSelect

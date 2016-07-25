@@ -15,7 +15,7 @@ class DashboardController extends @NGController
 
     @scope.tabs = [
       {
-        heading: 'Dashboard'
+        heading: 'Mon espace personnel'
         route: 'dashboard.index'
         banner: "<%= asset_path('dashboard-banners/dashboard.jpg') %>"
       }
@@ -56,7 +56,7 @@ class DashboardController extends @NGController
       banner: "<%= asset_path('dashboard-banners/calendrier.jpg') %>"
 
     tabGallery =
-      heading: 'Gallery'
+      heading: 'Galerie'
       route: "dashboard.gallery.music"
       routeActive: 'dashboard.gallery'
       banner: "<%= asset_path('dashboard-banners/galerie.jpg') %>"

@@ -34,8 +34,14 @@ class UserSearchService
   end
 
   def filter_by_price(price_min, price_max)
-    return @users if price_min.blank? || price_max.blank?
-    @users = @users.joins(:shows).where(shows: { price: price_min..price_max })
+    return @users if price_min.blank? && price_max.blank?
+    if price_min.blank?
+      @users = @users.joins(:shows).where('price < ?', price_max)
+    elsif price_max.blank?
+      @users = @users.joins(:shows).where('price > ?', price_min)
+    else
+      @users = @users.joins(:shows).where(shows: { price: price_min..price_max })
+    end
   end
 
   def results

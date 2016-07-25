@@ -21,9 +21,9 @@ class DashboardAccountController extends @NGController
   years: []
 
   tabsAccount: [
-    { heading: 'Payment', route: 'dashboard.account.payment' }
-    { heading: 'Information', route: 'dashboard.account.information' }
-    { heading: 'Security', route: 'dashboard.account.security' }
+    { heading: 'Carte bancaire', route: 'dashboard.account.payment' }
+    { heading: 'Compte stripe', route: 'dashboard.account.information' }
+    { heading: 'Identifiants', route: 'dashboard.account.security' }
   ]
 
   init: ->
