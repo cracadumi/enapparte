@@ -53,10 +53,8 @@
                   .btn.btn-enapparte-primary ng-click="applyCoupon()" Ok
           .total-price
             | Prix total
-            span ng-if="show.pricePerson"
-              | {{ show.price * booking.spectators * show.commission | currency }}
-            span ng-if="!show.pricePerson"
-              | {{ show.price * show.commission | currency }}
+            span
+              | {{ booking.price | currency }}
             p.small
               | Vous êtes une société ? Merci de nous contacter 
               a[href="http://enapparte-staging.herokuapp.com/#/society" target="_blank"]
@@ -74,18 +72,17 @@
             ui-select.enapparte-ui-select ng-model='user.address' theme='bootstrap' onkeypress="return false"
               ui-select-match [] {{user.address.fullAddress}}
               ui-select-choices repeat='address in user.addresses track by $index'
-                div ng-if="address.fullAddress != 'Add New Address'" {{address.fullAddress}}
-                div ng-if="address.fullAddress == 'Add New Address'" ui-sref="dashboard.profile.personal" {{address.fullAddress}}
+                div ng-if="address.fullAddress != 'Ajouter une adresse'" {{address.fullAddress}}
+                div ng-if="address.fullAddress == 'Ajouter une adresse'" ui-sref="dashboard.profile.personal" {{address.fullAddress}}
           .col-md-6
-            label.select-label Choisissez votre moyen de paiement :
+            label.select-label Choisissez votre moyen de paiement
             ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap' onkeypress="return false"
               ui-select-match
                 div ng-if="user.payment.brand && user.payment.brand != 'Add New Card' && user.payment.brand != 'Paypal' " {{user.payment.brand}}, {{user.payment.last4}}
               ui-select-choices repeat='payment in user.creditCards track by $index'
                 div ng-click="addNewCard()" ng-if="payment.brand == 'Add New Card'" Add New Card
                 div ng-if="payment.brand == 'Paypal'" Paypal
-                div ng-if="payment.brand != 'Add New Card' && payment.brand != 'Paypal'" {{payment.brand}}, {{payment.last4}}
-
+                div ng-if="payment.brand != 'Add New Card' && payment.brand != 'Paypal'" ui-sref="dashboard.account.payment" {{payment.brand}}
 
         .show-payment-message.col-xs-12
           .form-group

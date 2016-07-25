@@ -5,10 +5,10 @@
         p.va-middle.text-center.text-contrast.text-reinvent-desc
           | Il est temps de réinventer
           br
-          |  vos évènements. 
+          |  vos évènements.
           br
   #search-bar-home.search-bar-home
-    form.hm_search_submit ng-submit="beginSearch()" 
+    form.hm_search_submit ng-submit="beginSearch()"
       .row
         .col-sm-4.input-search
           ui-select.select-search-home[ng-model="artSelect.selected", theme='bootstrap']
@@ -18,7 +18,7 @@
         .col-sm-4.input-search
           .search-datetimepicker.input-group.date[input-select-date]
             input.form-control.dt-calendar[
-              type="text" 
+              type="text"
               ng-model="endDate"
               ng-keyup="$event.keyCode == 13 && beginSearch()"
             ]
@@ -29,4 +29,3 @@
             |  Chercher
   span[scroll-on-click]
     = image_tag 'arrow.png', class: "anchor-arrow"
-

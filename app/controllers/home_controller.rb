@@ -20,6 +20,10 @@ class HomeController < ApplicationController
     render json: { msg: "success" }
   end
 
+  def download_terms_file    
+    send_file Rails.root.join('documents','cgu_def_ea.pdf'), :filename => 'cgu' + '_enapparte_' + Time.now.strftime("%I%M%S").to_s + '.pdf', :type => "application/pdf", :disposition => "attachment"
+  end
+
   private
     def contact_params
       params.require(:contact).permit(:name, :email, :city, :phone, :message)
