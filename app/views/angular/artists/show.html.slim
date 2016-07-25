@@ -96,7 +96,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                 .error
                   | Veuillez remplir ce champ
               .transparent-control.enapparte-timepicker ng-class="{'input-invalid': show.submitted && show.invalid && (!show.time || show.time == '')}"
-                .input-group [uib-dropdown auto-close="outsideClick"]
+                .input-group.tp-dropdown [uib-dropdown auto-close="outsideClick"]
                   input.form-control [
                     type='text'
                     placeholder='Heure'
