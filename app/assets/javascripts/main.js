@@ -12,12 +12,12 @@ $(document).ready( function(){
   		$(this).parent().removeClass('open');
   	}
   	else{
-  		$(this).parent().addClass('open');	
+  		$(this).parent().addClass('open');
   	}
   });
   	$('body').on('click', function (e) {
-	    if (!$('div.tp-dropdown').is(e.target) 
-	        && $('div.tp-dropdown').has(e.target).length === 0 
+	    if (!$('div.tp-dropdown').is(e.target)
+	        && $('div.tp-dropdown').has(e.target).length === 0
 	        && $('div.tp-dropdown.open').has(e.target).length === 0
 	    ) {
 	        $('div.tp-dropdown').removeClass('open');
