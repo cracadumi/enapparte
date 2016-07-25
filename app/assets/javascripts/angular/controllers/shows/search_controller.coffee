@@ -31,10 +31,10 @@ class UserSearchController extends @NGController
     {price0: 600, price1: 999999999999, title: '600+ €'}
   ]
   priceRadiiGastro: [
-    {price0: 0, price1: 200, title: '< 40 €'}
-    {price0: 200, price1: 400, title: '40 € - 60 €'}
-    {price0: 400, price1: 600, title: '60 € - 80 €'}
-    {price0: 600, price1: 999999999999, title: '80+ €'}
+    {price0: 0, price1: 40, title: '< 40 €'}
+    {price0: 40, price1: 60, title: '40 € - 60 €'}
+    {price0: 60, price1: 80, title: '60 € - 80 €'}
+    {price0: 80, price1: 999999999999, title: '80+ €'}
   ]
 
   init: ->
