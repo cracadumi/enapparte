@@ -7,9 +7,9 @@ div[ng-controller="UserSearchController"]
         .col-xs-12.col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
           p.main-description-header.art-description-header[style="text-align:justify;" ng-hide="artSelect.selected.title != 'Tous les performeurs' "]
             | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
-          p.main-description-header.art-description-header[style="text-align:justify;" ng-show='artIsChosen()']
+          p.main-description-header.art-description-header[style="text-align:justify;" ng-show="artIsChosen() && artSelect.selected.title != 'Tous les performeurs' "]
             | {{artSelect.selected.mainDescription}}
-          p.main-description-header.art-description-header[style="text-align:justify; font-style: italic" ng-show='artIsChosen()']
+          p.main-description-header.art-description-header[style="text-align:justify; font-style: italic" ng-show="artIsChosen() && artSelect.selected.title != 'Tous les performeurs' "]
             | {{artSelect.selected.italicDescription}}
           p.main-description-header.art-description-header[style="text-align:justify;" ng-hide='artIsChosen()']
             | Tous nos performeurs ont été sélectionnés avec le plus grand soin. Et puisque le talent s'apprécie en live, nous les avons tous rencontrés afin de vous proposer une sélection riche et éclectique. Ils vous ont concocté des performances d'exception, spécialement calibrées pour vos évènements privés, quels que soient le lieu ou le nombre d'invités.
