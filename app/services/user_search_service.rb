@@ -18,8 +18,8 @@ class UserSearchService
 
   def filter_by_available_at(start_date, end_date)
     if end_date
-      right_border = DateTime.strptime(end_date, '%m/%d/%Y')
-      left_border = start_date ?  DateTime.strptime(start_date, '%m/%d/%Y') : DateTime.now
+      right_border = DateTime.strptime(end_date, '%d/%m/%Y')
+      left_border = start_date ?  DateTime.strptime(start_date, '%d/%m/%Y') : DateTime.now
       all_users = @users
       available_users = @users.joins(:availabilities).where(user_availabilities: { available_at: left_border..right_border })
       non_available_users = (all_users - available_users).uniq
@@ -30,10 +30,8 @@ class UserSearchService
 
   def filter_by_available_at_date(show_date)
     if show_date
-      right_border = DateTime.strptime(show_date, '%m/%d/%Y')
-      left_border = show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now
       all_users = @users      
-      available_users =   @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%m/%d/%Y') : DateTime.now })
+      available_users =   @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%d/%m/%Y') : DateTime.now })
       non_available_users = (all_users - available_users).uniq
       non_available_users.each {|u| u.unavailable = true}
       @users = (available_users + non_available_users).uniq
