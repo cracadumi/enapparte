@@ -1,7 +1,7 @@
 class Show < ActiveRecord::Base
 
   COMMISSION = 1.1
-  
+
   belongs_to :cover_picture, class_name: 'Picture'
 
   belongs_to :user
@@ -36,8 +36,8 @@ class Show < ActiveRecord::Base
   def spectators
     spect = ""
     if min_attendees && max_spectators
-      spect += "from " + min_attendees.to_s + " "
-      spect += "to " + max_spectators.to_s
+      spect += "A partir de " + min_attendees.to_s + " "
+      spect += "Jusqu'à " + max_spectators.to_s
       spect.slice(0,1).capitalize + spect.slice(1..-1)
     elsif !min_attendees && !max_spectators
       spect = "Indifférent"
