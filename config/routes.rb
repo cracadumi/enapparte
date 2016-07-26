@@ -58,5 +58,5 @@ Rails.application.routes.draw do
   post '/contact', to: 'home#contact', as: 'home_contact'
   post '/society', to: 'home#society', as: 'home_society'
   # route for downloading terms file actions
-  get '/download_terms_file', to: 'home#download_terms_file', as: 'download_terms_file', :defaults => { :format => 'pdf' }
+  get '/download_terms_file/:pdf_for', to: 'home#download_terms_file', as: 'download_terms_file', :defaults => { :format => 'pdf' }
 end

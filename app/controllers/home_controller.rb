@@ -20,8 +20,16 @@ class HomeController < ApplicationController
     render json: { msg: "success" }
   end
 
-  def download_terms_file    
-    send_file Rails.root.join('documents','cgu_def_ea.pdf'), :filename => 'cgu' + '_enapparte_' + Time.now.strftime("%I%M%S").to_s + '.pdf', :type => "application/pdf", :disposition => "attachment"
+  def download_terms_file
+    if params[:pdf_for].eql?('terms')
+      file = 'cgu_def'
+    elsif params[:pdf_for].eql?('presse')
+      file = 'DPenapparté'
+    end
+    # if file is present then it will be downloaded    
+    if file.present?
+      send_file Rails.root.join('documents',file + '.pdf'), :filename => file + '_enapparte_' + Time.now.strftime("%I%M%S").to_s + '.pdf', :type => "application/pdf", :disposition => "attachment"
+    end
   end
 
   private
