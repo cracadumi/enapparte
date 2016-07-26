@@ -39,7 +39,7 @@
                         option[ng-repeat="year in years" value="{{year}}"] {{year}}
               .col-xs-5.col-md-5
                 .form-group
-                  label CRYPTOGRAMME VISUEL
+                  label CRYPTOGRAMME
                   input.form-control[type="tel" ng-model="card.cvc" cc-type="cardNumber.$ccType" cc-cvc  ng-required="true"]
               .col-xs-12
                 button.btn.btn-enapparte-primary.btn-block[type="button" ng-click="addNewCard()" ng-disabled="cardForm.$invalid || card.pending"] Ajouter
