@@ -28,11 +28,14 @@ class ShowPaymentController extends @NGController
       .get(1)
       .then (user)=>
         @scope.user = user
-        @scope.user.addresses.unshift({fullAddress: 'Ajouter une adresse'})        
-        @scope.user.creditCards.unshift({last4: '', brand: 'Paypal'})
-        @scope.user.creditCards.unshift({last4: '', brand: 'Add New Card'})
-        @scope.user.creditCards.unshift({last4: '', brand: 'Ajouter un moyen de paiement'})
-
+        @scope.user.addresses.unshift({fullAddress: 'Ajouter une adresse'})
+        if @scope.user.creditCards
+          @scope.user.creditCards.unshift({last4: '', brand: 'Paypal'})
+          @scope.user.creditCards.unshift({last4: '', brand: 'Add New Card'})
+          @scope.user.creditCards.unshift({last4: '', brand: 'Ajouter un moyen de paiement'})
+        else
+          @scope.user.creditCards = [{last4: '', brand: 'Ajouter un moyen de paiement'}, {last4: '', brand: 'Add New Card'}]
+            
     if @stateParams.show
       @scope.show = @stateParams.show
     else
