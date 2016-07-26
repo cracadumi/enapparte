@@ -118,7 +118,7 @@ class ShowController extends @NGController
     #     show.coverPicture = picture
 
   removeShow: (show)=>
-    if confirm("Are you sure you want to remove this meal?")
+    if confirm("Are you sure you want to remove this show?")
       show
         .remove()
         .then =>
