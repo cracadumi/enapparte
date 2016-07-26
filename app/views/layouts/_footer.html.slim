@@ -23,13 +23,11 @@
             li
               a[ui-sref="pages.contact"]
                 | Contact
-            li
-              a[ui-sref='pages.performer']
-                | Devenir performer
           .col-xs-2
       .col-md-6.col-sm-6.widget.info-right
         h4.title.hidden-xs[ng-click="goPerformer()"]
-          | Devenir Performeur
+          a[ui-sref='pages.performer']
+           | Devenir Performeur
         / .row
         /   .col-xs-2
         /   ul.col-xs-8.menu
