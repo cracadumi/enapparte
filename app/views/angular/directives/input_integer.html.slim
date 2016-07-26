@@ -7,11 +7,11 @@
     input.form-control[id="{{elementId}}" ng-model="model" name="{{elementId}}" ng-required="required" type="number" step="1" min="{{ min }}" max="{{ max }}"]
     .error-messages[ng-show="form.$submitted || form[elementId].$touched"]
       span.help-block[ng-show="form[elementId].$error.required"]
-        | Please, fill the field
+        | Ce champ est requis
       span.help-block[ng-show="form[elementId].$error.number"]
-        | Please, enter a number
+        | Veuillez entrer un chiffre
       span.help-block[ng-show="form[elementId].$error.max"]
-        | Please, enter a value less then {{ max }}.
+        | Veuillez entrer une valeur inférieure à {{ max }}.
       span.help-block[ng-show="form[elementId].$error.min"]
-        | Please, enter a value more then {{ min - 1 }}.
+        | Veuillez entrer une valeur supérieure à {{ min - 1 }}.
   .clearfix

@@ -61,6 +61,7 @@ end
 #  stripe_user_id         :string
 #  stripe_access_code     :string
 #  art_id                 :integer
+#  visible                :boolean          default(FALSE)
 #
 # Indexes
 #

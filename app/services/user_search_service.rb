@@ -1,6 +1,7 @@
 class UserSearchService
   def initialize(params)
-    @users = User.all
+    # @users = User.all
+    @users = User.visible_users    
     filter_by_role(params[:role])
     filter_by_art(params[:art_id])
     filter_by_price(params[:price_min], params[:price_max])

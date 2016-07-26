@@ -61,6 +61,9 @@ class UserSearchController extends @NGController
       @search()
 
     @scope.$watch 'artSelect.selected', =>
+      @scope.priceRadius =
+        selected: null
+
       if angular.isUndefined(@scope.artSelect.selected)
         ''
       else

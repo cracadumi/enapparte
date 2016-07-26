@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
 
   scope :performers, -> { where role: roles[:performer] }
+  # fetch visible users only
+  scope :visible_users, -> { where visible: true  }
 
   attr_accessor :unavailable
 
@@ -165,6 +167,7 @@ end
 #  stripe_user_id         :string
 #  stripe_access_code     :string
 #  art_id                 :integer
+#  visible                :boolean          default(FALSE)
 #
 # Indexes
 #
