@@ -58,6 +58,7 @@ ActiveAdmin.register User do
       #   s.input :available_at
       # end
       f.input :art
+      f.input :visible, label: 'Active'
     end
     f.actions
   end
@@ -109,7 +110,7 @@ ActiveAdmin.register User do
       row :pictures do
         render(partial: 'active_admin/pictures', locals: { object: user, page: 'show' } )
       end
-
+      row :visible
       row :created_at
       row :updated_at
       row :sign_in_count
