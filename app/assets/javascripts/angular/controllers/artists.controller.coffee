@@ -94,7 +94,8 @@ class ArtistsController extends @NGController
     show.valid
 
   bookNow: (show) =>
-    if (show)
+    if (show)      
+      showDt = new Date(moment(show.date, "DD/MM/YYYY").format('MM/DD/YYYY') + " " + show.time.getHours() + ':' + show.time.getMinutes())
       show.submitted = true
       if @validateFields(show)
         unless @Auth.isAuthenticated()
@@ -107,12 +108,12 @@ class ArtistsController extends @NGController
           .then ()=>
             @state.go 'shows.payment',
               id: show.id
-              date: new Date(show.date + " " + show.time.getHours() + ':' + show.time.getMinutes()).getTime() / 1000
+              date: new Date(showDt).getTime() / 1000
               spectators: show.numberOfGuests
         else
           @state.go 'shows.payment',
             id: show.id
-            date: new Date(show.date + " " + show.time.getHours() + ':' + show.time.getMinutes()).getTime() / 1000
+            date: new Date(showDt).getTime() / 1000
             spectators: show.numberOfGuests
     else
       show.invalid = true
