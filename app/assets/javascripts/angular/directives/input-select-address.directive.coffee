@@ -39,7 +39,7 @@ angular
           angular.forEach addresses, (address)=>
             if address.isPrimary
               scope.selectedAddress = address
-          addresses.push { fullAddress: 'Add New Address', isPrimary: false, new: true }
+          addresses.push { fullAddress: 'Ajouter une adresse', isPrimary: false, new: true }
 
       scope.componentForm =
         street_number: 'short_name',

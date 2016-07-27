@@ -21,20 +21,20 @@
 
 en:
   dashboard:
-    add_new_address: "Add New Address"
+    add_new_address: "Ajouter une adresse"
 
   performer_mailer:
     booking_cancelled:
-      subject: "You refused booking"
+      subject: "Vous avez refusé la demande de réservation"
     booking_accepted:
-      subject: "You have confirmed the reservation, up to you and impress your audience!"
+      subject: "Vous avez confirmé la réservation, allez maintenant impressioner votre audience!"
     booking_created:
-      subject: "Booking created"
+      subject: "Réservation effectuée"
 
   user_mailer:
     booking_cancelled:
-      subject: "You refused booking"
+      subject: "Vous avez refusé la demande de réservation"
     booking_accepted:
-      subject: "Your inquiry has been validated by the performer!"
+      subject: "Votre demande a été validé par le performeur!"
     booking_created:
-      subject: "Booking created"
+      subject: "Réservation effectuée"

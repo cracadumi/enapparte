@@ -36,9 +36,13 @@ class Show < ActiveRecord::Base
   def spectators
     spect = ""
     if min_attendees && max_spectators
-      spect += "De " + min_attendees.to_s + " "
-      spect += "à " + max_spectators.to_s
-      spect.slice(0,1).capitalize + spect.slice(1..-1)
+      if min_attendees == max_spectators
+        spect = min_attendees
+      else
+        spect += "De " + min_attendees.to_s + " "
+        spect += "à " + max_spectators.to_s
+        spect.slice(0,1).capitalize + spect.slice(1..-1)
+      end
     elsif !min_attendees && !max_spectators
       spect = "Indifférent"
     elsif !min_attendees
