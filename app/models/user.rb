@@ -57,17 +57,17 @@ class User < ActiveRecord::Base
 
   def current_bookings
     bookings
-      .where('date >= ? and (status = 1 or status = 2)', Time.zone.now)
+      .where("date >= ? and (status = 'confirmed' or status = 'pending')", Time.zone.now)
       .order('date desc')
   end
 
   def old_bookings
-    bookings.where('date < ? and (status = 1)', Time.zone.now)
+    bookings.where("date < ? and (status = 'confirmed')", Time.zone.now)
             .order('date desc')
   end
 
   def cancelled_bookings
-    bookings.where('(status = 3 or status = 4)', Time.zone.now)
+    bookings.where("(status = 3 or status = 'expired')", Time.zone.now)
             .order('date desc')
   end
 

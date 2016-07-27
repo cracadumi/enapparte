@@ -5,4 +5,5 @@ json.array!(@bookings.includes(:show, user: [:profile_picture])) do |booking|
   json.show_title booking.show.title
   json.show_url url_for(booking.show)
   json.start booking.date.to_date
+  json.status booking.status
 end

@@ -24,11 +24,11 @@ class PerformancesController extends @NGController
         @scope.bookings = bookings
 
   filterCurrentBookings: (elem)->
-    (elem.status == 1 || elem.status == 2) && moment(elem.date) >= moment()
+    (elem.status == 'confirmed' || elem.status == 'pending') && moment(elem.date) >= moment()
 
   filterOldBookings: (elem)->
-    (elem.status == 1 || elem.status == 2) && moment(elem.date) < moment()
+    (elem.status == 'confirmed' || elem.status == 'pending') && moment(elem.date) < moment()
 
   filterCancelBookings: (elem)->
-    (elem.status == 3 || elem.status == 4)
+    (elem.status == 'canceled' || elem.status == 'expired')
 
