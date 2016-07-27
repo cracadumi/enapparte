@@ -80,7 +80,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
               .text-uppercase[ng-hide="show.pricePerson"] prix total
               .text-uppercase[ng-show="show.pricePerson"] par personne
               .price
-                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}
+                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}            
             .artist-show-card-actions
               .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && (!show.date || show.date == '')}"
                 .input-group.search-datetimepicker [input-select-date]
@@ -90,6 +90,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     ng-model='show.date'
                     ng-change='validateFields(show)'
                     ng-keyup="$event.keyCode == 13 && bookNow(show)"
+                    ng-disabled= 'show.isAvailable'
                     required
                   ]
                   .input-group-addon

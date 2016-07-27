@@ -40,6 +40,7 @@ json.shows do
     json.min_attendees show.min_attendees
     json.max_spectators show.max_spectators
     json.guso (show.guso || 0)
+    json.isAvailable !@user.visible    
     json.commission ENV['COMMISSION']
   	json.reviews do
   	  json.array! show.reviews_max_3 do |review|
@@ -57,4 +58,3 @@ json.shows do
   	end
   end
 end
-
