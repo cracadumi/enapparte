@@ -28,7 +28,8 @@ a[ui-sref="shows.search({id: user.art.id})"]
               dt Langues
               dd
                 | {{user.availableLanguages}}
-            .artist-idf Je me deplace en IDF
+            .artist-idf[ng-if="user.moving"] Je me deplace en IDF
+            .artist-idf[ng-if="!user.moving"] Je me déplace à Paris
         .margin-bottom-40
         uib-tabset justified="true" class="artist-tabs"
           uib-tab heading="GALERIE" ng-if='user.pictures.length'
