@@ -5,6 +5,9 @@ html[ng-app="enapparte"]
     title
       = content_for?(:title) ? yield(:title) : 'Enapparte'
     meta name="description" content=(content_for?(:description) ? yield(:description) : 'Enapparte')
+    meta content="#{asset_path('fb-stie-logo.png')}" property="og:image"
+    meta content="http://www.enapparteparis.fr" property="og:url"
+
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = favicon_link_tag
