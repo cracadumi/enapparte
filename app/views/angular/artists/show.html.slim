@@ -31,7 +31,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
             .artist-idf[ng-if="user.moving"] Je me deplace en IDF
             .artist-idf[ng-if="!user.moving"] Je me déplace à Paris
         .margin-bottom-40
-        uib-tabset justified="true" class="artist-tabs"
+        uib-tabset justified="true" class="artist-tabs" ng-if='user.pictures.length'
           uib-tab heading="GALERIE" ng-if='user.pictures.length'
             .artist-gallery.four-in-row
               .artist-gallery-item [
