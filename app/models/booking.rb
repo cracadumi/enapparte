@@ -12,6 +12,8 @@ class Booking < ActiveRecord::Base
   just_define_datetime_picker :paid_out_on
 
   alias_method :name, :id
+  
+  enum status: { confirmed: 1, pending: 2, canceled: 3, expired: 4 }
 
   def change_status status
     if self.update status: status
@@ -33,7 +35,7 @@ class Booking < ActiveRecord::Base
   end
 
   def self.check_expired
-    Booking.where('status = 2 and date > ?', 48.hours.ago).update_all status: 4
+    Booking.where("status = 'pending' and date > ?", 48.hours.ago).update_all status: 4
   end
 end
 
@@ -42,7 +44,7 @@ end
 # Table name: bookings
 #
 #  id                :integer          not null, primary key
-#  status            :integer
+#  status            :integer          default(2)
 #  date              :datetime
 #  spectators        :integer
 #  price             :float

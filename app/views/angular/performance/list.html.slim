@@ -28,10 +28,10 @@
           | {{ booking.payout | currency }}
           |: You will receive your payment 48 hours after your performance
         br
-        .row[ng-if="booking.status == 1"]
+        .row[ng-if="booking.status == 'confirmed' "]
           .col-md-12
             button.btn.btn-default= "Voir les détails"
-        .row[ng-if="booking.status == 2"]
+        .row[ng-if="booking.status == 'pending' "]
           .col-md-12
             button.btn.btn-default[ng-click="acceptBooking(booking, $index)"]= "Accept the application"
             '

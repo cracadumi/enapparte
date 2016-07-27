@@ -107,7 +107,7 @@ class ShowPaymentController extends @NGController
   bookingCreate: ()=>
     @scope.user.save()
       .then (user)=>
-        @scope.booking.status    = 2
+        @scope.booking.status    = 'pending'
         @scope.booking.addressId = @scope.user.address.id
         @scope.booking.creditCardId = @scope.user.payment.id
         @scope.booking.showId    = @scope.show.id

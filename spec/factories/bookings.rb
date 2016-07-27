@@ -25,7 +25,7 @@ end
 # Table name: bookings
 #
 #  id                :integer          not null, primary key
-#  status            :integer
+#  status            :integer          default(2)
 #  date              :datetime
 #  spectators        :integer
 #  price             :float

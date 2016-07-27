@@ -12,17 +12,17 @@ angular
         # accept
         scope.acceptBooking = (booking, index)->
           booking
-            .changeStatus(1)
+            .changeStatus('confirmed')
             .then (result)->
-              booking.status = 1
+              booking.status = 'confirmed'
               Flash.showNotice('You\'ve accepted the request successfully.')
 
         # cancel
         scope.cancelBooking = (booking, index)->
           booking
-            .changeStatus(3)
+            .changeStatus('canceled')
             .then (result)->
-              booking.status = 3
+              booking.status = 'canceled'
               Flash.showNotice('You\'ve cancelled the booking request.')
     }
   ]
