@@ -17,8 +17,8 @@
             legend= "Ajouter une nouvelle performance"
             p= "Votre performance ne sera visible sur votre profil que lorsqu'elle sera complète"
             br
-            input-select[label="Nombre de convives maximum" model="show.maxSpectators" data-collection=(([{ name: '' }] + (1..25).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
             input-select[label="Nombre de convives minimum" model="show.minAttendees" data-collection=(([{ name: '' }] + (1..10).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
+            input-select[label="Nombre de convives maximum" model="show.maxSpectators" data-collection=(([{ name: '' }] + (1..25).to_a.collect {|i| { name: i, value: i } } + [{ name: 'Indifférent', value: 1000 }]).to_json)]
             input-integer[label="Durée (en minutes)" model="show.length" required]
             input-string[label="Nom de la performance" model="show.title" required]
             input-ckeditor[label="Description" model="show.description" required]
@@ -72,4 +72,3 @@
                   i.glyphicon.glyphicon-refresh.glyphicon-refresh-animate[ng-show="show.pending"]
                   '
                   = "Valider"
-
