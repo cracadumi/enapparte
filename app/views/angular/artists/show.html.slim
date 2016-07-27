@@ -104,7 +104,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     readonly='true'
                     ng-value="show.time | date:'shortTime'"
                     ng-keyup="$event.keyCode == 13 && bookNow(show)"
-                    required                    
+                    required
                   ]
                   .input-group-addon
                     .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
@@ -152,10 +152,11 @@ a[ui-sref="shows.search({id: user.art.id})"]
             .artist-show-description[ng-bind-html="show.description" ng-if="show.description"]
 
             .comments-section
+              .artist-idf[ng-if="show.reviews.length > 0"]
+                |COMMENTS
               .comment-entry[ng-repeat="review in show.reviews"]
                 .comment-sender
                   | {{review.username}}
-                  span.time-ago &nbsp; - 5 hours ago
                 .comment-rating
                   .glyphicon [
                     ng-repeat="n in [].constructor(5) track by $index"
