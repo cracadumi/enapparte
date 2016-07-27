@@ -4,6 +4,7 @@ angular
     link: (scope, element, attr) ->
       $(element).datetimepicker
         format: "DD/MM/YYYY"
+        locale: 'fr'
         defaultDate: new Date()
         minDate: new Date(new Date().getTime() - 23 * 60 * 60 * 1000)
         allowInputToggle: true
@@ -16,6 +17,7 @@ angular
     link: (scope, element, attr) ->
       $(element).datetimepicker
         format: "DD/MM/YYYY"
+        locale: 'fr'
         defaultDate: new Date()
 
       $(element).on "dp.change", ->
