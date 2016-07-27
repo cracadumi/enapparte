@@ -80,7 +80,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
               .text-uppercase[ng-hide="show.pricePerson"] prix total
               .text-uppercase[ng-show="show.pricePerson"] par personne
               .price
-                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}
+                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}            
             .artist-show-card-actions
               .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && (!show.date || show.date == '')}"
                 .input-group.search-datetimepicker [input-select-date]
@@ -90,6 +90,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     ng-model='show.date'
                     ng-change='validateFields(show)'
                     ng-keyup="$event.keyCode == 13 && bookNow(show)"
+                    ng-disabled= 'show.isAvailable'
                     required
                   ]
                   .input-group-addon
@@ -104,7 +105,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
                     readonly='true'
                     ng-value="show.time | date:'shortTime'"
                     ng-keyup="$event.keyCode == 13 && bookNow(show)"
-                    required                    
+                    required
                   ]
                   .input-group-addon
                     .glyphicon.glyphicon-dashboard [uib-dropdown-toggle]
@@ -152,10 +153,11 @@ a[ui-sref="shows.search({id: user.art.id})"]
             .artist-show-description[ng-bind-html="show.description" ng-if="show.description"]
 
             .comments-section
+              .artist-idf[ng-if="show.reviews.length > 0"]
+                |COMMENTS
               .comment-entry[ng-repeat="review in show.reviews"]
                 .comment-sender
                   | {{review.username}}
-                  span.time-ago &nbsp; - 5 hours ago
                 .comment-rating
                   .glyphicon [
                     ng-repeat="n in [].constructor(5) track by $index"

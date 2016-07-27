@@ -13,5 +13,7 @@ json.user do
   json.partial! 'api/v1/users/user', user: @show.user
 end if @show.user
 
-json.banner_url image_url(@show.user.art.banner_url)
-json.art_title @show.user.art.title
+if @show.user.present? && @show.user.art.present?
+  json.banner_url image_url(@show.user.art.banner_url)
+  json.art_title @show.user.art.title
+end

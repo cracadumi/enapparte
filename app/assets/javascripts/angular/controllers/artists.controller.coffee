@@ -26,9 +26,11 @@ class ArtistsController extends @NGController
       .artist(user_id)
       .then (artist)=>
         @scope.user = artist
-        
+
         for show in @scope.user.shows
-          show.date = @stateParams.showDate
+          if show.isAvailable == false
+            console.log('here')
+            show.date = @stateParams.showDate
 
         @scope.user.shows
         @scope.bannerStyle =
@@ -94,7 +96,7 @@ class ArtistsController extends @NGController
     show.valid
 
   bookNow: (show) =>
-    if (show)      
+    if (show)
       showDt = new Date(moment(show.date, "DD/MM/YYYY").format('MM/DD/YYYY') + " " + show.time.getHours() + ':' + show.time.getMinutes())
       show.submitted = true
       if @validateFields(show)

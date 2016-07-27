@@ -1,7 +1,7 @@
 class UserSearchService
   def initialize(params)
     # @users = User.all
-    @users = User.visible_users    
+    @users = User.visible_users
     filter_by_role(params[:role])
     filter_by_art(params[:art_id])
     filter_by_price(params[:price_min], params[:price_max])
@@ -30,7 +30,7 @@ class UserSearchService
   end
 
   def filter_by_available_at_date(show_date)
-    if show_date
+    if show_date.present?
       all_users = @users
       available_users =   @users.joins(:availabilities).where(user_availabilities: {available_at: show_date ?  DateTime.strptime(show_date, '%d/%m/%Y') : DateTime.now })
       non_available_users = (all_users - available_users).uniq
