@@ -1,12 +1,13 @@
 angular
   .module 'enapparte'
   .directive 'inputSelectDate', ->
-    link: (scope, element, attr) ->
+    link: (scope, element, attr) ->      
       $(element).datetimepicker
         format: "DD/MM/YYYY"
         locale: 'fr'
         defaultDate: new Date()
         minDate: new Date(new Date().getTime() - 23 * 60 * 60 * 1000)
+        enabledDates: scope.performersAvailDates
         allowInputToggle: true
 
       ele = $(element).find('input')
