@@ -26,11 +26,12 @@ class ArtistsController extends @NGController
       .artist(user_id)
       .then (artist)=>
         @scope.user = artist
+        @scope.performersAvailDates = []
+        for available_dt in  @scope.user.availableDates
+          @scope.performersAvailDates.push(moment(available_dt[2]))
 
         for show in @scope.user.shows
-          if show.isAvailable == false
-            console.log('here')
-            show.date = @stateParams.showDate
+          show.date = @stateParams.showDate
 
         @scope.user.shows
         @scope.bannerStyle =
