@@ -1,14 +1,18 @@
-form[novalidate="novalidate" name="cardForm"]
+form[novalidate="novalidate" name="addresssForm"]
   .modal-header
     h3.modal-title
       | Ajouter une adresse
       span.glyphicon.glyphicon-lock.pull-right
   .modal-body
     .row
-      .col-md-12
-        fieldset.form_addresses
-          input-new-address[label="Entrez une localité" model="user.address" required]
+      .col-md-12 
+        .form-group
+          fieldset.form_addresses
+            input-new-address[label="Entrez une localité" addresses="user.addresses" model="new_address" required]
 
+      .col-xs-12
+        .form-group
+          button.btn.btn-enapparte-primary.btn-block[type="button" ng-click="addNewAddress(addresssForm)" ng-disabled="address.pending || addresssForm.$invalid"] Ajouter une adresse
   .modal-footer
     button.btn.btn-default[ng-click="$close(false)"]
       | Annuler
