@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726063149) do
+ActiveRecord::Schema.define(version: 20160727094525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160726063149) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.integer  "status"
+    t.integer  "status",            default: 2
     t.datetime "date"
     t.integer  "spectators"
     t.float    "price"
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20160726063149) do
     t.integer  "show_id"
     t.integer  "user_id"
     t.integer  "address_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "payment_method_id"
     t.integer  "credit_card_id"
   end
@@ -192,17 +192,14 @@ ActiveRecord::Schema.define(version: 20160726063149) do
     t.datetime "published_at"
     t.integer  "cover_picture_id"
     t.integer  "user_id"
-    t.integer  "art_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.float    "rating"
     t.boolean  "price_person"
-    t.datetime "date_at"
     t.integer  "min_attendees"
     t.float    "guso"
   end
 
-  add_index "shows", ["art_id"], name: "index_shows_on_art_id", using: :btree
   add_index "shows", ["cover_picture_id"], name: "index_shows_on_cover_picture_id", using: :btree
   add_index "shows", ["user_id"], name: "index_shows_on_user_id", using: :btree
 
