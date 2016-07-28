@@ -80,7 +80,7 @@ a[ui-sref="shows.search({id: user.art.id})"]
               .text-uppercase[ng-hide="show.pricePerson"] prix total
               .text-uppercase[ng-show="show.pricePerson"] par personne
               .price
-                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}            
+                | {{ show.price*show.commission+show.guso | currency:undefined:0 }}
             .artist-show-card-actions
               .transparent-control ng-class="{'input-invalid': show.submitted && show.invalid && (!show.date || show.date == '')}"
                 .input-group.search-datetimepicker [input-select-date]
@@ -153,8 +153,10 @@ a[ui-sref="shows.search({id: user.art.id})"]
             .artist-show-description[ng-bind-html="show.description" ng-if="show.description"]
 
             .comments-section
-              .artist-idf[ng-if="show.reviews.length > 0"]
+              br
+              .artist-idf.mar-top-bot[ng-if="show.reviews.length > 0"]
                 |COMMENTS
+              br
               .comment-entry[ng-repeat="review in show.reviews"]
                 .comment-sender
                   | {{review.username}}
