@@ -3,7 +3,7 @@ class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :address, class_name: 'Address'
   belongs_to :payment_method
-  has_one    :credit_card
+  belongs_to :credit_card
   has_one    :review
   has_many   :ratings, through: :review
 
