@@ -65,7 +65,6 @@ angular
             scope.setWeekdayValue()
             return
 
-
           $elm.fullCalendar
             events: '/api/v1/availabilities.json'
             lang: 'fr'
