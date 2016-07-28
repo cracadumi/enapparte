@@ -94,5 +94,5 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'mysql2', '~> 0.3.20'
+  #gem 'mysql2', '~> 0.3.20'
 end
