@@ -73,7 +73,7 @@
               ui-select-match [] {{user.address.fullAddress}}
               ui-select-choices repeat='address in user.addresses track by $index'
                 div ng-if="address.fullAddress != 'Ajouter une adresse'" {{address.fullAddress}}
-                div ng-if="address.fullAddress == 'Ajouter une adresse'" ui-sref="dashboard.profile.personal" {{address.fullAddress}}
+                div ng-if="address.fullAddress == 'Ajouter une adresse'" ng-click="addNewAddress()" {{address.fullAddress}}
           .col-md-6
             label.select-label Choisissez votre moyen de paiement
             ui-select.enapparte-ui-select ng-model='user.payment' theme='bootstrap' onkeypress="return false"

@@ -122,3 +122,43 @@ class ShowPaymentController extends @NGController
     if form.$valid && @scope.user
       @scope.bookingCreate()
 
+  addNewAddress: =>
+    user =  @scope.user
+    modalInstance = @uibModal.open
+      animation: true
+      size: 'lg'
+      templateUrl: 'shows/add_new_address.html'
+      backdrop  : 'static'
+      controller: ['$scope', '$uibModalInstance', '$state', 'Flash', '$locale', 'user', ($scope, $uibModalInstance, $state, Flash, $locale, user)->
+        $scope.months = $locale.DATETIME_FORMATS.SHORTMONTH
+        currentYear = new Date().getFullYear()
+        $scope.years = _.range(currentYear, currentYear + 10)
+        $scope.addNewCard = () ->
+          $scope.card.pending = true
+          Stripe.card.createToken
+            number: $scope.card.number
+            cvc: $scope.card.cvc
+            exp_month: $scope.card.exp_month
+            exp_year: $scope.card.exp_year.toString().substr(2, 2)
+          , (status, response) =>
+            if response.error
+              Flash.showError @scope, response.error.message
+              $scope.card.pending = false
+            else
+              cardToken = response.id
+              new CreditCard(card_token: cardToken).create()
+                .then (card) =>
+                  $scope.card = {}
+                  Flash.showNotice $scope, 'Card is successfully saved!'
+                  $scope.card.pending = false
+                  $uibModalInstance.close card
+                , (error) =>
+                  Flash.showError $scope, 'Failed to create new card'
+                  $scope.card.pending = false
+                  $uibModalInstance.close false
+      ]
+    .result
+    .then (result)=>
+      if result
+        @scope.user.creditCards.push(result)
+        @scope.user.payment = result

@@ -68,6 +68,7 @@ angular
 
           $elm.fullCalendar
             events: '/api/v1/availabilities.json'
+            lang: 'fr'
             dayClick: (date, jsEvent, allDay) ->
               date = new Date(date)
               date.setDate(date.getDate())
