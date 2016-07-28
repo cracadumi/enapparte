@@ -3,7 +3,7 @@ angular
   .directive 'inputNewAddress', ()->
     require: '^form'
     strict: 'E'
-    templateUrl: 'directives/input-select-address.html'
+    templateUrl: 'directives/input-new-address.html'
     scope:
       model: '='
       addresses: '='
@@ -14,32 +14,18 @@ angular
       scope.label = attrs.label
       scope.elementId = 'input_' + scope.$id
       scope.required = false
-      scope.selectedAddress = {}
+      scope.selectedAddress = {
+        fullAddress: '',
+        isPrimary: false,
+        new: true
+      }
       scope.input = element.find('#google-address')[0]
 
       scope.doNothing = (e)->
         e.preventDefault()
 
       scope.$watch 'selectedAddress', (newValue)=>
-        if newValue
-          angular.forEach scope.addresses, (address)=>
-            address.isPrimary = false
-          newValue.isPrimary = true
-          if newValue.new
-            $("#google-address").focus()
-            $("#google-address")[0].select()
-          else
-            if newValue.fullAddress
-              scope.model = newValue
-              scope.setLocationbyAddress newValue.fullAddress
-
-      scope.$watch 'addresses', (addresses)=>
-        if addresses instanceof Array
-          scope.initializeMap()
-          angular.forEach addresses, (address)=>
-            if address.isPrimary
-              scope.selectedAddress = address
-          addresses.push { fullAddress: 'Ajouter une adresse', isPrimary: false, new: true }
+        scope.initializeMap()
 
       scope.componentForm =
         street_number: 'short_name',

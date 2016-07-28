@@ -1,11 +1,11 @@
 .address-select
-  .form-group.select[ng-class="{ required: required, 'has-error': (form.$submitted || form[elementId].$touched) && form[elementId].$invalid }"]
-    label.text-right.col-sm-3.control-label for="{{elementId}}"
-      abbr[title="required" ng-if="required"] *
-      '
-      | {{ label }}
   .row
-    .col-md-9.col-md-offset-3 
-      input#google-address.string.optional.form-control[ng-model="selectedAddress.fullAddress" ng-click="setLocationbyAddress(selectedAddress.fullAddress)"]
+  	.col-md-12
+  	   .form-group	
+    	 		label.control-label for="{{elementId}}" 
+    	 			abbr[title="required" ng-if="required"] *
+      			'
+      			| {{ label }}
+    			input#google-address.string.optional.form-control[ng-model="selectedAddress.fullAddress" ng-change="setLocationbyAddress(selectedAddress.fullAddress)"]
   br
   #google-maps.col-sm-12[style="height: 300px"]
