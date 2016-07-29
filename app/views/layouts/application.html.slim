@@ -11,7 +11,7 @@ html[ng-app="enapparte"]
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = favicon_link_tag
-  body class="#{controller_name} #{action_name}" ng-controller="MainController"
+  body class="#{controller_name} #{action_name} ng-cloak" ng-controller="MainController"
     = render 'layouts/header'
     / = content_for?(:messages) ? yield(:messages) : render('layouts/messages')
     / = render partial: 'layouts/messages', locals: { flash_class: 'floating' }
