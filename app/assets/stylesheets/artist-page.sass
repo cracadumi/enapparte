@@ -47,6 +47,9 @@
   font-weight: bold
   margin-top: 0
   margin-left: 265px
+  @media (max-width: 520px)
+    margin-left: 0
+    text-align: center
 
 // Artist tabs
 .artist-tabs
@@ -85,11 +88,21 @@
   left: 0
   top: -59px
   width: 220px
+  @media (max-width: 520px)
+    width: 100%
+    position: relative
+    top: 0
+    max-height: 100%
+    float: none
   img
     width: 100%
 
 .artist-metadata
   margin-left: 250px
+  @media (max-width: 520px)
+    width: 100%
+    margin: 0
+    padding-top: 15px
 
 .artist-idf
   background: $light_color
@@ -110,6 +123,7 @@
 // Artist Gallery
 .artist-gallery
   overflow: hidden
+  padding-bottom: 30px
   &.three-in-row
     .artist-gallery-item + .artist-gallery-item:not(:nth-child(3n+1))
       margin-left: 10px
@@ -122,9 +136,10 @@
 
 .artist-gallery-item
   float: left
-  height: 144px
-  margin-bottom: 10px
+  height: 100%
+  margin-bottom: 15px
   width: 144px
+  padding-right: 0
   &:hover img
     border: 5px solid $light_color
     cursor: pointer
@@ -218,6 +233,10 @@
   position: absolute
   bottom: 30px
   left: 30px
+  @media (max-width: 777px)
+    position: relative
+    bottom: 0
+    left: 0
   .text-uppercase
     text-shadow: 0 0 2px #333
     font-size: 15px
@@ -231,6 +250,9 @@
     font-size: 45px
     margin-top: 5px
     padding: 0 15px
+    @media (max-width: 777px)
+      width: 100%
+      text-align: right
 
 .artist-show-card-actions
   bottom: 20px
@@ -240,12 +262,18 @@
   left: 250px
   position: absolute
   right: 30px
+  @media (max-width: 777px)
+    position: relative
+    left: 0
+    top: 10px
   .transparent-control
     +flex(0 0 24%)
     margin-bottom: 10px
     position: relative
     @media (max-width: 991px)
       +flex(0 0 48%)
+    @media (max-width: 520px)
+      +flex(0 0 100%)
     .input-group
       background: rgba(0,0,0,0.5)
     .form-control

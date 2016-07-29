@@ -23,6 +23,8 @@ body
   float: left
   margin-top: 1px
   padding-top: 1px
+  @media (min-width: 769px)
+    margin-left: -15px
   &:focus
     outline: none
 
@@ -95,6 +97,7 @@ body
 
   .main-header-inner
     width: 100%
+    margin: 0
 
   .navbar
     margin-bottom: 0 !important
@@ -190,8 +193,7 @@ body
     margin-left: 0
 
   .navbar-header
-    padding-right: 0
-    margin-right: -15px
+    padding: 0
 
   .art-select-sidebar
     position: absolute
@@ -236,7 +238,7 @@ body
 
   .has-search
     .navbar-header
-      padding-right: 0
+      padding: 0
       width: 100%
 
     .bs-navbar-collapse
@@ -281,7 +283,7 @@ body
 .nav li a:focus, .nav li a:focus,
 .nav li a:hover, .nav li a:hover
   background: none
-  
+
 .main-header.affix-top.home a.btn-performer:hover
   background: #002b3f
 
@@ -355,7 +357,7 @@ body
     h4.title
       cursor: pointer
     a
-      font-size: 26px !important      
+      font-size: 26px !important
 
   hr
     border: 1px solid #2c2c34
