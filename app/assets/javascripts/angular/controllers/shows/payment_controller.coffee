@@ -107,10 +107,10 @@ class ShowPaymentController extends @NGController
   bookingCreate: ()=>
     @scope.user.save()
       .then (user)=>
-        @scope.booking.status    = 'pending'
-        @scope.booking.addressId = @scope.user.address.id
+        @scope.booking.status       = 'pending'
+        @scope.booking.addressId    = @scope.user.address.id
         @scope.booking.creditCardId = @scope.user.payment.id
-        @scope.booking.showId    = @scope.show.id
+        @scope.booking.showId       = @scope.show.id
         @scope.booking.save()
           .then (booking)=>
             @state.go 'shows.payment_finish'
@@ -120,7 +120,8 @@ class ShowPaymentController extends @NGController
 
   bookingOrder: (form)=>
     if form.$valid && @scope.user
-      @scope.bookingCreate()
+      console.log(@scope.user.payment)
+      
 
   addNewAddress: =>
     user = @scope.user
