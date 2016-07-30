@@ -39,7 +39,8 @@ module Api
                                         start_date: params[:start_date],
                                         show_date: params[:show_date],
                                         price_min: params[:price0],
-                                        price_max: params[:price1]
+                                        price_max: params[:price1],
+                                        req_from_root: params[:req_from_root]
                                       ).results
         respond_with :api, :v1, @users
       end
