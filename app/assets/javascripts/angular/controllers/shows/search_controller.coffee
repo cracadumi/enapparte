@@ -42,10 +42,15 @@ class UserSearchController extends @NGController
     @scope.endDate = @stateParams.endDate || null
     @scope.artId = @stateParams.id || null
     @scope.artSelect = @ArtSelect
-    @scope.showDate = @stateParams.showDate || null
-
+    @scope.showDate = if @stateParams.showDate then moment.unix(@stateParams.showDate).format("DD/MM/YYYY") else null #@stateParams.showDate || null
     @scope.priceRadius =
       selected: null
+
+    @scope.toTimestamp = (date) ->
+      # date must be in DD-MM-YYYY format
+      dateSplitted = date.split('/')
+      formattedDate = dateSplitted[1] + '/' + dateSplitted[0] + '/' + dateSplitted[2]
+      new Date(formattedDate).getTime() / 1000
 
     @scope.$watch 'artSelect.items', =>
       if @rootScope.previousState != 'artists.show'

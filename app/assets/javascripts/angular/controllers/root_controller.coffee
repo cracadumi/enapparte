@@ -17,7 +17,8 @@ class RootController extends @NGController
     @scope.artSelect = @ArtSelect
 
   beginSearch: =>
-    artId = if @scope.artSelect.selected then @scope.artSelect.selected.id else nulls    
+    artId  = if @scope.artSelect.selected then @scope.artSelect.selected.id else null
+    showDt = if @scope.endDate then new Date(moment(@scope.endDate, "DD/MM/YYYY").format('MM/DD/YY')) else null
     @state.go 'shows.search',
       id: artId
-      showDate: @scope.endDate || null
+      showDate: new Date(showDt).getTime() / 1000 if showDt
