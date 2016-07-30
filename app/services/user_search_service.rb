@@ -3,7 +3,7 @@ class UserSearchService
     # @users = User.all
     @users = User.visible_users
     filter_by_role(params[:role])
-    filter_by_art(params[:art_id])
+    filter_by_art(params[:art_id], params[:req_from_root])
     filter_by_price(params[:price_min], params[:price_max])
     filter_by_available_at(params[:start_date], params[:end_date])
     filter_by_available_at_date(params[:show_date])
@@ -13,8 +13,13 @@ class UserSearchService
     @users = @users.where(role: User.roles[role]) if role.present?
   end
 
-  def filter_by_art(art_id)
-    @users = @users.where(art_id: art_id) if art_id.present?
+  def filter_by_art(art_id, req_from_root)
+    if art_id.present? && Art.find(art_id).title.eql?('Musique - Solo') && req_from_root.present?
+      art_ids = [ art_id , Art.find_by_title('Musique - Duo & Groupe').id ]
+      @users = @users.where('art_id in (?)',art_ids)
+    else
+      @users = @users.where(art_id: art_id) if art_id.present?
+    end
   end
 
   def filter_by_available_at(start_date, end_date)

@@ -31,7 +31,7 @@ class ArtistsController extends @NGController
           @scope.performersAvailDates.push(moment(available_dt[2]))
 
         for show in @scope.user.shows
-          show.date = @stateParams.showDate
+          show.date = if @stateParams.showDate then moment.unix(@stateParams.showDate).format("DD/MM/YYYY") else null
 
         @scope.user.shows
         @scope.bannerStyle =
@@ -88,7 +88,7 @@ class ArtistsController extends @NGController
     @scope.previewVideo = @getEmbedUrl video
 
   validateFields: (show) =>
-    if !show.time || !show.date || show.time == '' || show.date == '' || (show.pricePerson && (show.numberOfGuests == '' || !show.numberOfGuests)) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees))
+    if !show.time || !show.date || show.time == '' || show.date == '' || (show.pricePerson && ( show.numberOfGuests == '' || !show.numberOfGuests )) || (show.minAttendees && show.maxSpectators && (show.numberOfGuests < show.minAttendees || show.numberOfGuests > show.maxSpectators)) || (!show.minAttendees && show.maxSpectators && (show.numberOfGuests < 1 || show.numberOfGuests > show.maxSpectators)) || (show.minAttendees && !show.maxSpectators && (show.numberOfGuests < show.minAttendees))
       show.invalid = true
       show.valid = false
     else
@@ -98,9 +98,9 @@ class ArtistsController extends @NGController
 
   bookNow: (show) =>
     if (show)
-      showDt = new Date(moment(show.date, "DD/MM/YYYY").format('MM/DD/YYYY') + " " + show.time.getHours() + ':' + show.time.getMinutes())
       show.submitted = true
       if @validateFields(show)
+        showDt = new Date(moment(show.date, "DD/MM/YYYY").format('MM/DD/YYYY') + " " + show.time.getHours() + ':' + show.time.getMinutes())
         unless @Auth.isAuthenticated()
           @uibModalStack.dismissAll('closing')
           @uibModal.open
