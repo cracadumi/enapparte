@@ -88,8 +88,7 @@ class ShowController extends @NGController
   pictureIsSelected: ->
     @scope.show.pictures.filter((picture)->
       picture.selected
-    ).length > 0  
-
+    ).length > 0
   finishValidate: ->
     unless @scope.showForm.$valid
       @showError(1, 'Some fields have empty or wrong values')

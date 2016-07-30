@@ -116,11 +116,13 @@ class ShowPaymentController extends @NGController
             @state.go 'shows.payment_finish'
             @Flash.showNotice @scope, 'Booking saved successfully!'
           , (error)->
+            console.log(error)
       , (error)->
+        console.log(error)
 
   bookingOrder: (form)=>
     if form.$valid && @scope.user
-      console.log(@scope.user.payment)
+      @scope.bookingCreate()
       
 
   addNewAddress: =>
