@@ -33,8 +33,8 @@ a[ui-sref="shows.search({id: user.art.id})"]
         .margin-bottom-40
         uib-tabset justified="true" class="artist-tabs" ng-if='user.pictures.length'
           uib-tab heading="GALERIE" ng-if='user.pictures.length'
-            .artist-gallery.four-in-row
-              .artist-gallery-item [
+            .artist-gallery.row
+              .artist-gallery-item.col-md-3 [
                 ng-repeat='slide in user.pictures track by $index'
                 ng-click='openGallery(user.pictures, $index)'
               ]
@@ -142,8 +142,8 @@ a[ui-sref="shows.search({id: user.art.id})"]
 
           .col-xs-12.col-md-5
             h4 Galerie
-            .artist-gallery.three-in-row
-              .artist-gallery-item [
+            .artist-gallery.row
+              .artist-gallery-item.col-md-4 [
                 ng-repeat="picture in show.pictures"
                 ng-click='openGallery(show.pictures, $index)'
               ]

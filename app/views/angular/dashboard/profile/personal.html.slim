@@ -2,9 +2,9 @@
   .page-header
     h2= "Profil"
   / = simple_form_for @user, html: { class: 'form-horizontal' }, url: update_dashboard_path do |f|
-  .row
-    .col-md-4.pull-left
-      form.form-horizontal[name="profilePicForm"]
+  form.form-horizontal[name="profilePicForm"]
+    .row
+      .col-md-4
         h4= "Photo de profil"
         .photo
           img[ng-src="{{ user.profilePicture.src }}"]
@@ -18,34 +18,32 @@
           br
           br
 
-    form.form-horizontal[name="profileForm"]
       .col-md-8
-        fieldset
-          legend= "Informations personnelles"
-          / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
-          input-string[label="Prénom" model="user.firstname" required]
-          input-string[label="Nom" model="user.surname" required hint="Cette information ne sera partagée uniquement avec les utilisateur faisant partie d’une réservation confirmée"]
-          div[ng-if="user.role== 'performer' "]
-            input-string[label="Nom de scène" model="user.nickname"]
-            .user-moving-checkbox.col-sm-offset-3
-              .form-group.checkbox
-                input name="moving" ng-model="user.moving" type="checkbox"
-                label
-                  | Je me déplace en IDF
-          input-date[label="Date de naissance" model="user.dob" required]
-          .row
-            .col-md-9.col-md-offset-3
-              a[ui-sref="dashboard.account.security"] "Actualisez votre adresse email"
-          input-email[label="Email" model="user.email" required disabled]
-          input-phone[label="Téléphone" model="user.phoneNumber" required hint="Le numéro permet aux hôtes et aux performeurs de se contacter. Rassurez-vous, cette information ne sera communiquée qu’une fois votre réservation confirmée!"]
+        form.form-horizontal[name="profileForm"]
+          fieldset
+            legend= "Informations personnelles"
+            / input-select[label="Gender" model="user.gender" required data-collection=(User.genders_i18n.map {|k, v| { name: v, value: k } }.to_json)]
+            input-string[label="Prénom" model="user.firstname" required]
+            input-string[label="Nom" model="user.surname" required hint="Cette information ne sera partagée uniquement avec les utilisateur faisant partie d’une réservation confirmée"]
+            div[ng-if="user.role== 'performer' "]
+              input-string[label="Nom de scène" model="user.nickname"]
+              .user-moving-checkbox.col-sm-offset-3
+                .form-group.checkbox
+                  input name="moving" ng-model="user.moving" type="checkbox"
+                  label
+                    | Je me déplace en IDF
+            input-date[label="Date de naissance" model="user.dob" required]
+            .row
+              .col-md-9.col-md-offset-3
+                a[ui-sref="dashboard.account.security"] "Actualisez votre adresse email"
+            input-email[label="Email" model="user.email" required disabled]
+            input-phone[label="Téléphone" model="user.phoneNumber" required hint="Le numéro permet aux hôtes et aux performeurs de se contacter. Rassurez-vous, cette information ne sera communiquée qu’une fois votre réservation confirmée!"]
 
       .col-md-12
         fieldset.form_addresses
           legend= "Adresses"
           input-select-address[label="Selectionner l'adresse" model="user.address" addresses="user.addresses" required]
-
         .margin-bottom-40
-
         fieldset
           legend= "A propos"
           div[ng-if="user.role== 'performer' "]
@@ -59,8 +57,6 @@
                 ui-select-match(placeholder="Selectionner des langages..."){{$item.title}}
                 ui-select-choices repeat=("language.id as language in user.availableLanguages | filter: $select.search")
                   div ng-bind-html=("language.title | highlight: $select.search")
-
-
         .form-actions
           .pull-right
             button.btn.btn-enapparte-primary[ng-click="profileForm.$valid && userSave()"]

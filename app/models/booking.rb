@@ -3,7 +3,7 @@ class Booking < ActiveRecord::Base
   belongs_to :user
   belongs_to :address, class_name: 'Address'
   belongs_to :payment_method
-  has_one    :credit_card
+  belongs_to :credit_card
   has_one    :review
   has_many   :ratings, through: :review
 
@@ -11,9 +11,17 @@ class Booking < ActiveRecord::Base
   just_define_datetime_picker :paid_on
   just_define_datetime_picker :paid_out_on
 
+  before_save :set_payout_value
+
   alias_method :name, :id
   
   enum status: { confirmed: 1, pending: 2, canceled: 3, expired: 4 }
+
+  def set_payout_value
+    if price.present?
+      self.payout = (price/ENV['COMMISSION'].to_f).round(2)
+    end
+  end
 
   def change_status status
     if self.update status: status
