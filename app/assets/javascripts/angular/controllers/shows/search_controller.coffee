@@ -104,11 +104,9 @@ class UserSearchController extends @NGController
         art.checked == true
       .map (art)->
         art.id
-
     if @scope.priceRadius.selected
       price0 = @scope.priceRadius.selected.price0
       price1 = @scope.priceRadius.selected.price1
-
     @UserSearch
       .query
         q: q
@@ -119,9 +117,11 @@ class UserSearchController extends @NGController
         art_id: @scope.artSelect.selected.id if @scope.artSelect.selected
         show_date: @scope.showDate
         start_date: @scope.startDate
+        req_from_root: @stateParams.fromRoot && @stateParams.fromRoot == 'true'
         end_date: @scope.endDate
       .then (users)=>
         @scope.users = users
+        @stateParams.fromRoot = null if @stateParams.fromRoot
 
   modeDetails: (show)=>
     @state.go 'shows.detail',
