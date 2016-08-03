@@ -6,7 +6,6 @@ class ManageUserStripe
   def create_credit_card(token)
     create_stripe_customer if @user.customer_id.nil?
     customer = Stripe::Customer.retrieve @user.customer_id
-
     card = customer.sources.create(source: token)
     customer.default_source = card.id
     customer.save

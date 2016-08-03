@@ -113,12 +113,15 @@ class ShowPaymentController extends @NGController
         @scope.booking.showId       = @scope.show.id
         @scope.booking.save()
           .then (booking)=>
-            @state.go 'shows.payment_finish'
-            @Flash.showNotice @scope, 'Booking saved successfully!'
+            if(booking.success==true)
+              @state.go 'shows.payment_finish'
+              @Flash.showNotice @scope, booking.message
+            else
+              @Flash.showError @scope, booking.message
           , (error)->
-            console.log(error)
+            @Flash.showError @scope, error.error
       , (error)->
-        console.log(error)
+        @Flash.showError @scope, error.error
 
   bookingOrder: (form)=>
     if form.$valid && @scope.user

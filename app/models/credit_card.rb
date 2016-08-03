@@ -1,6 +1,6 @@
 class CreditCard < ActiveRecord::Base
   belongs_to :user
-  has_many :bookings
+  has_many :bookings, dependent: :nullify
 
   def set_default!
     user.credit_cards.update_all(default: false)
