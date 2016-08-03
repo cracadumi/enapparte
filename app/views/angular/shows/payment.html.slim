@@ -83,7 +83,7 @@
                 div ng-click="addNewCard()" ng-if="payment.brand == 'Add New Card'" Add New Card
                 div ng-click="addNewCard()" ng-if="payment.brand == 'Ajouter un moyen de paiement'" Ajouter un moyen de paiement
                 div ng-if="payment.brand == 'Paypal'" Paypal
-                div ng-if="payment.brand != 'Add New Card' && payment.brand != 'Ajouter un moyen de paiement' && payment.brand != 'Paypal'" ui-sref="dashboard.account.payment" {{payment.brand}}
+                div ng-if="payment.brand != 'Add New Card' && payment.brand != 'Ajouter un moyen de paiement' && payment.brand != 'Paypal'" {{payment.brand}}
 
         .show-payment-message.col-xs-12
           .form-group

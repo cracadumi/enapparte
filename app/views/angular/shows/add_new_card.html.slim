@@ -30,5 +30,15 @@ form[novalidate="novalidate" name="cardForm"]
         button.btn.btn-enapparte-primary.btn-block[type="button" ng-click="addNewCard(cardForm)" ng-disabled="cardForm.$invalid || card.pending"] Ajouter une carte
 
   .modal-footer
+    div.pull-left
+      .checkbox
+        label
+          input [
+            name="default"
+            type="checkbox"
+            ng-checked="true"
+            ng-model="card.default"
+          ]
+          | Save this card to my profile
     button.btn.btn-default[ng-click="$close(false)" ng-disabled="card.pending"]
       | Annuler
