@@ -12,7 +12,7 @@ class Booking < ActiveRecord::Base
   just_define_datetime_picker :paid_out_on
 
   before_save :set_payout_value
-  before_save :change_booking_status
+  #before_save :change_booking_status
 
   alias_method :name, :id
   
