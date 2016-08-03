@@ -3,20 +3,20 @@ class Api::V1::BookingsController < Api::BaseController
   def create
     @booking = current_user.bookings.build(booking_params)
     if @booking.valid?
-      #response = Booking.booking_payment((@booking.price*100), current_user.customer_id)
-      #if response == 'succeeded'
-      #  @booking.status = 'confirmed'
-      if @booking.save
-        UserMailer.booking_created(@booking).deliver_now
-        PerformerMailer.booking_created(@booking).deliver_now
-        render json: {message: "Booking has been saved successfully. You will receive an confirmation email within 48 hrs.", success: true }
+      response = Booking.booking_payment((@booking.price*100), current_user.customer_id)
+      if response == 'succeeded'
+        @booking.status = 'confirmed'
+        if @booking.save
+          UserMailer.booking_created(@booking).deliver_now
+          PerformerMailer.booking_created(@booking).deliver_now
+          render json: {message: "Booking has been saved successfully. You will receive an confirmation email within 48 hrs.", success: true }
+        else
+          render json: {message: "Error in creating booking. Please try again later.", success: false }
+        end
+        #respond_with :api, :v1, @booking
       else
-        render json: {message: "Error in creating booking. Please try again later.", success: false }
+        render json: {message: "#{response}", success: false }
       end
-      #respond_with :api, :v1, @booking
-      #else
-      #  render json: {error: "#{response}", success: false }
-      #end
     end
   end
 
