@@ -20,6 +20,7 @@
     'ngProgress'
     'angular-bind-html-compile'
     'ngCkeditor'
+    'pascalprecht.translate'
   ]
 
 @App.config ['AuthProvider', (AuthProvider)->
@@ -31,6 +32,10 @@
 
 @App.config ['uiSelectConfig', (uiSelectConfig) ->
   uiSelectConfig.theme = 'bootstrap'
+]
+
+@App.config ['$translateProvider', ($translateProvider) ->
+  
 ]
 
 # @App.config ['dateTimePickerConfig', (dateTimePickerConfig)->
@@ -156,7 +161,7 @@
       ]
     }
     .state 'shows', { abstract: true, url: '/shows', templateUrl: 'shows/index.html' }
-    .state 'shows.search', { url: '/:id/search?showDate&fromRoot', templateUrl: 'shows/search.html' }
+    .state 'shows.search', { url: '/:id/search?showDate', templateUrl: 'shows/search.html' }
     .state 'shows.detail', { url: '/:id/detail', templateUrl: 'shows/detail.html' }
     .state 'shows.payment', { url: '/:id/payment?date&spectators', templateUrl: 'shows/payment.html', params: { show: null } }
       .state 'shows.payment_finish', { url: '/payment_finish', templateUrl: 'shows/payment_finish.html' }
