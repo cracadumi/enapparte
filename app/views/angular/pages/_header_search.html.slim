@@ -3,9 +3,12 @@
     .item.relative.discovery-card.active
       .va-container.va-container-v.va-container-h
         p.va-middle.text-center.text-contrast.text-reinvent-desc
-          | Il est temps de réinventer
+          | Réservez un
+          span.dynamic-text
+            | {{randomText}}
+          | pour votre évènement,
           br
-          |  vos évènements.
+          	| chez vous ou ailleurs
           br
   #search-bar-home.search-bar-home
     form.hm_search_submit ng-submit="beginSearch()"

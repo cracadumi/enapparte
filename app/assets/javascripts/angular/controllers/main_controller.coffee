@@ -1,6 +1,6 @@
 angular
   .module 'enapparte'
-  .controller 'MainController', ['$rootScope', '$scope', '$sanitize', '$uibModal', 'Auth', '$state', ($rootScope, $scope, $sanitize, $uibModal, Auth, $state)->
+  .controller 'MainController', ['$rootScope', '$scope', '$sanitize', '$uibModal', 'Auth', '$state', "$interval", ($rootScope, $scope, $sanitize, $uibModal, Auth, $state, $interval)->
 
     $rootScope.Math = window.Math
 
@@ -29,5 +29,18 @@ angular
 
     $scope.goPerformer = ->
       $state.go 'performer'
+
+    randomTexts = ["un musicien", "un artiste-peintre", "un magicien", "un œnologue", "un mentaliste", "une troupe de comédiens", "un photographe", "un chef à domicile"]
+    randomIndex = 0
+    $scope.randomText = randomTexts[randomIndex]
+
+    $scope.randomInterval = $interval ()->
+      randomIndex += 1
+      randomIndex = 0 if randomIndex >= randomTexts.length
+      $scope.randomText = randomTexts[randomIndex]
+    , 500
+
+    $scope.$on "$destroy", ()->
+      $interval.cancel($scope.randomInterval) if $scope.randomInterval
 )
 ]
