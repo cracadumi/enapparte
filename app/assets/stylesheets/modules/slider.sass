@@ -70,6 +70,18 @@
   opacity: 0
   z-index: 2
 
+.va-top, .va-middle, .va-bottom
+  &.visible-xs
+    display: none !important
+    @media (max-width: 767px)
+      display: table-cell !important
+
+  &.hidden-xs
+    display: table-cell !important
+    @media (max-width: 767px)
+      display: none !important
+
+
 @media (max-width: 768px)
   .home-carousel .item
     height: 380px !important
