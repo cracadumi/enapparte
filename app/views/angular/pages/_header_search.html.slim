@@ -2,13 +2,20 @@
   .carousel-inner[style="text-align:center"]
     .item.relative.discovery-card.active
       .va-container.va-container-v.va-container-h
-        p.va-middle.text-center.text-contrast.text-reinvent-desc
+        p.va-middle.text-center.text-contrast.text-reinvent-desc.hidden-xs
           | Réservez un
           span.dynamic-text
-            | {{randomText}}
+            | &nbsp;{{randomText}}&nbsp;
+          br
           | pour votre évènement,
           br
-          	| chez vous ou ailleurs
+          | chez vous ou ailleurs
+          br
+        p.va-middle.text-center.text-contrast.text-reinvent-desc.visible-xs
+          | Réservez un
+          span.dynamic-text
+            | &nbsp;{{randomText}}&nbsp;
+          | pour votre évènement, chez vous ou ailleurs
           br
   #search-bar-home.search-bar-home
     form.hm_search_submit ng-submit="beginSearch()"
