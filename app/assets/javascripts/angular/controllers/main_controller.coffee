@@ -38,7 +38,7 @@ angular
       randomIndex += 1
       randomIndex = 0 if randomIndex >= randomTexts.length
       $scope.randomText = randomTexts[randomIndex]
-    , 500
+    , 1000
 
     $scope.$on "$destroy", ()->
       $interval.cancel($scope.randomInterval) if $scope.randomInterval
