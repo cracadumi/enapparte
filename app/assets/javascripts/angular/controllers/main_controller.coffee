@@ -30,7 +30,7 @@ angular
     $scope.goPerformer = ->
       $state.go 'performer'
 
-    randomTexts = ["un musicien", "un artiste-peintre", "un magicien", "un œnologue", "un mentaliste", "une troupe de comédiens", "un photographe", "un chef à domicile"]
+    randomTexts = ["un musicien", "un artiste-peintre", "un magicien", "un œnologue", "un mentaliste", "une troupe de comédiens", "un photographe", "un chef"]
     randomIndex = 0
     $scope.randomText = randomTexts[randomIndex]
 
